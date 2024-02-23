@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
 
     public Vector2 moveInput { get; private set; }
     public bool jump { get; private set; }
+    public bool isSprinting { get; private set; }
 
     private void Update()
     {
@@ -15,6 +16,7 @@ public class PlayerInput : MonoBehaviour
         
         if (moveInput.sqrMagnitude > 1) moveInput = moveInput.normalized;
 
-        jump = Input.GetButtonDown(jumpButtonName);
+        jump = Input.GetButton(jumpButtonName);
+        isSprinting = Input.GetKey(KeyCode.LeftShift);
     }
 }
