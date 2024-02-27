@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     [Header("Movement")]
     private float moveSpeed;
     public float walkSpeed;
@@ -18,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isReadyToJump = true;
     
     [Header("Ground Check")]
-    public float playerHeight;
     public LayerMask whatIsGround;
+    private float playerHeight;
     private bool isGrounded;
 
     [Header("Slope Handling")]
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private PlayerInput input;
     private Camera followCamera;
+    private Animator animatorPlayer;
     private float turnSmoothVelocity;
 
     private MovementState state;
@@ -47,20 +50,28 @@ public class PlayerMovement : MonoBehaviour
         sprinting,
         air
     }
+    void Awake()
+    {
+        StartCoroutine(PostSimulationUpdate());
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         followCamera = Camera.main;
         input = GetComponent<PlayerInput>();
+        animatorPlayer = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        playerHeight = GetComponent<CapsuleCollider>().height;
         rb.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isReadyToJump);
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight* 0.5f + 0.2f, whatIsGround);
+        isGrounded = Physics.Raycast(GetPlayerPosition(), Vector3.down, playerHeight* 0.5f + 0.2f, whatIsGround);
+
+        Debug.Log(isGrounded);
 
         StateHandler();
 
@@ -79,19 +90,29 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.drag = 0f;
         }
+        
     }
     private void FixedUpdate()
     {
         Move();
-        Rotate();
         SpeedControl();
     }
     public void Rotate()
     {
-        var targetRotation = followCamera.transform.eulerAngles.y;
-        targetRotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, 0f);
+        float targetRotationAngle = followCamera.transform.eulerAngles.y;
+        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotationAngle, ref turnSmoothVelocity, 0.02f);
+        Quaternion targetRotation = Quaternion.Euler(0f, smoothedAngle, 0f);
+        rb.MoveRotation(targetRotation);
+    }
 
-        transform.eulerAngles = Vector3.up * targetRotation;
+    IEnumerator PostSimulationUpdate()
+    {
+        YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
+        while (true)
+        {
+            yield return waitForFixedUpdate;
+            Rotate();
+        }
     }
 
     private void StateHandler()
@@ -119,12 +140,12 @@ public class PlayerMovement : MonoBehaviour
         if(IsOnSlope() == true && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
-            if(rb.velocity.y > 5)
+            if (rb.velocity.y > 5)
             {
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
             }
         }
-        else if(isGrounded == true)
+        else if(isGrounded == true && input.jump == false)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
@@ -172,13 +193,24 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsOnSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f) == true)
+        if(Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f) == true)
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
         }
 
         return false;
+    }
+
+    Vector3 GetPlayerPosition()
+    {
+        return new Vector3(transform.position.x, transform.position.y + playerHeight / 2, transform.position.z);
+    }
+
+    void UpdateAnimation(Vector2 input)
+    {
+        animatorPlayer.SetFloat("Horizontal", rb.velocity.x);
+        animatorPlayer.SetFloat("Vertical", rb.velocity.y);
     }
 
     private Vector3 GetSlopeMoveDirection()

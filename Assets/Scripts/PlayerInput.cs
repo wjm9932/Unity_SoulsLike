@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public string jumpButtonName = "Jump";
-    public string moveHorizontalAxisName = "Horizontal";
-    public string moveVerticalAxisName = "Vertical";
+    private string jumpButtonName = "Jump";
+    private string moveHorizontalAxisName = "Horizontal";
+    private string moveVerticalAxisName = "Vertical";
 
     public Vector2 moveInput { get; private set; }
     public bool jump { get; private set; }
