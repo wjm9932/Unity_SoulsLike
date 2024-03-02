@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     private bool isReadyToJump = true;
-    
+
     [Header("Ground Check")]
     public LayerMask whatIsGround;
     private float playerHeight;
@@ -44,10 +44,14 @@ public class PlayerMovement : MonoBehaviour
     private float turnSmoothVelocity;
 
     private MovementState state;
+    private bool isRotating = false;
+    private bool isDodging = false;
+
     private enum MovementState
     {
         walking,
         sprinting,
+        Dodging,
         air
     }
     void Awake()
@@ -69,38 +73,35 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.Raycast(GetPlayerPosition(), Vector3.down, playerHeight* 0.5f + 0.2f, whatIsGround);
+        isGrounded = Physics.Raycast(GetPlayerPosition(), Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        Debug.Log(isGrounded);
-
-        StateHandler();
-
-        if(input.jump == true && isGrounded == true && isReadyToJump == true)
+        if (input.isJumping == true && isGrounded == true && isReadyToJump == true)
         {
             Jump();
             isReadyToJump = false;
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if(isGrounded == true)
+        if (input.isDodging == true && isDodging == false)
         {
-            rb.drag = groundDrag;
+            Dodge();
         }
-        else
-        {
-            rb.drag = 0f;
-        }
-        
+
+        StateHandler();
+        UpdateAnimation(input);
     }
     private void FixedUpdate()
     {
-        Move();
-        SpeedControl();
+        if (isDodging == false)
+        {
+            Move();
+            SpeedControl();
+        }
     }
     public void Rotate()
     {
         float targetRotationAngle = followCamera.transform.eulerAngles.y;
-        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotationAngle, ref turnSmoothVelocity, 0.02f);
+        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotationAngle, ref turnSmoothVelocity, 0.1f);
         Quaternion targetRotation = Quaternion.Euler(0f, smoothedAngle, 0f);
         rb.MoveRotation(targetRotation);
     }
@@ -111,18 +112,62 @@ public class PlayerMovement : MonoBehaviour
         while (true)
         {
             yield return waitForFixedUpdate;
-            Rotate();
+            if (isDodging == false)
+            {
+                Rotate();
+            }
         }
     }
 
+    IEnumerator RotateBack()
+    {
+        YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
+        isRotating = true; // ?? ??? ???
+
+        float targetAngle = transform.eulerAngles.y + 180f;
+        float currentAngle = transform.eulerAngles.y;
+
+        while (Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle)) > 0.5f) // ?? ??? ??? ??? ??
+        {
+            currentAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, 500f * Time.deltaTime); // ?? ?? ??
+            rb.MoveRotation(Quaternion.Euler(0f, currentAngle, 0f));
+            yield return waitForFixedUpdate;
+        }
+
+        isRotating = false; // ?? ??
+    }
+
+    private void Dodge()
+    {
+        transform.LookAt(transform.position + moveDirection);
+
+        rb.velocity = Vector3.zero;
+        if (IsOnSlope() == true && !exitingSlope)
+        {
+            rb.AddForce(GetSlopeMoveDirection() * 10f, ForceMode.Impulse);
+            if (rb.velocity.y > 5)
+            {
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+            }
+        }
+        else
+        {
+            rb.AddForce(moveDirection * 10f, ForceMode.Impulse);
+        }
+    }
+
+    private void SetIsDodge()
+    {
+        isDodging = false;
+    }
     private void StateHandler()
     {
-        if(isGrounded == true && input.isSprinting == true)
+        if (isGrounded == true && input.isSprinting == true)
         {
             state = MovementState.sprinting;
             moveSpeed = sprintSpeed;
         }
-        else if(isGrounded == true)
+        else if (isGrounded == true)
         {
             state = MovementState.walking;
             moveSpeed = walkSpeed;
@@ -135,9 +180,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        moveDirection = transform.forward * input.moveInput.y + transform.right * input.moveInput.x;
+        SetMoveDirection();
 
-        if(IsOnSlope() == true && !exitingSlope)
+        if (IsOnSlope() == true && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
             if (rb.velocity.y > 5)
@@ -145,11 +190,11 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
             }
         }
-        else if(isGrounded == true && input.jump == false)
+        else if (isGrounded == true && input.isJumping == false)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
-        else if(isGrounded == false)
+        else if (isGrounded == false)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
@@ -172,11 +217,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpeedControl()
     {
-        if(IsOnSlope() == true && !exitingSlope)
+        if (IsOnSlope() == true && !exitingSlope)
         {
-            if(rb.velocity.magnitude > moveSpeed)
+            if (rb.velocity.magnitude > moveSpeed)
             {
                 rb.velocity = rb.velocity.normalized * moveSpeed;
+            }
+            if (input.moveInput == Vector2.zero)
+            {
+                rb.velocity = Vector3.zero;
+            }
+        }
+        else if (input.moveInput == Vector2.zero && input.isJumping == false)
+        {
+            if (isGrounded == true)
+            {
+                rb.velocity = Vector3.zero;
             }
         }
         else
@@ -193,7 +249,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsOnSlope()
     {
-        if(Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f) == true)
+        if (Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f) == true)
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -207,14 +263,30 @@ public class PlayerMovement : MonoBehaviour
         return new Vector3(transform.position.x, transform.position.y + playerHeight / 2, transform.position.z);
     }
 
-    void UpdateAnimation(Vector2 input)
+    void UpdateAnimation(PlayerInput input)
     {
-        animatorPlayer.SetFloat("Horizontal", rb.velocity.x);
-        animatorPlayer.SetFloat("Vertical", rb.velocity.y);
+        animatorPlayer.SetFloat("Horizontal", input.moveInput.x * rb.velocity.magnitude);
+        animatorPlayer.SetFloat("Vertical", input.moveInput.y * rb.velocity.magnitude);
+        animatorPlayer.SetBool("IsSprinting", input.isSprinting);
+
+        if (input.isDodging == true && isDodging == false)
+        {
+            animatorPlayer.SetTrigger("IsRolling");
+            isDodging = true;
+        }
     }
 
     private Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+    }
+
+    private void SetMoveDirection()
+    {
+        Vector3 forward = followCamera.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
+        moveDirection = forward * input.moveInput.y + followCamera.transform.right * input.moveInput.x;
     }
 }
