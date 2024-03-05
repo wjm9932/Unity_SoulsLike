@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [Header("Movement")]
     private float moveSpeed;
     public float walkSpeed;
@@ -33,9 +33,6 @@ public class PlayerMovement : MonoBehaviour
     public float speedSmoothTime = 0.1f;
     public float turnSmoothTime = 0.1f;
 
-    [Header("")]
-    public Transform orientation;
-
     private Vector3 moveDirection;
     private Rigidbody rb;
     private PlayerInput input;
@@ -43,15 +40,14 @@ public class PlayerMovement : MonoBehaviour
     private Animator animatorPlayer;
     private float turnSmoothVelocity;
 
-    private MovementState state;
+    private PlayerState playerState;
     private bool isRotating = false;
-    private bool isDodging = false;
 
+    private MovementState state;
     private enum MovementState
     {
         walking,
         sprinting,
-        Dodging,
         air
     }
     void Awake()
@@ -62,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerState = GetComponent<PlayerState>();
         followCamera = Camera.main;
         input = GetComponent<PlayerInput>();
         animatorPlayer = GetComponent<Animator>();
@@ -82,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (input.isDodging == true && isDodging == false)
+        if (input.isDodging == true && playerState.state == PlayerState.State.Idle)
         {
             Dodge();
         }
@@ -92,10 +89,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (isDodging == false)
+        if (playerState.state == PlayerState.State.Idle)
         {
             Move();
             SpeedControl();
+        }
+        else if(playerState.state == PlayerState.State.Attacking)
+        {
+            rb.velocity = Vector3.zero;
         }
     }
     public void Rotate()
@@ -112,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         while (true)
         {
             yield return waitForFixedUpdate;
-            if (isDodging == false)
+            if (playerState.state != PlayerState.State.Dodging)
             {
                 Rotate();
             }
@@ -152,13 +153,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.AddForce(moveDirection * 10f, ForceMode.Impulse);
+            rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
         }
-    }
-
-    private void SetIsDodge()
-    {
-        isDodging = false;
     }
     private void StateHandler()
     {
@@ -269,10 +265,10 @@ public class PlayerMovement : MonoBehaviour
         animatorPlayer.SetFloat("Vertical", input.moveInput.y * rb.velocity.magnitude);
         animatorPlayer.SetBool("IsSprinting", input.isSprinting);
 
-        if (input.isDodging == true && isDodging == false)
+        if (input.isDodging == true && playerState.state == PlayerState.State.Idle)
         {
             animatorPlayer.SetTrigger("IsRolling");
-            isDodging = true;
+            playerState.state = PlayerState.State.Dodging;
         }
     }
 
