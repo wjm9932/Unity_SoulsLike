@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Attack : MonoBehaviour
 {
     private PlayerInput input;
     private PlayerState playerState;
     private Animator animator;
+    private Camera followCamera;
     private ComboAttack currentCombo;
     private bool canComboAttack = true;
+    private Rigidbody rb;
     enum ComboAttack
     {
         Idle,
@@ -19,9 +22,11 @@ public class Attack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         input = GetComponent<PlayerInput>();
         playerState = GetComponent<PlayerState>();
+        followCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -31,30 +36,43 @@ public class Attack : MonoBehaviour
         {
             SwordAttack();
         }
-        ResetCombo();
-    }
-    void ResetCombo()
-    {
-        if (playerState.state == PlayerState.State.Idle && currentCombo != ComboAttack.Idle)
-        {
-            if(currentCombo != ComboAttack.Attack2)
-            {
-                animator.SetTrigger("ResetAttackCombo");
-            }
-            currentCombo = ComboAttack.Idle;
-            canComboAttack = true;
-        }
         
+        ResetPlayerState();
     }
+
+    void ResetPlayerState()
+    {
+        if(playerState.state == PlayerState.State.Attacking)
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == true)
+            {
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f && animator.IsInTransition(0) == false)
+                {
+                    animator.SetTrigger("ResetAttackCombo");
+                    playerState.state = PlayerState.State.Idle;
+                    currentCombo = ComboAttack.Idle;
+                    canComboAttack = true;
+                }
+            }
+        }
+    }
+
     void SetCanComboAttackTrue()
     {
         canComboAttack = true;
     }
     void SwordAttack()
     {
-
         if(canComboAttack == true && playerState.state != PlayerState.State.Dodging)
         {
+            Vector3 forward = followCamera.transform.forward;
+            forward.y = 0;
+            forward.Normalize();
+
+            Vector3 moveDirection = forward;
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection); 
+            rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 50f * Time.fixedDeltaTime));
+
             playerState.state = PlayerState.State.Attacking;
 
             if (currentCombo == ComboAttack.Idle)
@@ -67,6 +85,12 @@ public class Attack : MonoBehaviour
             {
                 animator.SetTrigger("IsAttack2");
                 currentCombo = ComboAttack.Attack2;
+                canComboAttack = false;
+            }
+            else if(currentCombo == ComboAttack.Attack2)
+            {
+                animator.SetTrigger("IsAttack3");
+                currentCombo = ComboAttack.Attack3;
                 canComboAttack = false;
             }
         }

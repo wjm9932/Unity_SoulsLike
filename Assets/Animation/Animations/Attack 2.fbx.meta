@@ -60,10 +60,10 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 1
-        functionName: ResetPlayerState
+      - time: 0.59206796
+        functionName: SetCanComboAttackTrue
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 481096b9bae75524982c6e0df812c93b, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: bdf3209042415654cbff5fe89d11c98f, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

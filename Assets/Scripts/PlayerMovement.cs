@@ -86,9 +86,12 @@ public class PlayerMovement : MonoBehaviour
 
         StateHandler();
         UpdateAnimation(input);
+        rb.useGravity = !IsOnSlope();
     }
     private void FixedUpdate()
     {
+        SetMoveDirection();
+
         if (playerState.state == PlayerState.State.Idle)
         {
             Move();
@@ -96,15 +99,17 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(playerState.state == PlayerState.State.Attacking)
         {
-            rb.velocity = Vector3.zero;
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
         }
     }
     public void Rotate()
     {
-        float targetRotationAngle = followCamera.transform.eulerAngles.y;
-        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotationAngle, ref turnSmoothVelocity, 0.1f);
-        Quaternion targetRotation = Quaternion.Euler(0f, smoothedAngle, 0f);
-        rb.MoveRotation(targetRotation);
+        if (rb.velocity.magnitude > 0.2f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 10f* Time.fixedDeltaTime));
+        }
+
     }
 
     IEnumerator PostSimulationUpdate()
@@ -145,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector3.zero;
         if (IsOnSlope() == true && !exitingSlope)
         {
+            
             rb.AddForce(GetSlopeMoveDirection() * 10f, ForceMode.Impulse);
             if (rb.velocity.y > 5)
             {
@@ -176,8 +182,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        SetMoveDirection();
-
         if (IsOnSlope() == true && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
@@ -188,14 +192,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isGrounded == true && input.isJumping == false)
         {
+            
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
         else if (isGrounded == false)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
-
-        rb.useGravity = !IsOnSlope();
     }
 
     private void Jump()
@@ -224,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector3.zero;
             }
         }
-        else if (input.moveInput == Vector2.zero && input.isJumping == false)
+        else if (input.moveInput.magnitude < 0.2f  && input.isJumping == false)
         {
             if (isGrounded == true)
             {
@@ -261,9 +264,7 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateAnimation(PlayerInput input)
     {
-        animatorPlayer.SetFloat("Horizontal", input.moveInput.x * rb.velocity.magnitude);
-        animatorPlayer.SetFloat("Vertical", input.moveInput.y * rb.velocity.magnitude);
-        animatorPlayer.SetBool("IsSprinting", input.isSprinting);
+        animatorPlayer.SetFloat("Speed", rb.velocity.magnitude, 0.08f, Time.deltaTime);
 
         if (input.isDodging == true && playerState.state == PlayerState.State.Idle)
         {

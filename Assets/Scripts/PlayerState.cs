@@ -9,10 +9,16 @@ public class PlayerState : MonoBehaviour
     public enum State
     {
         Idle,
+        Sprinting,
+        Jumping,
         Dodging,
         Attacking
     }
-    
+    private void Awake()
+    {
+        state = State.Idle;
+    }
+
     public void ResetPlayerState()
     {
         state = State.Idle;
