@@ -43,13 +43,6 @@ public class PlayerMovement : MonoBehaviour
     private PlayerState playerState;
     private bool isRotating = false;
 
-    private MovementState state;
-    private enum MovementState
-    {
-        walking,
-        sprinting,
-        air
-    }
     void Awake()
     {
         StartCoroutine(PostSimulationUpdate());
@@ -79,12 +72,15 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (input.isDodging == true && playerState.state == PlayerState.State.Idle)
+        if (input.isDodging == true && (playerState.state == PlayerState.State.Idle || playerState.state == PlayerState.State.Sprinting))
         {
             Dodge();
         }
 
-        StateHandler();
+        if(playerState.state != PlayerState.State.Dodging && playerState.state != PlayerState.State.Attacking)
+        {
+            StateHandler();
+        }
         UpdateAnimation(input);
         rb.useGravity = !IsOnSlope();
     }
@@ -92,12 +88,12 @@ public class PlayerMovement : MonoBehaviour
     {
         SetMoveDirection();
 
-        if (playerState.state == PlayerState.State.Idle)
+        if (playerState.state == PlayerState.State.Idle || playerState.state == PlayerState.State.Sprinting)
         {
             Move();
             SpeedControl();
         }
-        else if(playerState.state == PlayerState.State.Attacking)
+        else if (playerState.state == PlayerState.State.Attacking)
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
         }
@@ -107,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         if (rb.velocity.magnitude > 0.2f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 10f* Time.fixedDeltaTime));
+            rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime));
         }
 
     }
@@ -128,19 +124,19 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator RotateBack()
     {
         YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
-        isRotating = true; // ?? ??? ???
+        isRotating = true;
 
         float targetAngle = transform.eulerAngles.y + 180f;
         float currentAngle = transform.eulerAngles.y;
 
-        while (Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle)) > 0.5f) // ?? ??? ??? ??? ??
+        while (Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle)) > 0.5f)
         {
-            currentAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, 500f * Time.deltaTime); // ?? ?? ??
+            currentAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, 500f * Time.deltaTime);
             rb.MoveRotation(Quaternion.Euler(0f, currentAngle, 0f));
             yield return waitForFixedUpdate;
         }
 
-        isRotating = false; // ?? ??
+        isRotating = false;
     }
 
     private void Dodge()
@@ -150,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector3.zero;
         if (IsOnSlope() == true && !exitingSlope)
         {
-            
+
             rb.AddForce(GetSlopeMoveDirection() * 10f, ForceMode.Impulse);
             if (rb.velocity.y > 5)
             {
@@ -166,17 +162,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded == true && input.isSprinting == true)
         {
-            state = MovementState.sprinting;
+            playerState.state = PlayerState.State.Sprinting;
             moveSpeed = sprintSpeed;
         }
         else if (isGrounded == true)
         {
-            state = MovementState.walking;
+            playerState.state = PlayerState.State.Idle;
             moveSpeed = walkSpeed;
         }
         else
         {
-            state = MovementState.air;
+            playerState.state = PlayerState.State.Jumping;
         }
     }
 
@@ -192,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isGrounded == true && input.isJumping == false)
         {
-            
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
         else if (isGrounded == false)
@@ -227,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector3.zero;
             }
         }
-        else if (input.moveInput.magnitude < 0.2f  && input.isJumping == false)
+        else if (input.moveInput.magnitude < 0.2f && input.isJumping == false)
         {
             if (isGrounded == true)
             {
@@ -266,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
     {
         animatorPlayer.SetFloat("Speed", rb.velocity.magnitude, 0.08f, Time.deltaTime);
 
-        if (input.isDodging == true && playerState.state == PlayerState.State.Idle)
+        if (input.isDodging == true && (playerState.state == PlayerState.State.Idle || playerState.state == PlayerState.State.Sprinting))
         {
             animatorPlayer.SetTrigger("IsRolling");
             playerState.state = PlayerState.State.Dodging;

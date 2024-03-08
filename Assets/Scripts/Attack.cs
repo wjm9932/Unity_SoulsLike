@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Attack : MonoBehaviour
 {
+    public Transform leftHandPos;
+
     private PlayerInput input;
     private PlayerState playerState;
     private Animator animator;
@@ -93,6 +95,19 @@ public class Attack : MonoBehaviour
                 currentCombo = ComboAttack.Attack3;
                 canComboAttack = false;
             }
+        }
+    }
+    void OnAnimatorIK()
+    {
+        if(playerState.state == PlayerState.State.Idle)
+        {
+            animator.SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, animator.GetFloat("HandWeight"));
+            animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandPos.position);
+        }
+        else
+        {
+            animator.SetFloat("HandWeight", 0);
         }
     }
 }
