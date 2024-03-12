@@ -4,35 +4,37 @@ using UnityEngine;
 
 public class IdleState : PlayerMovementState
 {
-    private PlayerMovementStateMachine playerMovementStateMachine;
-    public IdleState(PlayerMovementStateMachine playerMovementStateMachine)
+    public IdleState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
-        this.playerMovementStateMachine = playerMovementStateMachine;
     }
 
     public override void Enter()
     {
-        base.Enter();
+        //base.Enter();
     }
 
     public override void Update()
     {
-        base.Update();
-
-        if(playerMovementStateMachine.character.input.moveInput != Vector2.zero)
+        //base.Update();
+        if(sm.character.input.moveInput != Vector2.zero)
         {
-            playerMovementStateMachine.ChangeState(playerMovementStateMachine.walkState);
+            sm.ChangeState(sm.walkState);
         }
     }
 
     public override void PhysicsUpdate()
     {
-        base.PhysicsUpdate();
+        //base.PhysicsUpdate();
+    }
 
+    public override void LateUpdate()
+    {
+        //base.LateUpdate();
     }
 
     public override void Exit()
     {
-        base.Exit();
+        //base.Exit();
     }
+
 }
