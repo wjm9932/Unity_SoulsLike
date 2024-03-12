@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(rb.velocity.magnitude);
         isGrounded = Physics.Raycast(GetPlayerPosition(), Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         if (input.isJumping == true && isGrounded == true && isReadyToJump == true)
@@ -105,7 +106,6 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime));
         }
-
     }
 
     IEnumerator PostSimulationUpdate()
