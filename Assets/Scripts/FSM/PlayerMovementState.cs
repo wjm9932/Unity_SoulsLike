@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public abstract class PlayerMovementState : IState 
 {
@@ -10,13 +11,14 @@ public abstract class PlayerMovementState : IState
     protected Vector3 moveDirection;
     protected Vector3 lookAtDirection;
 
-    protected float maxSlopeAngle = 45f;
+    protected float maxSlopeAngle;
     protected float moveSpeed;
     protected bool isGrounded;
 
     public PlayerMovementState(PlayerMovementStateMachine sm)
     {
         this.sm = sm;
+        maxSlopeAngle = 45f;
     }
 
     public virtual void Enter()
@@ -26,8 +28,18 @@ public abstract class PlayerMovementState : IState
     {
         isGrounded = Physics.Raycast(GetPlayerPosition(), Vector3.down, sm.character.playerHeight * 0.5f + 0.2f, sm.character.whatIsGround);
 
-        SetMoveDirection();
         sm.character.rb.useGravity = !IsOnSlope();
+
+        SetMoveDirection();
+
+        if (sm.character.input.moveInput == Vector2.zero)
+        {
+            sm.ChangeState(sm.idleState);
+        }
+        else if(sm.character.input.isDodging == true)
+        {
+            sm.ChangeState(sm.dodgeState);
+        }
     }
     public virtual void PhysicsUpdate()
     {
@@ -37,10 +49,10 @@ public abstract class PlayerMovementState : IState
     public virtual void LateUpdate()
     {
         Rotate();
+        UpdateAnimation();
     }
     public virtual void Exit()
     {
-        sm.character.rb.velocity = Vector3.zero;
     }
 
     private void Move()
@@ -94,7 +106,7 @@ public abstract class PlayerMovementState : IState
         return new Vector3(sm.character.transform.position.x, sm.character.transform.position.y + sm.character.playerHeight / 2, sm.character.transform.position.z);
     }
 
-    private bool IsOnSlope()
+    protected bool IsOnSlope()
     {
         if (Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, sm.character.playerHeight * 0.5f + 0.3f) == true)
         {
@@ -105,12 +117,12 @@ public abstract class PlayerMovementState : IState
         return false;
     }
 
-    private Vector3 GetSlopeMoveDirection()
+    protected Vector3 GetSlopeMoveDirection()
     {
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(sm.character.transform.forward, slopeHit.normal).normalized;
     }
 
-    private void SetMoveDirection()
+    protected void SetMoveDirection()
     {
         Vector3 forward = sm.character.followCamera.transform.forward;
         forward.y = 0;
@@ -118,5 +130,23 @@ public abstract class PlayerMovementState : IState
 
         moveDirection = forward * sm.character.input.moveInput.y + sm.character.followCamera.transform.right * sm.character.input.moveInput.x;
         lookAtDirection = forward * sm.character.input.rotationInput.y + sm.character.followCamera.transform.right * sm.character.input.rotationInput.x;
+    }
+
+    void UpdateAnimation()
+    {
+        sm.character.animator.SetFloat("Speed", sm.character.rb.velocity.magnitude, 0.08f, Time.deltaTime);
+    }
+
+    public virtual void OnAnimationEnterEvent()
+    {
+
+    }
+    public virtual void OnAnimationExitEvent()
+    {
+
+    }
+    public virtual void OnAnimationTransitionEvent()
+    {
+
     }
 }

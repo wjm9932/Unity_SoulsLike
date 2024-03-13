@@ -1,43 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Windows;
 
-public class WalkSate : PlayerMovementState
+public class SprintState : PlayerMovementState
 {
-    public WalkSate(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public SprintState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        moveSpeed = 5f;
+        moveSpeed = 7f;
     }
 
     public override void Update()
     {
-        if(sm.character.input.isSprinting == true)
+        if(sm.character.input.isSprinting == false)
         {
-            sm.ChangeState(sm.sprintState);
+            sm.ChangeState(sm.walkState);
         }
         else
         {
             base.Update();
         }
     }
-
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
     }
+
     public override void LateUpdate()
     {
         base.LateUpdate();
     }
     public override void Exit()
     {
-        base.Exit();  
+        base.Exit();
     }
 }

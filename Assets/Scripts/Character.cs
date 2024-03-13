@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+
+    public Animator animator { get; private set; }
     public Camera followCamera { get; private set; }
-    public Animator animatorPlayer { get; private set; }
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
     public PlayerInput input { get; private set; }
@@ -21,7 +22,7 @@ public class Character : MonoBehaviour
     void Start()
     {
         followCamera = Camera.main;
-        animatorPlayer = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         playerHeight = GetComponent<CapsuleCollider>().height;
         input = GetComponent<PlayerInput>();
@@ -34,7 +35,6 @@ public class Character : MonoBehaviour
     {
         playerMovementStateMachine.Update();
     }
-
     private void FixedUpdate()
     {
         playerMovementStateMachine.PhysicsUpdate();
@@ -42,5 +42,17 @@ public class Character : MonoBehaviour
     private void LateUpdate()
     {
         playerMovementStateMachine.LateUpdate();
+    }
+    private void OnAnimationEnterEvent()
+    {
+        playerMovementStateMachine.OnAnimationEnterEvent();
+    }
+    private void OnAnimationExitEvent()
+    {
+        playerMovementStateMachine.OnAnimationExitEvent();
+    }
+    private void OnAnimationTransitionEvent()
+    {
+        playerMovementStateMachine.OnAnimationTransitionEvent();
     }
 }

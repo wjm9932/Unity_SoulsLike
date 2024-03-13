@@ -7,12 +7,11 @@ public class IdleState : PlayerMovementState
     public IdleState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
     }
-
     public override void Enter()
     {
         //base.Enter();
+        sm.character.rb.velocity = Vector3.zero;
     }
-
     public override void Update()
     {
         //base.Update();
@@ -20,21 +19,26 @@ public class IdleState : PlayerMovementState
         {
             sm.ChangeState(sm.walkState);
         }
+        if(sm.character.input.isDodging == true)
+        {
+            sm.ChangeState(sm.dodgeState);
+        }
     }
-
     public override void PhysicsUpdate()
     {
         //base.PhysicsUpdate();
     }
-
     public override void LateUpdate()
     {
         //base.LateUpdate();
+        UpdateAnimation();
     }
-
     public override void Exit()
     {
         //base.Exit();
     }
-
+    void UpdateAnimation()
+    {
+        sm.character.animator.SetFloat("Speed", sm.character.rb.velocity.magnitude, 0.08f, Time.deltaTime);
+    }
 }

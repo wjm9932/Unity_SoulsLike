@@ -19,14 +19,27 @@ public abstract class StateMachine
 
     public void Update()
     {
-        currentState.Update();
+        currentState?.Update();
     }
     public void PhysicsUpdate()
     {
-        currentState.PhysicsUpdate();
+        currentState?.PhysicsUpdate();
     }
     public void LateUpdate()
     {
-        currentState.LateUpdate();
+        currentState?.LateUpdate();
+    }
+
+    public void OnAnimationEnterEvent()
+    {
+        currentState?.OnAnimationEnterEvent();
+    }
+    public void OnAnimationExitEvent()
+    {
+        currentState?.OnAnimationExitEvent();
+    }
+    public void OnAnimationTransitionEvent()
+    {
+        currentState?.OnAnimationTransitionEvent();
     }
 }
