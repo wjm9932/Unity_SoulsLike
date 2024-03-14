@@ -9,9 +9,8 @@ public class Combo_3AttackState : AttackState
     }
     public override void Enter()
     {
-        //base.Enter();
-        sm.character.rb.velocity = Vector3.zero;
-        sm.character.rb.AddForce(sm.character.transform.forward * 250f, ForceMode.Force);
+        dashForce = 250f;
+        base.Enter();
 
         sm.character.animator.SetTrigger("IsAttack3");
         canComboAttack = false;

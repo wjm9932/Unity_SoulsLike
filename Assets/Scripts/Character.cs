@@ -33,6 +33,10 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 forward = followCamera.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
         playerMovementStateMachine.Update();
     }
     private void FixedUpdate()

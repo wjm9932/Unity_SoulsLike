@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AttackState : IState
 {
     protected PlayerMovementStateMachine sm;
+    protected float dashForce;
     protected bool canComboAttack;
+    Quaternion rotation;
     public AttackState(PlayerMovementStateMachine sm)
     {
         this.sm = sm;
@@ -14,7 +17,15 @@ public class AttackState : IState
     public virtual void Enter()
     {
         sm.character.rb.velocity = Vector3.zero;
-        sm.character.rb.AddForce(sm.character.transform.forward * 150f, ForceMode.Force);
+
+        Vector3 forward = sm.character.followCamera.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
+        Vector3 dir = sm.character.transform.position + forward;
+        rotation = Quaternion.LookRotation(forward);
+
+        sm.character.rb.AddForce(forward * dashForce, ForceMode.Force);
     }
     public virtual void Update()
     {
@@ -22,6 +33,10 @@ public class AttackState : IState
         {
             sm.character.animator.SetTrigger("ResetAttackCombo");
             sm.ChangeState(sm.idleState);
+        }
+        else
+        {
+            sm.character.transform.rotation = Quaternion.Slerp(sm.character.transform.rotation, rotation, 10f * Time.deltaTime);
         }
     }
     public virtual void PhysicsUpdate()
