@@ -61,9 +61,9 @@ ModelImporter:
       curves: []
       events:
       - time: 0.59206796
-        functionName: SetCanComboAttackTrue
+        functionName: OnAnimationTransitionEvent
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: bdf3209042415654cbff5fe89d11c98f, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

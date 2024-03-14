@@ -23,6 +23,10 @@ public class IdleState : PlayerMovementState
         {
             sm.ChangeState(sm.dodgeState);
         }
+        if (sm.character.input.isAttack == true)
+        {
+            sm.ChangeState(sm.combo_1AttackState);
+        }
     }
     public override void PhysicsUpdate()
     {

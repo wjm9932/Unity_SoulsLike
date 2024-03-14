@@ -52,7 +52,6 @@ public class DodgeState : PlayerMovementState
     {
 
     }
-
     private void Dodge()
     {
         sm.character.transform.LookAt(sm.character.transform.position + moveDirection);

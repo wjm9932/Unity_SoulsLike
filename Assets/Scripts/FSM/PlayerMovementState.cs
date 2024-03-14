@@ -40,6 +40,10 @@ public abstract class PlayerMovementState : IState
         {
             sm.ChangeState(sm.dodgeState);
         }
+        if (sm.character.input.isAttack == true)
+        {
+            sm.ChangeState(sm.combo_1AttackState);
+        }
     }
     public virtual void PhysicsUpdate()
     {
