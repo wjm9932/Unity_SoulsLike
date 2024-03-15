@@ -40,7 +40,7 @@ public abstract class PlayerMovementState : IState
         {
             sm.ChangeState(sm.idleState);
         }
-        else if(sm.character.input.isDodging == true)
+        if(sm.character.input.isDodging == true)
         {
             sm.ChangeState(sm.dodgeState);
         }
@@ -48,6 +48,8 @@ public abstract class PlayerMovementState : IState
         {
             sm.ChangeState(sm.combo_1AttackState);
         }
+
+        
     }
     public virtual void PhysicsUpdate()
     {

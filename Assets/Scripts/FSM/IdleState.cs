@@ -16,8 +16,15 @@ public class IdleState : PlayerMovementState
     {
         //base.Update();
         if(sm.character.input.moveInput != Vector2.zero)
-        {
-            sm.ChangeState(sm.walkState);
+        { 
+            if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)
+            {
+                sm.ChangeState(sm.walkState);
+            }
+            else
+            {
+                sm.ChangeState(sm.lockOnWalkState);
+            }
         }
         if(sm.character.input.isDodging == true)
         {

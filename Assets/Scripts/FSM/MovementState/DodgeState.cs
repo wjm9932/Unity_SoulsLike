@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DodgeState : PlayerMovementState
 {
+    private Vector3 target;
     private bool isDodgeFinished;
     public DodgeState(PlayerMovementStateMachine sm) : base(sm)
     {
@@ -12,6 +13,8 @@ public class DodgeState : PlayerMovementState
     }
     public override void Enter()
     {
+        target = new Vector3(0.18f, 1.57f, 10.11f);
+
         isDodgeFinished = false;
 
         sm.character.animator.SetTrigger("IsRolling");
@@ -26,7 +29,15 @@ public class DodgeState : PlayerMovementState
 
         if (isDodgeFinished == true)
         {
-            sm.ChangeState(sm.walkState);
+            if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            {
+                sm.ChangeState(sm.lockOnWalkState);
+
+            }
+            else
+            {
+                sm.ChangeState(sm.walkState);
+            }
         }
     }
     public override void PhysicsUpdate()
@@ -66,8 +77,7 @@ public class DodgeState : PlayerMovementState
         }
         else
         {
-            sm.character.rb.AddForce(sm.character.transform.forward * 10f, ForceMode.Impulse);
+            sm.character.rb.AddForce(sm.character.transform.forward * 400f, ForceMode.Force);
         }
-
     }
 }

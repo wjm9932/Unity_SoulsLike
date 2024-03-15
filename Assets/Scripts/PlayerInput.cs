@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviour
     public bool isSprinting { get; private set; }
     public bool isBack { get; private set; }
     public bool isAttack { get; private set; }
+    public bool isLockOn { get; private set; }
 
     public bool isDodging { get; private set; }
 
@@ -22,6 +23,7 @@ public class PlayerInput : MonoBehaviour
     private void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -51,8 +53,8 @@ public class PlayerInput : MonoBehaviour
 
         isJumping = Input.GetButton(jumpButtonName);
         isSprinting = Input.GetKey(KeyCode.LeftShift);
-        isBack = Input.GetKeyDown(KeyCode.S);
         isDodging = Input.GetKeyDown(KeyCode.Space);
         isAttack = Input.GetButtonDown(attackButtonName);
+        isLockOn = Input.GetKeyDown(KeyCode.F);
     }
 }

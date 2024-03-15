@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Cinemachine;
 
 public class Character : MonoBehaviour
 {
+    public CinemachineVirtualCamera lockOnCamera;
+    public CinemachineFreeLook lockOffCamera;
 
     public Animator animator { get; private set; }
     public Camera followCamera { get; private set; }
+
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
     public PlayerInput input { get; private set; }
@@ -17,6 +21,7 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        CameraStateMachine.Initialize(this);
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
     }
     void Start()
@@ -28,16 +33,15 @@ public class Character : MonoBehaviour
         input = GetComponent<PlayerInput>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
+        CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 forward = followCamera.transform.forward;
-        forward.y = 0;
-        forward.Normalize();
-
         playerMovementStateMachine.Update();
+        Debug.Log(playerMovementStateMachine.currentState);
+        CameraStateMachine.Instance.Update();
     }
     private void FixedUpdate()
     {
