@@ -15,6 +15,8 @@ public abstract class PlayerMovementState : IState
     protected float moveSpeed;
     protected bool isGrounded;
 
+    private IEnumerator coroutineReference;
+
     public PlayerMovementState(PlayerMovementStateMachine sm)
     {
         this.sm = sm;
@@ -23,6 +25,8 @@ public abstract class PlayerMovementState : IState
 
     public virtual void Enter()
     {
+        coroutineReference = PostSimulationUpdate();
+        sm.character.StartCoroutine(coroutineReference);
     }
     public virtual void Update()
     {
@@ -52,11 +56,11 @@ public abstract class PlayerMovementState : IState
     }
     public virtual void LateUpdate()
     {
-        Rotate();
         UpdateAnimation();
     }
     public virtual void Exit()
     {
+        sm.character.StopCoroutine(coroutineReference);
     }
 
     private void Move()
@@ -101,7 +105,17 @@ public abstract class PlayerMovementState : IState
         if (sm.character.rb.velocity.magnitude > 0.2f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(lookAtDirection);
-            sm.character.transform.rotation = (Quaternion.Slerp(sm.character.transform.rotation, targetRotation, 15f * Time.deltaTime));
+            sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
+        }
+    }
+
+    IEnumerator PostSimulationUpdate()
+    {
+        YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
+        while (true)
+        {
+            yield return waitForFixedUpdate;
+            Rotate();
         }
     }
 

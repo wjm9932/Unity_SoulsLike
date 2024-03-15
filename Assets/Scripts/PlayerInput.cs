@@ -52,7 +52,7 @@ public class PlayerInput : MonoBehaviour
         isJumping = Input.GetButton(jumpButtonName);
         isSprinting = Input.GetKey(KeyCode.LeftShift);
         isBack = Input.GetKeyDown(KeyCode.S);
-        isDodging = Input.GetKeyDown(KeyCode.F);
+        isDodging = Input.GetKeyDown(KeyCode.Space);
         isAttack = Input.GetButtonDown(attackButtonName);
     }
 }
