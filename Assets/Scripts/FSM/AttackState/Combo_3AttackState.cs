@@ -9,7 +9,7 @@ public class Combo_3AttackState : AttackState
     }
     public override void Enter()
     {
-        dashForce = 250f;
+        dashForce = 6f;
         base.Enter();
 
         sm.character.animator.SetTrigger("IsAttack3");

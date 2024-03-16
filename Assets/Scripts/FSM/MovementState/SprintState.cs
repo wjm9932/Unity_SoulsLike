@@ -20,6 +20,10 @@ public class SprintState : PlayerMovementState
         {
             sm.ChangeState(sm.walkState);
         }
+        else if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+        {
+            sm.ChangeState(sm.lockOnWalkState);
+        }
         else
         {
             base.Update();

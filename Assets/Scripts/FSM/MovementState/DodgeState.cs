@@ -29,15 +29,7 @@ public class DodgeState : PlayerMovementState
 
         if (isDodgeFinished == true)
         {
-            if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
-            {
-                sm.ChangeState(sm.lockOnWalkState);
-
-            }
-            else
-            {
-                sm.ChangeState(sm.walkState);
-            }
+            sm.ChangeState(sm.walkState);
         }
     }
     public override void PhysicsUpdate()
@@ -77,7 +69,7 @@ public class DodgeState : PlayerMovementState
         }
         else
         {
-            sm.character.rb.AddForce(sm.character.transform.forward * 400f, ForceMode.Force);
+            sm.character.rb.AddForce(sm.character.transform.forward * 7f, ForceMode.Impulse);
         }
     }
 }

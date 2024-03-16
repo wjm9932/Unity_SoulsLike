@@ -17,15 +17,15 @@ public class AttackState : IState
     public virtual void Enter()
     {
         sm.character.rb.velocity = Vector3.zero;
+        sm.character.rb.drag = 2f;
 
         Vector3 forward = sm.character.followCamera.transform.forward;
         forward.y = 0;
         forward.Normalize();
 
-        Vector3 dir = sm.character.transform.position + forward;
         rotation = Quaternion.LookRotation(forward);
 
-        sm.character.rb.AddForce(forward * dashForce, ForceMode.Force);
+        sm.character.rb.AddForce(forward * dashForce, ForceMode.Impulse);
     }
     public virtual void Update()
     {
@@ -50,6 +50,8 @@ public class AttackState : IState
     public virtual void Exit()
     {
         canComboAttack = true;
+
+        sm.character.rb.drag = 0f;
     }
     public virtual void OnAnimationEnterEvent()
     {

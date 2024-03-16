@@ -22,6 +22,10 @@ public class WalkSate : PlayerMovementState
         {
             sm.ChangeState(sm.sprintState);
         }
+        else if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+        {
+            sm.ChangeState(sm.lockOnWalkState);
+        }
         else
         {
             base.Update();

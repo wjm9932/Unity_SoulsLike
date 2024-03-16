@@ -14,7 +14,6 @@ public class CameraLockOnState : CameraState
     {
         base.Enter(); 
 
-        //?? 
         target = new Vector3(0.18f, 1.57f, 10.11f);
         Vector3 targetDirection = target - csm.character.transform.position;
         targetDirection.y = 0;

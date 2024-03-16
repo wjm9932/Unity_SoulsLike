@@ -14,6 +14,7 @@ public class LockOnWalkState : PlayerMovementState
     public override void Enter()
     {
         target = new Vector3(0.18f, 1.57f, 10.11f);
+
         coroutineReference = PostSimulationUpdate();
         sm.character.StartCoroutine(coroutineReference);
         moveSpeed = 5f;

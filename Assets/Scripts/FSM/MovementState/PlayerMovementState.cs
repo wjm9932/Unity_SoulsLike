@@ -48,8 +48,6 @@ public abstract class PlayerMovementState : IState
         {
             sm.ChangeState(sm.combo_1AttackState);
         }
-
-        
     }
     public virtual void PhysicsUpdate()
     {

@@ -40,7 +40,6 @@ public class Character : MonoBehaviour
     void Update()
     {
         playerMovementStateMachine.Update();
-        Debug.Log(playerMovementStateMachine.currentState);
         CameraStateMachine.Instance.Update();
     }
     private void FixedUpdate()
