@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraState : IState
 {
     protected CameraStateMachine csm;
-    public GameObject targetObject { get; private set; }
+    protected Vector3 target;
    public CameraState(CameraStateMachine csm)
     {
         this.csm = csm;

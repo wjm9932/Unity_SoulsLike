@@ -42,7 +42,14 @@ public abstract class PlayerMovementState : IState
         }
         if(sm.character.input.isDodging == true)
         {
-            sm.ChangeState(sm.dodgeState);
+            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            {
+                sm.ChangeState(sm.lockOnDodgeState);
+            }
+            else
+            {
+                sm.ChangeState(sm.dodgeState);
+            }
         }
         if (sm.character.input.isAttack == true)
         {
@@ -135,7 +142,7 @@ public abstract class PlayerMovementState : IState
         return false;
     }
 
-    protected Vector3 GetSlopeMoveDirection()
+    protected virtual Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(sm.character.transform.forward, slopeHit.normal).normalized;
     }

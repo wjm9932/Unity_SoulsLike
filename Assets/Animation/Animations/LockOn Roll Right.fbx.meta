@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 0123870abacf12f418162d84cb6d7810
+guid: b0444ce0eba7289418d867ca0e82f802
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Roll Left
+    second: LockOn Roll Right
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,13 +36,13 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Roll Left
+      name: LockOn Roll Right
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
       lastFrame: 60
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: -30
       level: 0
       cycleOffset: 0
       loop: 0
@@ -54,19 +54,12 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.9230769
-        functionName: SetIsDodge
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 6020de2450817144aa8b5c1cefec2d66, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class DodgeState : PlayerMovementState
 {
-    private Vector3 target;
     private bool isDodgeFinished;
     public DodgeState(PlayerMovementStateMachine sm) : base(sm)
     {
@@ -13,8 +12,6 @@ public class DodgeState : PlayerMovementState
     }
     public override void Enter()
     {
-        target = new Vector3(0.18f, 1.57f, 10.11f);
-
         isDodgeFinished = false;
 
         sm.character.animator.SetTrigger("IsRolling");
