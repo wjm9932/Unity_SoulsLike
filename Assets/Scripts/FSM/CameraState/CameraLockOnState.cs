@@ -15,11 +15,6 @@ public class CameraLockOnState : CameraState
 
         csm.character.animator.SetBool("IsLockOn", true);
 
-        target = new Vector3(0.18f, 1.57f, 10.11f);
-        Vector3 targetDirection = target - csm.character.transform.position;
-        targetDirection.y = 0;
-        csm.character.transform.rotation = Quaternion.LookRotation(targetDirection);
-
         csm.character.lockOffCamera.Priority = 9;
         csm.character.lockOnCamera.Priority = 10;
     }

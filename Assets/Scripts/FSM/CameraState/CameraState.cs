@@ -16,7 +16,10 @@ public class CameraState : IState
     }
     public virtual void Update()
     {
-        if(csm.character.input.isLockOn == true)
+        csm.character.lockOnCameraPosition.position = csm.character.transform.position;
+        csm.character.lockOnCameraPosition.LookAt(new Vector3(0.18f, 1.57f, 10.11f));
+
+        if (csm.character.input.isLockOn == true)
         {
             if(csm.currentState == csm.cameraLockOnState)
             {

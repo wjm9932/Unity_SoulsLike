@@ -26,7 +26,14 @@ public class DodgeState : PlayerMovementState
 
         if (isDodgeFinished == true)
         {
-            sm.ChangeState(sm.walkState);
+            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            {
+                sm.ChangeState(sm.lockOnWalkState);
+            }
+            else
+            {
+                sm.ChangeState(sm.walkState);
+            }
         }
     }
     public override void PhysicsUpdate()

@@ -8,14 +8,14 @@ public class Character : MonoBehaviour
 {
     public CinemachineVirtualCamera lockOnCamera;
     public CinemachineFreeLook lockOffCamera;
+    public Transform lockOnCameraPosition;
+    public LayerMask whatIsGround;
 
     public Animator animator { get; private set; }
     public Camera followCamera { get; private set; }
-
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
     public PlayerInput input { get; private set; }
-    public LayerMask whatIsGround;
 
     private PlayerMovementStateMachine playerMovementStateMachine;
     // Start is called before the first frame update
@@ -39,6 +39,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         playerMovementStateMachine.Update();
         CameraStateMachine.Instance.Update();
     }
