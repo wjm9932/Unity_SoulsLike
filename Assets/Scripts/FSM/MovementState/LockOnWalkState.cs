@@ -5,17 +5,14 @@ using UnityEngine;
 
 public class LockOnWalkState : PlayerMovementState
 {
-    private Vector3 target;
     private IEnumerator coroutineReference;
     public LockOnWalkState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
+        coroutineReference = PostSimulationUpdate();
     }
 
     public override void Enter()
     {
-        target = new Vector3(0.18f, 1.57f, 10.11f);
-
-        coroutineReference = PostSimulationUpdate();
         sm.character.StartCoroutine(coroutineReference);
         moveSpeed = 5f;
     }
@@ -32,8 +29,8 @@ public class LockOnWalkState : PlayerMovementState
 
     public override void PhysicsUpdate()
     {
-        base.PhysicsUpdate();
-
+        Move();
+        SpeedControl();
     }
     public override void LateUpdate()
     {
@@ -46,10 +43,30 @@ public class LockOnWalkState : PlayerMovementState
     }
     private void Rotate()
     {
-        Vector3 direction = new Vector3(target.x - sm.character.rb.position.x, 0, target.z - sm.character.rb.position.z);
+        Vector3 direction = new Vector3(sm.character.tempTarget.transform.position.x - sm.character.rb.position.x, 0, sm.character.tempTarget.transform.position.z - sm.character.rb.position.z);
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
+    }
+    protected override void Move()
+    {
+        if (IsOnSlope() == true)
+        {
+            sm.character.rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
+            if (sm.character.rb.velocity.y > 5)
+            {
+                sm.character.rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+            }
+        }
+        else
+        {
+            sm.character.rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        }
+    }
+    protected override Vector3 GetSlopeMoveDirection()
+    {
+        Vector3 moveDir = sm.character.transform.forward * sm.character.input.moveInput.y + sm.character.transform.right * sm.character.input.moveInput.x;
+        return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
     }
     IEnumerator PostSimulationUpdate()
     {

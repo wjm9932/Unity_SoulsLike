@@ -15,7 +15,6 @@ public abstract class StateMachine
         currentState = newState;
         currentState.Enter();
     }
-
     public void Update()
     {
         currentState?.Update();

@@ -13,6 +13,7 @@ public class Combo_1AttackState : AttackState
     public override void Enter()
     {
         dashForce = 1.5f;
+
         base.Enter();
         sm.character.animator.SetTrigger("IsAttack1");
         canComboAttack = false;

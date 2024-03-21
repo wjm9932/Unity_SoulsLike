@@ -5,7 +5,9 @@ using UnityEngine;
 public class CameraState : IState
 {
     protected CameraStateMachine csm;
-    protected Vector3 target;
+    protected Transform target;
+
+    private Vector3 playerHeadPos;
    public CameraState(CameraStateMachine csm)
     {
         this.csm = csm;
@@ -16,8 +18,7 @@ public class CameraState : IState
     }
     public virtual void Update()
     {
-        csm.character.lockOnCameraPosition.position = csm.character.transform.position;
-        csm.character.lockOnCameraPosition.LookAt(new Vector3(0.18f, 1.57f, 10.11f));
+        UpdateCameraPosition();
 
         if (csm.character.input.isLockOn == true)
         {
@@ -54,5 +55,22 @@ public class CameraState : IState
     public virtual void OnAnimationTransitionEvent()
     {
 
+    }
+    private void UpdateCameraPosition()
+    {
+        playerHeadPos = csm.character.transform.position;
+        playerHeadPos.y = csm.character.playerHeight;
+
+        Vector3 dir = (csm.character.tempTarget.transform.position - playerHeadPos).normalized;
+        Vector3 camPos = playerHeadPos - dir * 5f;
+
+        if (camPos.y < 0.2f)
+        {
+            camPos.y = 0.2f;
+        }
+
+        //csm.character.lockOnCameraPosition.position = csm.character.transform.position;
+        csm.character.lockOnCameraPosition.position = camPos;
+        csm.character.lockOnCameraPosition.LookAt(csm.character.tempTarget.transform.position);
     }
 }

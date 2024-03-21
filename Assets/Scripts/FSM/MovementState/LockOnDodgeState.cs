@@ -5,29 +5,18 @@ using UnityEngine;
 public class LockOnDodgeState : PlayerMovementState
 {
     private bool isDodgeFinished;
-    private IEnumerator coroutineReference;
-
-
-    private Vector3 target;
+    private Vector3 moveDir;
 
     public LockOnDodgeState(PlayerMovementStateMachine sm) : base(sm)
     {
-
     }
     public override void Enter()
     {
-        target = new Vector3(0.18f, 1.57f, 10.11f);
-
-        coroutineReference = PostSimulationUpdate();
-        sm.character.StartCoroutine(coroutineReference);
-
         isDodgeFinished = false;
         sm.character.rb.velocity = Vector3.zero;
 
-        sm.character.animator.SetFloat("Horizontal", sm.character.input.moveInput.x);
-        sm.character.animator.SetFloat("Vertical", sm.character.input.moveInput.y);
-        sm.character.animator.SetTrigger("IsRolling");
         Dodge();
+        UpdateAnimation();
     }
     public override void Update()
     {
@@ -55,19 +44,18 @@ public class LockOnDodgeState : PlayerMovementState
     }
     public override void Exit()
     {
-        sm.character.StopCoroutine(coroutineReference);
     }
     public override void OnAnimationEnterEvent()
     {
-
+        sm.character.canBeDamaged = false;
     }
     public override void OnAnimationExitEvent()
     {
         isDodgeFinished = true;
+        sm.character.canBeDamaged = true;
     }
     public override void OnAnimationTransitionEvent()
     {
-
     }
     private void Dodge()
     {
@@ -81,8 +69,15 @@ public class LockOnDodgeState : PlayerMovementState
         }
         else
         {
-            Vector3 moveDir = sm.character.transform.forward * sm.character.input.moveInput.y + sm.character.transform.right * sm.character.input.moveInput.x;
-            sm.character.rb.AddForce(moveDir * 7f, ForceMode.Impulse);
+            if (sm.character.input.moveInput == Vector2.zero)
+            {
+                moveDir = sm.character.transform.forward;
+            }
+            else
+            {
+                moveDir = sm.character.transform.forward * sm.character.input.dodgeInput.y + sm.character.transform.right * sm.character.input.dodgeInput.x;
+            }
+            sm.character.rb.AddForce(moveDir * 3f, ForceMode.Impulse);
         }
     }
 
@@ -94,7 +89,7 @@ public class LockOnDodgeState : PlayerMovementState
 
     private void Rotate()
     {
-        Vector3 direction = new Vector3(target.x - sm.character.rb.position.x, 0, target.z - sm.character.rb.position.z);
+        Vector3 direction = new Vector3(sm.character.tempTarget.transform.position.x - sm.character.rb.position.x, 0, sm.character.tempTarget.transform.position.z - sm.character.rb.position.z);
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
@@ -108,5 +103,11 @@ public class LockOnDodgeState : PlayerMovementState
             yield return waitForFixedUpdate;
             Rotate();
         }
+    }
+    private void UpdateAnimation()
+    {
+        sm.character.animator.SetFloat("Horizontal", sm.character.input.dodgeInput.x);
+        sm.character.animator.SetFloat("Vertical", sm.character.input.dodgeInput.y);
+        sm.character.animator.SetTrigger("IsRolling");
     }
 }

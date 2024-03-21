@@ -70,7 +70,7 @@ public abstract class PlayerMovementState : IState
         sm.character.StopCoroutine(coroutineReference);
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         if (IsOnSlope() == true)
         {
@@ -86,7 +86,7 @@ public abstract class PlayerMovementState : IState
         }
     }
 
-    private void SpeedControl()
+    protected void SpeedControl()
     {
         if (IsOnSlope() == true)
         {
@@ -168,7 +168,6 @@ public abstract class PlayerMovementState : IState
     }
     public virtual void OnAnimationExitEvent()
     {
-
     }
     public virtual void OnAnimationTransitionEvent()
     {

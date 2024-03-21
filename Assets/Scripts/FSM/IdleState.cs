@@ -26,9 +26,16 @@ public class IdleState : PlayerMovementState
                 sm.ChangeState(sm.lockOnWalkState);
             }
         }
-        if(sm.character.input.isDodging == true)
+        if (sm.character.input.isDodging == true)
         {
-            sm.ChangeState(sm.dodgeState);
+            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            {
+                sm.ChangeState(sm.lockOnDodgeState);
+            }
+            else
+            {
+                sm.ChangeState(sm.dodgeState);
+            }
         }
         if (sm.character.input.isAttack == true)
         {

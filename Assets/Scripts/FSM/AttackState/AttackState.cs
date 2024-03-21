@@ -9,23 +9,15 @@ public class AttackState : IState
     protected float dashForce;
     protected bool canComboAttack;
     Quaternion rotation;
+
     public AttackState(PlayerMovementStateMachine sm)
     {
         this.sm = sm;
     }
-
     public virtual void Enter()
     {
-        sm.character.rb.velocity = Vector3.zero;
-        sm.character.rb.drag = 2f;
-
-        Vector3 forward = sm.character.followCamera.transform.forward;
-        forward.y = 0;
-        forward.Normalize();
-
-        rotation = Quaternion.LookRotation(forward);
-
-        sm.character.rb.AddForce(forward * dashForce, ForceMode.Impulse);
+        AddAttackDashForce();
+        sm.character.swordEffect.enabled = true;
     }
     public virtual void Update()
     {
@@ -50,7 +42,7 @@ public class AttackState : IState
     public virtual void Exit()
     {
         canComboAttack = true;
-
+        sm.character.swordEffect.enabled = false;
         sm.character.rb.drag = 0f;
     }
     public virtual void OnAnimationEnterEvent()
@@ -64,5 +56,18 @@ public class AttackState : IState
     public virtual void OnAnimationTransitionEvent()
     {
         canComboAttack = true;
+    }
+    private void AddAttackDashForce()
+    {
+        sm.character.rb.velocity = Vector3.zero;
+        sm.character.rb.drag = 2f;
+
+        Vector3 forward = sm.character.followCamera.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
+        rotation = Quaternion.LookRotation(forward);
+
+        sm.character.rb.AddForce(forward * dashForce, ForceMode.Impulse);
     }
 }

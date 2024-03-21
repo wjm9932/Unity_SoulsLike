@@ -9,13 +9,13 @@ public class PlayerInput : MonoBehaviour
     private string attackButtonName = "Fire1";
 
     public Vector2 moveInput { get; private set; }
+    public Vector2 dodgeInput { get; private set; }
     public Vector2 rotationInput { get; private set; }
     public bool isJumping { get; private set; }
     public bool isSprinting { get; private set; }
     public bool isBack { get; private set; }
     public bool isAttack { get; private set; }
     public bool isLockOn { get; private set; }
-
     public bool isDodging { get; private set; }
 
     private float inputX;
@@ -47,6 +47,7 @@ public class PlayerInput : MonoBehaviour
         }
 
         moveInput = new Vector2(inputX, inputY);
+        dodgeInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rotationInput = new Vector2(Input.GetAxis(moveHorizontalAxisName), Input.GetAxis(moveVerticalAxisName));
 
         if (moveInput.sqrMagnitude > 1) moveInput = moveInput.normalized;

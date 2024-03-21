@@ -49,15 +49,15 @@ public class DodgeState : PlayerMovementState
     }
     public override void OnAnimationEnterEvent()
     {
-
+        sm.character.canBeDamaged = false;
     }
     public override void OnAnimationExitEvent()
     {
         isDodgeFinished = true;
+        sm.character.canBeDamaged = true;
     }
     public override void OnAnimationTransitionEvent()
     {
-
     }
     private void Dodge()
     {
