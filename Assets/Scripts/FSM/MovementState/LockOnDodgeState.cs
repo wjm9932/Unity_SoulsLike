@@ -87,23 +87,23 @@ public class LockOnDodgeState : PlayerMovementState
         return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
     }
 
-    private void Rotate()
-    {
-        Vector3 direction = new Vector3(sm.character.tempTarget.transform.position.x - sm.character.rb.position.x, 0, sm.character.tempTarget.transform.position.z - sm.character.rb.position.z);
+    //private void Rotate()
+    //{
+    //    Vector3 direction = new Vector3(sm.character.tempTarget.transform.position.x - sm.character.rb.position.x, 0, sm.character.tempTarget.transform.position.z - sm.character.rb.position.z);
 
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
-    }
+    //    Quaternion targetRotation = Quaternion.LookRotation(direction);
+    //    sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
+    //}
 
-    IEnumerator PostSimulationUpdate()
-    {
-        YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
-        while (true)
-        {
-            yield return waitForFixedUpdate;
-            Rotate();
-        }
-    }
+    //IEnumerator PostSimulationUpdate()
+    //{
+    //    YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
+    //    while (true)
+    //    {
+    //        yield return waitForFixedUpdate;
+    //        Rotate();
+    //    }
+    //}
     private void UpdateAnimation()
     {
         sm.character.animator.SetFloat("Horizontal", sm.character.input.dodgeInput.x);

@@ -9,11 +9,10 @@ public class Character : LivingEntity
     public CinemachineVirtualCamera lockOnCamera;
     public CinemachineFreeLook lockOffCamera;
     public Transform lockOnCameraPosition;
+    public Transform camEyePos;
     public TrailRenderer swordEffect;
     public LayerMask whatIsGround;
     public LayerMask enemy;
-
-    public GameObject tempTarget;
     public Animator animator { get; private set; }
     public Camera followCamera { get; private set; }
     public Rigidbody rb { get; private set; }

@@ -43,7 +43,7 @@ public class LockOnWalkState : PlayerMovementState
     }
     private void Rotate()
     {
-        Vector3 direction = new Vector3(sm.character.tempTarget.transform.position.x - sm.character.rb.position.x, 0, sm.character.tempTarget.transform.position.z - sm.character.rb.position.z);
+        Vector3 direction = new Vector3(CameraStateMachine.Instance.cameraLockOnState.target.position.x - sm.character.rb.position.x, 0, CameraStateMachine.Instance.cameraLockOnState.target.position.z - sm.character.rb.position.z);
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
