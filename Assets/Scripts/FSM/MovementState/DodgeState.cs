@@ -65,7 +65,7 @@ public class DodgeState : PlayerMovementState
 
         if (IsOnSlope() == true)
         {
-            sm.character.rb.AddForce(GetSlopeMoveDirection() * 10f, ForceMode.Impulse);
+            sm.character.rb.AddForce(GetSlopeMoveDirection() * 7f, ForceMode.Impulse);
             if (sm.character.rb.velocity.y > 5)
             {
                 sm.character.rb.AddForce(Vector3.down * 80f, ForceMode.Force);
