@@ -7,11 +7,9 @@ public abstract class PlayerMovementState : IState
 {
     protected PlayerMovementStateMachine sm;
 
-    protected RaycastHit slopeHit;
     protected Vector3 moveDirection;
     protected Vector3 lookAtDirection;
 
-    protected float maxSlopeAngle;
     protected float moveSpeed;
     protected bool isGrounded;
 
@@ -20,7 +18,6 @@ public abstract class PlayerMovementState : IState
     public PlayerMovementState(PlayerMovementStateMachine sm)
     {
         this.sm = sm;
-        maxSlopeAngle = 45f;
     }
 
     public virtual void Enter()
@@ -30,11 +27,10 @@ public abstract class PlayerMovementState : IState
     }
     public virtual void Update()
     {
-        isGrounded = Physics.Raycast(GetPlayerPosition(), Vector3.down, sm.character.playerHeight * 0.5f + 0.2f, sm.character.whatIsGround);
-
-        sm.character.rb.useGravity = !IsOnSlope();
+        isGrounded = Physics.Raycast(sm.character.GetPlayerPosition(), Vector3.down, sm.character.playerHeight * 0.5f + 0.2f, sm.character.whatIsGround);
 
         SetMoveDirection();
+        SpeedControl();
 
         if (sm.character.input.moveInput == Vector2.zero)
         {
@@ -59,7 +55,6 @@ public abstract class PlayerMovementState : IState
     public virtual void PhysicsUpdate()
     {
         Move();
-        SpeedControl();
     }
     public virtual void LateUpdate()
     {
@@ -72,7 +67,7 @@ public abstract class PlayerMovementState : IState
 
     protected virtual void Move()
     {
-        if (IsOnSlope() == true)
+        if (sm.character.IsOnSlope() == true)
         {
             sm.character.rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
             if (sm.character.rb.velocity.y > 5)
@@ -85,10 +80,9 @@ public abstract class PlayerMovementState : IState
             sm.character.rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
     }
-
     protected void SpeedControl()
     {
-        if (IsOnSlope() == true)
+        if (sm.character.IsOnSlope() == true)
         {
             if (sm.character.rb.velocity.magnitude > moveSpeed)
             {
@@ -106,7 +100,6 @@ public abstract class PlayerMovementState : IState
             }
         }
     }
-
     private void Rotate()
     {
         if (sm.character.rb.velocity.magnitude > 0.2f)
@@ -115,7 +108,6 @@ public abstract class PlayerMovementState : IState
             sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
         }
     }
-
     IEnumerator PostSimulationUpdate()
     {
         YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
@@ -125,28 +117,10 @@ public abstract class PlayerMovementState : IState
             Rotate();
         }
     }
-
-    Vector3 GetPlayerPosition()
-    {
-        return new Vector3(sm.character.transform.position.x, sm.character.transform.position.y + sm.character.playerHeight / 2, sm.character.transform.position.z);
-    }
-
-    protected bool IsOnSlope()
-    {
-        if (Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, sm.character.playerHeight * 0.5f + 0.1f) == true)
-        {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
-        }
-
-        return false;
-    }
-
     protected virtual Vector3 GetSlopeMoveDirection()
     {
-        return Vector3.ProjectOnPlane(sm.character.transform.forward, slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(sm.character.transform.forward, sm.character.slopeHit.normal).normalized;
     }
-
     protected void SetMoveDirection()
     {
         Vector3 forward = sm.character.followCamera.transform.forward;
@@ -156,12 +130,10 @@ public abstract class PlayerMovementState : IState
         moveDirection = forward * sm.character.input.moveInput.y + sm.character.followCamera.transform.right * sm.character.input.moveInput.x;
         lookAtDirection = forward * sm.character.input.rotationInput.y + sm.character.followCamera.transform.right * sm.character.input.rotationInput.x;
     }
-
     void UpdateAnimation()
     {
         sm.character.animator.SetFloat("Speed", sm.character.rb.velocity.magnitude, 0.08f, Time.deltaTime);
     }
-
     public virtual void OnAnimationEnterEvent()
     {
 

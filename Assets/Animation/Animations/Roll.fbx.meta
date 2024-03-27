@@ -39,7 +39,7 @@ ModelImporter:
       name: Roll
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 6
+      firstFrame: 12
       lastFrame: 71
       wrapMode: 0
       orientationOffsetY: 0
@@ -67,7 +67,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.82731956
+      - time: 0.638523
         functionName: OnAnimationExitEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}

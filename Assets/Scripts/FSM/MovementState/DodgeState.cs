@@ -12,17 +12,16 @@ public class DodgeState : PlayerMovementState
     }
     public override void Enter()
     {
+        moveSpeed = 3f;
         isDodgeFinished = false;
 
         sm.character.animator.SetTrigger("IsRolling");
-        sm.character.rb.velocity = Vector3.zero;
 
         SetMoveDirection();
-        Dodge();
     }
     public override void Update()
     {
-        sm.character.rb.useGravity = !IsOnSlope();
+        SpeedControl();
 
         if (isDodgeFinished == true)
         {
@@ -38,7 +37,7 @@ public class DodgeState : PlayerMovementState
     }
     public override void PhysicsUpdate()
     {
-
+        Dodge();
     }
     public override void LateUpdate()
     {
@@ -63,17 +62,14 @@ public class DodgeState : PlayerMovementState
     {
         sm.character.transform.LookAt(sm.character.transform.position + moveDirection);
 
-        if (IsOnSlope() == true)
+        if (sm.character.IsOnSlope() == true)
         {
-            sm.character.rb.AddForce(GetSlopeMoveDirection() * 7f, ForceMode.Impulse);
-            if (sm.character.rb.velocity.y > 5)
-            {
-                sm.character.rb.AddForce(Vector3.down * 80f, ForceMode.Force);
-            }
+            sm.character.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed * 10f, ForceMode.Force);
         }
         else
         {
-            sm.character.rb.AddForce(sm.character.transform.forward * 7f, ForceMode.Impulse);
+            sm.character.rb.AddForce(sm.character.transform.forward * moveSpeed * 10f, ForceMode.Force);
         }
     }
+    
 }

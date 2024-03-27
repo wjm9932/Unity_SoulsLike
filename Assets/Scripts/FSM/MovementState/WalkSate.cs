@@ -13,7 +13,7 @@ public class WalkSate : PlayerMovementState
     public override void Enter()
     {
         base.Enter();
-        moveSpeed = 5f;
+        moveSpeed = 3f;
     }
 
     public override void Update()

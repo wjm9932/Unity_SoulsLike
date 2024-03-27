@@ -14,7 +14,7 @@ public class LockOnWalkState : PlayerMovementState
     public override void Enter()
     {
         sm.character.StartCoroutine(coroutineReference);
-        moveSpeed = 5f;
+        moveSpeed = 3f;
     }
 
     public override void Update()
@@ -30,7 +30,6 @@ public class LockOnWalkState : PlayerMovementState
     public override void PhysicsUpdate()
     {
         Move();
-        SpeedControl();
     }
     public override void LateUpdate()
     {
@@ -50,7 +49,7 @@ public class LockOnWalkState : PlayerMovementState
     }
     protected override void Move()
     {
-        if (IsOnSlope() == true)
+        if (sm.character.IsOnSlope() == true)
         {
             sm.character.rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
             if (sm.character.rb.velocity.y > 5)
@@ -66,7 +65,7 @@ public class LockOnWalkState : PlayerMovementState
     protected override Vector3 GetSlopeMoveDirection()
     {
         Vector3 moveDir = sm.character.transform.forward * sm.character.input.moveInput.y + sm.character.transform.right * sm.character.input.moveInput.x;
-        return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(moveDir, sm.character.slopeHit.normal).normalized;
     }
     IEnumerator PostSimulationUpdate()
     {

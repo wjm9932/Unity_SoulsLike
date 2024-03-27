@@ -11,7 +11,7 @@ public class SprintState : PlayerMovementState
     public override void Enter()
     {
         base.Enter();
-        moveSpeed = 7f;
+        moveSpeed = 5f;
     }
 
     public override void Update()

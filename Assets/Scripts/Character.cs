@@ -20,6 +20,13 @@ public class Character : LivingEntity
     public PlayerInput input { get; private set; }
 
     private PlayerMovementStateMachine playerMovementStateMachine;
+
+
+    public RaycastHit slopeHit;
+
+    [SerializeField]
+    private float maxSlopeAngle;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -37,11 +44,13 @@ public class Character : LivingEntity
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
         CameraStateMachine.Instance.Update();
     }
@@ -64,5 +73,21 @@ public class Character : LivingEntity
     private void OnAnimationTransitionEvent()
     {
         playerMovementStateMachine.OnAnimationTransitionEvent();
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return new Vector3(transform.position.x, transform.position.y + playerHeight / 2, transform.position.z);
+    }
+
+    public bool IsOnSlope()
+    {
+        if (Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, playerHeight * 0.5f + 0.1f) == true)
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle < maxSlopeAngle && angle != 0;
+        }
+
+        return false;
     }
 }

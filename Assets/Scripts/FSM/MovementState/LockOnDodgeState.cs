@@ -6,6 +6,7 @@ public class LockOnDodgeState : PlayerMovementState
 {
     private bool isDodgeFinished;
     private Vector3 moveDir;
+    private Vector2 dodgeDir;
 
     public LockOnDodgeState(PlayerMovementStateMachine sm) : base(sm)
     {
@@ -14,14 +15,14 @@ public class LockOnDodgeState : PlayerMovementState
     {
         isDodgeFinished = false;
         sm.character.rb.velocity = Vector3.zero;
-
-        Dodge();
+        moveSpeed = 2f;
+        dodgeDir = sm.character.input.dodgeInput;
         UpdateAnimation();
     }
     public override void Update()
     {
-        sm.character.rb.useGravity = !IsOnSlope();
-
+        SpeedControl();
+        Debug.Log(dodgeDir);
         if (isDodgeFinished == true)
         {
             if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
@@ -36,7 +37,7 @@ public class LockOnDodgeState : PlayerMovementState
     }
     public override void PhysicsUpdate()
     {
-
+        Dodge();
     }
     public override void LateUpdate()
     {
@@ -59,32 +60,29 @@ public class LockOnDodgeState : PlayerMovementState
     }
     private void Dodge()
     {
-        if (IsOnSlope() == true)
+        //sm.character.rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+        if (sm.character.IsOnSlope() == true)
         {
-            sm.character.rb.AddForce(GetSlopeMoveDirection() * 7f, ForceMode.Impulse);
-            if (sm.character.rb.velocity.y > 5)
-            {
-                sm.character.rb.AddForce(Vector3.down * 80f, ForceMode.Force);
-            }
+            sm.character.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed, ForceMode.Impulse);     
         }
         else
         {
-            if (sm.character.input.moveInput == Vector2.zero)
+            if (dodgeDir == Vector2.zero)
             {
                 moveDir = sm.character.transform.forward;
             }
             else
             {
-                moveDir = sm.character.transform.forward * sm.character.input.dodgeInput.y + sm.character.transform.right * sm.character.input.dodgeInput.x;
+                moveDir = sm.character.transform.forward * dodgeDir.y + sm.character.transform.right * dodgeDir.x;
             }
-            sm.character.rb.AddForce(moveDir * 3f, ForceMode.Impulse);
+            sm.character.rb.AddForce(moveDir.normalized * moveSpeed, ForceMode.Impulse);
         }
     }
 
     protected override Vector3 GetSlopeMoveDirection()
     {
-        Vector3 moveDir = sm.character.transform.forward * sm.character.input.moveInput.y + sm.character.transform.right * sm.character.input.moveInput.x;
-        return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
+        Vector3 moveDir = sm.character.transform.forward * dodgeDir.y + sm.character.transform.right * dodgeDir.x;
+        return Vector3.ProjectOnPlane(moveDir, sm.character.slopeHit.normal).normalized;
     }
 
     //private void Rotate()
@@ -106,8 +104,8 @@ public class LockOnDodgeState : PlayerMovementState
     //}
     private void UpdateAnimation()
     {
-        sm.character.animator.SetFloat("Horizontal", sm.character.input.dodgeInput.x);
-        sm.character.animator.SetFloat("Vertical", sm.character.input.dodgeInput.y);
+        sm.character.animator.SetFloat("Horizontal", dodgeDir.x);
+        sm.character.animator.SetFloat("Vertical", dodgeDir.y);
         sm.character.animator.SetTrigger("IsRolling");
     }
 }
