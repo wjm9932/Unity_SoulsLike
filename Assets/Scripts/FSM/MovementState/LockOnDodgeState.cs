@@ -22,7 +22,6 @@ public class LockOnDodgeState : PlayerMovementState
     public override void Update()
     {
         SpeedControl();
-        Debug.Log(dodgeDir);
         if (isDodgeFinished == true)
         {
             if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)

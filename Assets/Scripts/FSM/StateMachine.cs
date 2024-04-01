@@ -43,4 +43,8 @@ public abstract class StateMachine
     {
         currentState?.OnAnimationTransitionEvent();
     }
+    public void OnAnimatorIK()
+    {
+        currentState?.OnAnimatorIK();
+    }
 }

@@ -44,4 +44,10 @@ public class WalkSate : PlayerMovementState
     {
         base.Exit();  
     }
+    public override void OnAnimatorIK()
+    {
+        sm.character.animator.SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
+        sm.character.animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, sm.character.animator.GetFloat("HandWeight"));
+        sm.character.animator.SetIKPosition(AvatarIKGoal.LeftHand, sm.character.leftHandPos.position);
+    }
 }

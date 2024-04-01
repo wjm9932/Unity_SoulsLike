@@ -57,6 +57,10 @@ public class AttackState : IState
     {
         canComboAttack = true;
     }
+    public virtual void OnAnimatorIK()
+    {
+        sm.character.animator.SetFloat("HandWeight", 0);
+    }
     private void AddAttackDashForce()
     {
         sm.character.rb.velocity = Vector3.zero;

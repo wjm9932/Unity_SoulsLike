@@ -51,5 +51,8 @@ public class CameraState : IState
     {
 
     }
-    
+    public virtual void OnAnimatorIK()
+    {
+
+    }
 }

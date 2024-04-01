@@ -15,9 +15,13 @@ public class IdleState : PlayerMovementState
     public override void Update()
     {
         //base.Update();
-        if(sm.character.input.moveInput != Vector2.zero)
-        { 
-            if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)
+        if (sm.character.IsOnSlope() == true)
+        {
+            sm.character.rb.velocity = Vector3.zero;
+        }
+        if (sm.character.input.moveInput != Vector2.zero)
+        {
+            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)
             {
                 sm.ChangeState(sm.walkState);
             }
@@ -55,8 +59,15 @@ public class IdleState : PlayerMovementState
     {
         //base.Exit();
     }
+    public override void OnAnimatorIK()
+    {
+        sm.character.animator.SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
+        sm.character.animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, sm.character.animator.GetFloat("HandWeight"));
+        sm.character.animator.SetIKPosition(AvatarIKGoal.LeftHand, sm.character.leftHandPos.position);
+    }
     void UpdateAnimation()
     {
         sm.character.animator.SetFloat("Speed", sm.character.rb.velocity.magnitude, 0.08f, Time.deltaTime);
     }
+
 }

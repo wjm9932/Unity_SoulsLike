@@ -19,12 +19,19 @@ public class LockOnWalkState : PlayerMovementState
 
     public override void Update()
     {
-        base.Update();
-
-        if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)
+        if (sm.character.input.isSprinting == true)
+        {
+            sm.ChangeState(sm.sprintState);
+        }
+        else if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)
         {
             sm.ChangeState(sm.walkState);
         }
+        else
+        {
+            base.Update();
+        }
+
     }
 
     public override void PhysicsUpdate()

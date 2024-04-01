@@ -18,11 +18,14 @@ public class SprintState : PlayerMovementState
     {
         if(sm.character.input.isSprinting == false)
         {
-            sm.ChangeState(sm.walkState);
-        }
-        else if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
-        {
-            sm.ChangeState(sm.lockOnWalkState);
+            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            {
+                sm.ChangeState(sm.lockOnWalkState);
+            }
+            else
+            {
+                sm.ChangeState(sm.walkState);
+            }
         }
         else
         {

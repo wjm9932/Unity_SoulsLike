@@ -143,6 +143,9 @@ public abstract class PlayerMovementState : IState
     }
     public virtual void OnAnimationTransitionEvent()
     {
-
+    }
+    public virtual void OnAnimatorIK()
+    {
+        sm.character.animator.SetFloat("HandWeight", 0);
     }
 }

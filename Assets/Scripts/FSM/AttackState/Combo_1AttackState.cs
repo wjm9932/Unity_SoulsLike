@@ -29,7 +29,6 @@ public class Combo_1AttackState : AttackState
         {
             base.Update();
         }
-        
     }
     public override void PhysicsUpdate()
     {
@@ -55,5 +54,9 @@ public class Combo_1AttackState : AttackState
     public override void OnAnimationTransitionEvent()
     {
         base.OnAnimationTransitionEvent();
+    }
+    public override void OnAnimatorIK()
+    {
+        base.OnAnimatorIK();
     }
 }
