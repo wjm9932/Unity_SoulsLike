@@ -10,6 +10,7 @@ public class Character : LivingEntity
     public CinemachineFreeLook lockOffCamera;
     public Transform lockOnCameraPosition;
     public Transform camEyePos;
+    public Transform leftHandPos;
     public TrailRenderer swordEffect;
     public LayerMask whatIsGround;
     public LayerMask enemy;
@@ -74,7 +75,10 @@ public class Character : LivingEntity
     {
         playerMovementStateMachine.OnAnimationTransitionEvent();
     }
-
+    private void OnAnimatorIK()
+    {
+        playerMovementStateMachine.OnAnimatorIK();
+    }
     public Vector3 GetPlayerPosition()
     {
         return new Vector3(transform.position.x, transform.position.y + playerHeight / 2, transform.position.z);
@@ -90,4 +94,6 @@ public class Character : LivingEntity
 
         return false;
     }
+
+    
 }
