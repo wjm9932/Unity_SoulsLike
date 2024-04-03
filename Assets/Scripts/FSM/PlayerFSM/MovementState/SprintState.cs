@@ -2,47 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprintState : PlayerMovementState
+namespace PlayerFSM
 {
-    public SprintState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public class SprintState : PlayerMovementState
     {
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-        moveSpeed = 5f;
-    }
-
-    public override void Update()
-    {
-        if(sm.character.input.isSprinting == false)
+        public SprintState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
-            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            moveSpeed = 5f;
+        }
+
+        public override void Update()
+        {
+            if (sm.character.input.isSprinting == false)
             {
-                sm.ChangeState(sm.lockOnWalkState);
+                if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+                {
+                    sm.ChangeState(sm.lockOnWalkState);
+                }
+                else
+                {
+                    sm.ChangeState(sm.walkState);
+                }
             }
             else
             {
-                sm.ChangeState(sm.walkState);
+                base.Update();
             }
         }
-        else
+        public override void PhysicsUpdate()
         {
-            base.Update();
+            base.PhysicsUpdate();
         }
-    }
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
 
-    public override void LateUpdate()
-    {
-        base.LateUpdate();
-    }
-    public override void Exit()
-    {
-        base.Exit();
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+        }
+        public override void Exit()
+        {
+            base.Exit();
+        }
     }
 }

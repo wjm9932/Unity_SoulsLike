@@ -3,60 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class Combo_1AttackState : AttackState
+namespace PlayerFSM
 {
-    
-    public Combo_1AttackState(PlayerMovementStateMachine sm) : base(sm)
+    public class Combo_1AttackState : AttackState
     {
-    }
 
-    public override void Enter()
-    {
-        dashForce = 1.5f;
-
-        base.Enter();
-        sm.character.animator.SetTrigger("IsAttack1");
-        canComboAttack = false;
-    }
-
-    public override void Update()
-    {
-        if(canComboAttack == true && sm.character.input.isAttack == true)
+        public Combo_1AttackState(PlayerMovementStateMachine sm) : base(sm)
         {
-            sm.ChangeState(sm.combo_2AttackState);
         }
-        else
-        {
-            base.Update();
-        }
-    }
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-    public override void LateUpdate()
-    {
-        base.LateUpdate();
-    }
-    public override void Exit()
-    {
-        base.Exit();
-    }
 
-    public override void OnAnimationEnterEvent()
-    {
-        base.OnAnimationEnterEvent();
-    }
-    public override void OnAnimationExitEvent()
-    {
-        base.OnAnimationExitEvent();
-    }
-    public override void OnAnimationTransitionEvent()
-    {
-        base.OnAnimationTransitionEvent();
-    }
-    public override void OnAnimatorIK()
-    {
-        base.OnAnimatorIK();
+        public override void Enter()
+        {
+            dashForce = 1.5f;
+
+            base.Enter();
+            sm.character.animator.SetTrigger("IsAttack1");
+            canComboAttack = false;
+        }
+
+        public override void Update()
+        {
+            if (canComboAttack == true && sm.character.input.isAttack == true)
+            {
+                sm.ChangeState(sm.combo_2AttackState);
+            }
+            else
+            {
+                base.Update();
+            }
+        }
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+        }
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+        }
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void OnAnimationEnterEvent()
+        {
+            base.OnAnimationEnterEvent();
+        }
+        public override void OnAnimationExitEvent()
+        {
+            base.OnAnimationExitEvent();
+        }
+        public override void OnAnimationTransitionEvent()
+        {
+            base.OnAnimationTransitionEvent();
+        }
+        public override void OnAnimatorIK()
+        {
+            base.OnAnimatorIK();
+        }
     }
 }

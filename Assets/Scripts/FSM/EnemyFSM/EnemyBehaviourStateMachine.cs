@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using EnemyFSM;
 public class EnemyBehaviorStateMachine : StateMachine
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Enemy enemy { get; }
+    public Character character { get; }
+    public IdleState idleState { get; }
+    public EnemyBehaviorStateMachine(Enemy enemy, Character character)
+    {   
+        this.enemy = enemy;
+        this.character = character;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        idleState = new IdleState(this);
     }
 }
