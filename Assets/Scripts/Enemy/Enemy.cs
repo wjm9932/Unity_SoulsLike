@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class MoveCamera : MonoBehaviour
+public class Enemy : LivingEntity
 {
-    public Transform cameraPosition;
+    private NavMeshAgent navMesh;
+    private void Awake()
+    {
+        navMesh = GetComponent<NavMeshAgent>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -12,8 +17,8 @@ public class MoveCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-        transform.position = cameraPosition.position;
+        
     }
 }

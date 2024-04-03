@@ -105,7 +105,7 @@ public abstract class PlayerMovementState : IState
         if (sm.character.rb.velocity.magnitude > 0.2f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(lookAtDirection);
-            sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
+            sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 15f * Time.fixedDeltaTime));
         }
     }
     IEnumerator PostSimulationUpdate()
