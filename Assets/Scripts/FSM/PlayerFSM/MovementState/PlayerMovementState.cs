@@ -119,7 +119,8 @@ public abstract class PlayerMovementState : IState
     }
     protected virtual Vector3 GetSlopeMoveDirection()
     {
-        return Vector3.ProjectOnPlane(sm.character.transform.forward, sm.character.slopeHit.normal).normalized;
+        //return Vector3.ProjectOnPlane(sm.character.transform.forward, sm.character.slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(moveDirection, sm.character.slopeHit.normal).normalized;
     }
     protected void SetMoveDirection()
     {

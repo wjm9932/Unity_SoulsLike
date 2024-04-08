@@ -29,12 +29,13 @@ public class Enemy : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.V))
+        //if (Input.GetKeyDown(KeyCode.V))
         //{
         //    rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
         //}
         //navMesh.nextPosition = transform.position;
-        
+
+        //transform.position = Vector3.MoveTowards(transform.position, character.transform.position, Time.deltaTime * 1f);
         enemyBehaviorStateMachine.Update();
     }
     private void FixedUpdate()
