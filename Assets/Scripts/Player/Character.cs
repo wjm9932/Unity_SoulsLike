@@ -54,6 +54,10 @@ public class Character : LivingEntity
         rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
         CameraStateMachine.Instance.Update();
+        //if player get hit by enemy
+        //{
+        //    playerMovementStateMachine.ChangeState(HitState)
+        //}
     }
     private void FixedUpdate()
     {

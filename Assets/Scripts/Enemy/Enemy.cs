@@ -5,18 +5,23 @@ using UnityEngine.AI;
 
 public class Enemy : LivingEntity
 {
+    public NavMeshAgent navMesh { get; private set; }
+    public Rigidbody rb { get; private set; }
+    public Animator animator { get; private set; }
+
     [SerializeField]
     private Character character;
-
-    public NavMeshAgent navMesh { get; private set; }
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
     }
     // Start is called before the first frame update
     void Start()
     {
+        //navMesh.updatePosition = false;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this, character);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
     }
@@ -24,6 +29,12 @@ public class Enemy : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        //if(Input.GetKeyDown(KeyCode.V))
+        //{
+        //    rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+        //}
+        //navMesh.nextPosition = transform.position;
+        
         enemyBehaviorStateMachine.Update();
     }
     private void FixedUpdate()

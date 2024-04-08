@@ -15,11 +15,23 @@ namespace EnemyFSM
 
         public virtual void Enter()
         {
-
+            sm.enemy.navMesh.isStopped = false;
         }
         public virtual void Update()
         {
-            Rotate();
+            sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetAngle(), Time.deltaTime * 5);
+
+            if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= 3f)
+            {
+                sm.enemy.navMesh.SetDestination(sm.character.transform.position);
+            }
+            else
+            {
+                if (Quaternion.Angle(sm.enemy.transform.rotation, GetAngle()) < 10f)
+                {
+                    sm.ChangeState(sm.SwordAttackState);
+                }
+            }
         }
         public virtual void PhysicsUpdate()
         {
@@ -31,7 +43,8 @@ namespace EnemyFSM
         }
         public virtual void Exit()
         {
-
+            sm.enemy.navMesh.isStopped = true;
+            sm.enemy.navMesh.ResetPath();
         }
         public virtual void OnAnimationEnterEvent()
         {
@@ -49,14 +62,12 @@ namespace EnemyFSM
         {
 
         }
-        private void Rotate()
+        private Quaternion GetAngle()
         {
             Vector3 direction = sm.character.transform.position - sm.enemy.transform.position;
-            direction.y = 0;
+            direction.y = 0; 
 
-            float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-
-            sm.enemy.transform.rotation = Quaternion.Euler(0, angle, 0);
+            return Quaternion.LookRotation(direction);
         }
     }
 }
