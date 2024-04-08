@@ -45,7 +45,6 @@ public class Character : LivingEntity
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
-
     }
 
     // Update is called once per frame
@@ -98,6 +97,4 @@ public class Character : LivingEntity
 
         return false;
     }
-
-    
 }
