@@ -15,7 +15,7 @@ namespace PlayerFSM
         public override void Enter()
         {
             sm.character.StartCoroutine(coroutineReference);
-            moveSpeed = 3f;
+            moveSpeed = sm.character.walkSpeed;
         }
 
         public override void Update()

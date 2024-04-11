@@ -5,66 +5,65 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class IdleState : IState
+    public class IdleState : EnemyPatternState
     {
-        protected EnemyBehaviorStateMachine sm;
-        public IdleState(EnemyBehaviorStateMachine sm)
+        public IdleState(EnemyBehaviorStateMachine sm) : base(sm)
         {
-            this.sm = sm;
+            stoppingDistance = 1f;
+            agentSpeed = 4f;
         }
 
-        public virtual void Enter()
+        public override void Enter()
         {
             sm.enemy.navMesh.isStopped = false;
+            sm.enemy.navMesh.speed = agentSpeed;
+            sm.enemy.navMesh.stoppingDistance = stoppingDistance;
         }
-        public virtual void Update()
+        public override void Update()
         {
-            sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetAngle(), Time.deltaTime * 5);
-
-            if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= 3f)
+            if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= 2f)
             {
+                sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
                 sm.enemy.navMesh.SetDestination(sm.character.transform.position);
             }
             else
             {
-                if (Quaternion.Angle(sm.enemy.transform.rotation, GetAngle()) < 10f)
-                {
-                    sm.ChangeState(sm.SwordAttackState);
-                }
+                sm.enemy.navMesh.ResetPath();
+                sm.ChangeState(sm.swordAttackState);
             }
         }
-        public virtual void PhysicsUpdate()
+        public override void PhysicsUpdate()
         {
 
         }
-        public virtual void LateUpdate()
+        public override void LateUpdate()
         {
 
         }
-        public virtual void Exit()
+        public override void Exit()
         {
             sm.enemy.navMesh.isStopped = true;
             sm.enemy.navMesh.ResetPath();
         }
-        public virtual void OnAnimationEnterEvent()
+        public override void OnAnimationEnterEvent()
         {
 
         }
-        public virtual void OnAnimationExitEvent()
+        public override void OnAnimationExitEvent()
         {
 
         }
-        public virtual void OnAnimationTransitionEvent()
+        public override void OnAnimationTransitionEvent()
         {
 
         }
-        public virtual void OnAnimatorIK()
+        public override void OnAnimatorIK()
         {
 
         }
-        private Quaternion GetAngle()
+        private Quaternion GetMoveRotationAngle()
         {
-            Vector3 direction = sm.character.transform.position - sm.enemy.transform.position;
+            Vector3 direction = sm.enemy.navMesh.velocity;
             direction.y = 0; 
 
             return Quaternion.LookRotation(direction);

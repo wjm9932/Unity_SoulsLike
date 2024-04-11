@@ -13,7 +13,7 @@ namespace PlayerFSM
         public override void Enter()
         {
             base.Enter();
-            moveSpeed = 5f;
+            moveSpeed = sm.character.sprintSpeed;
         }
 
         public override void Update()

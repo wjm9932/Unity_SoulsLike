@@ -66,7 +66,15 @@ namespace PlayerFSM
 
             if (sm.character.IsOnSlope() == true)
             {
-                sm.character.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed * 10f, ForceMode.Force);
+                if (sm.character.input.dodgeInput == Vector2.zero)
+                {
+                    var dir = Vector3.ProjectOnPlane(sm.character.transform.forward, sm.character.slopeHit.normal).normalized;
+                    sm.character.rb.AddForce(dir * moveSpeed * 10f, ForceMode.Force);
+                }
+                else
+                {
+                    sm.character.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed * 10f, ForceMode.Force);
+                }
             }
             else
             {

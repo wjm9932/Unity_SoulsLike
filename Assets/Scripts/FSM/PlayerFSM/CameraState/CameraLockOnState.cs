@@ -6,10 +6,8 @@ using Cinemachine;
 public class CameraLockOnState : CameraState
 {
     public Transform target { get; private set; }
-    private Vector3 camEyePos;
     public CameraLockOnState(CameraStateMachine CameraStateMachine) : base(CameraStateMachine)
     {
-        camEyePos = Vector3.zero;
     }
     public override void Enter()
     {

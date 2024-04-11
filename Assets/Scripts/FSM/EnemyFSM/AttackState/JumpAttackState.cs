@@ -4,27 +4,34 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class SwordAttackState : EnemyPatternState
+    public class JumpAttackState : EnemyPatternState
     {
         private Quaternion dir;
-        public SwordAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        private float distance;
+        public JumpAttackState(EnemyBehaviorStateMachine sm) : base(sm)
         {
-            stoppingDistance = 1f;
+            stoppingDistance = 2f;
         }
 
         public override void Enter()
         {
-            dir = GetLookAtAngle();
-            sm.enemy.navMesh.isStopped = true;
-            sm.enemy.animator.SetTrigger("Attack");
+            dir = GetInitialPlayerDir();
+            
+            distance = Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position);
+            agentSpeed = (distance - stoppingDistance) / 1f;
+
+            sm.enemy.navMesh.speed = agentSpeed;
+            sm.enemy.navMesh.stoppingDistance = stoppingDistance;
+            sm.enemy.navMesh.SetDestination(sm.character.transform.position);
+            sm.enemy.animator.SetTrigger("Jump Attack");
         }
         public override void Update()
         {
             sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 10);
 
-            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f && sm.enemy.animator.IsInTransition(0) == false)
+            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
             {
-                GetBossPattern();
+                sm.ChangeState(sm.idleState);
             }
         }
         public override void PhysicsUpdate()
@@ -37,7 +44,7 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-            sm.enemy.navMesh.isStopped = false;
+
         }
         public override void OnAnimationEnterEvent()
         {
@@ -55,22 +62,8 @@ namespace EnemyFSM
         {
 
         }
-        private void GetBossPattern()
-        {
-            int pattern = Random.Range(0, 2);
-            switch (pattern)
-            {
-                case 0:
-                    sm.ChangeState(sm.idleState);
-                    break;
-                case 1:
-                    sm.ChangeState(sm.jumpAttackState);
-                    break;
-                default:
-                    break;
-            }
-        }
-        private Quaternion GetLookAtAngle()
+
+        private Quaternion GetInitialPlayerDir()
         {
             Vector3 dir = sm.character.transform.position - sm.enemy.transform.position;
             dir.y = 0;

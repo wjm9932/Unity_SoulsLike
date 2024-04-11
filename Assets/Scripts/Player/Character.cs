@@ -14,16 +14,17 @@ public class Character : LivingEntity
     public TrailRenderer swordEffect;
     public LayerMask whatIsGround;
     public LayerMask enemy;
+    public float walkSpeed;
+    public float sprintSpeed;
     public Animator animator { get; private set; }
     public Camera followCamera { get; private set; }
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
     public PlayerInput input { get; private set; }
+    public RaycastHit slopeHit;
 
     private PlayerMovementStateMachine playerMovementStateMachine;
 
-
-    public RaycastHit slopeHit;
 
     [SerializeField]
     private float maxSlopeAngle;
