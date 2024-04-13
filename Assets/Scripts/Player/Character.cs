@@ -23,7 +23,7 @@ public class Character : LivingEntity
     public PlayerInput input { get; private set; }
     public RaycastHit slopeHit;
 
-    private PlayerMovementStateMachine playerMovementStateMachine;
+    public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
     [SerializeField]
     private float maxSlopeAngle;
 
@@ -52,6 +52,7 @@ public class Character : LivingEntity
         rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
         CameraStateMachine.Instance.Update();
+
         //if player get hit by enemy
         //{
         //    playerMovementStateMachine.ChangeState(HitState)
@@ -96,4 +97,5 @@ public class Character : LivingEntity
 
         return false;
     }
+
 }

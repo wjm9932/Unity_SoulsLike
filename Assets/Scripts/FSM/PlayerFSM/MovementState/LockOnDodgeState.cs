@@ -19,6 +19,7 @@ namespace PlayerFSM
             sm.character.rb.velocity = Vector3.zero;
             moveSpeed = 2f;
             dodgeDir = sm.character.input.dodgeInput;
+
             UpdateAnimation();
         }
         public override void Update()
@@ -61,7 +62,6 @@ namespace PlayerFSM
         }
         private void Dodge()
         {
-            //sm.character.rb.AddForce(Vector3.down * 80f, ForceMode.Force);
             if (sm.character.IsOnSlope() == true)
             {
                 if (dodgeDir == Vector2.zero)

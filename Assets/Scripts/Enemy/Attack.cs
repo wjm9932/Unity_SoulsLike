@@ -21,7 +21,10 @@ public class Attack : MonoBehaviour
         {
             if (canAttack == true)
             {
-                other.GetComponent<Animator>().SetTrigger("Hit");
+                Character character = other.GetComponent<Character>();
+
+                character.animator.SetTrigger("Hit");
+                character.playerMovementStateMachine.ChangeState(character.playerMovementStateMachine.hitState);
             }
         }
     }

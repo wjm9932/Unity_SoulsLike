@@ -16,6 +16,7 @@ public class PlayerMovementStateMachine : StateMachine
     public Combo_3AttackState combo_3AttackState { get; }
     public LockOnWalkState lockOnWalkState { get; }
     public LockOnDodgeState lockOnDodgeState { get; }
+    public HitState hitState { get; }
 
 
     public PlayerMovementStateMachine(Character character)
@@ -32,5 +33,6 @@ public class PlayerMovementStateMachine : StateMachine
         combo_3AttackState = new Combo_3AttackState(this);
         lockOnWalkState = new LockOnWalkState(this);
         lockOnDodgeState = new LockOnDodgeState(this);
+        hitState = new HitState(this);  
     }
 }
