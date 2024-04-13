@@ -9,6 +9,8 @@ public class EnemyBehaviorStateMachine : StateMachine
     public IdleState idleState { get; }
     public SwordAttackState swordAttackState { get; }
     public JumpAttackState jumpAttackState { get; }
+    public DashAttackState dashAttackState { get; }
+    public BackFlipState backFlipState { get; }
     public EnemyBehaviorStateMachine(Enemy enemy, Character character)
     {   
         this.enemy = enemy;
@@ -17,5 +19,7 @@ public class EnemyBehaviorStateMachine : StateMachine
         idleState = new IdleState(this);
         swordAttackState = new SwordAttackState(this);
         jumpAttackState = new JumpAttackState(this);
+        dashAttackState = new DashAttackState(this);
+        backFlipState = new BackFlipState(this);
     }
 }

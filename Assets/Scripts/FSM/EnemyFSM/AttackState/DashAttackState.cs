@@ -4,28 +4,26 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class SwordAttackState : EnemyPatternState
+    public class DashAttackState : EnemyPatternState
     {
-        public SwordAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        public DashAttackState(EnemyBehaviorStateMachine sm) : base(sm)
         {
-            stoppingDistance = 1f;
+            stoppingDistance = 0f;
         }
 
         public override void Enter()
         {
+            sm.enemy.navMesh.stoppingDistance = stoppingDistance;
+            sm.enemy.navMesh.speed = 20f;
+            SetDashDestination();
+
             dir = GetLookAtAngle();
-            sm.enemy.navMesh.isStopped = true;
-            sm.enemy.animator.SetTrigger("Attack");
         }
         public override void Update()
         {
             sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 10);
 
-            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f && sm.enemy.animator.IsInTransition(0) == false)
-            {
-                //GetBossPattern();
-                sm.ChangeState(sm.backFlipState);
-            }
+            
         }
         public override void PhysicsUpdate()
         {
@@ -37,7 +35,6 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-            sm.enemy.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
         {
@@ -70,6 +67,12 @@ namespace EnemyFSM
                     break;
             }
         }
-        
+        private void SetDashDestination()
+        {
+            Vector3 backOffset = sm.enemy.transform.forward * 5;
+            Vector3 dashDestination = sm.character.transform.position + backOffset;
+
+            sm.enemy.navMesh.SetDestination(dashDestination);
+        }
     }
 }

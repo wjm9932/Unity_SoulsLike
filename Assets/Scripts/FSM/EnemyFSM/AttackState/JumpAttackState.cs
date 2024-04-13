@@ -6,7 +6,7 @@ namespace EnemyFSM
 {
     public class JumpAttackState : EnemyPatternState
     {
-        private Quaternion dir;
+        
         private float distance;
         public JumpAttackState(EnemyBehaviorStateMachine sm) : base(sm)
         {
@@ -15,7 +15,7 @@ namespace EnemyFSM
 
         public override void Enter()
         {
-            dir = GetInitialPlayerDir();
+            dir = GetLookAtAngle();
             
             distance = Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position);
             agentSpeed = (distance - stoppingDistance) / 1f;
@@ -61,14 +61,6 @@ namespace EnemyFSM
         public override void OnAnimatorIK()
         {
 
-        }
-
-        private Quaternion GetInitialPlayerDir()
-        {
-            Vector3 dir = sm.character.transform.position - sm.enemy.transform.position;
-            dir.y = 0;
-
-            return Quaternion.LookRotation(dir);
         }
     }
 }

@@ -21,6 +21,8 @@ public class Enemy : LivingEntity
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
+
+        navMesh.updateRotation = false;
     }
     // Start is called before the first frame update
     void Start()

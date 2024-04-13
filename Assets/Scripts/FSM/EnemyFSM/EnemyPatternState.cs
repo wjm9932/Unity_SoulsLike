@@ -7,6 +7,7 @@ public abstract class EnemyPatternState : IState
     protected EnemyBehaviorStateMachine sm;
     protected float stoppingDistance;
     protected float agentSpeed;
+    protected Quaternion dir;
     public EnemyPatternState(EnemyBehaviorStateMachine sm)
     {
         this.sm = sm;
@@ -47,5 +48,12 @@ public abstract class EnemyPatternState : IState
     public virtual void OnAnimatorIK()
     {
 
+    }
+    protected virtual Quaternion GetLookAtAngle()
+    {
+        Vector3 dir = sm.character.transform.position - sm.enemy.transform.position;
+        dir.y = 0;
+
+        return Quaternion.LookRotation(dir);
     }
 }

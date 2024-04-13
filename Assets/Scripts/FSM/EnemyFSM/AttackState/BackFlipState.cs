@@ -1,31 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class SwordAttackState : EnemyPatternState
+    public class BackFlipState : EnemyPatternState
     {
-        public SwordAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        private float distance;
+        public BackFlipState(EnemyBehaviorStateMachine sm) : base(sm)
         {
-            stoppingDistance = 1f;
+            stoppingDistance = 0f;
         }
 
         public override void Enter()
         {
             dir = GetLookAtAngle();
-            sm.enemy.navMesh.isStopped = true;
-            sm.enemy.animator.SetTrigger("Attack");
+
+            SetDashDestinationAndSpeed();
+            sm.enemy.animator.SetTrigger("BackFlip");
         }
         public override void Update()
         {
-            sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 10);
+            sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 30);
 
-            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f && sm.enemy.animator.IsInTransition(0) == false)
+            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
             {
-                //GetBossPattern();
-                sm.ChangeState(sm.backFlipState);
+                sm.ChangeState(sm.jumpAttackState);
             }
+
         }
         public override void PhysicsUpdate()
         {
@@ -37,7 +40,6 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-            sm.enemy.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
         {
@@ -70,6 +72,18 @@ namespace EnemyFSM
                     break;
             }
         }
-        
+
+        private void SetDashDestinationAndSpeed()
+        {
+            Vector3 forwardDirection = dir * Vector3.forward;
+            Vector3 backOffset = forwardDirection * -5;
+            Vector3 dashDestination = sm.enemy.transform.position + backOffset;
+
+            sm.enemy.navMesh.SetDestination(dashDestination);
+
+            distance = Vector3.Distance(sm.enemy.transform.position, dashDestination);
+            agentSpeed = distance / 0.75f;
+            sm.enemy.navMesh.speed = agentSpeed;
+        }
     }
 }
