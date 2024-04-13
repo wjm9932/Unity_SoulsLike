@@ -56,7 +56,16 @@ namespace EnemyFSM
         }
         public override void OnAnimationTransitionEvent()
         {
-
+            if (canAttack == false)
+            {
+                canAttack = true;
+                sm.enemy.swordAttack.SetCanAttack(canAttack);
+            }
+            else
+            {
+                canAttack = false;
+                sm.enemy.swordAttack.SetCanAttack(canAttack);
+            }
         }
         public override void OnAnimatorIK()
         {
