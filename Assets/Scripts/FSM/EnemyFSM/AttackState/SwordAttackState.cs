@@ -25,6 +25,7 @@ namespace EnemyFSM
             {
                 //GetBossPattern();
                 sm.ChangeState(sm.backFlipState);
+                //sm.ChangeState(sm.idleState);
             }
         }
         public override void PhysicsUpdate()
@@ -49,7 +50,16 @@ namespace EnemyFSM
         }
         public override void OnAnimationTransitionEvent()
         {
-
+            if(canAttack == false)
+            {
+                canAttack = true;
+                sm.enemy.swordAttack.SetCanAttack(canAttack);
+            }
+            else
+            {
+                canAttack = false;
+                sm.enemy.swordAttack.SetCanAttack(canAttack);
+            }
         }
         public override void OnAnimatorIK()
         {

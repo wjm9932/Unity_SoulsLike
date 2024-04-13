@@ -8,19 +8,22 @@ public class Enemy : LivingEntity
     public NavMeshAgent navMesh { get; private set; }
     public Rigidbody rb { get; private set; }
     public Animator animator { get; private set; }
+    public Attack swordAttack { get; private set; }
+    
     public RaycastHit slopeHit;
+    public GameObject sword;
 
     [SerializeField]
     private Character character;
     [SerializeField]
     private float maxSlopeAngle;
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
+        swordAttack = sword.GetComponent<Attack>();
 
         navMesh.updateRotation = false;
     }

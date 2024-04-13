@@ -24,8 +24,6 @@ public class Character : LivingEntity
     public RaycastHit slopeHit;
 
     private PlayerMovementStateMachine playerMovementStateMachine;
-
-
     [SerializeField]
     private float maxSlopeAngle;
 
