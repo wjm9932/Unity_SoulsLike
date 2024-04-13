@@ -23,8 +23,8 @@ namespace EnemyFSM
 
             if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f && sm.enemy.animator.IsInTransition(0) == false)
             {
-                //GetBossPattern();
-                sm.ChangeState(sm.backFlipState);
+                GetBossPattern();
+                //sm.ChangeState(sm.backFlipState);
                 //sm.ChangeState(sm.idleState);
             }
         }
@@ -67,7 +67,7 @@ namespace EnemyFSM
         }
         private void GetBossPattern()
         {
-            int pattern = Random.Range(0, 2);
+            int pattern = Random.Range(0, 3);
             switch (pattern)
             {
                 case 0:
@@ -75,6 +75,9 @@ namespace EnemyFSM
                     break;
                 case 1:
                     sm.ChangeState(sm.jumpAttackState);
+                    break;
+                case 2:
+                    sm.ChangeState(sm.backFlipState);
                     break;
                 default:
                     break;

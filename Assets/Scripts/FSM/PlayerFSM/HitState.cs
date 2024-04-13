@@ -14,6 +14,7 @@ namespace PlayerFSM
         }
         public virtual void Enter()
         {
+            sm.character.canBeDamaged = false;
             exit = false;
             sm.character.rb.velocity = Vector3.zero;
         }
@@ -34,7 +35,7 @@ namespace PlayerFSM
         }
         public virtual void Exit()
         {
-
+            sm.character.canBeDamaged = true;
         }
         public virtual void OnAnimationEnterEvent()
         {

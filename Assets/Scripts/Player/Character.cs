@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.TextCore.Text;
 
 public class Character : LivingEntity
 {
@@ -98,4 +99,20 @@ public class Character : LivingEntity
         return false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Attack attack = other.GetComponent<Attack>();
+        if (attack != null)
+        {
+            if(attack.canAttack == true && canBeDamaged == true)
+            {
+                animator.SetTrigger("Hit");
+                playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+
+                var hitPoint = other.ClosestPoint(transform.position);
+                Vector3 hitNormal = (transform.position - hitPoint).normalized;
+                EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+            }
+        }
+    }
 }

@@ -31,7 +31,8 @@ namespace EnemyFSM
 
             if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
             {
-                sm.ChangeState(sm.idleState);
+                //sm.ChangeState(sm.idleState);
+                GetBossPattern();
             }
         }
         public override void PhysicsUpdate()
@@ -70,6 +71,21 @@ namespace EnemyFSM
         public override void OnAnimatorIK()
         {
 
+        }
+        private void GetBossPattern()
+        {
+            int pattern = Random.Range(0, 2);
+            switch (pattern)
+            {
+                case 0:
+                    sm.ChangeState(sm.idleState);
+                    break;
+                case 1:
+                    sm.ChangeState(sm.backFlipState);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

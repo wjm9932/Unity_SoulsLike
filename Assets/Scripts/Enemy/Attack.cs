@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    private bool canAttack;
+    public bool canAttack { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -15,19 +15,7 @@ public class Attack : MonoBehaviour
     void Update()
     {
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            Character character = other.GetComponent<Character>();
-
-            if (canAttack == true && character.canBeDamaged == true)
-            {
-                character.animator.SetTrigger("Hit");
-                character.playerMovementStateMachine.ChangeState(character.playerMovementStateMachine.hitState);
-            }
-        }
-    }
+    
 
     public void SetCanAttack(bool canAttack)
     {
