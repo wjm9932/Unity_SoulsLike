@@ -22,16 +22,19 @@ public class Character : LivingEntity
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
     public PlayerInput input { get; private set; }
-    public RaycastHit slopeHit;
-
     public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
+    
     [SerializeField]
     private float maxSlopeAngle;
+
+    private Attack attack;
+    public RaycastHit slopeHit;
 
     // Start is called before the first frame update
     private void Awake()
     {
         canBeDamaged = true;
+        attack = GetComponent<Attack>();
         CameraStateMachine.Initialize(this);
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
     }
@@ -54,10 +57,6 @@ public class Character : LivingEntity
         playerMovementStateMachine.Update();
         CameraStateMachine.Instance.Update();
 
-        //if player get hit by enemy
-        //{
-        //    playerMovementStateMachine.ChangeState(HitState)
-        //}
     }
     private void FixedUpdate()
     {
@@ -101,10 +100,11 @@ public class Character : LivingEntity
 
     private void OnTriggerEnter(Collider other)
     {
-        Attack attack = other.GetComponent<Attack>();
-        if (attack != null)
+        if(other.tag == "EnemySword")
         {
-            if(attack.canAttack == true && canBeDamaged == true)
+            Attack enemy = other.transform.root.GetComponent<Attack>();
+
+            if (enemy.canAttack == true && this.canBeDamaged == true)
             {
                 animator.SetTrigger("Hit");
                 playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);

@@ -64,16 +64,16 @@ ModelImporter:
       curves: []
       events:
       - time: 0.4404332
-        functionName: OnAnimationTransitionEvent
+        functionName: SetCanAttack
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 0654fac006e45fd41b69c95e9880ed98, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.5311851
-        functionName: OnAnimationTransitionEvent
+        functionName: SetCanAttack
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 0654fac006e45fd41b69c95e9880ed98, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

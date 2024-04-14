@@ -8,11 +8,13 @@ public class AttackState : IState
     protected PlayerMovementStateMachine sm;
     protected float dashForce;
     protected bool canComboAttack;
+    protected bool canAttack;
     Quaternion rotation;
 
     public AttackState(PlayerMovementStateMachine sm)
     {
         this.sm = sm;
+        canAttack = false;
     }
     public virtual void Enter()
     {

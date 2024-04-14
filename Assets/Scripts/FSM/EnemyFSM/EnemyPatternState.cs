@@ -8,11 +8,9 @@ public abstract class EnemyPatternState : IState
     protected float stoppingDistance;
     protected float agentSpeed;
     protected Quaternion dir;
-    protected bool canAttack;
     public EnemyPatternState(EnemyBehaviorStateMachine sm)
     {
         this.sm = sm;
-        canAttack = false;
     }
 
     public virtual void Enter()

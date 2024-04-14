@@ -17,8 +17,9 @@ public class Attack : MonoBehaviour
     }
     
 
-    public void SetCanAttack(bool canAttack)
+    public void SetCanAttack()
     {
-        this.canAttack = canAttack;
+        canAttack = !canAttack;
     }
+
 }

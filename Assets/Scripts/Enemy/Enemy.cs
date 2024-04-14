@@ -8,23 +8,24 @@ public class Enemy : LivingEntity
     public NavMeshAgent navMesh { get; private set; }
     public Rigidbody rb { get; private set; }
     public Animator animator { get; private set; }
-    public Attack swordAttack { get; private set; }
     
     public RaycastHit slopeHit;
-    public GameObject sword;
 
     [SerializeField]
     private Character character;
     [SerializeField]
     private float maxSlopeAngle;
+
+    private Attack attack;
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
+    
     private void Awake()
     {
+        canBeDamaged = true;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
-        swordAttack = sword.GetComponent<Attack>();
-
+        attack = GetComponent<Attack>();
         navMesh.updateRotation = false;
     }
     // Start is called before the first frame update
@@ -71,5 +72,20 @@ public class Enemy : LivingEntity
         }
 
         return false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Sword")
+        {
+            Attack player = other.transform.root.GetComponent<Attack>();
+
+            if (player.canAttack == true && this.canBeDamaged == true)
+            {
+                var hitPoint = other.ClosestPoint(transform.position);
+                Vector3 hitNormal = (transform.position - hitPoint).normalized;
+                EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+            }
+        }
     }
 }

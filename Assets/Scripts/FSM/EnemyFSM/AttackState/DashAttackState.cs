@@ -22,8 +22,6 @@ namespace EnemyFSM
         public override void Update()
         {
             sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 10);
-
-            
         }
         public override void PhysicsUpdate()
         {
