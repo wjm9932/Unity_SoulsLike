@@ -27,7 +27,7 @@ namespace EnemyFSM
             dir = GetLookAtAngle();
             sm.enemy.animator.SetTrigger("DashStab");
             sm.enemy.GetComponent<CapsuleCollider>().isTrigger = true;
-            sm.enemy.attack.SetCanAttack();
+            sm.enemy.attack.SetCanAttack(1);
         }
         public override void Update()
         {
@@ -39,7 +39,14 @@ namespace EnemyFSM
             if(timer <= 0)
             {
                 sm.enemy.animator.SetTrigger("StabDone");
-                sm.ChangeState(sm.idleState);
+                if (sm.enemy.isTest == true)
+                {
+                    sm.ChangeState(sm.idleState);
+                }
+                else
+                {
+                    GetBossPattern();
+                }
             }
         }
         public override void PhysicsUpdate()
@@ -53,7 +60,7 @@ namespace EnemyFSM
         public override void Exit()
         {
             sm.enemy.GetComponent<CapsuleCollider>().isTrigger = false;
-            sm.enemy.attack.SetCanAttack();
+            sm.enemy.attack.SetCanAttack(0);
         }
         public override void OnAnimationEnterEvent()
         {

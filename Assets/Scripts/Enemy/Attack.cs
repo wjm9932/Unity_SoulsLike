@@ -17,12 +17,15 @@ public class Attack : MonoBehaviour
     }
     
 
-    public void SetCanAttack()
+    public void SetCanAttack(int flag)
     {
-        canAttack = !canAttack;
-    }
-    public void SetCanAttack(bool flag)
-    {
-        canAttack = flag;
+        if(flag == 1)
+        {
+            canAttack = true;
+        }
+        else
+        {
+            canAttack = false;
+        }
     }
 }

@@ -7,7 +7,6 @@ namespace EnemyFSM
 {
     public class IdleState : EnemyPatternState
     {
-        private bool flag = false;
         public IdleState(EnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 2f;
@@ -22,11 +21,7 @@ namespace EnemyFSM
         }
         public override void Update()
         {
-            if(Input.GetKeyDown(KeyCode.B))
-            {
-                flag = !flag;
-            }
-            if(flag == true)
+            if(sm.enemy.isTest == false)
             {
                 if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= stoppingDistance)
                 {
@@ -38,7 +33,7 @@ namespace EnemyFSM
                     sm.enemy.navMesh.ResetPath();
                     sm.ChangeState(sm.swordAttackState);
                 }
-            }  
+            }
         }
         public override void PhysicsUpdate()
         {

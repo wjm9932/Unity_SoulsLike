@@ -18,6 +18,7 @@ public class Enemy : LivingEntity
 
     public Attack attack { get; private set; }
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
+    public bool isTest = true;
     
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class Enemy : LivingEntity
     // Start is called before the first frame update
     void Start()
     {
+        isTest = true;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this, character);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
     }
@@ -39,9 +41,38 @@ public class Enemy : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            isTest = !isTest;
+        }
         rb.useGravity = !IsOnSlope();
 
         enemyBehaviorStateMachine.Update();
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stabAttackState);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.backFlipState);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.jumpAttackState);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stanbyStabAttackState);
+        }
     }
     private void FixedUpdate()
     {

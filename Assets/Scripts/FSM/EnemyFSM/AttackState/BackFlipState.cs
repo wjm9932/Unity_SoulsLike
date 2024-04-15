@@ -26,7 +26,14 @@ namespace EnemyFSM
 
             if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
             {
-                GetBossPattern();
+                if (sm.enemy.isTest == true)
+                {
+                    sm.ChangeState(sm.idleState);
+                }
+                else
+                {
+                    GetBossPattern();
+                }
             }
 
         }

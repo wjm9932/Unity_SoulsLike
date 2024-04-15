@@ -20,7 +20,7 @@ namespace EnemyFSM
         }
         public override void Update()
         {
-            if (timer > 0f && Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position) >= 4f)
+            if (timer > 0f && Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position) >= 3f)
             {
                 sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetLookAtAngle(), Time.deltaTime * 10);
                 timer -= Time.deltaTime;
