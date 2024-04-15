@@ -16,17 +16,18 @@ public class Enemy : LivingEntity
     [SerializeField]
     private float maxSlopeAngle;
 
-    private Attack attack;
+    public Attack attack { get; private set; }
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
     
     private void Awake()
     {
-        canBeDamaged = true;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
         attack = GetComponent<Attack>();
+
         navMesh.updateRotation = false;
+        canBeDamaged = true;
     }
     // Start is called before the first frame update
     void Start()

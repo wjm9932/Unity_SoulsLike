@@ -4,42 +4,28 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class DashAttackState : EnemyPatternState
+    public class StabAttackState : EnemyPatternState
     {
-        private float distance;
-        private float timer;
-        public DashAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        public StabAttackState(EnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 0f;
         }
 
         public override void Enter()
         {
-            timer = 0.1f;
-
-            distance = Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position);
-            agentSpeed = distance / 0.15f;
-
-            sm.enemy.navMesh.stoppingDistance = stoppingDistance;
-            sm.enemy.navMesh.speed = agentSpeed;
-            SetDashDestination();
-
             dir = GetLookAtAngle();
-            sm.enemy.animator.SetTrigger("DashStab");
-            sm.enemy.GetComponent<CapsuleCollider>().isTrigger = true;
-            sm.enemy.attack.SetCanAttack();
+
+            sm.enemy.navMesh.isStopped = true;
+            sm.enemy.animator.SetTrigger("Stab");
         }
         public override void Update()
         {
             sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 10);
-            if(sm.enemy.navMesh.remainingDistance <= 0f)
+
+            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.75f && sm.enemy.animator.IsInTransition(0) == false)
             {
-                timer -= Time.deltaTime;
-            }
-            if(timer <= 0)
-            {
-                sm.enemy.animator.SetTrigger("StabDone");
                 sm.ChangeState(sm.idleState);
+                //GetBossPattern();
             }
         }
         public override void PhysicsUpdate()
@@ -52,8 +38,7 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-            sm.enemy.GetComponent<CapsuleCollider>().isTrigger = false;
-            sm.enemy.attack.SetCanAttack();
+            sm.enemy.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
         {
@@ -86,13 +71,6 @@ namespace EnemyFSM
                     break;
             }
         }
-        private void SetDashDestination()
-        {
-            Vector3 backOffset = sm.enemy.transform.forward * 5f;
-            Vector3 rightOffset = sm.enemy.transform.right * -1.5f;
-            Vector3 dashDestination = sm.character.transform.position + backOffset;
 
-            sm.enemy.navMesh.SetDestination(dashDestination);
-        }
     }
 }

@@ -9,7 +9,7 @@ namespace EnemyFSM
     {
         public IdleState(EnemyBehaviorStateMachine sm) : base(sm)
         {
-            stoppingDistance = 1f;
+            stoppingDistance = 2f;
             agentSpeed = 4f;
         }
 
@@ -21,7 +21,7 @@ namespace EnemyFSM
         }
         public override void Update()
         {
-            if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= 2f)
+            if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= stoppingDistance)
             {
                 sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
                 sm.enemy.navMesh.SetDestination(sm.character.transform.position);
@@ -30,6 +30,7 @@ namespace EnemyFSM
             {
                 sm.enemy.navMesh.ResetPath();
                 sm.ChangeState(sm.swordAttackState);
+                //sm.ChangeState(sm.stanbyStabAttackState);
             }
         }
         public override void PhysicsUpdate()

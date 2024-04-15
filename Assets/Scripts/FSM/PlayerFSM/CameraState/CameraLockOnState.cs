@@ -46,6 +46,7 @@ public class CameraLockOnState : CameraState
     public override void Exit()
     {
         base.Exit();
+        csm.character.StopCoroutine(ApplyDampingAfterFirstFrame());
         csm.character.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
     }
     private void UpdateCameraPosition()

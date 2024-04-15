@@ -26,7 +26,6 @@ namespace EnemyFSM
 
             if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
             {
-                //sm.ChangeState(sm.jumpAttackState);
                 GetBossPattern();
             }
 
@@ -64,7 +63,7 @@ namespace EnemyFSM
             switch (pattern)
             {
                 case 0:
-                    sm.ChangeState(sm.idleState);
+                    sm.ChangeState(sm.stanbyStabAttackState);
                     break;
                 case 1:
                     sm.ChangeState(sm.jumpAttackState);
