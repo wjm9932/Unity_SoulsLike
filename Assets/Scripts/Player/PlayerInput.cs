@@ -24,6 +24,7 @@ public class PlayerInput : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Application.targetFrameRate = 144;
     }
 
     private void Update()
@@ -57,5 +58,9 @@ public class PlayerInput : MonoBehaviour
         isDodging = Input.GetKeyDown(KeyCode.Space);
         isAttack = Input.GetButtonDown(attackButtonName);
         isLockOn = Input.GetKeyDown(KeyCode.F);
+    }
+    private void FixedUpdate()
+    {
+        
     }
 }

@@ -21,5 +21,8 @@ public class Attack : MonoBehaviour
     {
         canAttack = !canAttack;
     }
-
+    public void SetCanAttack(bool flag)
+    {
+        canAttack = flag;
+    }
 }

@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
+    second: SwingSword
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -39,20 +39,20 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: SwingSword
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
       lastFrame: 38
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: -15
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
@@ -62,7 +62,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.42499998
+        functionName: SetCanAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5964286
+        functionName: SetCanAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -7,6 +7,7 @@ namespace EnemyFSM
 {
     public class IdleState : EnemyPatternState
     {
+        private bool flag = false;
         public IdleState(EnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 2f;
@@ -21,17 +22,23 @@ namespace EnemyFSM
         }
         public override void Update()
         {
-            if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= stoppingDistance)
+            if(Input.GetKeyDown(KeyCode.B))
             {
-                sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
-                sm.enemy.navMesh.SetDestination(sm.character.transform.position);
+                flag = !flag;
             }
-            else
+            if(flag == true)
             {
-                sm.enemy.navMesh.ResetPath();
-                sm.ChangeState(sm.swordAttackState);
-                //sm.ChangeState(sm.stanbyStabAttackState);
-            }
+                if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= stoppingDistance)
+                {
+                    sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
+                    sm.enemy.navMesh.SetDestination(sm.character.transform.position);
+                }
+                else
+                {
+                    sm.enemy.navMesh.ResetPath();
+                    sm.ChangeState(sm.swordAttackState);
+                }
+            }  
         }
         public override void PhysicsUpdate()
         {

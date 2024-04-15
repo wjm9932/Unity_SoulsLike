@@ -46,6 +46,7 @@ public class AttackState : IState
         canComboAttack = true;
         sm.character.swordEffect.enabled = false;
         sm.character.rb.drag = 0f;
+        sm.character.attack.SetCanAttack(false);
     }
     public virtual void OnAnimationEnterEvent()
     {

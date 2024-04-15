@@ -27,7 +27,7 @@ public class Character : LivingEntity
     [SerializeField]
     private float maxSlopeAngle;
 
-    private Attack attack;
+    public Attack attack { get; private set; }
     public RaycastHit slopeHit;
 
     // Start is called before the first frame update
@@ -98,21 +98,42 @@ public class Character : LivingEntity
         return false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.tag == "EnemySword")
+    //    {
+    //        Attack enemy = other.transform.root.GetComponent<Attack>();
+
+    //        if (enemy.canAttack == true && this.canBeDamaged == true)
+    //        {
+    //            animator.SetTrigger("Hit");
+    //            playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+
+    //            var hitPoint = other.ClosestPoint(transform.position);
+    //            Vector3 hitNormal = (transform.position - hitPoint).normalized;
+    //            EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+    //        }
+    //    }
+    //}
+    private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "EnemySword")
+        if (other.tag == "EnemySword")
         {
-            Attack enemy = other.transform.root.GetComponent<Attack>();
-
-            if (enemy.canAttack == true && this.canBeDamaged == true)
+            if(playerMovementStateMachine.currentState != playerMovementStateMachine.hitState)
             {
-                animator.SetTrigger("Hit");
-                playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                Attack enemy = other.transform.root.GetComponent<Attack>();
 
-                var hitPoint = other.ClosestPoint(transform.position);
-                Vector3 hitNormal = (transform.position - hitPoint).normalized;
-                EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+                if (enemy.canAttack == true && this.canBeDamaged == true)
+                {
+                    animator.SetTrigger("Hit");
+                    playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+
+                    var hitPoint = other.ClosestPoint(transform.position);
+                    Vector3 hitNormal = (transform.position - hitPoint).normalized;
+                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+                }
             }
         }
+
     }
 }
