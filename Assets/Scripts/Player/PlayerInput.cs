@@ -59,8 +59,4 @@ public class PlayerInput : MonoBehaviour
         isAttack = Input.GetButtonDown(attackButtonName);
         isLockOn = Input.GetKeyDown(KeyCode.F);
     }
-    private void FixedUpdate()
-    {
-        
-    }
 }

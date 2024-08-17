@@ -97,24 +97,6 @@ public class Character : LivingEntity
 
         return false;
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.tag == "EnemySword")
-    //    {
-    //        Attack enemy = other.transform.root.GetComponent<Attack>();
-
-    //        if (enemy.canAttack == true && this.canBeDamaged == true)
-    //        {
-    //            animator.SetTrigger("Hit");
-    //            playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
-
-    //            var hitPoint = other.ClosestPoint(transform.position);
-    //            Vector3 hitNormal = (transform.position - hitPoint).normalized;
-    //            EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
-    //        }
-    //    }
-    //}
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "EnemySword")

@@ -39,14 +39,7 @@ namespace EnemyFSM
             if(timer <= 0)
             {
                 sm.enemy.animator.SetTrigger("StabDone");
-                if (sm.enemy.isTest == true)
-                {
-                    sm.ChangeState(sm.idleState);
-                }
-                else
-                {
-                    GetBossPattern();
-                }
+                GetBossPattern();
             }
         }
         public override void PhysicsUpdate()

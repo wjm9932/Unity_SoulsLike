@@ -63,14 +63,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3388407
+      - time: 0.36953124
         functionName: SetCanAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.438714
+      - time: 0.40035084
         functionName: SetCanAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}

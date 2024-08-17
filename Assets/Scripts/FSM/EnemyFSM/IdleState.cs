@@ -21,18 +21,15 @@ namespace EnemyFSM
         }
         public override void Update()
         {
-            if(sm.enemy.isTest == false)
+            if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= stoppingDistance)
             {
-                if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= stoppingDistance)
-                {
-                    sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
-                    sm.enemy.navMesh.SetDestination(sm.character.transform.position);
-                }
-                else
-                {
-                    sm.enemy.navMesh.ResetPath();
-                    sm.ChangeState(sm.swordAttackState);
-                }
+                sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
+                sm.enemy.navMesh.SetDestination(sm.character.transform.position);
+            }
+            else
+            {
+                sm.enemy.navMesh.ResetPath();
+                sm.ChangeState(sm.swordAttackState);
             }
         }
         public override void PhysicsUpdate()
