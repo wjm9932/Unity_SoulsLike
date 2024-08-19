@@ -32,9 +32,7 @@ namespace PlayerFSM
             {
                 base.Update();
             }
-
         }
-
         public override void PhysicsUpdate()
         {
             Move();
@@ -42,7 +40,6 @@ namespace PlayerFSM
         public override void LateUpdate()
         {
             base.LateUpdate();
-
         }
         public override void Exit()
         {
