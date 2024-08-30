@@ -89,7 +89,6 @@ namespace EnemyFSM
         private void SetDashDestination()
         {
             Vector3 backOffset = sm.enemy.transform.forward * 5f;
-            Vector3 rightOffset = sm.enemy.transform.right * -1.5f;
             Vector3 dashDestination = sm.character.transform.position + backOffset;
 
             sm.enemy.navMesh.SetDestination(dashDestination);

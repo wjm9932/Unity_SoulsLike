@@ -92,7 +92,7 @@ public class Character : LivingEntity
         if (Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, playerHeight * 0.5f + 0.1f) == true)
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
+            return angle < maxSlopeAngle && !Mathf.Approximately(angle, 0f);
         }
 
         return false;

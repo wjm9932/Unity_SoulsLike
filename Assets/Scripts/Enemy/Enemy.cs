@@ -41,8 +41,6 @@ public class Enemy : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        rb.useGravity = !IsOnSlope();
-
         enemyBehaviorStateMachine.Update();
         //if (Input.GetKeyDown(KeyCode.C))
         //{
@@ -95,16 +93,6 @@ public class Enemy : LivingEntity
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
 
-    public bool IsOnSlope()
-    {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, 0.1f) == true)
-        {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
-        }
-
-        return false;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
