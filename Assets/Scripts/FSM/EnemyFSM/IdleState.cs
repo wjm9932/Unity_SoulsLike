@@ -28,7 +28,6 @@ namespace EnemyFSM
             }
             else
             {
-                sm.enemy.navMesh.ResetPath();
                 sm.ChangeState(sm.swordAttackState);
             }
         }

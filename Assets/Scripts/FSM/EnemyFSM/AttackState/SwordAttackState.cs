@@ -8,7 +8,7 @@ namespace EnemyFSM
     {
         public SwordAttackState(EnemyBehaviorStateMachine sm) : base(sm)
         {
-            stoppingDistance = 1f;
+            
         }
 
         public override void Enter()
