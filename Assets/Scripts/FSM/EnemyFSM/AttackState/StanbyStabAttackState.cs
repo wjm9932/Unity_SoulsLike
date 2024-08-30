@@ -6,7 +6,7 @@ namespace EnemyFSM
 {
     public class StanbyStabAttackState : EnemyPatternState
     {
-        private float timer;
+        private bool isReadyToAttack;
         public StanbyStabAttackState(EnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 0f;
@@ -14,16 +14,17 @@ namespace EnemyFSM
 
         public override void Enter()
         {
-            timer = 1f;
+            sm.enemy.StartCoroutine(GetReady());
+
+            isReadyToAttack = false;
             sm.enemy.navMesh.isStopped = true;
             sm.enemy.animator.SetTrigger("StabReady");
         }
         public override void Update()
         {
-            if (timer > 0f && Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position) >= 3f)
+            if (isReadyToAttack == false && Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position) >= 3f)
             {
                 sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetLookAtAngle(), Time.deltaTime * 10);
-                timer -= Time.deltaTime;
             }
             else
             {
@@ -57,6 +58,11 @@ namespace EnemyFSM
         public override void OnAnimatorIK()
         {
 
+        }
+        IEnumerator GetReady()
+        {
+            yield return new WaitForSeconds(1f);
+            isReadyToAttack = true;
         }
         private void GetBossPattern()
         {

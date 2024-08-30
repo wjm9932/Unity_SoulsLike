@@ -15,8 +15,9 @@ namespace EnemyFSM
 
         public override void Enter()
         {
-            dir = GetLookAtAngle();
+            sm.enemy.navMesh.stoppingDistance = stoppingDistance;
 
+            dir = GetLookAtAngle();
             SetDashDestinationAndSpeed();
             sm.enemy.animator.SetTrigger("BackFlip");
         }
