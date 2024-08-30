@@ -57,8 +57,6 @@ namespace EnemyFSM
         {
             int pattern = Random.Range(0, 5);
             
-            Debug.Log(pattern);
-
             switch (pattern)
             {
                 case 0:
