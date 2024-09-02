@@ -57,10 +57,6 @@ namespace PlayerFSM
             if (sm.character.IsOnSlope() == true)
             {
                 sm.character.rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
-                if (sm.character.rb.velocity.y > 5)
-                {
-                    sm.character.rb.AddForce(Vector3.down * 80f, ForceMode.Force);
-                }
             }
             else
             {
