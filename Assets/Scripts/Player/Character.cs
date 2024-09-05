@@ -30,6 +30,9 @@ public class Character : LivingEntity
     public Attack attack { get; private set; }
     public RaycastHit slopeHit;
 
+
+    private Inventory inventory;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -45,6 +48,7 @@ public class Character : LivingEntity
         rb = GetComponent<Rigidbody>();
         playerHeight = GetComponent<CapsuleCollider>().height;
         input = GetComponent<PlayerInput>();
+        inventory = GetComponent<Inventory>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
@@ -116,6 +120,16 @@ public class Character : LivingEntity
                 }
             }
         }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Item item = other.GetComponent<Item>();
+
+        if(item != null)
+        {
+            inventory.AddItem(item);
+            Destroy(item.gameObject);
+        }
     }
 }

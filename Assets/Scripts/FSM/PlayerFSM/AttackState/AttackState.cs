@@ -30,7 +30,7 @@ public class AttackState : IState
         }
         else
         {
-            sm.character.transform.rotation = Quaternion.Slerp(sm.character.transform.rotation, rotation, 10f * Time.deltaTime);
+            sm.character.transform.rotation = Quaternion.Slerp(sm.character.transform.rotation, rotation, 20f * Time.deltaTime);
         }
     }
     public virtual void PhysicsUpdate()

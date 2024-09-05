@@ -9,9 +9,6 @@ public class CameraStateMachine : StateMachine
     {
         get
         {
-            if (instance == null)
-            {
-            }
             return instance;
         }
     }
