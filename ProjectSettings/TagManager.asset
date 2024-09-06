@@ -6,17 +6,17 @@ TagManager:
   tags:
   - Sword
   - EnemySword
-  - Item
+  - HealthPotion
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Item
   - Water
   - UI
   - whatIsGround
   - EnemySword
-  - 
+  - Player
   - 
   - 
   - 
