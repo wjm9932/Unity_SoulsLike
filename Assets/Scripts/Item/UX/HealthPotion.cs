@@ -6,6 +6,14 @@ namespace UX
 {
     public class HealthPotion : Item
     {
-    }
+        private void Start()
+        {
+            
+        }
 
+        private void Update()
+        {
+            
+        }
+    }
 }

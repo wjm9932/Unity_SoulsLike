@@ -12,7 +12,7 @@ namespace UI
         public ItemData data;
 
         private int _count = 0;
-        public int count // ???? ? ??: ??? ?? ?? ???? ??
+        public int count
         {
             set
             {
@@ -39,5 +39,6 @@ namespace UI
         {
             OnDestroy?.Invoke(item);
         }
+
     }
 }

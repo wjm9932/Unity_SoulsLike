@@ -21,7 +21,6 @@ namespace UI
         }
         public override void UseItem(LivingEntity livingEntity)
         {
-
             --count;
             UpdateCount(count);
             livingEntity.RecoverHP(data.value);

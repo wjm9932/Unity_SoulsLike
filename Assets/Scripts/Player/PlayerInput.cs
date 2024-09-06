@@ -1,7 +1,12 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
+    public delegate void ClickEvent();
 
     private string jumpButtonName = "Jump";
     private string moveHorizontalAxisName = "Horizontal";
@@ -16,7 +21,6 @@ public class PlayerInput : MonoBehaviour
     public bool isAttack { get; private set; }
     public bool isLockOn { get; private set; }
     public bool isDodging { get; private set; }
-    public bool isClickingItem { get; private set; }
 
     private float inputX;
     private float inputY;
@@ -49,8 +53,6 @@ public class PlayerInput : MonoBehaviour
             inputY = 0f;
         }
 
-        HandleClickInput();
-
         moveInput = new Vector2(inputX, inputY);
         dodgeInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rotationInput = new Vector2(Input.GetAxis(moveHorizontalAxisName), Input.GetAxis(moveVerticalAxisName));
@@ -64,23 +66,20 @@ public class PlayerInput : MonoBehaviour
         isLockOn = Input.GetKeyDown(KeyCode.F);
     }
 
-    private void HandleClickInput()
+    public void ClickItemUI(ClickEvent clickEvent)
     {
-        // ??? ??? ??? ? ?? ??
         if (Input.GetMouseButtonDown(0))
         {
             mouseDeltaTime = Time.time;
-            isClickingItem = false;  
         }
 
-        // ??? ??? ? ? ?? ?? ?? ??
         if (Input.GetMouseButtonUp(0))
         {
             duration = Time.time - mouseDeltaTime;
 
             if (duration <= 0.2f)
             {
-                isClickingItem = true;
+                clickEvent?.Invoke();
             }
         }
     }

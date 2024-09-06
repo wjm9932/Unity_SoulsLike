@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public GraphicRaycaster uiRaycaster;
+    public EventSystem eventSystem;
     public List<GameObject> inventorySlot = new List<GameObject>(35);
 
     private Dictionary<string, GameObject> itemContainer = new Dictionary<string, GameObject>(35);
+    private PointerEventData pointerEventData;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +25,7 @@ public class Inventory : MonoBehaviour
         
     }
 
-    public void AddItem(GameObject item)
+    public void AddItem(UX.Item item)
     {
         if (itemContainer.ContainsKey(item.tag) == false)
         {
@@ -30,6 +34,8 @@ public class Inventory : MonoBehaviour
                 if (inventorySlot[i].transform.childCount == 0)
                 {
                     GameObject inventoryItem = Instantiate(item.GetComponent<UX.Item>().icon, inventorySlot[i].transform);
+                    inventoryItem.transform.tag = item.tag;
+
                     inventoryItem.GetComponent<UI.Item>().AddItem();
                     inventoryItem.GetComponent<UI.Item>().OnDestroy += RemoveItemFromInventory;
 
@@ -47,11 +53,31 @@ public class Inventory : MonoBehaviour
 
     private void RemoveItemFromInventory(GameObject potion)
     {
-        string itemTag = potion.gameObject.tag;
-
-        if (itemContainer.ContainsKey(itemTag))
+        if (itemContainer.ContainsKey(potion.gameObject.tag) == true)
         {
-            itemContainer.Remove(itemTag);
+            itemContainer.Remove(potion.gameObject.tag);
         }
+    }
+
+    public UI.Item GetItemUI()
+    {
+        pointerEventData = new PointerEventData(eventSystem)
+        {
+            position = Input.mousePosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        uiRaycaster.Raycast(pointerEventData, results);
+        if (results.Count > 0)
+        {
+            UI.Item item = results[0].gameObject.GetComponent<UI.Item>();
+            if (item != null)
+            {
+                return item;
+            }
+        }
+
+        return null;
     }
 }

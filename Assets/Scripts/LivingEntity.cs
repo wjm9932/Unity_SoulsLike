@@ -9,11 +9,11 @@ public class LivingEntity : MonoBehaviour, IDamageable
     public float health { get; protected set; }
 
     [SerializeField]
-    private float startingHealth = 100f;
+    protected float startingHealth = 100f;
 
     private void Start()
     {
-        health = startingHealth;
+        
     }
 
     public void RecoverHP(int amount)

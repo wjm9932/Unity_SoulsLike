@@ -60,13 +60,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.46888816
-        functionName: OnAnimationTransitionEvent
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.36785713
         functionName: SetCanAttack
         data: 
@@ -74,10 +67,17 @@ ModelImporter:
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.4857143
+      - time: 0.47645503
         functionName: SetCanAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5522215
+        functionName: OnAnimationTransitionEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

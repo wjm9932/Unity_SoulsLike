@@ -43,6 +43,8 @@ public class Character : LivingEntity
     }
     void Start()
     {
+        health = startingHealth;
+
         followCamera = Camera.main;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -61,6 +63,7 @@ public class Character : LivingEntity
         playerMovementStateMachine.Update();
         CameraStateMachine.Instance.Update();
 
+        input.ClickItemUI(OnItemClick);
     }
     private void FixedUpdate()
     {
@@ -124,11 +127,21 @@ public class Character : LivingEntity
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent<UX.Item>() != null)
+        UX.Item item = other.gameObject.GetComponent<UX.Item>();
+
+        if (item != null)
         {
-            GameObject item = other.gameObject;
             inventory.AddItem(item);
             Destroy(item.gameObject);
+        }
+    }
+
+    private void OnItemClick()
+    {
+        var clickedItem = inventory.GetItemUI(); 
+        if (clickedItem != null)
+        {
+            clickedItem.UseItem(this);
         }
     }
 }

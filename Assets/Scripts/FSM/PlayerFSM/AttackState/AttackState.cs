@@ -43,7 +43,6 @@ public class AttackState : IState
     }
     public virtual void Exit()
     {
-        canComboAttack = true;
         sm.character.swordEffect.enabled = false;
         sm.character.rb.drag = 0f;
         sm.character.attack.SetCanAttack(0);
