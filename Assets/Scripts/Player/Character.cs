@@ -124,10 +124,9 @@ public class Character : LivingEntity
 
     private void OnTriggerEnter(Collider other)
     {
-        Item item = other.GetComponent<Item>();
-
-        if(item != null)
+        if(other.gameObject.GetComponent<UX.Item>() != null)
         {
+            GameObject item = other.gameObject;
             inventory.AddItem(item);
             Destroy(item.gameObject);
         }

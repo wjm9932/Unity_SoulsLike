@@ -13,13 +13,15 @@ public class PlayerInput : MonoBehaviour
     public Vector2 rotationInput { get; private set; }
     public bool isJumping { get; private set; }
     public bool isSprinting { get; private set; }
-    public bool isBack { get; private set; }
     public bool isAttack { get; private set; }
     public bool isLockOn { get; private set; }
     public bool isDodging { get; private set; }
+    public bool isClickingItem { get; private set; }
 
     private float inputX;
     private float inputY;
+    private float mouseDeltaTime;
+    private float duration;
     private void Start()
     {
         Cursor.visible = false;
@@ -47,6 +49,8 @@ public class PlayerInput : MonoBehaviour
             inputY = 0f;
         }
 
+        HandleClickInput();
+
         moveInput = new Vector2(inputX, inputY);
         dodgeInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rotationInput = new Vector2(Input.GetAxis(moveHorizontalAxisName), Input.GetAxis(moveVerticalAxisName));
@@ -58,5 +62,26 @@ public class PlayerInput : MonoBehaviour
         isDodging = Input.GetKeyDown(KeyCode.Space);
         isAttack = Input.GetButtonDown(attackButtonName);
         isLockOn = Input.GetKeyDown(KeyCode.F);
+    }
+
+    private void HandleClickInput()
+    {
+        // ??? ??? ??? ? ?? ??
+        if (Input.GetMouseButtonDown(0))
+        {
+            mouseDeltaTime = Time.time;
+            isClickingItem = false;  
+        }
+
+        // ??? ??? ? ? ?? ?? ?? ??
+        if (Input.GetMouseButtonUp(0))
+        {
+            duration = Time.time - mouseDeltaTime;
+
+            if (duration <= 0.2f)
+            {
+                isClickingItem = true;
+            }
+        }
     }
 }

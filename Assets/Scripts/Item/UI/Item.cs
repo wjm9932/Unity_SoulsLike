@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+namespace UI
+{
+    public abstract class Item : MonoBehaviour
+    {
+        public delegate void OnDestroyEventHandler(GameObject item);
+        public event OnDestroyEventHandler OnDestroy;
+        public ItemData data;
+
+        private int _count = 0;
+        public int count // ???? ? ??: ??? ?? ?? ???? ??
+        {
+            set
+            {
+                _count = value;
+            }
+            get
+            {
+                return _count;
+            }
+        }
+        public abstract void UseItem(LivingEntity livingEntity);
+        public void UpdateCount(int count)
+        {
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = count.ToString();
+        }
+
+        public void AddItem()
+        {
+            ++count;
+            UpdateCount(count);
+        }
+
+        public void DestroyItem(GameObject item)
+        {
+            OnDestroy?.Invoke(item);
+        }
+    }
+}

@@ -11,6 +11,16 @@ public class LivingEntity : MonoBehaviour, IDamageable
     [SerializeField]
     private float startingHealth = 100f;
 
+    private void Start()
+    {
+        health = startingHealth;
+    }
+
+    public void RecoverHP(int amount)
+    {
+        health += amount;
+    }
+
     public bool ApplyDamage(DamageMessage msg)
     {
         if(canBeDamaged == true)

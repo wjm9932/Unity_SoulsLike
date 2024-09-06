@@ -16,7 +16,6 @@ namespace PlayerFSM
         }
         public override void Update()
         {
-            //base.Update();
             if (sm.character.IsOnSlope() == true)
             {
                 sm.character.rb.velocity = Vector3.zero;
