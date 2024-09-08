@@ -28,8 +28,6 @@ public class PlayerInput : MonoBehaviour
     private float duration;
     private void Start()
     {
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
         Application.targetFrameRate = 144;
     }
 

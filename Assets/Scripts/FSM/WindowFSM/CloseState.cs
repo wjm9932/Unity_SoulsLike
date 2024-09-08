@@ -12,6 +12,8 @@ public class CloseState : IStateUI
 
     public void Enter()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Update()

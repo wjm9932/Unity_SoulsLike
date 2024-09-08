@@ -5,19 +5,23 @@ using UnityEngine;
 public abstract class OpenState : IStateUI
 {
     protected UIStateMachine sm;
-
+    private float xCameraSpeed;
+    private float yCameraSpeed;
     public OpenState(UIStateMachine sm)
     {
         this.sm = sm;
+        xCameraSpeed = sm.character.lockOffCamera.m_XAxis.m_MaxSpeed;
+        yCameraSpeed = sm.character.lockOffCamera.m_YAxis.m_MaxSpeed;
     }
-
-
 
     // Start is called before the first frame update
     public virtual void Enter()
     {
-        sm.character.lockOffCamera.m_XAxis.m_InputAxisName = "";
-        sm.character.lockOffCamera.m_YAxis.m_InputAxisName = "";
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        sm.character.lockOffCamera.m_XAxis.m_MaxSpeed = 0f;
+        sm.character.lockOffCamera.m_YAxis.m_MaxSpeed = 0f;
     }
 
     // Update is called once per frame
@@ -31,7 +35,7 @@ public abstract class OpenState : IStateUI
 
     public virtual void Exit()
     {
-        sm.character.lockOffCamera.m_XAxis.m_InputAxisName = "Mouse X";
-        sm.character.lockOffCamera.m_YAxis.m_InputAxisName = "Mouse Y";
+        sm.character.lockOffCamera.m_XAxis.m_MaxSpeed = xCameraSpeed;
+        sm.character.lockOffCamera.m_YAxis.m_MaxSpeed = yCameraSpeed;
     }
 }
