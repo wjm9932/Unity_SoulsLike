@@ -19,7 +19,7 @@ namespace UI
         {
 
         }
-        public override void UseItem(LivingEntity livingEntity)
+        public override bool UseItem(LivingEntity livingEntity)
         {
             --count;
             UpdateCount(count);
@@ -30,6 +30,8 @@ namespace UI
                 DestroyItem(gameObject);
                 Destroy(gameObject);
             }
+
+            return true;
         }
     }
 }

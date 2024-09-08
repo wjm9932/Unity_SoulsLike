@@ -4,9 +4,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.TextCore.Text;
+using UnityEditorInternal;
 
 public class Character : LivingEntity
 {
+    public delegate void CloseWindow();
+    public CloseWindow closeWindow;
+
+    public GameObject inventoryUI;
+
     public CinemachineVirtualCamera lockOnCamera;
     public CinemachineFreeLook lockOffCamera;
     public Transform lockOnCameraPosition;
@@ -18,11 +24,12 @@ public class Character : LivingEntity
     public float walkSpeed;
     public float sprintSpeed;
     public Animator animator { get; private set; }
-    public Camera followCamera { get; private set; }
+    public Camera mainCamera { get; private set; }
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
     public PlayerInput input { get; private set; }
     public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
+    public UIStateMachine uiStateMachine { get; private set; }
     
     [SerializeField]
     private float maxSlopeAngle;
@@ -39,13 +46,14 @@ public class Character : LivingEntity
         canBeDamaged = true;
         attack = GetComponent<Attack>();
         CameraStateMachine.Initialize(this);
-        playerMovementStateMachine = new PlayerMovementStateMachine(this);
+        uiStateMachine = new UIStateMachine(this);
+        playerMovementStateMachine = new PlayerMovementStateMachine(this, uiStateMachine);
     }
     void Start()
     {
         health = startingHealth;
 
-        followCamera = Camera.main;
+        mainCamera = Camera.main;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         playerHeight = GetComponent<CapsuleCollider>().height;
@@ -53,6 +61,7 @@ public class Character : LivingEntity
         inventory = GetComponent<Inventory>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
+        uiStateMachine.ChangeState(uiStateMachine.closeState);
         CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
     }
 
@@ -61,9 +70,27 @@ public class Character : LivingEntity
     {
         rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
+        uiStateMachine.Update();
         CameraStateMachine.Instance.Update();
 
-        input.ClickItemUI(OnItemClick);
+        input.IsClickItemInInventory(OnClickItem);
+
+        /************************************Test********************************************************/
+        //if(Input.GetKeyDown(KeyCode.Q) == true) // Quest
+        //{
+        //    closeWindow = CloseQuestWindow;
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.I) == true) // Inventory
+        //{
+        //    closeWindow = CloseInventoryWindow;
+        //}
+
+        //if(Input.GetKeyDown(KeyCode.Escape) == true)
+        //{
+        //    closeWindow?.Invoke();
+        //}
+        /************************************Test********************************************************/
     }
     private void FixedUpdate()
     {
@@ -136,12 +163,28 @@ public class Character : LivingEntity
         }
     }
 
-    private void OnItemClick()
+    private bool OnClickItem()
     {
         var clickedItem = inventory.GetItemUI(); 
         if (clickedItem != null)
         {
-            clickedItem.UseItem(this);
+            return clickedItem.UseItem(this);
+        }
+        else
+        {
+            return false;
         }
     }
+
+    /************************************Test********************************************************/
+    private void CloseQuestWindow()
+    {
+        Debug.Log("Close QuestWindow");
+    }
+
+    private void CloseInventoryWindow()
+    {
+        Debug.Log("Close InventoryWindow");
+    }
+    /************************************Test********************************************************/
 }

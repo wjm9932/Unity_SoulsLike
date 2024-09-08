@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
-    public delegate void ClickEvent();
+    public delegate bool ClickEvent();
 
     private string jumpButtonName = "Jump";
     private string moveHorizontalAxisName = "Horizontal";
@@ -28,7 +28,7 @@ public class PlayerInput : MonoBehaviour
     private float duration;
     private void Start()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
         Application.targetFrameRate = 144;
     }
@@ -66,7 +66,7 @@ public class PlayerInput : MonoBehaviour
         isLockOn = Input.GetKeyDown(KeyCode.F);
     }
 
-    public void ClickItemUI(ClickEvent clickEvent)
+    public bool IsClickItemInInventory(ClickEvent clickEvent)
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -79,8 +79,9 @@ public class PlayerInput : MonoBehaviour
 
             if (duration <= 0.2f)
             {
-                clickEvent?.Invoke();
+                return clickEvent?.Invoke() ?? false;
             }
         }
+        return false;
     }
 }

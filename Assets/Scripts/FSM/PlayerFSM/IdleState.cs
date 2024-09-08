@@ -31,20 +31,23 @@ namespace PlayerFSM
                     sm.ChangeState(sm.lockOnWalkState);
                 }
             }
-            if (sm.character.input.isDodging == true)
+            if (sm.uiStatMachine.currentState is OpenState == false)
             {
-                if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+                if (sm.character.input.isDodging == true)
                 {
-                    sm.ChangeState(sm.lockOnDodgeState);
+                    if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+                    {
+                        sm.ChangeState(sm.lockOnDodgeState);
+                    }
+                    else
+                    {
+                        sm.ChangeState(sm.dodgeState);
+                    }
                 }
-                else
+                if (sm.character.input.isAttack == true)
                 {
-                    sm.ChangeState(sm.dodgeState);
+                    sm.ChangeState(sm.combo_1AttackState);
                 }
-            }
-            if (sm.character.input.isAttack == true)
-            {
-                sm.ChangeState(sm.combo_1AttackState);
             }
         }
         public override void PhysicsUpdate()

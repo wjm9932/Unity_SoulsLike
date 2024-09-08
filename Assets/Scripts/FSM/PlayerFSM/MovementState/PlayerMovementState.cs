@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-
-public abstract class PlayerMovementState : IState 
+using UX;
+public abstract class PlayerMovementState : IState
 {
     protected PlayerMovementStateMachine sm;
 
@@ -36,20 +36,23 @@ public abstract class PlayerMovementState : IState
         {
             sm.ChangeState(sm.idleState);
         }
-        if(sm.character.input.isDodging == true)
+        if (sm.uiStatMachine.currentState is OpenState == false)
         {
-            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            if (sm.character.input.isDodging == true)
             {
-                sm.ChangeState(sm.lockOnDodgeState);
+                if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+                {
+                    sm.ChangeState(sm.lockOnDodgeState);
+                }
+                else
+                {
+                    sm.ChangeState(sm.dodgeState);
+                }
             }
-            else
+            if (sm.character.input.isAttack == true)
             {
-                sm.ChangeState(sm.dodgeState);
+                sm.ChangeState(sm.combo_1AttackState);
             }
-        }
-        if (sm.character.input.isAttack == true)
-        {
-            sm.ChangeState(sm.combo_1AttackState);
         }
     }
     public virtual void PhysicsUpdate()
@@ -119,12 +122,12 @@ public abstract class PlayerMovementState : IState
     }
     protected void SetMoveDirection()
     {
-        Vector3 forward = sm.character.followCamera.transform.forward;
+        Vector3 forward = sm.character.mainCamera.transform.forward;
         forward.y = 0;
         forward.Normalize();
 
-        moveDirection = forward * sm.character.input.moveInput.y + sm.character.followCamera.transform.right * sm.character.input.moveInput.x;
-        lookAtDirection = forward * sm.character.input.rotationInput.y + sm.character.followCamera.transform.right * sm.character.input.rotationInput.x;
+        moveDirection = forward * sm.character.input.moveInput.y + sm.character.mainCamera.transform.right * sm.character.input.moveInput.x;
+        lookAtDirection = forward * sm.character.input.rotationInput.y + sm.character.mainCamera.transform.right * sm.character.input.rotationInput.x;
     }
     void UpdateAnimation()
     {

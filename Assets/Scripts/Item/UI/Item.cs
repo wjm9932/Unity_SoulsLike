@@ -23,7 +23,7 @@ namespace UI
                 return _count;
             }
         }
-        public abstract void UseItem(LivingEntity livingEntity);
+        public abstract bool UseItem(LivingEntity livingEntity);
         public void UpdateCount(int count)
         {
             transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = count.ToString();

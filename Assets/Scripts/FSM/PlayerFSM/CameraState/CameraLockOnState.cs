@@ -75,12 +75,12 @@ public class CameraLockOnState : CameraState
         {
             Transform closetTarget = null;
             float closestAngle = 30f;
-            Vector3 camForward = csm.character.followCamera.transform.forward;
+            Vector3 camForward = csm.character.mainCamera.transform.forward;
             camForward.y = 0f;
 
             for (int i = 0; i < nearByTargets.Length; i++)
             {
-                Vector3 dir = nearByTargets[i].transform.position - csm.character.followCamera.transform.position;
+                Vector3 dir = nearByTargets[i].transform.position - csm.character.mainCamera.transform.position;
                 dir.y = 0f;
                 float angle = Vector3.Angle(camForward, dir);
 

@@ -33,7 +33,7 @@ namespace PlayerFSM
                 }
                 else
                 {
-                    sm.ChangeState(sm.walkState);
+                    sm.ChangeState(sm.idleState);
                 }
             }
         }

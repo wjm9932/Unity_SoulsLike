@@ -68,7 +68,7 @@ public class AttackState : IState
         sm.character.rb.velocity = Vector3.zero;
         sm.character.rb.drag = 2f;
 
-        Vector3 forward = sm.character.followCamera.transform.forward;
+        Vector3 forward = sm.character.mainCamera.transform.forward;
         forward.y = 0;
         forward.Normalize();
 
