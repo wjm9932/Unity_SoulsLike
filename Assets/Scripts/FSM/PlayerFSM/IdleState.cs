@@ -16,6 +16,10 @@ namespace PlayerFSM
         }
         public override void Update()
         {
+            if(Input.GetKeyDown(KeyCode.K))
+            {
+                sm.character.animator.SetTrigger("DrinkPotion");
+            }
             if (sm.character.IsOnSlope() == true)
             {
                 sm.character.rb.velocity = Vector3.zero;
