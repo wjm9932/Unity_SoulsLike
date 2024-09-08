@@ -18,6 +18,7 @@ public class PlayerMovementStateMachine : StateMachine
     public LockOnWalkState lockOnWalkState { get; }
     public LockOnDodgeState lockOnDodgeState { get; }
     public HitState hitState { get; }
+    public DrinkPotionState drinkPotionState { get; }
 
 
     public PlayerMovementStateMachine(Character character, UIStateMachine uiStateMachine)
@@ -28,6 +29,7 @@ public class PlayerMovementStateMachine : StateMachine
         walkState = new WalkSate(this);
         sprintState = new SprintState(this);
         dodgeState = new DodgeState(this);
+        drinkPotionState = new DrinkPotionState(this);
 
         combo_1AttackState = new Combo_1AttackState(this);
         combo_2AttackState = new Combo_2AttackState(this);

@@ -11,7 +11,6 @@ public abstract class PlayerMovementState : IState
     protected Vector3 lookAtDirection;
 
     protected float moveSpeed;
-    protected bool isGrounded;
 
     private IEnumerator coroutineReference;
 
@@ -27,8 +26,6 @@ public abstract class PlayerMovementState : IState
     }
     public virtual void Update()
     {
-        isGrounded = Physics.Raycast(sm.character.GetPlayerPosition(), Vector3.down, sm.character.playerHeight * 0.5f + 0.2f, sm.character.whatIsGround);
-
         SetMoveDirection();
         SpeedControl();
 

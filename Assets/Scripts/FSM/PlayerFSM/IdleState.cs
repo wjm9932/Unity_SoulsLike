@@ -18,7 +18,7 @@ namespace PlayerFSM
         {
             if(Input.GetKeyDown(KeyCode.K))
             {
-                sm.character.animator.SetTrigger("DrinkPotion");
+                sm.ChangeState(sm.drinkPotionState);
             }
             if (sm.character.IsOnSlope() == true)
             {
