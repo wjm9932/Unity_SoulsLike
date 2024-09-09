@@ -73,7 +73,7 @@ public class Character : LivingEntity
         uiStateMachine.Update();
         CameraStateMachine.Instance.Update();
 
-        input.IsClickItemInInventory(OnClickItem);
+        //input.IsClickItemInInventory(OnClickItem);
 
         /************************************Test********************************************************/
         //if(Input.GetKeyDown(KeyCode.Q) == true) // Quest

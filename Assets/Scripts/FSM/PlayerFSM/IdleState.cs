@@ -4,22 +4,19 @@ using UnityEngine;
 
 namespace PlayerFSM
 {
-    public class IdleState : PlayerMovementState
+    public class IdleState : IState
     {
-        public IdleState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        private PlayerMovementStateMachine sm;
+        public IdleState(PlayerMovementStateMachine playerMovementStateMachine)
         {
+            sm = playerMovementStateMachine;
         }
-        public override void Enter()
+        public void Enter()
         {
-            //base.Enter();
             sm.character.rb.velocity = Vector3.zero;
         }
-        public override void Update()
+        public void Update()
         {
-            if (sm.character.IsOnSlope() == true)
-            {
-                sm.character.rb.velocity = Vector3.zero;
-            }
             if (sm.character.input.moveInput != Vector2.zero)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)
@@ -31,6 +28,12 @@ namespace PlayerFSM
                     sm.ChangeState(sm.lockOnWalkState);
                 }
             }
+
+            if (sm.character.input.IsClickItemInInventory(sm.character.OnClickItem) == true)
+            {
+                sm.ChangeState(sm.drinkPotionState);
+            }
+
             if (sm.uiStatMachine.currentState is OpenState == false)
             {
                 if (sm.character.input.isDodging == true)
@@ -48,26 +51,22 @@ namespace PlayerFSM
                 {
                     sm.ChangeState(sm.combo_1AttackState);
                 }
-                if(sm.character.input.IsClickItemInInventory(sm.character.OnClickItem) == true)
-                {
-                    sm.ChangeState(sm.drinkPotionState);
-                }
             }
         }
-        public override void PhysicsUpdate()
+        public void PhysicsUpdate()
         {
             //base.PhysicsUpdate();
         }
-        public override void LateUpdate()
+        public void LateUpdate()
         {
             //base.LateUpdate();
             UpdateAnimation();
         }
-        public override void Exit()
+        public void Exit()
         {
             //base.Exit();
         }
-        public override void OnAnimatorIK()
+        public void OnAnimatorIK()
         {
             sm.character.animator.SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
             sm.character.animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, sm.character.animator.GetFloat("HandWeight"));
@@ -77,7 +76,16 @@ namespace PlayerFSM
         {
             sm.character.animator.SetFloat("Speed", sm.character.rb.velocity.magnitude, 0.08f, Time.deltaTime);
         }
+        public virtual void OnAnimationEnterEvent()
+        {
 
+        }
+        public virtual void OnAnimationExitEvent()
+        {
+        }
+        public virtual void OnAnimationTransitionEvent()
+        {
+        }
     }
 }
 

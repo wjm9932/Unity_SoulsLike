@@ -33,6 +33,12 @@ public abstract class PlayerMovementState : IState
         {
             sm.ChangeState(sm.idleState);
         }
+        
+        if (sm.character.input.IsClickItemInInventory(sm.character.OnClickItem) == true)
+        {
+            sm.ChangeState(sm.drinkPotionState);
+        }
+        
         if (sm.uiStatMachine.currentState is OpenState == false)
         {
             if (sm.character.input.isDodging == true)
