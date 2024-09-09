@@ -163,7 +163,7 @@ public class Character : LivingEntity
         }
     }
 
-    private bool OnClickItem()
+    public bool OnClickItem()
     {
         var clickedItem = inventory.GetItemUI(); 
         if (clickedItem != null)

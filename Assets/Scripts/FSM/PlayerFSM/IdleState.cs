@@ -16,10 +16,6 @@ namespace PlayerFSM
         }
         public override void Update()
         {
-            if(Input.GetKeyDown(KeyCode.K))
-            {
-                sm.ChangeState(sm.drinkPotionState);
-            }
             if (sm.character.IsOnSlope() == true)
             {
                 sm.character.rb.velocity = Vector3.zero;
@@ -51,6 +47,10 @@ namespace PlayerFSM
                 if (sm.character.input.isAttack == true)
                 {
                     sm.ChangeState(sm.combo_1AttackState);
+                }
+                if(sm.character.input.IsClickItemInInventory(sm.character.OnClickItem) == true)
+                {
+                    sm.ChangeState(sm.drinkPotionState);
                 }
             }
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DrinkPotionState : PlayerMovementState
 {
+    private bool isDrinkFinished;
     public DrinkPotionState(PlayerMovementStateMachine sm) : base(sm)
     {
 
@@ -13,6 +14,7 @@ public class DrinkPotionState : PlayerMovementState
     {
         base.Enter();
 
+        isDrinkFinished = false;
         sm.character.animator.SetTrigger("DrinkPotion");
         moveSpeed = sm.character.walkSpeed;
     }
@@ -22,9 +24,19 @@ public class DrinkPotionState : PlayerMovementState
     {
         SetMoveDirection();
         SpeedControl();
+
+        if(isDrinkFinished == true)
+        {
+            sm.ChangeState(sm.walkState);
+        }
     }
     public override void Exit()
     {
         base.Exit();
+    }
+
+    public override void OnAnimationExitEvent()
+    {
+        isDrinkFinished = true;
     }
 }
