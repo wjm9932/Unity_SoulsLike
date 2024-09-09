@@ -25,6 +25,11 @@ public class DrinkPotionState : PlayerMovementState
         SetMoveDirection();
         SpeedControl();
 
+        if(moveDirection == Vector3.zero)
+        {
+            sm.character.rb.velocity = Vector3.zero;
+        }
+
         if(isDrinkFinished == true)
         {
             sm.ChangeState(sm.walkState);

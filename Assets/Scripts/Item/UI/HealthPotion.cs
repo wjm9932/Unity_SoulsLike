@@ -21,17 +21,22 @@ namespace UI
         }
         public override bool UseItem(LivingEntity livingEntity)
         {
-            --count;
-            UpdateCount(count);
-            livingEntity.RecoverHP(data.value);
-
-            if(count <= 0)
+            if(livingEntity.RecoverHP(data.value) == true)
             {
-                DestroyItem(gameObject);
-                Destroy(gameObject);
-            }
+                --count;
+                UpdateCount(count);
 
-            return true;
+                if (count <= 0)
+                {
+                    DestroyItem(gameObject);
+                    Destroy(gameObject);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

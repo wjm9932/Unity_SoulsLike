@@ -11,6 +11,7 @@ namespace UI
         public event OnDestroyEventHandler OnDestroy;
         public ItemData data;
 
+        public TextMeshProUGUI countText;
         private int _count = 0;
         public int count
         {
@@ -26,7 +27,7 @@ namespace UI
         public abstract bool UseItem(LivingEntity livingEntity);
         public void UpdateCount(int count)
         {
-            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = count.ToString();
+            countText.text = count.ToString();
         }
 
         public void AddItem()

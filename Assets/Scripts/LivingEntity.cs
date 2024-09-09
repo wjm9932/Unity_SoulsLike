@@ -16,9 +16,17 @@ public class LivingEntity : MonoBehaviour, IDamageable
         
     }
 
-    public void RecoverHP(int amount)
+    public bool RecoverHP(int amount)
     {
-        health += amount;
+        if(health >= startingHealth)
+        {
+            return false;
+        }
+        else
+        {
+            health = Mathf.Min(health + amount, startingHealth);
+            return true;
+        }
     }
 
     public bool ApplyDamage(DamageMessage msg)
