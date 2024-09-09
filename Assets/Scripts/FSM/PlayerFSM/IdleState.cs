@@ -17,6 +17,11 @@ namespace PlayerFSM
         }
         public void Update()
         {
+            if(sm.character.IsOnSlope() == true)
+            {
+                sm.character.rb.velocity = Vector3.zero;
+            }
+
             if (sm.character.input.moveInput != Vector2.zero)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)

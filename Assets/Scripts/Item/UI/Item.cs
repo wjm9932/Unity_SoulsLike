@@ -9,9 +9,10 @@ namespace UI
     {
         public delegate void OnDestroyEventHandler(GameObject item);
         public event OnDestroyEventHandler OnDestroy;
-        public ItemData data;
 
+        public ItemData data;
         public TextMeshProUGUI countText;
+
         private int _count = 0;
         public int count
         {

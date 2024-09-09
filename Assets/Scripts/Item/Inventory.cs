@@ -51,11 +51,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void RemoveItemFromInventory(GameObject potion)
+    private void RemoveItemFromInventory(GameObject item)
     {
-        if (itemContainer.ContainsKey(potion.gameObject.tag) == true)
+        if (itemContainer.ContainsKey(item.gameObject.tag) == true)
         {
-            itemContainer.Remove(potion.gameObject.tag);
+            itemContainer.Remove(item.gameObject.tag);
         }
     }
 
