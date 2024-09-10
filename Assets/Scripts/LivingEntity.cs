@@ -9,7 +9,12 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     public float health { get; protected set; }
 
     [SerializeField]
-    protected float startingHealth = 100f;
+    private float _maxHealth = 100f;
+
+    public float maxHealth
+    {
+        get { return _maxHealth; }
+    }
 
     private void Start()
     {
@@ -18,13 +23,13 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
     public bool RecoverHP(int amount)
     {
-        if(health >= startingHealth)
+        if(health >= maxHealth)
         {
             return false;
         }
         else
         {
-            health = Mathf.Min(health + amount, startingHealth);
+            health = Mathf.Min(health + amount, maxHealth);
             return true;
         }
     }

@@ -6,7 +6,6 @@ public class UI_InventorySlot : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("123");
         if (transform.childCount == 0)
         {
             DraggableItem dropped = eventData.pointerDrag.gameObject.GetComponent<DraggableItem>();

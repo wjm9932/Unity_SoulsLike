@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.TextCore.Text;
 using UnityEditorInternal;
@@ -9,6 +10,9 @@ using UnityEditorInternal;
 public class Character : LivingEntity
 {
     public GameObject inventoryUI;
+
+    public Image hpBar;
+
 
     public CinemachineVirtualCamera lockOnCamera;
     public CinemachineFreeLook lockOffCamera;
@@ -51,7 +55,8 @@ public class Character : LivingEntity
     }
     void Start()
     {
-        health = startingHealth;
+        health = 50f;
+        hpBar.fillAmount = health / maxHealth;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -73,7 +78,6 @@ public class Character : LivingEntity
         uiStateMachine.Update();
         CameraStateMachine.Instance.Update();
 
-        Debug.Log(playerMovementStateMachine.currentState);
 
         //input.IsClickItemInInventory(OnClickItem);
 
