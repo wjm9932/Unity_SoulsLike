@@ -14,7 +14,7 @@ namespace PlayerFSM
             dashForce = 6f;
             base.Enter();
 
-            sm.character.animator.SetTrigger("IsAttack3");
+            sm.owner.animator.SetTrigger("IsAttack3");
             canComboAttack = false;
         }
 

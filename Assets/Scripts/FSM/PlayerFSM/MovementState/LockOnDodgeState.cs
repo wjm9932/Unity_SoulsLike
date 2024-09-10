@@ -16,9 +16,9 @@ namespace PlayerFSM
         public override void Enter()
         {
             isDodgeFinished = false;
-            sm.character.rb.velocity = Vector3.zero;
+            sm.owner.rb.velocity = Vector3.zero;
             moveSpeed = 2f;
-            dodgeDir = sm.character.input.dodgeInput;
+            dodgeDir = sm.owner.input.dodgeInput;
 
             UpdateAnimation();
         }
@@ -50,48 +50,48 @@ namespace PlayerFSM
         }
         public override void OnAnimationEnterEvent()
         {
-            sm.character.canBeDamaged = false;
+            sm.owner.canBeDamaged = false;
         }
         public override void OnAnimationExitEvent()
         {
             isDodgeFinished = true;
-            sm.character.canBeDamaged = true;
+            sm.owner.canBeDamaged = true;
         }
         public override void OnAnimationTransitionEvent()
         {
         }
         private void Dodge()
         {
-            if (sm.character.IsOnSlope() == true)
+            if (sm.owner.IsOnSlope() == true)
             {
                 if (dodgeDir == Vector2.zero)
                 {
-                    var dir = Vector3.ProjectOnPlane(sm.character.transform.forward, sm.character.slopeHit.normal).normalized;
-                    sm.character.rb.AddForce(dir * moveSpeed, ForceMode.Impulse);
+                    var dir = Vector3.ProjectOnPlane(sm.owner.transform.forward, sm.owner.slopeHit.normal).normalized;
+                    sm.owner.rb.AddForce(dir * moveSpeed, ForceMode.Impulse);
                 }
                 else
                 {
-                    sm.character.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed, ForceMode.Impulse);
+                    sm.owner.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed, ForceMode.Impulse);
                 }
             }
             else
             {
                 if (dodgeDir == Vector2.zero)
                 {
-                    moveDir = sm.character.transform.forward;
+                    moveDir = sm.owner.transform.forward;
                 }
                 else
                 {
-                    moveDir = sm.character.transform.forward * dodgeDir.y + sm.character.transform.right * dodgeDir.x;
+                    moveDir = sm.owner.transform.forward * dodgeDir.y + sm.owner.transform.right * dodgeDir.x;
                 }
-                sm.character.rb.AddForce(moveDir.normalized * moveSpeed, ForceMode.Impulse);
+                sm.owner.rb.AddForce(moveDir.normalized * moveSpeed, ForceMode.Impulse);
             }
         }
 
         protected override Vector3 GetSlopeMoveDirection()
         {
-            Vector3 moveDir = sm.character.transform.forward * dodgeDir.y + sm.character.transform.right * dodgeDir.x;
-            return Vector3.ProjectOnPlane(moveDir, sm.character.slopeHit.normal).normalized;
+            Vector3 moveDir = sm.owner.transform.forward * dodgeDir.y + sm.owner.transform.right * dodgeDir.x;
+            return Vector3.ProjectOnPlane(moveDir, sm.owner.slopeHit.normal).normalized;
         }
 
         //private void Rotate()
@@ -113,9 +113,9 @@ namespace PlayerFSM
         //}
         private void UpdateAnimation()
         {
-            sm.character.animator.SetFloat("Horizontal", dodgeDir.x);
-            sm.character.animator.SetFloat("Vertical", dodgeDir.y);
-            sm.character.animator.SetTrigger("IsRolling");
+            sm.owner.animator.SetFloat("Horizontal", dodgeDir.x);
+            sm.owner.animator.SetFloat("Vertical", dodgeDir.y);
+            sm.owner.animator.SetTrigger("IsRolling");
         }
     }
 }

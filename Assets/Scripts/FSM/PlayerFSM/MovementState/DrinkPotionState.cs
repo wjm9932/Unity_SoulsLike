@@ -13,10 +13,17 @@ public class DrinkPotionState : PlayerMovementState
     public override void Enter()
     {
         base.Enter();
-
-        isDrinkFinished = false;
-        sm.character.animator.SetTrigger("DrinkPotion");
-        moveSpeed = sm.character.walkSpeed;
+        if (sm.owner.clickedItem.UseItem(sm.owner) == true)
+        {
+            isDrinkFinished = false;
+            sm.owner.animator.SetTrigger("DrinkPotion");
+            moveSpeed = sm.owner.walkSpeed;
+        }
+        else
+        {
+            sm.ChangeState(sm.walkState);
+        }
+        
     }
 
     // Update is called once per frame
@@ -27,7 +34,7 @@ public class DrinkPotionState : PlayerMovementState
 
         if(moveDirection == Vector3.zero)
         {
-            sm.character.rb.velocity = Vector3.zero;
+            sm.owner.rb.velocity = Vector3.zero;
         }
 
         if(isDrinkFinished == true)

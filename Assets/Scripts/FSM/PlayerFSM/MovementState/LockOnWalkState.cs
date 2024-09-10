@@ -14,13 +14,13 @@ namespace PlayerFSM
 
         public override void Enter()
         {
-            sm.character.StartCoroutine(coroutineReference);
-            moveSpeed = sm.character.walkSpeed;
+            sm.owner.StartCoroutine(coroutineReference);
+            moveSpeed = sm.owner.walkSpeed;
         }
 
         public override void Update()
         {
-            if (sm.character.input.isSprinting == true)
+            if (sm.owner.input.isSprinting == true)
             {
                 sm.ChangeState(sm.sprintState);
             }
@@ -43,30 +43,30 @@ namespace PlayerFSM
         }
         public override void Exit()
         {
-            sm.character.StopCoroutine(coroutineReference);
+            sm.owner.StopCoroutine(coroutineReference);
         }
         private void Rotate()
         {
-            Vector3 direction = new Vector3(CameraStateMachine.Instance.cameraLockOnState.target.position.x - sm.character.rb.position.x, 0, CameraStateMachine.Instance.cameraLockOnState.target.position.z - sm.character.rb.position.z);
+            Vector3 direction = new Vector3(CameraStateMachine.Instance.cameraLockOnState.target.position.x - sm.owner.rb.position.x, 0, CameraStateMachine.Instance.cameraLockOnState.target.position.z - sm.owner.rb.position.z);
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
+            sm.owner.rb.MoveRotation(Quaternion.Slerp(sm.owner.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
         }
         protected override void Move()
         {
-            if (sm.character.IsOnSlope() == true)
+            if (sm.owner.IsOnSlope() == true)
             {
-                sm.character.rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
+                sm.owner.rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
             }
             else
             {
-                sm.character.rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+                sm.owner.rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
             }
         }
         protected override Vector3 GetSlopeMoveDirection()
         {
-            Vector3 moveDir = sm.character.transform.forward * sm.character.input.moveInput.y + sm.character.transform.right * sm.character.input.moveInput.x;
-            return Vector3.ProjectOnPlane(moveDir, sm.character.slopeHit.normal).normalized;
+            Vector3 moveDir = sm.owner.transform.forward * sm.owner.input.moveInput.y + sm.owner.transform.right * sm.owner.input.moveInput.x;
+            return Vector3.ProjectOnPlane(moveDir, sm.owner.slopeHit.normal).normalized;
         }
         IEnumerator PostSimulationUpdate()
         {

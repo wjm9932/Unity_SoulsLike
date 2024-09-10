@@ -13,12 +13,12 @@ namespace PlayerFSM
         public override void Enter()
         {
             base.Enter();
-            moveSpeed = sm.character.sprintSpeed;
+            moveSpeed = sm.owner.sprintSpeed;
         }
 
         public override void Update()
         {
-            if (sm.character.input.isSprinting == false)
+            if (sm.owner.input.isSprinting == false)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
                 {

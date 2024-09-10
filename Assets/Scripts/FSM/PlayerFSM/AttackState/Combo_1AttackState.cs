@@ -17,13 +17,13 @@ namespace PlayerFSM
             dashForce = 1.5f;
 
             base.Enter();
-            sm.character.animator.SetTrigger("IsAttack1");
+            sm.owner.animator.SetTrigger("IsAttack1");
             canComboAttack = false;
         }
 
         public override void Update()
         {
-            if (canComboAttack == true && sm.character.input.isAttack == true)
+            if (canComboAttack == true && sm.owner.input.isAttack == true)
             {
                 sm.ChangeState(sm.combo_2AttackState);
             }

@@ -13,16 +13,16 @@ namespace PlayerFSM
         }
         public void Enter()
         {
-            sm.character.rb.velocity = Vector3.zero;
+            sm.owner.rb.velocity = Vector3.zero;
         }
         public void Update()
         {
-            if(sm.character.IsOnSlope() == true)
+            if(sm.owner.IsOnSlope() == true)
             {
-                sm.character.rb.velocity = Vector3.zero;
+                sm.owner.rb.velocity = Vector3.zero;
             }
 
-            if (sm.character.input.moveInput != Vector2.zero)
+            if (sm.owner.input.moveInput != Vector2.zero)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)
                 {
@@ -34,14 +34,14 @@ namespace PlayerFSM
                 }
             }
 
-            if (sm.character.input.IsClickItemInInventory(sm.character.OnClickItem) == true)
+            if (sm.owner.input.IsClickItemInInventory(sm.owner.OnClickItem) == true)
             {
-                sm.ChangeState(sm.drinkPotionState);
+                sm.ChangeState(sm.owner.clickedItem.GetTargetState(sm));
             }
 
-            if (sm.uiStatMachine.currentState is OpenState == false)
+            if (sm.owner.uiStateMachine.currentState is OpenState == false)
             {
-                if (sm.character.input.isDodging == true)
+                if (sm.owner.input.isDodging == true)
                 {
                     if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
                     {
@@ -52,7 +52,7 @@ namespace PlayerFSM
                         sm.ChangeState(sm.dodgeState);
                     }
                 }
-                if (sm.character.input.isAttack == true)
+                if (sm.owner.input.isAttack == true)
                 {
                     sm.ChangeState(sm.combo_1AttackState);
                 }
@@ -73,13 +73,13 @@ namespace PlayerFSM
         }
         public void OnAnimatorIK()
         {
-            sm.character.animator.SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
-            sm.character.animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, sm.character.animator.GetFloat("HandWeight"));
-            sm.character.animator.SetIKPosition(AvatarIKGoal.LeftHand, sm.character.leftHandPos.position);
+            sm.owner.animator.SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
+            sm.owner.animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, sm.owner.animator.GetFloat("HandWeight"));
+            sm.owner.animator.SetIKPosition(AvatarIKGoal.LeftHand, sm.owner.leftHandPos.position);
         }
         void UpdateAnimation()
         {
-            sm.character.animator.SetFloat("Speed", sm.character.rb.velocity.magnitude, 0.08f, Time.deltaTime);
+            sm.owner.animator.SetFloat("Speed", sm.owner.rb.velocity.magnitude, 0.08f, Time.deltaTime);
         }
         public virtual void OnAnimationEnterEvent()
         {

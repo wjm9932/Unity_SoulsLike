@@ -15,8 +15,8 @@ namespace PlayerFSM
         public virtual void Enter()
         {
             exit = false;
-            sm.character.canBeDamaged = false;
-            sm.character.rb.velocity = Vector3.zero;
+            sm.owner.canBeDamaged = false;
+            sm.owner.rb.velocity = Vector3.zero;
         }
         public virtual void Update()
         {
@@ -35,8 +35,8 @@ namespace PlayerFSM
         }
         public virtual void Exit()
         {
-            sm.character.canBeDamaged = true;
-            sm.character.attack.SetCanAttack(0);
+            sm.owner.canBeDamaged = true;
+            sm.owner.attack.SetCanAttack(0);
         }
         public virtual void OnAnimationEnterEvent()
         {
@@ -51,7 +51,7 @@ namespace PlayerFSM
         }
         public virtual void OnAnimatorIK()
         {
-            sm.character.animator.SetFloat("HandWeight", 0);
+            sm.owner.animator.SetFloat("HandWeight", 0);
         }
     }
 }

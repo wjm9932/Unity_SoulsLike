@@ -8,9 +8,6 @@ using UnityEditorInternal;
 
 public class Character : LivingEntity
 {
-    public delegate void CloseWindow();
-    public CloseWindow closeWindow;
-
     public GameObject inventoryUI;
 
     public CinemachineVirtualCamera lockOnCamera;
@@ -23,6 +20,9 @@ public class Character : LivingEntity
     public LayerMask enemy;
     public float walkSpeed;
     public float sprintSpeed;
+
+    public UI.Item clickedItem { get; private set; }
+
     public Animator animator { get; private set; }
     public Camera mainCamera { get; private set; }
     public Rigidbody rb { get; private set; }
@@ -47,11 +47,11 @@ public class Character : LivingEntity
         attack = GetComponent<Attack>();
         CameraStateMachine.Initialize(this);
         uiStateMachine = new UIStateMachine(this);
-        playerMovementStateMachine = new PlayerMovementStateMachine(this, uiStateMachine);
+        playerMovementStateMachine = new PlayerMovementStateMachine(this);
     }
     void Start()
     {
-        health = 50f;
+        health = startingHealth;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -72,6 +72,8 @@ public class Character : LivingEntity
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
         CameraStateMachine.Instance.Update();
+
+        Debug.Log(playerMovementStateMachine.currentState);
 
         //input.IsClickItemInInventory(OnClickItem);
 
@@ -165,10 +167,11 @@ public class Character : LivingEntity
 
     public bool OnClickItem()
     {
-        var clickedItem = inventory.GetItemUI(); 
+        clickedItem = inventory.GetItemUI(); 
+
         if (clickedItem != null)
         {
-            return clickedItem.UseItem(this);
+            return true;
         }
         else
         {

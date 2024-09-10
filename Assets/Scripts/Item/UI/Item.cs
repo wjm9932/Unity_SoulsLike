@@ -26,6 +26,8 @@ namespace UI
             }
         }
         public abstract bool UseItem(LivingEntity livingEntity);
+        public abstract IState GetTargetState(PlayerMovementStateMachine stateMachine);
+
         public void UpdateCount(int count)
         {
             countText.text = count.ToString();
@@ -41,6 +43,5 @@ namespace UI
         {
             OnDestroy?.Invoke(item);
         }
-
     }
 }

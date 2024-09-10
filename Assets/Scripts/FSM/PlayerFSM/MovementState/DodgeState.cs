@@ -17,7 +17,7 @@ namespace PlayerFSM
             moveSpeed = 3f;
             isDodgeFinished = false;
 
-            sm.character.animator.SetTrigger("IsRolling");
+            sm.owner.animator.SetTrigger("IsRolling");
 
             SetMoveDirection();
         }
@@ -50,35 +50,35 @@ namespace PlayerFSM
         }
         public override void OnAnimationEnterEvent()
         {
-            sm.character.canBeDamaged = false;
+            sm.owner.canBeDamaged = false;
         }
         public override void OnAnimationExitEvent()
         {
             isDodgeFinished = true;
-            sm.character.canBeDamaged = true;
+            sm.owner.canBeDamaged = true;
         }
         public override void OnAnimationTransitionEvent()
         {
         }
         private void Dodge()
         {
-            sm.character.transform.LookAt(sm.character.transform.position + moveDirection);
+            sm.owner.transform.LookAt(sm.owner.transform.position + moveDirection);
 
-            if (sm.character.IsOnSlope() == true)
+            if (sm.owner.IsOnSlope() == true)
             {
-                if (sm.character.input.dodgeInput == Vector2.zero)
+                if (sm.owner.input.dodgeInput == Vector2.zero)
                 {
-                    var dir = Vector3.ProjectOnPlane(sm.character.transform.forward, sm.character.slopeHit.normal).normalized;
-                    sm.character.rb.AddForce(dir * moveSpeed * 10f, ForceMode.Force);
+                    var dir = Vector3.ProjectOnPlane(sm.owner.transform.forward, sm.owner.slopeHit.normal).normalized;
+                    sm.owner.rb.AddForce(dir * moveSpeed * 10f, ForceMode.Force);
                 }
                 else
                 {
-                    sm.character.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed * 10f, ForceMode.Force);
+                    sm.owner.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed * 10f, ForceMode.Force);
                 }
             }
             else
             {
-                sm.character.rb.AddForce(sm.character.transform.forward * moveSpeed * 10f, ForceMode.Force);
+                sm.owner.rb.AddForce(sm.owner.transform.forward * moveSpeed * 10f, ForceMode.Force);
             }
         }
 

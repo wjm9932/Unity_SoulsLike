@@ -15,12 +15,12 @@ namespace PlayerFSM
         public override void Enter()
         {
             base.Enter();
-            moveSpeed = sm.character.walkSpeed;
+            moveSpeed = sm.owner.walkSpeed;
         }
 
         public override void Update()
         {
-            if (sm.character.input.isSprinting == true)
+            if (sm.owner.input.isSprinting == true)
             {
                 sm.ChangeState(sm.sprintState);
             }
@@ -48,9 +48,9 @@ namespace PlayerFSM
         }
         public override void OnAnimatorIK()
         {
-            sm.character.animator.SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
-            sm.character.animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, sm.character.animator.GetFloat("HandWeight"));
-            sm.character.animator.SetIKPosition(AvatarIKGoal.LeftHand, sm.character.leftHandPos.position);
+            sm.owner.animator.SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
+            sm.owner.animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, sm.owner.animator.GetFloat("HandWeight"));
+            sm.owner.animator.SetIKPosition(AvatarIKGoal.LeftHand, sm.owner.leftHandPos.position);
         }
     }
 }

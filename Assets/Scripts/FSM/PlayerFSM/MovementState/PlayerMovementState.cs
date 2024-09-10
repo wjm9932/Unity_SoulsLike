@@ -22,26 +22,26 @@ public abstract class PlayerMovementState : IState
     public virtual void Enter()
     {
         coroutineReference = PostSimulationUpdate();
-        sm.character.StartCoroutine(coroutineReference);
+        sm.owner.StartCoroutine(coroutineReference);
     }
     public virtual void Update()
     {
         SetMoveDirection();
         SpeedControl();
 
-        if (sm.character.input.moveInput == Vector2.zero)
+        if (sm.owner.input.moveInput == Vector2.zero)
         {
             sm.ChangeState(sm.idleState);
         }
-        
-        if (sm.character.input.IsClickItemInInventory(sm.character.OnClickItem) == true)
+
+        if (sm.owner.input.IsClickItemInInventory(sm.owner.OnClickItem) == true)
         {
-            sm.ChangeState(sm.drinkPotionState);
+            sm.ChangeState(sm.owner.clickedItem.GetTargetState(sm));
         }
-        
-        if (sm.uiStatMachine.currentState is OpenState == false)
+
+        if (sm.owner.uiStateMachine.currentState is OpenState == false)
         {
-            if (sm.character.input.isDodging == true)
+            if (sm.owner.input.isDodging == true)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
                 {
@@ -52,7 +52,7 @@ public abstract class PlayerMovementState : IState
                     sm.ChangeState(sm.dodgeState);
                 }
             }
-            if (sm.character.input.isAttack == true)
+            if (sm.owner.input.isAttack == true)
             {
                 sm.ChangeState(sm.combo_1AttackState);
             }
@@ -68,46 +68,46 @@ public abstract class PlayerMovementState : IState
     }
     public virtual void Exit()
     {
-        sm.character.StopCoroutine(coroutineReference);
+        sm.owner.StopCoroutine(coroutineReference);
     }
 
     protected virtual void Move()
     {
-        if (sm.character.IsOnSlope() == true)
+        if (sm.owner.IsOnSlope() == true)
         {
-            sm.character.rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
+            sm.owner.rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
         }
         else
         {
-            sm.character.rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            sm.owner.rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
     }
     protected void SpeedControl()
     {
-        if (sm.character.IsOnSlope() == true)
+        if (sm.owner.IsOnSlope() == true)
         {
-            if (sm.character.rb.velocity.magnitude > moveSpeed)
+            if (sm.owner.rb.velocity.magnitude > moveSpeed)
             {
-                sm.character.rb.velocity = sm.character.rb.velocity.normalized * moveSpeed;
+                sm.owner.rb.velocity = sm.owner.rb.velocity.normalized * moveSpeed;
             }
         }
         else
         {
-            Vector3 flatVel = new Vector3(sm.character.rb.velocity.x, 0f, sm.character.rb.velocity.z);
+            Vector3 flatVel = new Vector3(sm.owner.rb.velocity.x, 0f, sm.owner.rb.velocity.z);
 
             if (flatVel.magnitude > moveSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                sm.character.rb.velocity = new Vector3(limitedVel.x, sm.character.rb.velocity.y, limitedVel.z);
+                sm.owner.rb.velocity = new Vector3(limitedVel.x, sm.owner.rb.velocity.y, limitedVel.z);
             }
         }
     }
     private void Rotate()
     {
-        if (sm.character.rb.velocity.magnitude > 0.2f)
+        if (sm.owner.rb.velocity.magnitude > 0.2f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(lookAtDirection);
-            sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 15f * Time.fixedDeltaTime));
+            sm.owner.rb.MoveRotation(Quaternion.Slerp(sm.owner.rb.rotation, targetRotation, 15f * Time.fixedDeltaTime));
         }
     }
     IEnumerator PostSimulationUpdate()
@@ -121,20 +121,20 @@ public abstract class PlayerMovementState : IState
     }
     protected virtual Vector3 GetSlopeMoveDirection()
     {
-        return Vector3.ProjectOnPlane(moveDirection, sm.character.slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(moveDirection, sm.owner.slopeHit.normal).normalized;
     }
     protected void SetMoveDirection()
     {
-        Vector3 forward = sm.character.mainCamera.transform.forward;
+        Vector3 forward = sm.owner.mainCamera.transform.forward;
         forward.y = 0;
         forward.Normalize();
 
-        moveDirection = forward * sm.character.input.moveInput.y + sm.character.mainCamera.transform.right * sm.character.input.moveInput.x;
-        lookAtDirection = forward * sm.character.input.rotationInput.y + sm.character.mainCamera.transform.right * sm.character.input.rotationInput.x;
+        moveDirection = forward * sm.owner.input.moveInput.y + sm.owner.mainCamera.transform.right * sm.owner.input.moveInput.x;
+        lookAtDirection = forward * sm.owner.input.rotationInput.y + sm.owner.mainCamera.transform.right * sm.owner.input.rotationInput.x;
     }
     void UpdateAnimation()
     {
-        sm.character.animator.SetFloat("Speed", sm.character.rb.velocity.magnitude, 0.08f, Time.deltaTime);
+        sm.owner.animator.SetFloat("Speed", sm.owner.rb.velocity.magnitude, 0.08f, Time.deltaTime);
     }
     public virtual void OnAnimationEnterEvent()
     {
@@ -148,6 +148,6 @@ public abstract class PlayerMovementState : IState
     }
     public virtual void OnAnimatorIK()
     {
-        sm.character.animator.SetFloat("HandWeight", 0);
+        sm.owner.animator.SetFloat("HandWeight", 0);
     }
 }

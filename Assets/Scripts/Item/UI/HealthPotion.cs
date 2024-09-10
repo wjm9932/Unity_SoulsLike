@@ -11,7 +11,7 @@ namespace UI
         // Start is called before the first frame update
         void Start()
         {
-
+            
         }
 
         // Update is called once per frame
@@ -19,9 +19,10 @@ namespace UI
         {
 
         }
+
         public override bool UseItem(LivingEntity livingEntity)
         {
-            if(livingEntity.RecoverHP(data.value) == true)
+            if (livingEntity.RecoverHP(data.value) == true)
             {
                 --count;
                 UpdateCount(count);
@@ -37,6 +38,11 @@ namespace UI
             {
                 return false;
             }
+        }
+
+        public override IState GetTargetState(PlayerMovementStateMachine stateMachine)
+        {
+            return stateMachine.drinkPotionState;
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LivingEntity : MonoBehaviour, IDamageable
+public abstract class LivingEntity : MonoBehaviour, IDamageable
 {
     [HideInInspector]
     public bool canBeDamaged;

@@ -6,8 +6,7 @@ using PlayerFSM;
 
 public class PlayerMovementStateMachine : StateMachine
 {
-    public UIStateMachine uiStatMachine { get; }
-    public Character character { get;}
+    public Character owner { get;}
     public IdleState idleState { get; }
     public WalkSate walkState { get; }
     public SprintState sprintState { get; }
@@ -21,10 +20,9 @@ public class PlayerMovementStateMachine : StateMachine
     public DrinkPotionState drinkPotionState { get; }
 
 
-    public PlayerMovementStateMachine(Character character, UIStateMachine uiStateMachine)
+    public PlayerMovementStateMachine(Character character)
     {
-        this.character = character;
-        this.uiStatMachine = uiStateMachine;
+        this.owner = character;
         idleState = new IdleState(this);
         walkState = new WalkSate(this);
         sprintState = new SprintState(this);
