@@ -71,13 +71,12 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(playerMovementStateMachine.currentState);
         rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
         CameraStateMachine.Instance.Update();
 
-
+        hpBar.fillAmount = health / maxHealth;
         //input.IsClickItemInInventory(OnClickItem);
 
         /************************************Test********************************************************/
@@ -140,11 +139,11 @@ public class Character : LivingEntity
     {
         if (other.tag == "EnemySword")
         {
-            if(playerMovementStateMachine.currentState != playerMovementStateMachine.hitState)
-            {
-                LivingEntity enemy = other.transform.root.GetComponent<LivingEntity>();
+            LivingEntity enemy = other.transform.root.GetComponent<LivingEntity>();
 
-                if (enemy.canAttack == true && this.canBeDamaged == true)
+            if (enemy.canAttack == true && enemy != null)
+            {
+                if(ApplyDamage(enemy.damage) == true)
                 {
                     animator.SetTrigger("Hit");
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
@@ -167,6 +166,7 @@ public class Character : LivingEntity
             Destroy(item.gameObject);
         }
     }
+
 
     public bool OnClickItem()
     {

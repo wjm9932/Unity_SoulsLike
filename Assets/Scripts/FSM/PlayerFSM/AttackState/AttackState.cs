@@ -68,11 +68,25 @@ public class AttackState : IState
         sm.owner.rb.velocity = Vector3.zero;
         sm.owner.rb.drag = 2f;
 
-        Vector3 forward = sm.owner.mainCamera.transform.forward;
-        forward.y = 0;
-        forward.Normalize();
+        Vector3 forward;
 
-        rotation = Quaternion.LookRotation(forward);
+        if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+        {
+            forward = CameraStateMachine.Instance.cameraLockOnState.target.position - sm.owner.transform.position;
+            forward.y = 0;
+            forward.Normalize();
+
+            rotation = Quaternion.LookRotation(forward);
+        }
+        else
+        {
+            forward = sm.owner.mainCamera.transform.forward;
+            forward.y = 0;
+            forward.Normalize();
+
+            rotation = Quaternion.LookRotation(forward);
+        }
+       
 
         sm.owner.rb.AddForce(forward * dashForce, ForceMode.Impulse);
     }

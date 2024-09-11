@@ -17,6 +17,7 @@ namespace EnemyFSM
 
             sm.enemy.navMesh.isStopped = true;
             sm.enemy.animator.SetTrigger("Stab");
+            sm.enemy.SetDamage(5f);
         }
         public override void Update()
         {

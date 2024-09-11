@@ -28,6 +28,7 @@ namespace EnemyFSM
             sm.enemy.animator.SetTrigger("DashStab");
             sm.enemy.GetComponent<CapsuleCollider>().isTrigger = true;
             sm.enemy.SetCanAttack(1);
+            sm.enemy.SetDamage(15f);
         }
         public override void Update()
         {

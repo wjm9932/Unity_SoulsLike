@@ -24,6 +24,7 @@ namespace EnemyFSM
             sm.enemy.navMesh.stoppingDistance = stoppingDistance;
             sm.enemy.navMesh.SetDestination(sm.character.transform.position);
             sm.enemy.animator.SetTrigger("Jump Attack");
+            sm.enemy.SetDamage(20f);
         }
         public override void Update()
         {
@@ -31,7 +32,9 @@ namespace EnemyFSM
 
             if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
             {
-                GetBossPattern();
+                //GetBossPattern();
+
+                sm.ChangeState(sm.idleState);
             }
         }
         public override void PhysicsUpdate()

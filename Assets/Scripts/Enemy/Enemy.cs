@@ -21,6 +21,7 @@ public class Enemy : LivingEntity
 
     private void Awake()
     {
+        health = maxHealth;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
@@ -32,6 +33,7 @@ public class Enemy : LivingEntity
     void Start()
     {
         isTest = true;
+
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this, character);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
     }
@@ -41,9 +43,8 @@ public class Enemy : LivingEntity
     {
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.jumpAttackState);
         }
-
 
         enemyBehaviorStateMachine.Update();
 
@@ -102,29 +103,20 @@ public class Enemy : LivingEntity
 
     private void OnTriggerEnter(Collider other)
     {
-        //var player = other.GetComponent<IDamageable>();
-        //if(player != null)
-        //{
-        //    var hitPoint = other.ClosestPoint(transform.position);
-        //    Vector3 hitNormal = (transform.position - hitPoint).normalized;
-
-        //    var message = new DamageMessage();
-        //    message.hitPoint = hitPoint;
-        //    message.hitNormal = hitNormal;
-        //    message.amount = 15f;
-
-        //    player.ApplyDamage(message);
-        //}
         if (other.tag == "Sword")
         {
             LivingEntity player = other.transform.root.GetComponent<LivingEntity>();
 
-            if (player.canAttack == true && this.canBeDamaged == true)
+            if (player != null && player.canAttack == true)
             {
-                var hitPoint = other.ClosestPoint(transform.position);
-                Vector3 hitNormal = (transform.position - hitPoint).normalized;
-                EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+                if(ApplyDamage(player.damage) == true)
+                {
+                    var hitPoint = other.ClosestPoint(transform.position);
+                    Vector3 hitNormal = (transform.position - hitPoint).normalized;
+                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+                }
             }
         }
     }
+
 }

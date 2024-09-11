@@ -11,10 +11,12 @@ namespace PlayerFSM
         }
         public override void Enter()
         {
-            dashForce = 1.5f;
             base.Enter();
+
+            dashForce = 1.5f;
             sm.owner.animator.SetTrigger("IsAttack2");
             canComboAttack = false;
+            sm.owner.SetDamage(20f);
         }
 
         public override void Update()

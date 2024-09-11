@@ -1,4 +1,4 @@
 public interface IDamageable
 {
-    bool ApplyDamage(DamageMessage damageMessage);
+    bool ApplyDamage(float damage);
 }

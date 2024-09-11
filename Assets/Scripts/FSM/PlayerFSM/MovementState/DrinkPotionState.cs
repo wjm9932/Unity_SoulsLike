@@ -71,8 +71,6 @@ public class DrinkPotionState : PlayerMovementState
         {
             sm.owner.RecoverHP(amountPerTick);
 
-            sm.owner.hpBar.fillAmount = sm.owner.health / sm.owner.maxHealth;
-
             elapsedTime += interval;
             yield return new WaitForSeconds(interval);
         }

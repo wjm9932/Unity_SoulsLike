@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     public bool canBeDamaged;
     public float health { get; protected set; }
     public bool canAttack { get; private set; }
+    public float damage { get; private set; }
+    public event Action onDeath;
 
     [SerializeField]
     private float _maxHealth = 100f;
@@ -40,10 +43,19 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         return health >= _maxHealth;
     }
 
-    public virtual bool ApplyDamage(DamageMessage msg)
+    public bool ApplyDamage(float damage)
     {
-        if (canAttack == true && this.canBeDamaged == true)
+        if (this.canBeDamaged == true)
         {
+            health -= damage;
+            
+            if(health <= 0)
+            {
+                if(onDeath != null)
+                {
+                    onDeath();
+                }
+            }
             return true;
         }
         else
@@ -62,5 +74,10 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         {
             canAttack = false;
         }
+    }
+
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
     }
 }

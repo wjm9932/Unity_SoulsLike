@@ -16,6 +16,7 @@ namespace EnemyFSM
             dir = GetLookAtAngle();
             sm.enemy.navMesh.isStopped = true;
             sm.enemy.animator.SetTrigger("Attack");
+            sm.enemy.SetDamage(10f);
         }
         public override void Update()
         {
