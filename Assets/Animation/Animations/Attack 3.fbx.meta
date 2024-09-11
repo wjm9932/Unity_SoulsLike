@@ -63,14 +63,14 @@ ModelImporter:
       - time: 0.41785714
         functionName: SetCanAttack
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: a786a064620d7ea41a54fe7fc852b60a, type: 3}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
       - time: 0.52500004
         functionName: SetCanAttack
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 66683acc01b50714ca1d515c2ab7ed55, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: a786a064620d7ea41a54fe7fc852b60a, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

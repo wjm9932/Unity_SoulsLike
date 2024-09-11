@@ -5,21 +5,25 @@ using UnityEngine;
 public class DrinkPotionState : PlayerMovementState
 {
     private bool isDrinkFinished;
+    private IEnumerator recoverCoroutine;
     public DrinkPotionState(PlayerMovementStateMachine sm) : base(sm)
     {
-
     }
     // Start is called before the first frame update
     public override void Enter()
     {
         base.Enter();
+
+        sm.owner.animator.SetLayerWeight(1, 1);
+        recoverCoroutine = RecoverHPOverTime(0.5f, sm.owner.clickedItem.data.value);
+
         if (sm.owner.clickedItem.UseItem(sm.owner) == true)
         {
             isDrinkFinished = false;
             sm.owner.animator.SetTrigger("DrinkPotion");
             moveSpeed = sm.owner.walkSpeed;
 
-            sm.owner.StartCoroutine(RecoverHPOverTime(0.5f, sm.owner.clickedItem.data.value));
+            sm.owner.StartCoroutine(recoverCoroutine);
         }
         else
         {
@@ -48,7 +52,8 @@ public class DrinkPotionState : PlayerMovementState
     public override void Exit()
     {
         base.Exit();
-        sm.owner.StopCoroutine(RecoverHPOverTime(1f, sm.owner.clickedItem.data.value));
+        sm.owner.StopCoroutine(recoverCoroutine);
+        sm.owner.animator.SetLayerWeight(1, 0);
     }
 
     public override void OnAnimationExitEvent()

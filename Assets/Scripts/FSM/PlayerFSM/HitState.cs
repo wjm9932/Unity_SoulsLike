@@ -36,7 +36,7 @@ namespace PlayerFSM
         public virtual void Exit()
         {
             sm.owner.canBeDamaged = true;
-            sm.owner.attack.SetCanAttack(0);
+            sm.owner.SetCanAttack(0);
         }
         public virtual void OnAnimationEnterEvent()
         {

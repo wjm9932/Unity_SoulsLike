@@ -38,7 +38,6 @@ public class Character : LivingEntity
     [SerializeField]
     private float maxSlopeAngle;
 
-    public Attack attack { get; private set; }
     public RaycastHit slopeHit;
 
 
@@ -48,7 +47,6 @@ public class Character : LivingEntity
     private void Awake()
     {
         canBeDamaged = true;
-        attack = GetComponent<Attack>();
         CameraStateMachine.Initialize(this);
         uiStateMachine = new UIStateMachine(this);
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
@@ -73,6 +71,7 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(playerMovementStateMachine.currentState);
         rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
@@ -143,7 +142,7 @@ public class Character : LivingEntity
         {
             if(playerMovementStateMachine.currentState != playerMovementStateMachine.hitState)
             {
-                Attack enemy = other.transform.root.GetComponent<Attack>();
+                LivingEntity enemy = other.transform.root.GetComponent<LivingEntity>();
 
                 if (enemy.canAttack == true && this.canBeDamaged == true)
                 {

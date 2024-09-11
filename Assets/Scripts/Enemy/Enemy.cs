@@ -8,7 +8,7 @@ public class Enemy : LivingEntity
     public NavMeshAgent navMesh { get; private set; }
     public Rigidbody rb { get; private set; }
     public Animator animator { get; private set; }
-    
+
     public RaycastHit slopeHit;
 
     [SerializeField]
@@ -16,16 +16,14 @@ public class Enemy : LivingEntity
     [SerializeField]
     private float maxSlopeAngle;
 
-    public Attack attack { get; private set; }
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
     public bool isTest = true;
-    
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
-        attack = GetComponent<Attack>();
 
         navMesh.updateRotation = false;
         canBeDamaged = true;
@@ -41,7 +39,15 @@ public class Enemy : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
+        }
+
+
         enemyBehaviorStateMachine.Update();
+
+
         //if (Input.GetKeyDown(KeyCode.C))
         //{
         //    isTest = !isTest;
@@ -96,9 +102,22 @@ public class Enemy : LivingEntity
 
     private void OnTriggerEnter(Collider other)
     {
+        //var player = other.GetComponent<IDamageable>();
+        //if(player != null)
+        //{
+        //    var hitPoint = other.ClosestPoint(transform.position);
+        //    Vector3 hitNormal = (transform.position - hitPoint).normalized;
+
+        //    var message = new DamageMessage();
+        //    message.hitPoint = hitPoint;
+        //    message.hitNormal = hitNormal;
+        //    message.amount = 15f;
+
+        //    player.ApplyDamage(message);
+        //}
         if (other.tag == "Sword")
         {
-            Attack player = other.transform.root.GetComponent<Attack>();
+            LivingEntity player = other.transform.root.GetComponent<LivingEntity>();
 
             if (player.canAttack == true && this.canBeDamaged == true)
             {
