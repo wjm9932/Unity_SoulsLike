@@ -25,6 +25,7 @@ namespace UI
                 return _count;
             }
         }
+
         public abstract bool UseItem(LivingEntity livingEntity);
         public abstract IState GetTargetState(PlayerMovementStateMachine stateMachine);
 

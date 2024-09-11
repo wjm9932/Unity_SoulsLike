@@ -21,7 +21,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         
     }
 
-    public bool RecoverHP(int amount)
+    public bool RecoverHP(float amount)
     {
         if(health >= maxHealth)
         {
@@ -32,6 +32,11 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
             health = Mathf.Min(health + amount, maxHealth);
             return true;
         }
+    }
+
+    public bool IsMaxHp()
+    {
+        return health >= _maxHealth;
     }
 
     public bool ApplyDamage(DamageMessage msg)

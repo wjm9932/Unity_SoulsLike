@@ -18,6 +18,8 @@ public class DrinkPotionState : PlayerMovementState
             isDrinkFinished = false;
             sm.owner.animator.SetTrigger("DrinkPotion");
             moveSpeed = sm.owner.walkSpeed;
+
+            sm.owner.StartCoroutine(RecoverHPOverTime(0.5f, sm.owner.clickedItem.data.value));
         }
         else
         {
@@ -29,7 +31,6 @@ public class DrinkPotionState : PlayerMovementState
     // Update is called once per frame
     public override void Update()
     {
-        sm.owner.hpBar.fillAmount = sm.owner.health / sm.owner.maxHealth;
 
         SetMoveDirection();
         SpeedControl();
@@ -47,10 +48,28 @@ public class DrinkPotionState : PlayerMovementState
     public override void Exit()
     {
         base.Exit();
+        sm.owner.StopCoroutine(RecoverHPOverTime(1f, sm.owner.clickedItem.data.value));
     }
 
     public override void OnAnimationExitEvent()
     {
         isDrinkFinished = true;
+    }
+
+    private IEnumerator RecoverHPOverTime(float duration, float totalRecovery)
+    {
+        float elapsedTime = 0f;
+        float amountPerTick = totalRecovery / 100f; 
+        float interval = duration / 100f; 
+
+        while (elapsedTime < duration)
+        {
+            sm.owner.RecoverHP(amountPerTick);
+
+            sm.owner.hpBar.fillAmount = sm.owner.health / sm.owner.maxHealth;
+
+            elapsedTime += interval;
+            yield return new WaitForSeconds(interval);
+        }
     }
 }

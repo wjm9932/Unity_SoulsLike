@@ -22,7 +22,7 @@ namespace UI
 
         public override bool UseItem(LivingEntity livingEntity)
         {
-            if (livingEntity.RecoverHP(data.value) == true)
+            if (livingEntity.IsMaxHp() == false)
             {
                 --count;
                 UpdateCount(count);
