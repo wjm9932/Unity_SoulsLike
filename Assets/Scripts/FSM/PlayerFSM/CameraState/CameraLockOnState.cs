@@ -15,7 +15,7 @@ public class CameraLockOnState : CameraState
 
         target = ScanNearByEnemy();
 
-        if(target == null)
+        if (target == null)
         {
             csm.ChangeState(csm.cameraLockOffState);
         }
@@ -32,7 +32,7 @@ public class CameraLockOnState : CameraState
     }
     public override void Update()
     {
-        base .Update();
+        base.Update();
         UpdateCameraPosition();
     }
     public override void PhysicsUpdate()
@@ -51,24 +51,26 @@ public class CameraLockOnState : CameraState
     }
     private void UpdateCameraPosition()
     {
-       
-        Vector3 dir = (target.position - csm.character.camEyePos.position).normalized;
-        Vector3 camPos = csm.character.camEyePos.position - dir * 4.5f;
-
-        if (camPos.y < 0.2f)
+        if (target != null)
         {
-            camPos.y = 0.2f;
-        }
+            Vector3 dir = (target.position - csm.character.camEyePos.position).normalized;
+            Vector3 camPos = csm.character.camEyePos.position - dir * 4.5f;
 
-        csm.character.lockOnCameraPosition.position = camPos;
-        csm.character.lockOnCameraPosition.LookAt(target.position);
+            if (camPos.y < 0.2f)
+            {
+                camPos.y = 0.2f;
+            }
+
+            csm.character.lockOnCameraPosition.position = camPos;
+            csm.character.lockOnCameraPosition.LookAt(target.position);
+        }
     }
 
     private Transform ScanNearByEnemy()
     {
         Collider[] nearByTargets = Physics.OverlapSphere(csm.character.transform.position, 20f, csm.character.enemy);
 
-        if(nearByTargets.Length <= 0)
+        if (nearByTargets.Length <= 0)
         {
             return null;
         }
@@ -85,7 +87,7 @@ public class CameraLockOnState : CameraState
                 dir.y = 0f;
                 float angle = Vector3.Angle(camForward, dir);
 
-                if(angle < closestAngle)
+                if (angle < closestAngle)
                 {
                     closestAngle = angle;
                     closetTarget = nearByTargets[i].transform;
