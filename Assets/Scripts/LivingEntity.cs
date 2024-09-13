@@ -5,9 +5,22 @@ using UnityEngine;
 
 public abstract class LivingEntity : MonoBehaviour, IDamageable
 {
-    [HideInInspector]
-    public bool canBeDamaged;
-    public float health { get; protected set; }
+    private bool _canBeDamaged;
+    public virtual bool canBeDamaged
+    {
+        get { return _canBeDamaged; }
+        set { _canBeDamaged = value; }
+    }
+
+    private float _health;
+    public virtual float health 
+    {
+        get { return _health; }
+        protected set
+        {
+            _health = value;
+        }
+    }
     public bool canAttack { get; private set; }
     public float damage { get; private set; }
     public event Action onDeath;
@@ -48,6 +61,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         if (this.canBeDamaged == true)
         {
             health -= damage;
+            canBeDamaged = false;
             
             if(health <= 0)
             {

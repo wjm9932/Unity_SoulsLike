@@ -43,6 +43,17 @@ public class Character : LivingEntity
 
     private Inventory inventory;
 
+
+    public override float health
+    {
+        protected set
+        {
+            base.health = value;
+            hpBar.fillAmount = health / maxHealth;
+        }
+    }
+
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -54,7 +65,6 @@ public class Character : LivingEntity
     void Start()
     {
         health = 50f;
-        hpBar.fillAmount = health / maxHealth;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -76,7 +86,6 @@ public class Character : LivingEntity
         uiStateMachine.Update();
         CameraStateMachine.Instance.Update();
 
-        hpBar.fillAmount = health / maxHealth;
         //input.IsClickItemInInventory(OnClickItem);
 
         /************************************Test********************************************************/
@@ -143,7 +152,7 @@ public class Character : LivingEntity
 
             if (enemy.canAttack == true && enemy != null)
             {
-                if(ApplyDamage(enemy.damage) == true)
+                if (ApplyDamage(enemy.damage) == true)
                 {
                     animator.SetTrigger("Hit");
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);

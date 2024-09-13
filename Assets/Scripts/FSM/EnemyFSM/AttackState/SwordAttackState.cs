@@ -25,7 +25,8 @@ namespace EnemyFSM
             if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
             {
                 //GetBossPattern();
-                sm.ChangeState(sm.idleState);
+                //sm.ChangeState(sm.idleState);
+                sm.ChangeState(sm.stabAttackState);
             }
         }
         public override void PhysicsUpdate()

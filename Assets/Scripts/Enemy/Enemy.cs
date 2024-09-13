@@ -5,24 +5,31 @@ using UnityEngine.AI;
 
 public class Enemy : LivingEntity
 {
+    public bool isTest = true;
+
+
     public NavMeshAgent navMesh { get; private set; }
-    public Rigidbody rb { get; private set; }
     public Animator animator { get; private set; }
-
-    public RaycastHit slopeHit;
-
     [SerializeField]
     private Character character;
-    [SerializeField]
-    private float maxSlopeAngle;
-
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
-    public bool isTest = true;
+
+    public override bool canBeDamaged
+    {
+        get
+        {
+            return Time.time >= lastTimeDamaged + minTimeBetDamaged ? true : false;
+        }
+    }
+
+    private float lastTimeDamaged;
+    private const float minTimeBetDamaged = 0.1f;
+
+
 
     private void Awake()
     {
         health = maxHealth;
-        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
 
@@ -43,7 +50,7 @@ public class Enemy : LivingEntity
     {
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.jumpAttackState);
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stabAttackState);
         }
 
         enemyBehaviorStateMachine.Update();
@@ -101,7 +108,7 @@ public class Enemy : LivingEntity
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Sword")
         {
@@ -111,6 +118,8 @@ public class Enemy : LivingEntity
             {
                 if(ApplyDamage(player.damage) == true)
                 {
+                    lastTimeDamaged = Time.time;
+
                     var hitPoint = other.ClosestPoint(transform.position);
                     Vector3 hitNormal = (transform.position - hitPoint).normalized;
                     EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
