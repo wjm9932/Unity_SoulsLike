@@ -32,8 +32,8 @@ public class CameraLockOnState : CameraState
     }
     public override void Update()
     {
-        base.Update();
         UpdateCameraPosition();
+        base.Update();
     }
     public override void PhysicsUpdate()
     {
@@ -51,19 +51,16 @@ public class CameraLockOnState : CameraState
     }
     private void UpdateCameraPosition()
     {
-        if (target != null)
+        Vector3 dir = (target.position - csm.character.camEyePos.position).normalized;
+        Vector3 camPos = csm.character.camEyePos.position - dir * 4.5f;
+
+        if (camPos.y < 0.2f)
         {
-            Vector3 dir = (target.position - csm.character.camEyePos.position).normalized;
-            Vector3 camPos = csm.character.camEyePos.position - dir * 4.5f;
-
-            if (camPos.y < 0.2f)
-            {
-                camPos.y = 0.2f;
-            }
-
-            csm.character.lockOnCameraPosition.position = camPos;
-            csm.character.lockOnCameraPosition.LookAt(target.position);
+            camPos.y = 0.2f;
         }
+
+        csm.character.lockOnCameraPosition.position = camPos;
+        csm.character.lockOnCameraPosition.LookAt(target.position);
     }
 
     private Transform ScanNearByEnemy()
