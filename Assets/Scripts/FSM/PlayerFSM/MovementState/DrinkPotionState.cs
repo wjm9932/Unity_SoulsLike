@@ -13,8 +13,6 @@ public class DrinkPotionState : PlayerMovementState
     public override void Enter()
     {
         base.Enter();
-
-        sm.owner.animator.SetLayerWeight(1, 1);
         recoverCoroutine = RecoverHPOverTime(0.5f, sm.owner.clickedItem.data.value);
 
         if (sm.owner.clickedItem.UseItem(sm.owner) == true)
@@ -22,6 +20,7 @@ public class DrinkPotionState : PlayerMovementState
             isDrinkFinished = false;
             sm.owner.animator.SetTrigger("DrinkPotion");
             moveSpeed = sm.owner.walkSpeed;
+            sm.owner.animator.SetLayerWeight(1, 1);
 
             sm.owner.StartCoroutine(recoverCoroutine);
         }

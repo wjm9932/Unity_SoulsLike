@@ -77,7 +77,14 @@ public class PlayerInput : MonoBehaviour
 
             if (duration <= 0.2f)
             {
-                return clickEvent?.Invoke() ?? false;
+                if (clickEvent != null)
+                {
+                    return clickEvent.Invoke();
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         return false;
