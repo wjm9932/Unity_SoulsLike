@@ -19,7 +19,6 @@ namespace PlayerFSM
             sm.owner.rb.velocity = Vector3.zero;
             moveSpeed = 2f;
             dodgeDir = sm.owner.input.dodgeInput;
-
             UpdateAnimation();
         }
         public override void Update()

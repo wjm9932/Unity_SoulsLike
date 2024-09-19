@@ -136,9 +136,12 @@ public class Character : LivingEntity
     {
         playerMovementStateMachine.OnAnimationEnterEvent();
     }
-    private void OnAnimationExitEvent()
+    private void OnAnimationExitEvent(AnimationEvent ev)
     {
-        playerMovementStateMachine.OnAnimationExitEvent();
+        if (ev.animatorClipInfo.weight >= 0.5f)
+        {
+            playerMovementStateMachine.OnAnimationExitEvent();
+        }
     }
     private void OnAnimationTransitionEvent()
     {
