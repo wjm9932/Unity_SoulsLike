@@ -25,7 +25,7 @@ public class Character : LivingEntity
     public float walkSpeed;
     public float sprintSpeed;
 
-    public UI.Item clickedItem { get; private set; }
+    public UsableItem clickedItem { get; private set; }
 
     public Animator animator { get; private set; }
     public Camera mainCamera { get; private set; }

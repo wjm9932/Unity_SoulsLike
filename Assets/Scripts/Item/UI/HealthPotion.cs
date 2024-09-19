@@ -6,21 +6,17 @@ using Unity.VisualScripting;
 
 namespace UI
 {
-    public class HealthPotion : Item
+    public class HealthPotion : Item, UsableItem
     {
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField]
+        private ItemData dataField;
+
+        public ItemData data
         {
-            
+            get { return dataField; }
+            private set { dataField = value; }
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        public override bool UseItem(LivingEntity livingEntity)
+        public bool UseItem(LivingEntity livingEntity)
         {
             if (livingEntity.IsMaxHp() == false)
             {
@@ -40,7 +36,7 @@ namespace UI
             }
         }
 
-        public override IState GetTargetState(PlayerMovementStateMachine stateMachine)
+        public IState GetTargetState(PlayerMovementStateMachine stateMachine)
         {
             return stateMachine.drinkPotionState;
         }

@@ -40,7 +40,6 @@ public class Inventory : MonoBehaviour
                     inventoryItem.GetComponent<UI.Item>().OnDestroy += RemoveItemFromInventory;
 
                     itemContainer.Add(item.tag, inventoryItem);
-
                     break;
                 }
             }
@@ -59,7 +58,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public UI.Item GetItemUI()
+    public UsableItem GetItemUI()
     {
         pointerEventData = new PointerEventData(eventSystem)
         {
@@ -71,7 +70,7 @@ public class Inventory : MonoBehaviour
         uiRaycaster.Raycast(pointerEventData, results);
         if (results.Count > 0)
         {
-            UI.Item item = results[0].gameObject.GetComponent<UI.Item>();
+            UsableItem item = results[0].gameObject.GetComponent<UsableItem>();
             if (item != null)
             {
                 return item;
