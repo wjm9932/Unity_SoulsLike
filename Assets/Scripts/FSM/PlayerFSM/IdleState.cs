@@ -36,7 +36,15 @@ namespace PlayerFSM
 
             if (sm.owner.input.IsClickItemInInventory(sm.owner.OnClickItem) == true)
             {
-                sm.ChangeState(sm.owner.clickedItem.GetTargetState(sm));
+                sm.ChangeState(sm.owner.toBeUsedItem.GetTargetState(sm));
+            }
+
+            if(sm.owner.input.isUsingQuickSlot == true)
+            {
+                if(sm.owner.quickSlot != null)
+                {
+                    sm.ChangeState(sm.owner.quickSlot.GetTargetState(sm));
+                }
             }
 
             if (sm.owner.uiStateMachine.currentState is OpenState == false)

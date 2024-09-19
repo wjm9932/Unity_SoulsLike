@@ -21,6 +21,7 @@ public class PlayerInput : MonoBehaviour
     public bool isAttack { get; private set; }
     public bool isLockOn { get; private set; }
     public bool isDodging { get; private set; }
+    public bool isUsingQuickSlot { get; private set; }
 
     private float inputX;
     private float inputY;
@@ -62,6 +63,7 @@ public class PlayerInput : MonoBehaviour
         isDodging = Input.GetKeyDown(KeyCode.Space);
         isAttack = Input.GetButtonDown(attackButtonName);
         isLockOn = Input.GetKeyDown(KeyCode.F);
+        isUsingQuickSlot = Input.GetKeyDown(KeyCode.Q);
     }
 
     public bool IsClickItemInInventory(ClickEvent clickEvent)

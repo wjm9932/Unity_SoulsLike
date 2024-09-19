@@ -14,7 +14,6 @@ namespace UI
         public ItemData data
         {
             get { return dataField; }
-            private set { dataField = value; }
         }
         public bool UseItem(LivingEntity livingEntity)
         {

@@ -13,14 +13,13 @@ public class DrinkPotionState : PlayerMovementState
     public override void Enter()
     {
         base.Enter();
-        recoverCoroutine = RecoverHPOverTime(0.5f, sm.owner.clickedItem.data.value);
+        recoverCoroutine = RecoverHPOverTime(0.5f, sm.owner.toBeUsedItem.data.value);
 
-        if (sm.owner.clickedItem.UseItem(sm.owner) == true)
+        if (sm.owner.toBeUsedItem.UseItem(sm.owner) == true)
         {
             isDrinkFinished = false;
             sm.owner.animator.SetTrigger("DrinkPotion");
             moveSpeed = sm.owner.walkSpeed;
-            sm.owner.animator.SetLayerWeight(1, 1);
 
             sm.owner.StartCoroutine(recoverCoroutine);
         }
@@ -51,8 +50,8 @@ public class DrinkPotionState : PlayerMovementState
     public override void Exit()
     {
         base.Exit();
+        sm.owner.animator.SetTrigger("DrinkPotionIsDone");
         sm.owner.StopCoroutine(recoverCoroutine);
-        sm.owner.animator.SetLayerWeight(1, 0);
     }
 
     public override void OnAnimationExitEvent()

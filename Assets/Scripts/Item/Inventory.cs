@@ -33,6 +33,11 @@ public class Inventory : MonoBehaviour
             {
                 if (inventorySlot[i].transform.childCount == 0)
                 {
+                    if (i == 0 && item.GetComponent<UX.Item>().icon.GetComponent<UsableItem>() == null)
+                    {
+                        continue; 
+                    }
+
                     GameObject inventoryItem = Instantiate(item.GetComponent<UX.Item>().icon, inventorySlot[i].transform);
                     inventoryItem.transform.tag = item.tag;
 
@@ -43,6 +48,7 @@ public class Inventory : MonoBehaviour
                     break;
                 }
             }
+
         }
         else
         {

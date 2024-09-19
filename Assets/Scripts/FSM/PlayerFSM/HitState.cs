@@ -17,6 +17,7 @@ namespace PlayerFSM
             exit = false;
             sm.owner.canBeDamaged = false;
             sm.owner.rb.velocity = Vector3.zero;
+            //sm.owner.animator.SetLayerWeight(1, 0);
         }
         public virtual void Update()
         {

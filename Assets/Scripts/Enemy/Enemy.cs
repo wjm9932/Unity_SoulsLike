@@ -110,7 +110,7 @@ public class Enemy : LivingEntity
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Sword")
+        if (other.CompareTag("Sword") == true)
         {
             LivingEntity player = other.transform.root.GetComponent<LivingEntity>();
 

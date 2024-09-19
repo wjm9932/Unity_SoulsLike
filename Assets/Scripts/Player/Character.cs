@@ -9,23 +9,42 @@ using UnityEditorInternal;
 
 public class Character : LivingEntity
 {
+    [SerializeField]
+    private GameObject _quickSlot;
+    public UsableItem quickSlot
+    {
+        get 
+        {
+            if( _quickSlot.transform.childCount == 0)
+            {
+                return null;
+            }
+            else
+            {
+                toBeUsedItem = _quickSlot.GetComponentInChildren<UsableItem>();
+                return toBeUsedItem;
+            }
+        }
+    }
+
     public GameObject inventoryUI;
-
     public Image hpBar;
-
-
     public CinemachineVirtualCamera lockOnCamera;
     public CinemachineFreeLook lockOffCamera;
+
     public Transform lockOnCameraPosition;
     public Transform camEyePos;
     public Transform leftHandPos;
+    
     public TrailRenderer swordEffect;
+    
     public LayerMask whatIsGround;
     public LayerMask enemy;
+    
     public float walkSpeed;
     public float sprintSpeed;
 
-    public UsableItem clickedItem { get; private set; }
+    public UsableItem toBeUsedItem { get; private set; }
 
     public Animator animator { get; private set; }
     public Camera mainCamera { get; private set; }
@@ -34,7 +53,7 @@ public class Character : LivingEntity
     public PlayerInput input { get; private set; }
     public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
     public UIStateMachine uiStateMachine { get; private set; }
-    
+
     [SerializeField]
     private float maxSlopeAngle;
 
@@ -64,7 +83,7 @@ public class Character : LivingEntity
     }
     void Start()
     {
-        health = 50f;
+        health = 10f;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -146,7 +165,7 @@ public class Character : LivingEntity
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "EnemySword")
+        if (other.CompareTag("EnemySword") == true)
         {
             LivingEntity enemy = other.transform.root.GetComponent<LivingEntity>();
 
@@ -179,9 +198,9 @@ public class Character : LivingEntity
 
     public bool OnClickItem()
     {
-        clickedItem = inventory.GetItemUI(); 
+        toBeUsedItem = inventory.GetItemUI();
 
-        if (clickedItem != null)
+        if (toBeUsedItem != null)
         {
             return true;
         }
