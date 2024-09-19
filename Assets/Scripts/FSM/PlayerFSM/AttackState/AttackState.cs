@@ -75,19 +75,15 @@ public class AttackState : IState
             forward = CameraStateMachine.Instance.cameraLockOnState.target.position - sm.owner.transform.position;
             forward.y = 0;
             forward.Normalize();
-
-            rotation = Quaternion.LookRotation(forward);
         }
         else
         {
             forward = sm.owner.mainCamera.transform.forward;
             forward.y = 0;
             forward.Normalize();
-
-            rotation = Quaternion.LookRotation(forward);
         }
-       
 
+        rotation = Quaternion.LookRotation(forward);
         sm.owner.rb.AddForce(forward * dashForce, ForceMode.Impulse);
     }
 }
