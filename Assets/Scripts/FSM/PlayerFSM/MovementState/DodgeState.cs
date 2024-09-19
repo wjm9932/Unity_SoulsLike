@@ -47,6 +47,7 @@ namespace PlayerFSM
         }
         public override void Exit()
         {
+            sm.owner.animator.SetTrigger("DodgeIsDone");
         }
         public override void OnAnimationEnterEvent()
         {
