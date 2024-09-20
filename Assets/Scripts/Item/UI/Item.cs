@@ -39,6 +39,7 @@ namespace UI
         public void DestroyItem(GameObject item)
         {
             OnDestroy?.Invoke(item);
+            Destroy(item);
         }
     }
 }

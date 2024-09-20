@@ -8,9 +8,9 @@ public class Inventory : MonoBehaviour
 {
     public GraphicRaycaster uiRaycaster;
     public EventSystem eventSystem;
-    public List<GameObject> inventorySlot = new List<GameObject>(35);
+    public List<GameObject> inventorySlot = new List<GameObject>(36);
 
-    private Dictionary<string, GameObject> itemContainer = new Dictionary<string, GameObject>(35);
+    private Dictionary<string, GameObject> itemContainer = new Dictionary<string, GameObject>(36);
     private PointerEventData pointerEventData;
 
     // Start is called before the first frame update

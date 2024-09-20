@@ -25,7 +25,6 @@ namespace UI
                 if (count <= 0)
                 {
                     DestroyItem(gameObject);
-                    Destroy(gameObject);
                 }
                 return true;
             }

@@ -40,6 +40,16 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Dropped on a UI element");
+
+        }
+        else
+        {
+            Debug.Log("Dropped outside UI");
+        }
+
         transform.SetParent(_originParent);
         image.raycastTarget = true;
     }
