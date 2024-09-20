@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -40,17 +41,15 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject() == false)
         {
-            Debug.Log("Dropped on a UI element");
-
+           
+            //gameObject.GetComponent<Item>()
         }
         else
         {
-            Debug.Log("Dropped outside UI");
+            transform.SetParent(_originParent);
+            image.raycastTarget = true;
         }
-
-        transform.SetParent(_originParent);
-        image.raycastTarget = true;
     }
 }

@@ -9,21 +9,12 @@ using UnityEditorInternal;
 
 public class Character : LivingEntity
 {
-    [SerializeField]
-    private GameObject _quickSlot;
     public UsableItem quickSlot
     {
         get 
         {
-            if( _quickSlot.transform.childCount == 0)
-            {
-                return null;
-            }
-            else
-            {
-                toBeUsedItem = _quickSlot.GetComponentInChildren<UsableItem>();
-                return toBeUsedItem;
-            }
+            toBeUsedItem = inventory.quickSlot;
+            return toBeUsedItem;
         }
     }
 
@@ -194,7 +185,6 @@ public class Character : LivingEntity
         if (item != null)
         {
             inventory.AddItem(item);
-            Destroy(item.gameObject);
         }
     }
 

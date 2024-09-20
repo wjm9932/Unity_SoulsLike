@@ -8,21 +8,37 @@ public class Inventory : MonoBehaviour
 {
     public GraphicRaycaster uiRaycaster;
     public EventSystem eventSystem;
-    public List<GameObject> inventorySlot = new List<GameObject>(36);
 
+    [SerializeField]
+    private List<GameObject> inventorySlot = new List<GameObject>(36);
     private Dictionary<string, GameObject> itemContainer = new Dictionary<string, GameObject>(36);
     private PointerEventData pointerEventData;
+
+    public UsableItem quickSlot
+    {
+        get
+        {
+            if (inventorySlot[0].transform.childCount == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return inventorySlot[0].GetComponentInChildren<UsableItem>();
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void AddItem(UX.Item item)
@@ -35,12 +51,11 @@ public class Inventory : MonoBehaviour
                 {
                     if (i == 0 && item.GetComponent<UX.Item>().icon.GetComponent<UsableItem>() == null)
                     {
-                        continue; 
+                        continue;
                     }
 
                     GameObject inventoryItem = Instantiate(item.GetComponent<UX.Item>().icon, inventorySlot[i].transform);
                     inventoryItem.transform.tag = item.tag;
-
                     inventoryItem.GetComponent<UI.Item>().AddItem();
                     inventoryItem.GetComponent<UI.Item>().OnDestroy += RemoveItemFromInventory;
 
@@ -48,12 +63,12 @@ public class Inventory : MonoBehaviour
                     break;
                 }
             }
-
         }
         else
         {
             itemContainer[item.tag].GetComponent<UI.Item>().AddItem();
         }
+        Destroy(item.gameObject);
     }
 
     private void RemoveItemFromInventory(GameObject item)
