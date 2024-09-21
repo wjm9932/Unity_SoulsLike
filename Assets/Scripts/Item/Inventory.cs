@@ -43,33 +43,47 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(UX.Item item)
     {
-        if (itemContainer.ContainsKey(item.tag) == false)
+        int emptySlot = FindEmptySlot(item);
+
+        if(emptySlot == -1)
         {
-            for (int i = 0; i < inventorySlot.Count; i++)
-            {
-                if (inventorySlot[i].transform.childCount == 0)
-                {
-                    if (i == 0 && item.GetComponent<UX.Item>().icon.GetComponent<UsableItem>() == null)
-                    {
-                        continue;
-                    }
-
-                    GameObject inventoryItem = Instantiate(item.GetComponent<UX.Item>().icon, inventorySlot[i].transform);
-                    inventoryItem.transform.tag = item.tag;
-                    inventoryItem.GetComponent<UI.Item>().AddItem();
-                    inventoryItem.GetComponent<UI.Item>().OnDestroy += RemoveItemFromInventory;
-                    inventoryItem.GetComponent<UI.Item>().OnDrop += DropItem;
-
-                    itemContainer.Add(item.tag, inventoryItem);
-                    break;
-                }
-            }
+            Debug.Log("Inventory is full");
         }
         else
         {
-            itemContainer[item.tag].GetComponent<UI.Item>().AddItem();
+            if (itemContainer.ContainsKey(item.tag) == false)
+            {
+                GameObject inventoryItem = Instantiate(item.GetComponent<UX.Item>().icon, inventorySlot[emptySlot].transform);
+                inventoryItem.transform.tag = item.tag;
+                inventoryItem.GetComponent<UI.Item>().AddItem();
+                inventoryItem.GetComponent<UI.Item>().OnDestroy += RemoveItemFromInventory;
+                inventoryItem.GetComponent<UI.Item>().OnDrop += DropItem;
+
+                itemContainer.Add(item.tag, inventoryItem);
+            }
+            else
+            {
+                itemContainer[item.tag].GetComponent<UI.Item>().AddItem();
+            }
+
+            Destroy(item.gameObject); 
         }
-        Destroy(item.gameObject);
+    }
+
+    private int FindEmptySlot(UX.Item item)
+    {
+        for (int i = 0; i < inventorySlot.Count; i++)
+        {
+            if (inventorySlot[i].transform.childCount == 0)
+            {
+                if (i == 0 && item.GetComponent<UX.Item>().icon.GetComponent<UsableItem>() == null)
+                {
+                    continue;
+                }
+                return i;
+            }
+        }
+        return -1;
     }
 
     private void RemoveItemFromInventory(GameObject item)
@@ -97,6 +111,7 @@ public class Inventory : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
 
         uiRaycaster.Raycast(pointerEventData, results);
+
         if (results.Count > 0)
         {
             UsableItem item = results[0].gameObject.GetComponent<UsableItem>();

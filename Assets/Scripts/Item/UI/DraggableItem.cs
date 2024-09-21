@@ -41,15 +41,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
+        if(gameObject.GetComponent<Item>() != null)
         {
-            gameObject.GetComponent<Item>().DropItem();
-            gameObject.GetComponent<Item>().DestroyItem();
+            if (EventSystem.current.IsPointerOverGameObject() == false)
+            {
+                gameObject.GetComponent<Item>().DropItem();
+                gameObject.GetComponent<Item>().DestroyItem();
+                return;
+            }
         }
-        else
-        {
-            transform.SetParent(_originParent);
-            image.raycastTarget = true;
-        }
+
+        transform.SetParent(_originParent);
+        image.raycastTarget = true;
     }
 }

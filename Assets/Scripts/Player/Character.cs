@@ -91,28 +91,10 @@ public class Character : LivingEntity
     void Update()
     {
         rb.useGravity = !IsOnSlope();
+
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
         CameraStateMachine.Instance.Update();
-
-        //input.IsClickItemInInventory(OnClickItem);
-
-        /************************************Test********************************************************/
-        //if(Input.GetKeyDown(KeyCode.Q) == true) // Quest
-        //{
-        //    closeWindow = CloseQuestWindow;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.I) == true) // Inventory
-        //{
-        //    closeWindow = CloseInventoryWindow;
-        //}
-
-        //if(Input.GetKeyDown(KeyCode.Escape) == true)
-        //{
-        //    closeWindow?.Invoke();
-        //}
-        /************************************Test********************************************************/
     }
     private void FixedUpdate()
     {
