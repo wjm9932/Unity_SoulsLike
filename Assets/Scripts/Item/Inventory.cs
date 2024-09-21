@@ -58,6 +58,7 @@ public class Inventory : MonoBehaviour
                     inventoryItem.transform.tag = item.tag;
                     inventoryItem.GetComponent<UI.Item>().AddItem();
                     inventoryItem.GetComponent<UI.Item>().OnDestroy += RemoveItemFromInventory;
+                    inventoryItem.GetComponent<UI.Item>().OnDrop += DropItem;
 
                     itemContainer.Add(item.tag, inventoryItem);
                     break;
@@ -78,7 +79,14 @@ public class Inventory : MonoBehaviour
             itemContainer.Remove(item.gameObject.tag);
         }
     }
-
+    private void DropItem(GameObject item, int count)
+    {
+        for(int i = 0; i < count; i++)
+        {
+            GameObject items = Instantiate(item, gameObject.transform.position, Quaternion.identity);
+            items.GetComponent<UX.HealthPotion>().triggerCount = 1;
+        }
+    }
     public UsableItem GetItemUI()
     {
         pointerEventData = new PointerEventData(eventSystem)

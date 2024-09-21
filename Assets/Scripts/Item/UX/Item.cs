@@ -8,6 +8,7 @@ namespace UX
     public abstract class Item : MonoBehaviour
     {
         public GameObject icon;
+        public int triggerCount;
     }
 }
 

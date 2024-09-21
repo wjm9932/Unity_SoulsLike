@@ -239,4 +239,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 2512434278917518307}
+  itemUX: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
   dataField: {fileID: 11400000, guid: 272aba066580d2c4981d96f07b7baf74, type: 2}

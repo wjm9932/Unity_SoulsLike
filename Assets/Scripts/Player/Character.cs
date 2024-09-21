@@ -53,7 +53,6 @@ public class Character : LivingEntity
 
     private Inventory inventory;
 
-
     public override float health
     {
         protected set
@@ -149,7 +148,7 @@ public class Character : LivingEntity
 
     public bool IsOnSlope()
     {
-        if (Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, playerHeight * 0.5f + 0.1f) == true)
+        if (Physics.Raycast(GetPlayerPosition(), Vector3.down, out slopeHit, playerHeight * 0.5f + 0.1f, whatIsGround) == true)
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && !Mathf.Approximately(angle, 0f);
@@ -184,7 +183,14 @@ public class Character : LivingEntity
 
         if (item != null)
         {
-            inventory.AddItem(item);
+            if (item.triggerCount <= 0)
+            {
+                inventory.AddItem(item);
+            }
+            else
+            {
+                --item.triggerCount;
+            }
         }
     }
 

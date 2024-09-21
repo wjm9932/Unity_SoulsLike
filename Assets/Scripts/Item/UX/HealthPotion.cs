@@ -6,9 +6,9 @@ namespace UX
 {
     public class HealthPotion : Item
     {
-        private void Start()
+        private void Awake()
         {
-            
+            triggerCount = 0;
         }
 
         private void Update()

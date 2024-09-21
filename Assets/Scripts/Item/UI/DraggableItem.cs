@@ -43,8 +43,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (EventSystem.current.IsPointerOverGameObject() == false)
         {
-           
-            //gameObject.GetComponent<Item>()
+            gameObject.GetComponent<Item>().DropItem();
+            gameObject.GetComponent<Item>().DestroyItem();
         }
         else
         {

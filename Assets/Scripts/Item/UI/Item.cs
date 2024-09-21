@@ -10,7 +10,13 @@ namespace UI
         public delegate void OnDestroyEventHandler(GameObject item);
         public event OnDestroyEventHandler OnDestroy;
 
+        public delegate void OnDropEventHandler(GameObject item, int count);
+        public event OnDropEventHandler OnDrop;
+
         public TextMeshProUGUI countText;
+
+        [SerializeField]
+        private GameObject itemUX;
 
         private int _count = 0;
         public int count
@@ -36,10 +42,15 @@ namespace UI
             UpdateCount(count);
         }
 
-        public void DestroyItem(GameObject item)
+        public void DestroyItem()
         {
-            OnDestroy?.Invoke(item);
-            Destroy(item);
+            OnDestroy?.Invoke(gameObject);
+            Destroy(gameObject);
+        }
+
+        public void DropItem()
+        {
+            OnDrop?.Invoke(itemUX, count);
         }
     }
 }
