@@ -85,10 +85,14 @@ public class AttackState : IState
 
         if (sm.owner.IsOnSlope() == true)
         {
-            forward = Vector3.ProjectOnPlane(forward, sm.owner.slopeHit.normal).normalized;
+            var dir = Vector3.ProjectOnPlane(forward, sm.owner.slopeHit.normal).normalized;
+            sm.owner.rb.AddForce(dir * dashForce, ForceMode.Impulse);
         }
-        
-        sm.owner.rb.AddForce(forward * dashForce, ForceMode.Impulse);
+        else
+        {
+            sm.owner.rb.AddForce(forward * dashForce, ForceMode.Impulse);
+        }
+
         rotation = Quaternion.LookRotation(forward);
     }
 }
