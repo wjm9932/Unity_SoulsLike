@@ -47,7 +47,6 @@ public class CameraLockOnState : CameraState
     {
         base.Exit();
         csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
-        target = null;
     }
     private void UpdateCameraPosition()
     {
@@ -80,9 +79,9 @@ public class CameraLockOnState : CameraState
 
             for (int i = 0; i < nearByTargets.Length; i++)
             {
-                Vector3 dir = nearByTargets[i].transform.position - csm.owner.mainCamera.transform.position;
+                Vector3 dir = nearByTargets[i].transform.position - csm.owner.transform.position;
 
-                if (Physics.Raycast(csm.owner.mainCamera.transform.position, dir, dir.magnitude, csm.owner.lockOnCameraTargetLayer) == true)
+                if (Physics.Raycast(csm.owner.transform.position, dir, dir.magnitude, csm.owner.lockOnCameraTargetLayer) == true)
                 {
                     continue;
                 }
@@ -90,7 +89,6 @@ public class CameraLockOnState : CameraState
                 {
                     dir.y = 0f;
                     float angle = Vector3.Angle(camForward, dir);
-
                     if (angle < closestAngle)
                     {
                         closestAngle = angle;
