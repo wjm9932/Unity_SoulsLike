@@ -21,13 +21,13 @@ public class CameraLockOnState : CameraState
         }
         else
         {
-            csm.character.animator.SetBool("IsLockOn", true);
-            csm.character.lockOnCamera.LookAt = target;
-            csm.character.lockOffCamera.Priority = 9;
-            csm.character.lockOnCamera.Priority = 10;
+            csm.owner.animator.SetBool("IsLockOn", true);
+            csm.owner.lockOnCamera.LookAt = target;
+            csm.owner.lockOffCamera.Priority = 9;
+            csm.owner.lockOnCamera.Priority = 10;
 
             UpdateCameraPosition();
-            csm.character.StartCoroutine(ApplyDampingAfterFirstFrame());
+            csm.owner.StartCoroutine(ApplyDampingAfterFirstFrame());
         }
     }
     public override void Update()
@@ -46,26 +46,26 @@ public class CameraLockOnState : CameraState
     public override void Exit()
     {
         base.Exit();
-        csm.character.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
+        csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
         target = null;
     }
     private void UpdateCameraPosition()
     {
-        Vector3 dir = (target.position - csm.character.camEyePos.position).normalized;
-        Vector3 camPos = csm.character.camEyePos.position - dir * 4.5f;
+        Vector3 dir = (target.position - csm.owner.camEyePos.position).normalized;
+        Vector3 camPos = csm.owner.camEyePos.position - dir * 4.5f;
 
         if (camPos.y < 0.2f)
         {
             camPos.y = 0.2f;
         }
 
-        csm.character.lockOnCameraPosition.position = camPos;
-        csm.character.lockOnCameraPosition.LookAt(target.position);
+        csm.owner.lockOnCameraPosition.position = camPos;
+        csm.owner.lockOnCameraPosition.LookAt(target.position);
     }
 
     private Transform ScanNearByEnemy()
     {
-        Collider[] nearByTargets = Physics.OverlapSphere(csm.character.transform.position, 20f, csm.character.enemy);
+        Collider[] nearByTargets = Physics.OverlapSphere(csm.owner.transform.position, 20f, csm.owner.enemyMask);
 
         if (nearByTargets.Length <= 0)
         {
@@ -75,19 +75,27 @@ public class CameraLockOnState : CameraState
         {
             Transform closetTarget = null;
             float closestAngle = 30f;
-            Vector3 camForward = csm.character.mainCamera.transform.forward;
+            Vector3 camForward = csm.owner.mainCamera.transform.forward;
             camForward.y = 0f;
 
             for (int i = 0; i < nearByTargets.Length; i++)
             {
-                Vector3 dir = nearByTargets[i].transform.position - csm.character.mainCamera.transform.position;
-                dir.y = 0f;
-                float angle = Vector3.Angle(camForward, dir);
+                Vector3 dir = nearByTargets[i].transform.position - csm.owner.mainCamera.transform.position;
 
-                if (angle < closestAngle)
+                if (Physics.Raycast(csm.owner.mainCamera.transform.position, dir, dir.magnitude, csm.owner.lockOnCameraTargetLayer) == true)
                 {
-                    closestAngle = angle;
-                    closetTarget = nearByTargets[i].transform;
+                    continue;
+                }
+                else
+                {
+                    dir.y = 0f;
+                    float angle = Vector3.Angle(camForward, dir);
+
+                    if (angle < closestAngle)
+                    {
+                        closestAngle = angle;
+                        closetTarget = nearByTargets[i].transform;
+                    }
                 }
             }
             return closetTarget;
@@ -96,6 +104,6 @@ public class CameraLockOnState : CameraState
     private IEnumerator ApplyDampingAfterFirstFrame()
     {
         yield return null;
-        csm.character.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 1f;
+        csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 1f;
     }
 }

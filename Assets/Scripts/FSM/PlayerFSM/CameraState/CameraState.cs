@@ -15,7 +15,7 @@ public class CameraState : IState
     }
     public virtual void Update()
     {
-        if (csm.character.input.isLockOn == true)
+        if (csm.owner.input.isLockOn == true)
         {
             if(csm.currentState == csm.cameraLockOnState)
             {

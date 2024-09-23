@@ -12,11 +12,11 @@ public class CameraLockOffState : CameraState
     public override void Enter()
     {
         base.Enter();
-        csm.character.lockOnCamera.LookAt = null;
-        csm.character.animator.SetBool("IsLockOn", false);
+        csm.owner.lockOnCamera.LookAt = null;
+        csm.owner.animator.SetBool("IsLockOn", false);
 
-        csm.character.lockOffCamera.Priority = 10;
-        csm.character.lockOnCamera.Priority = 9;
+        csm.owner.lockOffCamera.Priority = 10;
+        csm.owner.lockOnCamera.Priority = 9;
     }
     public override void Update()
     {

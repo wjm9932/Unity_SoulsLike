@@ -7,6 +7,7 @@ TagManager:
   - Sword
   - EnemySword
   - HealthPotion
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - whatIsGround
   - Enemy
   - Player
-  - 
+  - Obstacle
   - 
   - 
   - 

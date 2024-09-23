@@ -30,7 +30,8 @@ public class Character : LivingEntity
     public TrailRenderer swordEffect;
     
     public LayerMask whatIsGround;
-    public LayerMask enemy;
+    public LayerMask enemyMask;
+    public LayerMask lockOnCameraTargetLayer;
     
     public float walkSpeed;
     public float sprintSpeed;

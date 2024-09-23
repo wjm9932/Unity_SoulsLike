@@ -13,14 +13,14 @@ public class CameraStateMachine : StateMachine
         }
     }
 
-    public Character character { get; }
+    public Character owner { get; }
 
     public CameraLockOnState cameraLockOnState { get; private set; }
     public CameraLockOffState cameraLockOffState { get; private set; }
 
     public CameraStateMachine(Character character)
     {
-        this.character = character;
+        this.owner = character;
 
         cameraLockOnState = new CameraLockOnState(this);
         cameraLockOffState = new CameraLockOffState(this);
