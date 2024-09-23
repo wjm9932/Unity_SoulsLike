@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class LivingEntity : MonoBehaviour, IDamageable
+public abstract class LivingEntity : MonoBehaviour
 {
     private bool _canBeDamaged;
     public virtual bool canBeDamaged
@@ -26,12 +26,16 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     public event Action onDeath;
 
     [SerializeField]
+    Transform damageTextPosition;
+
+    [SerializeField]
     private float _maxHealth = 100f;
 
     public float maxHealth
     {
         get { return _maxHealth; }
     }
+
 
     private void Start()
     {
@@ -70,6 +74,8 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
                     onDeath();
                 }
             }
+
+            EffectManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damage);
             return true;
         }
         else

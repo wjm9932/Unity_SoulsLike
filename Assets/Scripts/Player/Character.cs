@@ -94,6 +94,7 @@ public class Character : LivingEntity
 
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
+
         CameraStateMachine.Instance.Update();
     }
     private void FixedUpdate()
@@ -175,7 +176,6 @@ public class Character : LivingEntity
             }
         }
     }
-
 
     public bool OnClickItem()
     {

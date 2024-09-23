@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class EffectManager : MonoBehaviour
@@ -14,8 +15,12 @@ public class EffectManager : MonoBehaviour
 
     public enum EffectType
     {
-        Flesh
+        Flesh,
+        Wall
     }
+
+    [SerializeField]
+    private TextMeshPro damageText;
 
     public ParticleSystem fleshHitEffectPrefab;
 
@@ -36,5 +41,11 @@ public class EffectManager : MonoBehaviour
         }
 
         effect.Play();
+    }
+
+    public void PlayDamageText(Vector3 pos, Transform parent, float damage)
+    {
+        var text = Instantiate(damageText, pos, Quaternion.identity, parent);
+        text.text = damage.ToString();
     }
 }
