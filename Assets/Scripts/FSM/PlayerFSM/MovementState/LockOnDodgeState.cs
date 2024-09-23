@@ -17,13 +17,16 @@ namespace PlayerFSM
         {
             isDodgeFinished = false;
             sm.owner.rb.velocity = Vector3.zero;
-            moveSpeed = 2f;
+
+            moveSpeed = 4f;
             dodgeDir = sm.owner.input.dodgeInput;
+            
+            Dodge();
+
             UpdateAnimation();
         }
         public override void Update()
         {
-            SpeedControl();
             if (isDodgeFinished == true)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
@@ -38,7 +41,6 @@ namespace PlayerFSM
         }
         public override void PhysicsUpdate()
         {
-            Dodge();
         }
         public override void LateUpdate()
         {
@@ -82,7 +84,7 @@ namespace PlayerFSM
                 }
                 else
                 {
-                    moveDir = sm.owner.transform.forward * dodgeDir.y + sm.owner.transform.right * dodgeDir.x;
+                    moveDir = sm.owner.mainCamera.transform.forward * dodgeDir.y + sm.owner.mainCamera.transform.right * dodgeDir.x;
                 }
                 sm.owner.rb.AddForce(moveDir.normalized * moveSpeed, ForceMode.Impulse);
             }
@@ -90,31 +92,16 @@ namespace PlayerFSM
 
         protected override Vector3 GetSlopeMoveDirection()
         {
-            Vector3 moveDir = sm.owner.transform.forward * dodgeDir.y + sm.owner.transform.right * dodgeDir.x;
+            moveDir = sm.owner.mainCamera.transform.forward * dodgeDir.y + sm.owner.mainCamera.transform.right * dodgeDir.x;
             return Vector3.ProjectOnPlane(moveDir, sm.owner.slopeHit.normal).normalized;
         }
 
-        //private void Rotate()
-        //{
-        //    Vector3 direction = new Vector3(sm.character.tempTarget.transform.position.x - sm.character.rb.position.x, 0, sm.character.tempTarget.transform.position.z - sm.character.rb.position.z);
-
-        //    Quaternion targetRotation = Quaternion.LookRotation(direction);
-        //    sm.character.rb.MoveRotation(Quaternion.Slerp(sm.character.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
-        //}
-
-        //IEnumerator PostSimulationUpdate()
-        //{
-        //    YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
-        //    while (true)
-        //    {
-        //        yield return waitForFixedUpdate;
-        //        Rotate();
-        //    }
-        //}
         private void UpdateAnimation()
         {
-            sm.owner.animator.SetFloat("Horizontal", dodgeDir.x);
-            sm.owner.animator.SetFloat("Vertical", dodgeDir.y);
+            Vector3 localMoveDir = sm.owner.transform.InverseTransformDirection(moveDir).normalized;
+
+            sm.owner.animator.SetFloat("Horizontal", localMoveDir.x); 
+            sm.owner.animator.SetFloat("Vertical", localMoveDir.z);   
             sm.owner.animator.SetTrigger("IsRolling");
         }
     }
