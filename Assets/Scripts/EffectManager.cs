@@ -19,9 +19,6 @@ public class EffectManager : MonoBehaviour
         Wall
     }
 
-    [SerializeField]
-    private TextMeshPro damageText;
-
     public ParticleSystem fleshHitEffectPrefab;
 
     public void PlayHitEffect(Vector3 pos, Vector3 normal, Transform parent, EffectType effectType)
@@ -41,11 +38,5 @@ public class EffectManager : MonoBehaviour
         }
 
         effect.Play();
-    }
-
-    public void PlayDamageText(Vector3 pos, Transform parent, float damage)
-    {
-        var text = Instantiate(damageText, pos, Quaternion.identity, parent);
-        text.text = damage.ToString();
     }
 }

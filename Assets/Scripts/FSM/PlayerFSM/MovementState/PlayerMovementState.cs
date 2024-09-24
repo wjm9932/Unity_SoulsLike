@@ -21,6 +21,8 @@ public abstract class PlayerMovementState : IState
 
     public virtual void Enter()
     {
+        SetMoveDirection();
+
         coroutineReference = PostSimulationUpdate();
         sm.owner.StartCoroutine(coroutineReference);
     }

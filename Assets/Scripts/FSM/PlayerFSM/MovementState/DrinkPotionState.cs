@@ -26,15 +26,14 @@ public class DrinkPotionState : PlayerMovementState
         }
         else
         {
+            TextManager.Instance.PlayNotificationText(TextManager.DisplayText.HP_IS_FULL);
             sm.ChangeState(sm.walkState);
         }
-        
     }
 
     // Update is called once per frame
     public override void Update()
     {
-
         SetMoveDirection();
         SpeedControl();
 

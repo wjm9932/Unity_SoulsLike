@@ -35,6 +35,7 @@ public class Inventory : MonoBehaviour
         if(emptySlot == -1)
         {
             Debug.Log("Inventory is full");
+            TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
         }
         else
         {

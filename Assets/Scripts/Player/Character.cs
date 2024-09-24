@@ -74,7 +74,7 @@ public class Character : LivingEntity
     }
     void Start()
     {
-        health = 10f;
+        health = 100f;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
