@@ -19,7 +19,7 @@ public class DrinkPotionState : PlayerMovementState
         if (sm.owner.toBeUsedItem.UseItem(sm.owner) == true)
         {
             isDrinkFinished = false;
-            sm.owner.animator.SetTrigger("DrinkPotion");
+            sm.owner.animator.SetBool("IsDrinkingPotion", true);
             moveSpeed = sm.owner.walkSpeed;
 
             sm.owner.StartCoroutine(recoverCoroutine);
@@ -50,7 +50,7 @@ public class DrinkPotionState : PlayerMovementState
     public override void Exit()
     {
         base.Exit();
-        sm.owner.animator.SetTrigger("DrinkPotionIsDone");
+        sm.owner.animator.SetBool("IsDrinkingPotion", false);
         sm.owner.StopCoroutine(recoverCoroutine);
     }
 

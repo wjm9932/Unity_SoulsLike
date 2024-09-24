@@ -150,7 +150,6 @@ public class Character : LivingEntity
             {
                 if (ApplyDamage(enemy.damage) == true)
                 {
-                    animator.SetTrigger("Hit");
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
 
                     var hitPoint = other.ClosestPoint(transform.position);

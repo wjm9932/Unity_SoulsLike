@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> inventorySlot = new List<GameObject>(36);
+
     private Dictionary<string, GameObject> itemContainer = new Dictionary<string, GameObject>(36);
     private PointerEventData pointerEventData;
 
@@ -34,7 +35,6 @@ public class Inventory : MonoBehaviour
 
         if(emptySlot == -1)
         {
-            Debug.Log("Inventory is full");
             TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
         }
         else

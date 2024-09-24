@@ -22,7 +22,6 @@ namespace PlayerFSM
             dodgeDir = sm.owner.input.dodgeInput;
             
             Dodge();
-
             UpdateAnimation();
         }
         public override void Update()
@@ -48,7 +47,7 @@ namespace PlayerFSM
         }
         public override void Exit()
         {
-            sm.owner.animator.SetTrigger("DodgeIsDone");
+            sm.owner.animator.SetBool("IsDodging", false);
         }
         public override void OnAnimationEnterEvent()
         {
@@ -101,8 +100,8 @@ namespace PlayerFSM
             Vector3 localMoveDir = sm.owner.transform.InverseTransformDirection(moveDir).normalized;
 
             sm.owner.animator.SetFloat("Horizontal", localMoveDir.x); 
-            sm.owner.animator.SetFloat("Vertical", localMoveDir.z);   
-            sm.owner.animator.SetTrigger("IsRolling");
+            sm.owner.animator.SetFloat("Vertical", localMoveDir.z);
+            sm.owner.animator.SetBool("IsDodging", true);
         }
     }
 }

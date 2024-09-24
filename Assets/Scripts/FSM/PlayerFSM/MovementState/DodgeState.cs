@@ -18,7 +18,7 @@ namespace PlayerFSM
             sm.owner.rb.velocity = Vector3.zero;
             isDodgeFinished = false;
 
-            sm.owner.animator.SetTrigger("IsRolling");
+            sm.owner.animator.SetBool("IsDodging", true);
 
             SetMoveDirection();
 
@@ -50,7 +50,7 @@ namespace PlayerFSM
         }
         public override void Exit()
         {
-            sm.owner.animator.SetTrigger("DodgeIsDone");
+            sm.owner.animator.SetBool("IsDodging", false);
         }
         public override void OnAnimationEnterEvent()
         {

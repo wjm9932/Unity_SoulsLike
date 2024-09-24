@@ -50,7 +50,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                 return;
             }
         }
-
         transform.SetParent(_originParent);
         image.raycastTarget = true;
     }

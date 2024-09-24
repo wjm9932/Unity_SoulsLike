@@ -26,6 +26,7 @@ public class TextManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI hpIsFullText;
+
     [SerializeField]
     private TextMeshProUGUI inventoryIsFullText;
 
