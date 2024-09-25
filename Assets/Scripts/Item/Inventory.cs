@@ -86,7 +86,7 @@ public class Inventory : MonoBehaviour
         for(int i = 0; i < count; i++)
         {
             GameObject items = Instantiate(item, gameObject.transform.position, Quaternion.identity);
-            items.GetComponent<UX.HealthPotion>().triggerCount = 1;
+            items.GetComponent<UX.Item>().triggerCount = 1;
         }
     }
     public UsableItem GetItemUI()
@@ -110,5 +110,22 @@ public class Inventory : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        UX.Item item = other.gameObject.GetComponent<UX.Item>();
+
+        if (item != null)
+        {
+            if (item.triggerCount <= 0)
+            {
+                AddItem(item);
+            }
+            else
+            {
+                --item.triggerCount;
+            }
+        }
     }
 }

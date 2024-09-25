@@ -7,6 +7,7 @@ public class DamageText : MonoBehaviour
 {
     private float time;
     private Camera camera;
+
     private void Awake()
     {
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();

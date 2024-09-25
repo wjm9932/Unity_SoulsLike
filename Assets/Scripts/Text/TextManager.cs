@@ -68,17 +68,18 @@ public class TextManager : MonoBehaviour
 
         if (notificationTextStack.Count >= notificationTextMaxCount)
         {
-            Destroy(notificationTextStack.Peek().gameObject);
-            notificationTextStack.Dequeue();
+            var textToRemove = notificationTextStack.Dequeue();
+            Destroy(textToRemove.gameObject);
+
         }
 
         var text = Instantiate(displayText, notificationPanel.transform).gameObject;
-        text.GetComponent<DestroyTextInTime>().OnDestroy += RemoveFromStack;
+        text.GetComponent<DestroyTextInTime>().OnDestroy += RemoveFromQueue;
 
         notificationTextStack.Enqueue(text);
     }
 
-    private void RemoveFromStack()
+    private void RemoveFromQueue()
     {
         notificationTextStack.Dequeue();
     }

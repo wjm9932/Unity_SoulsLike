@@ -26,7 +26,7 @@ public class Character : LivingEntity
     public Transform lockOnCameraPosition;
     public Transform camEyePos;
     public Transform leftHandPos;
-    
+
     public TrailRenderer swordEffect;
     
     public LayerMask whatIsGround;
@@ -156,23 +156,6 @@ public class Character : LivingEntity
                     Vector3 hitNormal = (transform.position - hitPoint).normalized;
                     EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
                 }
-            }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        UX.Item item = other.gameObject.GetComponent<UX.Item>();
-
-        if (item != null)
-        {
-            if (item.triggerCount <= 0)
-            {
-                inventory.AddItem(item);
-            }
-            else
-            {
-                --item.triggerCount;
             }
         }
     }
