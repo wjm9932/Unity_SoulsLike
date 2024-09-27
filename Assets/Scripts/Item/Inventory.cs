@@ -29,16 +29,18 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    public bool AddItem(UX.Item item)
+
+
+    public bool AddItem(UX.Item item, int count)
     {
         int emptySlot = FindEmptySlot(item);
 
-        if(emptySlot == -1)
+        if (emptySlot == -1)
         {
-            TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
             return false;
         }
-        else
+
+        for (int i = 0; i < count; i++)
         {
             if (itemContainer.ContainsKey(item.tag) == false)
             {
@@ -55,9 +57,10 @@ public class Inventory : MonoBehaviour
                 itemContainer[item.tag].GetComponent<UI.Item>().AddItem();
             }
 
-            Destroy(item.gameObject);
-            return true;
         }
+
+        Destroy(item.gameObject);
+        return true;
     }
 
     private int FindEmptySlot(UX.Item item)
@@ -83,14 +86,16 @@ public class Inventory : MonoBehaviour
             itemContainer.Remove(item.gameObject.tag);
         }
     }
+    
     private void DropItem(GameObject item, int count)
     {
-        for(int i = 0; i < count; i++)
-        {
-            GameObject items = Instantiate(item, gameObject.transform.position, Quaternion.identity);
-            items.GetComponent<UX.Item>().triggerCount = 1;
-        }
+        GameObject items = Instantiate(item, gameObject.transform.position, Quaternion.identity);
+        items.GetComponent<UX.Item>().triggerCount = 1;
+        items.GetComponent<UX.Item>().numOfItem = count;
+
+        TextManager.Instance.PlayNotificationText("You've dropped " + items.GetComponent<UX.Item>().itemName + "x" + count);
     }
+    
     public UsableItem GetItemUI()
     {
         pointerEventData = new PointerEventData(eventSystem)
@@ -122,9 +127,13 @@ public class Inventory : MonoBehaviour
         {
             if (item.triggerCount <= 0)
             {
-                if(AddItem(item) == true)
+                if (AddItem(item, item.numOfItem) == true)
                 {
-                    TextManager.Instance.PlayNotificationText(item.itemName);
+                    TextManager.Instance.PlayNotificationText("You've got " + item.itemName + " x" + item.numOfItem);
+                }
+                else
+                {
+                    TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
                 }
             }
             else

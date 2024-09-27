@@ -32,7 +32,7 @@ public class TextManager : MonoBehaviour
     private TextMeshProUGUI inventoryIsFullText;
 
     [SerializeField]
-    private TextMeshProUGUI GetItemText;
+    private TextMeshProUGUI itemActionText;
 
     [SerializeField]
     private GameObject notificationPanel;
@@ -82,7 +82,8 @@ public class TextManager : MonoBehaviour
     public void PlayNotificationText(string itemName)
     {
         CheckNotificationTextQueueCount();
-        var text = Instantiate(GetItemText, notificationPanel.transform);
+
+        var text = Instantiate(itemActionText, notificationPanel.transform);
         text.text += itemName;
         text.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += RemoveFromQueue;
 
