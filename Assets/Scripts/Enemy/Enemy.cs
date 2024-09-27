@@ -23,7 +23,7 @@ public class Enemy : LivingEntity
     }
 
     private float lastTimeDamaged;
-    private const float minTimeBetDamaged = 0.1f;
+    private const float minTimeBetDamaged = 0.5f;
 
 
 
