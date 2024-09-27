@@ -29,13 +29,14 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    public void AddItem(UX.Item item)
+    public bool AddItem(UX.Item item)
     {
         int emptySlot = FindEmptySlot(item);
 
         if(emptySlot == -1)
         {
             TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
+            return false;
         }
         else
         {
@@ -54,7 +55,8 @@ public class Inventory : MonoBehaviour
                 itemContainer[item.tag].GetComponent<UI.Item>().AddItem();
             }
 
-            Destroy(item.gameObject); 
+            Destroy(item.gameObject);
+            return true;
         }
     }
 
@@ -120,7 +122,10 @@ public class Inventory : MonoBehaviour
         {
             if (item.triggerCount <= 0)
             {
-                AddItem(item);
+                if(AddItem(item) == true)
+                {
+                    TextManager.Instance.PlayNotificationText(item.itemName);
+                }
             }
             else
             {

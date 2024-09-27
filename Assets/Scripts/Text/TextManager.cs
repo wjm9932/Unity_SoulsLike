@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static EffectManager;
+using static TextManager;
 using static UnityEditor.PlayerSettings;
 
 public class TextManager : MonoBehaviour
@@ -18,7 +19,7 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    private Queue<GameObject> notificationTextStack = new Queue<GameObject>();
+    private Queue<GameObject> notificationTextQueue = new Queue<GameObject>();
     private const int notificationTextMaxCount = 4;
 
     [SerializeField]
@@ -29,6 +30,9 @@ public class TextManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI inventoryIsFullText;
+
+    [SerializeField]
+    private TextMeshProUGUI GetItemText;
 
     [SerializeField]
     private GameObject notificationPanel;
@@ -55,6 +59,7 @@ public class TextManager : MonoBehaviour
     {
         var text = Instantiate(damageText, pos, Quaternion.identity, parent);
         text.text = damage.ToString();
+
     }
     public void PlayNotificationText(DisplayText textType)
     {
@@ -66,22 +71,36 @@ public class TextManager : MonoBehaviour
             return;
         }
 
-        if (notificationTextStack.Count >= notificationTextMaxCount)
-        {
-            var textToRemove = notificationTextStack.Dequeue();
-            Destroy(textToRemove.gameObject);
-
-        }
+        CheckNotificationTextQueueCount();
 
         var text = Instantiate(displayText, notificationPanel.transform).gameObject;
         text.GetComponent<DestroyTextInTime>().OnDestroy += RemoveFromQueue;
 
-        notificationTextStack.Enqueue(text);
+        notificationTextQueue.Enqueue(text);
+    }
+
+    public void PlayNotificationText(string itemName)
+    {
+        CheckNotificationTextQueueCount();
+        var text = Instantiate(GetItemText, notificationPanel.transform);
+        text.text += itemName;
+        text.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += RemoveFromQueue;
+
+        notificationTextQueue.Enqueue(text.gameObject);
+    }
+
+    private void CheckNotificationTextQueueCount()
+    {
+        if (notificationTextQueue.Count >= notificationTextMaxCount)
+        {
+            var textToRemove = notificationTextQueue.Dequeue();
+            Destroy(textToRemove.gameObject);
+        }
     }
 
     private void RemoveFromQueue()
     {
-        notificationTextStack.Dequeue();
+        notificationTextQueue.Dequeue();
     }
 
     TextMeshProUGUI GetDisplayText(DisplayText textType)

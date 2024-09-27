@@ -9,6 +9,8 @@ namespace UX
         private void Awake()
         {
             triggerCount = 0;
+            numOfItem = 1;
+            itemName = "Health Potion!";
         }
 
         private void Update()

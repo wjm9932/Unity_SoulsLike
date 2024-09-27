@@ -9,6 +9,8 @@ namespace UX
     {
         public GameObject icon;
         public int triggerCount;
+        public string itemName { get; protected set; }
+        public int numOfItem;
     }
 }
 
