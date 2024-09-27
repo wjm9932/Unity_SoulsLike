@@ -74,7 +74,7 @@ public class TextManager : MonoBehaviour
         CheckNotificationTextQueueCount();
 
         var text = Instantiate(displayText, notificationPanel.transform).gameObject;
-        text.GetComponent<DestroyTextInTime>().OnDestroy += RemoveFromQueue;
+        text.GetComponent<DestroyTextInTime>().OnDestroy += () => notificationTextQueue.Dequeue();
 
         notificationTextQueue.Enqueue(text);
     }
@@ -85,7 +85,7 @@ public class TextManager : MonoBehaviour
 
         var text = Instantiate(itemActionText, notificationPanel.transform);
         text.text += itemName;
-        text.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += RemoveFromQueue;
+        text.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += () => notificationTextQueue.Dequeue();
 
         notificationTextQueue.Enqueue(text.gameObject);
     }
@@ -97,11 +97,6 @@ public class TextManager : MonoBehaviour
             var textToRemove = notificationTextQueue.Dequeue();
             Destroy(textToRemove.gameObject);
         }
-    }
-
-    private void RemoveFromQueue()
-    {
-        notificationTextQueue.Dequeue();
     }
 
     TextMeshProUGUI GetDisplayText(DisplayText textType)
