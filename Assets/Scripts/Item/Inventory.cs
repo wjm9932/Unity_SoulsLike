@@ -108,6 +108,9 @@ public class Inventory : MonoBehaviour
         items.GetComponent<UX.Item>().triggerCount = 1;
         items.GetComponent<UX.Item>().numOfItem = count;
 
+        //itemContainer[item.tag].GetComponent<UI.Item>().count = 0;
+        //playerEvent.CollectItem();
+
         TextManager.Instance.PlayNotificationText("You've dropped " + items.GetComponent<UX.Item>().itemName + "x" + count);
     }
     
