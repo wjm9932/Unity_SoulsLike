@@ -70,7 +70,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        //playerEvent.UpdateItemCount();
+        playerEvent.UpdateItemCount();
         //and in quest script, lets assume the getPotionQuest, playerEvent.onCollect += CheckHealthPotionCount; CheckHealthPotionCount() : count = owner.inventory.FindItem("HealthPotion"); if(count >= target) FinishQeust();
 
         Destroy(item.gameObject);
@@ -119,8 +119,8 @@ public class Inventory : MonoBehaviour
         items.GetComponent<UX.Item>().triggerCount = 1;
         items.GetComponent<UX.Item>().numOfItem = count;
 
-        //itemContainer[item.tag].GetComponent<UI.Item>().count = 0;
-        //playerEvent.UpdateItemCount();
+        itemContainer[item.tag].GetComponent<UI.Item>().count = 0;
+        playerEvent.UpdateItemCount();
 
         TextManager.Instance.PlayNotificationText("You've dropped " + items.GetComponent<UX.Item>().itemName + "x" + count);
     }

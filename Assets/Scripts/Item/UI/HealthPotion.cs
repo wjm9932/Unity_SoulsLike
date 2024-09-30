@@ -15,7 +15,7 @@ namespace UI
         {
             get { return dataField; }
         }
-        public event System.Action OnUseItem;
+        public event Action OnUseItem;
 
         public bool UseItem(LivingEntity livingEntity)
         {
