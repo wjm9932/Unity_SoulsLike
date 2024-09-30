@@ -15,6 +15,13 @@ public class Inventory : MonoBehaviour
     private Dictionary<string, GameObject> itemContainer = new Dictionary<string, GameObject>(36);
     private PointerEventData pointerEventData;
 
+    private EventManager playerEvent;
+
+    private void Awake()
+    {
+        playerEvent = GetComponent<EventManager>();
+    }
+
     public UsableItem quickSlot
     {
         get
@@ -49,6 +56,11 @@ public class Inventory : MonoBehaviour
                 inventoryItem.GetComponent<UI.Item>().AddItem();
                 inventoryItem.GetComponent<UI.Item>().OnDestroy += RemoveItemFromInventory;
                 inventoryItem.GetComponent<UI.Item>().OnDrop += DropItem;
+                
+                if(inventoryItem.GetComponent<UsableItem>() != null)
+                {
+                    inventoryItem.GetComponent<UsableItem>().OnUseItem += playerEvent.UpdateItemCount; 
+                }
 
                 itemContainer.Add(item.tag, inventoryItem);
             }
@@ -56,11 +68,10 @@ public class Inventory : MonoBehaviour
             {
                 itemContainer[item.tag].GetComponent<UI.Item>().AddItem();
             }
-
         }
 
-        //playerEvent.CollectItem();
-        //and in quest script, lets assume the getPotionQuest, playerEvent += CheckHealthPotion; CheckHealthPotion() : count = owner.inventory.FindItem("HealthPotion"); if(count >= target) FinishQeust();
+        //playerEvent.UpdateItemCount();
+        //and in quest script, lets assume the getPotionQuest, playerEvent.onCollect += CheckHealthPotionCount; CheckHealthPotionCount() : count = owner.inventory.FindItem("HealthPotion"); if(count >= target) FinishQeust();
 
         Destroy(item.gameObject);
         return true;
@@ -109,11 +120,10 @@ public class Inventory : MonoBehaviour
         items.GetComponent<UX.Item>().numOfItem = count;
 
         //itemContainer[item.tag].GetComponent<UI.Item>().count = 0;
-        //playerEvent.CollectItem();
+        //playerEvent.UpdateItemCount();
 
         TextManager.Instance.PlayNotificationText("You've dropped " + items.GetComponent<UX.Item>().itemName + "x" + count);
     }
-    
     public UsableItem GetItemUI()
     {
         pointerEventData = new PointerEventData(eventSystem)

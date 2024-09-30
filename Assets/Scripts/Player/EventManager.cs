@@ -5,7 +5,7 @@ using System;
 
 public class EventManager : MonoBehaviour
 {
-    public event Action onItemCollected;
+    public event Action onCollect;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +18,11 @@ public class EventManager : MonoBehaviour
         
     }
 
-    public void CollectItem()
+    public void UpdateItemCount()
     {
-        if(onItemCollected != null)
+        if(onCollect != null)
         {
-            onItemCollected();
+            onCollect();
         }
     }
 }

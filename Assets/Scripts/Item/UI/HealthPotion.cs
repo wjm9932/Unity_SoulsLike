@@ -15,17 +15,25 @@ namespace UI
         {
             get { return dataField; }
         }
+        public event System.Action OnUseItem;
+
         public bool UseItem(LivingEntity livingEntity)
         {
             if (livingEntity.IsMaxHp() == false)
             {
                 --count;
                 UpdateCount(count);
-
+                
                 if (count <= 0)
                 {
                     DestroyItem();
                 }
+
+                if(OnUseItem != null)
+                {
+                    OnUseItem();
+                }
+
                 return true;
             }
             else
