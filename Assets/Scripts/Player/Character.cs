@@ -51,8 +51,9 @@ public class Character : LivingEntity
 
     public RaycastHit slopeHit;
 
-
-    private Inventory inventory;
+    
+    public Inventory inventory { get; private set; }
+    public EventManager eventManager { get; private set; }
 
     public override float health
     {
@@ -82,6 +83,7 @@ public class Character : LivingEntity
         playerHeight = GetComponent<CapsuleCollider>().height;
         input = GetComponent<PlayerInput>();
         inventory = GetComponent<Inventory>();
+        eventManager = GetComponent<EventManager>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         uiStateMachine.ChangeState(uiStateMachine.closeState);

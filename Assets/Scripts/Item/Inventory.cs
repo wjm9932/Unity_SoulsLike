@@ -40,6 +40,9 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
+        //playerEvent.CollectItem();
+        //and in quest script, lets assume the getPotionQuest, playerEvent += CheckHealthPotion; CheckHealthPotion() : count = owner.inventory.FindItem("HealthPotion"); if(count >= target) FinishQeust();
+
         for (int i = 0; i < count; i++)
         {
             if (itemContainer.ContainsKey(item.tag) == false)
@@ -61,6 +64,18 @@ public class Inventory : MonoBehaviour
 
         Destroy(item.gameObject);
         return true;
+    }
+    
+    public int FindItem(string item)
+    {
+        if (itemContainer.ContainsKey(item) == false)
+        {
+            return 0;
+        }
+        else
+        {
+            return itemContainer[item].GetComponent<UI.Item>().count;
+        }
     }
 
     private int FindEmptySlot(UX.Item item)
