@@ -31,6 +31,7 @@ public abstract class PlayerMovementState : IState
         SetMoveDirection();
         SpeedControl();
 
+
         if (sm.owner.input.moveInput == Vector2.zero)
         {
             sm.ChangeState(sm.idleState);
@@ -50,6 +51,11 @@ public abstract class PlayerMovementState : IState
         }
         if (sm.owner.uiStateMachine.currentState is OpenState == false)
         {
+            if (sm.owner.input.isInteracting == true && QuestManager.Instance.InteractWithQuest() == true)
+            {
+                sm.ChangeState(sm.questInteractState);
+            }
+
             if (sm.owner.input.isDodging == true)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)

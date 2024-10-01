@@ -9,7 +9,7 @@ public class QuestManager : MonoBehaviour
     public static QuestManager Instance { get; private set; }
 
     public event Action<Quest> onChangeQuestState;
-    public event Action onInteractWithQuest;
+    public event Func<bool> onInteractWithQuest;
 
     [SerializeField]
     private Character questOwner;
@@ -46,12 +46,19 @@ public class QuestManager : MonoBehaviour
             NotifyQuestStateToQuestPoints(quest);
         }
     }
-    public void InteractWithQuest()
+    public bool InteractWithQuest()
     {
-        if(onInteractWithQuest != null)
+        if (onInteractWithQuest != null)
         {
-            onInteractWithQuest();
+            foreach (Func<bool> del in onInteractWithQuest.GetInvocationList())
+            {
+                if (del.Invoke() == true)
+                {
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
     public void StartQuest(string id)

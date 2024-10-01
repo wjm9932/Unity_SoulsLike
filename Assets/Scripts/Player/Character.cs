@@ -95,11 +95,6 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) == true)
-        {
-            QuestManager.Instance.InteractWithQuest();
-        }
-
         rb.useGravity = !IsOnSlope();
 
         playerMovementStateMachine.Update();

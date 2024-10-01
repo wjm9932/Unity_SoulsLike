@@ -17,10 +17,10 @@ namespace PlayerFSM
         }
         public void Update()
         {
-            if(sm.owner.IsOnSlope() == true)
-            {
-                sm.owner.rb.velocity = Vector3.zero;
-            }
+            //if(sm.owner.IsOnSlope() == true)
+            //{
+            //    sm.owner.rb.velocity = Vector3.zero;
+            //}
 
             if (sm.owner.input.moveInput != Vector2.zero)
             {
@@ -33,6 +33,7 @@ namespace PlayerFSM
                     sm.ChangeState(sm.lockOnWalkState);
                 }
             }
+
 
             if (sm.owner.input.IsClickItemInInventory(sm.owner.OnClickItem) == true)
             {
@@ -49,6 +50,11 @@ namespace PlayerFSM
 
             if (sm.owner.uiStateMachine.currentState is OpenState == false)
             {
+                if (sm.owner.input.isInteracting == true && QuestManager.Instance.InteractWithQuest() == true)
+                {
+                    sm.ChangeState(sm.questInteractState);
+                }
+
                 if (sm.owner.input.isDodging == true)
                 {
                     if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)

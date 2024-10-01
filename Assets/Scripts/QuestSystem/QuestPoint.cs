@@ -32,11 +32,11 @@ public class QuestPoint : MonoBehaviour
         QuestManager.Instance.onInteractWithQuest -= InteractWithQuest;
     }
 
-    private void InteractWithQuest()
+    private bool InteractWithQuest()
     {
         if(isPlayerNearby == false)
         {
-            return;
+            return false;
         }
 
         if (currentQuestState == QuestState.CAN_START && isStartPoint == true)
@@ -51,6 +51,7 @@ public class QuestPoint : MonoBehaviour
         {
             Debug.Log("Can't start or finish quest");
         }
+        return true;
     }
 
     private void ChangeQuestState(Quest quest)
