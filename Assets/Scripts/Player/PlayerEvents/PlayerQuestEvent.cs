@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerEvent : MonoBehaviour
+public class PlayerQuestEvent : MonoBehaviour
 {
     public event Action onCollect;
 

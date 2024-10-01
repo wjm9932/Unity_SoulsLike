@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-   public static QuestManager Instance { get; private set; }
+    public static QuestManager Instance { get; private set; }
 
     public event Action<Quest> onChangeQuestState;
     public event Action onInteractWithQuest;

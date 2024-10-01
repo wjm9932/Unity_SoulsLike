@@ -7,7 +7,7 @@ using Cinemachine;
 using UnityEngine.TextCore.Text;
 using UnityEditorInternal;
 
-[RequireComponent(typeof(PlayerEvent))]
+[RequireComponent(typeof(PlayerQuestEvent))]
 [RequireComponent(typeof(Inventory))]
 public class Character : LivingEntity
 {
@@ -55,7 +55,7 @@ public class Character : LivingEntity
 
 
     public Inventory inventory { get; private set; }
-    public PlayerEvent eventManager { get; private set; }
+    public PlayerQuestEvent eventManager { get; private set; }
 
     public override float health
     {
@@ -85,7 +85,7 @@ public class Character : LivingEntity
         playerHeight = GetComponent<CapsuleCollider>().height;
         input = GetComponent<PlayerInput>();
         inventory = GetComponent<Inventory>();
-        eventManager = GetComponent<PlayerEvent>();
+        eventManager = GetComponent<PlayerQuestEvent>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         uiStateMachine.ChangeState(uiStateMachine.closeState);
