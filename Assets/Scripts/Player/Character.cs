@@ -13,7 +13,7 @@ public class Character : LivingEntity
 {
     public UsableItem quickSlot
     {
-        get 
+        get
         {
             toBeUsedItem = inventory.quickSlot;
             return toBeUsedItem;
@@ -30,11 +30,11 @@ public class Character : LivingEntity
     public Transform leftHandPos;
 
     public TrailRenderer swordEffect;
-    
+
     public LayerMask whatIsGround;
     public LayerMask enemyMask;
     public LayerMask lockOnCameraTargetLayer;
-    
+
     public float walkSpeed;
     public float sprintSpeed;
 
@@ -53,7 +53,7 @@ public class Character : LivingEntity
 
     public RaycastHit slopeHit;
 
-    
+
     public Inventory inventory { get; private set; }
     public PlayerEvent eventManager { get; private set; }
 
@@ -95,6 +95,11 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E) == true)
+        {
+            QuestManager.Instance.InteractWithQuest();
+        }
+
         rb.useGravity = !IsOnSlope();
 
         playerMovementStateMachine.Update();

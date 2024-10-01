@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager Instance { get; private set; }
+   public static QuestManager Instance { get; private set; }
+
     public event Action<Quest> onChangeQuestState;
+    public event Action onInteractWithQuest;
 
     [SerializeField]
     private Character questOwner;
@@ -17,6 +19,15 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Debug.LogError("Found more than one Game Events Manager in the scene.");
+        }
+        else
+        {
+            Instance = this;
+        }
+
         questMap = CreateQuestMap();
     }
 
@@ -32,12 +43,24 @@ public class QuestManager : MonoBehaviour
     {
         foreach(Quest quest in questMap.Values)
         {
-            ChangeQuestState(quest);
+            NotifyQuestStateToQuestPoints(quest);
         }
     }
+    public void InteractWithQuest()
+    {
+        if(onInteractWithQuest != null)
+        {
+            onInteractWithQuest();
+        }
+    }
+
     public void StartQuest(string id)
     {
         Debug.Log("Start Quest: " + id);
+
+        //Quest quest = GetQuestById(id);
+        //quest.InstantiateCurrentQuestStep(this.transform);
+        //ChangeQuestState(quest, QuestState.IN_PROGRESS);
     }
 
     public void AdvanceQuest(string id)
@@ -50,18 +73,22 @@ public class QuestManager : MonoBehaviour
         Debug.Log("Finish Quest: " + id);
     }
 
-    public void ChangeQuestState(Quest quest)
+    private void NotifyQuestStateToQuestPoints(Quest quest)
     {
         if (onChangeQuestState != null)
         {
             onChangeQuestState(quest);
         }
     }
+    private void ChangeQuestState(Quest quest, QuestState state)
+    {
+        quest.state = state;
+        NotifyQuestStateToQuestPoints(quest);
+    }
     private Dictionary<string, Quest> CreateQuestMap()
     {
-        // loads all QuestInfoSO Scriptable Objects under the Assets/Resources/Quests folder
         QuestInfoSO[] allQuests = Resources.LoadAll<QuestInfoSO>("Quests");
-        // Create the quest map
+
         Dictionary<string, Quest> idToQuestMap = new Dictionary<string, Quest>();
         foreach (QuestInfoSO questInfo in allQuests)
         {
