@@ -7,6 +7,7 @@ using Cinemachine;
 using UnityEngine.TextCore.Text;
 using UnityEditorInternal;
 
+[RequireComponent(typeof(EventManager))]
 public class Character : LivingEntity
 {
     public UsableItem quickSlot

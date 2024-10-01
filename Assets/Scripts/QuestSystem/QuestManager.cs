@@ -6,7 +6,7 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     [SerializeField]
-    private Character player;
+    private Character questOwner;
 
     private Dictionary<string, Quest> questMap;
     private void Awake()
@@ -19,23 +19,23 @@ public class QuestManager : MonoBehaviour
 
     private void OnEnable()
     {
-        player.GetComponent<EventManager>().questEvents.onStartQuest += StartQuest;
-        player.GetComponent<EventManager>().questEvents.onAdvanceQuest += AdvanceQuest;
-        player.GetComponent<EventManager>().questEvents.onFinishQuest += FinishQuest;
+        questOwner.GetComponent<EventManager>().questEvents.onStartQuest += StartQuest;
+        questOwner.GetComponent<EventManager>().questEvents.onAdvanceQuest += AdvanceQuest;
+        questOwner.GetComponent<EventManager>().questEvents.onFinishQuest += FinishQuest;
     }
 
     private void OnDisable()
     {
-        player.GetComponent<EventManager>().questEvents.onStartQuest -= StartQuest;
-        player.GetComponent<EventManager>().questEvents.onAdvanceQuest -= AdvanceQuest;
-        player.GetComponent<EventManager>().questEvents.onFinishQuest -= FinishQuest;
+        questOwner.GetComponent<EventManager>().questEvents.onStartQuest -= StartQuest;
+        questOwner.GetComponent<EventManager>().questEvents.onAdvanceQuest -= AdvanceQuest;
+        questOwner.GetComponent<EventManager>().questEvents.onFinishQuest -= FinishQuest;
     }
 
     private void Start()
     {
         foreach(Quest quest in questMap.Values)
         {
-            player.GetComponent<EventManager>().questEvents.ChangeQuestState(quest);
+            questOwner.GetComponent<EventManager>().questEvents.ChangeQuestState(quest);
         }
     }
 
@@ -66,7 +66,7 @@ public class QuestManager : MonoBehaviour
             {
                 Debug.LogWarning("Duplicate ID found when creating quest map: " + questInfo.id);
             }
-            idToQuestMap.Add(questInfo.id, new Quest(questInfo, player));
+            idToQuestMap.Add(questInfo.id, new Quest(questInfo, questOwner));
         }
         return idToQuestMap;
     }
