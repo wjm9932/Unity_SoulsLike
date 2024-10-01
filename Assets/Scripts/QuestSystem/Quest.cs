@@ -5,14 +5,14 @@ using UnityEngine;
 public class Quest
 {
     public QuestInfoSO info;
-    public QuestState state;
+    public QuestState state { get; private set; }
     private int currentQuestStepIndex;
     private Character questOwner;
 
     public Quest(QuestInfoSO info, Character owner)
     {
         this.info = info;
-        this.state = QuestState.REQUIREMENTS_NOT_MET;
+        this.state = QuestState.CAN_START;
         this.currentQuestStepIndex = 0;
         this.questOwner = owner;
     }
@@ -34,7 +34,10 @@ public class Quest
             questStep.SetOwner(questOwner);
         }
     }
-
+    public void ChangeQuestState(QuestState state)
+    {
+        this.state = state;
+    }
     private GameObject GetCurrentQuestStepPrefab()
     {
         GameObject questStepPrefab = null;

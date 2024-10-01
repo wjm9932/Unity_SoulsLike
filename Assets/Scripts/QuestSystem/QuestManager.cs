@@ -58,9 +58,9 @@ public class QuestManager : MonoBehaviour
     {
         Debug.Log("Start Quest: " + id);
 
-        //Quest quest = GetQuestById(id);
-        //quest.InstantiateCurrentQuestStep(this.transform);
-        //ChangeQuestState(quest, QuestState.IN_PROGRESS);
+        Quest quest = GetQuestById(id);
+        quest.InstantiateCurrentQuestStep(this.transform);
+        ChangeQuestState(quest, QuestState.IN_PROGRESS);
     }
 
     public void AdvanceQuest(string id)
@@ -82,7 +82,7 @@ public class QuestManager : MonoBehaviour
     }
     private void ChangeQuestState(Quest quest, QuestState state)
     {
-        quest.state = state;
+        quest.ChangeQuestState(state);
         NotifyQuestStateToQuestPoints(quest);
     }
     private Dictionary<string, Quest> CreateQuestMap()
