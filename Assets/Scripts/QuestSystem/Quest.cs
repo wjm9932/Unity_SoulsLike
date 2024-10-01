@@ -12,7 +12,7 @@ public class Quest
     public Quest(QuestInfoSO info, Character owner)
     {
         this.info = info;
-        this.state = QuestState.CAN_START;
+        this.state = info.initialState;
         this.currentQuestStepIndex = 0;
         this.questOwner = owner;
     }

@@ -18,9 +18,9 @@ public class CollectHealthPotionQuestStep : QuestStep
 
     private void Start()
     {
-        currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectHealthPotion;
 
+        currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
         if (currentHealthPotionCount >= targetHealthPotionCount)
         {
             FinishQuestStep();

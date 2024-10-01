@@ -8,7 +8,8 @@ public class QuestInfoSO : ScriptableObject
     [SerializeField]
     public string id;
     public string displpayName;
-    
+    public QuestState initialState;
+
     [Header ("Requirements")]
     public QuestInfoSO[] questPrerequisites;
 

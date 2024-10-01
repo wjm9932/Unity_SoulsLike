@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: CollectHealthPotionQuest
   displpayName: Collect Health Potions!
+  initialState: 1
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 8766620630391108114, guid: aebc00cf9860efd4a8a84c4fda2370d2, type: 3}

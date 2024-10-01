@@ -71,6 +71,38 @@ public class QuestManager : MonoBehaviour
     public void FinishQuest(string id)
     {
         Debug.Log("Finish Quest: " + id);
+
+        Quest quest = GetQuestById(id);
+        ChangeQuestState(quest, QuestState.FINISHED);
+        FindCanStartQuest();
+    }
+
+    private void FindCanStartQuest()
+    {
+        foreach(Quest quest in questMap.Values)
+        {
+            if(IsRequirementMet(quest) == true && quest.state == QuestState.REQUIREMENTS_NOT_MET)
+            {
+                ChangeQuestState(quest, QuestState.CAN_START);
+            }
+        }
+    }
+
+    private bool IsRequirementMet(Quest quest)
+    {
+        if (quest.info.questPrerequisites.Length == 0)
+        {
+            return false; 
+        }
+
+        foreach (QuestInfoSO prerequisites in quest.info.questPrerequisites)
+        {
+            if (GetQuestById(prerequisites.id).state != QuestState.FINISHED)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void NotifyQuestStateToQuestPoints(Quest quest)
