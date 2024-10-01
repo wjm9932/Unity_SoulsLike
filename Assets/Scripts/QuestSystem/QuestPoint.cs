@@ -12,9 +12,14 @@ public class QuestPoint : MonoBehaviour
     [SerializeField] private bool isStartPoint = true;
     [SerializeField] private bool isFinishPoint = true;
 
+
+    private QuestIcon questIcon;
     private QuestState currentQuestState;
     private bool isPlayerNearby = false;
-
+    private void Awake()
+    {
+        questIcon = GetComponentInChildren<QuestIcon>();
+    }
     private void OnEnable()
     {
         QuestManager.Instance.onChangeQuestState += ChangeQuestState;
@@ -53,6 +58,8 @@ public class QuestPoint : MonoBehaviour
         if (this.quest.id == quest.info.id)
         {
             currentQuestState = quest.state;
+            questIcon.SetState(currentQuestState, isStartPoint, isFinishPoint);
+
             Debug.Log("Quest with id: " + this.quest.id + " is updated to state: " + currentQuestState);
         }
     }
