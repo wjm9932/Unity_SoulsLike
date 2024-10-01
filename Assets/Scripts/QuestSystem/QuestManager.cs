@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,55 +6,57 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    public static QuestManager Instance { get; private set; }
+    public event Action<Quest> onChangeQuestState;
+
     [SerializeField]
     private Character questOwner;
 
     private Dictionary<string, Quest> questMap;
+
+
     private void Awake()
     {
         questMap = CreateQuestMap();
-        
-        //Quest quest = GetQuestById("CollectHealthPotionQuest");
-        //quest.InstantiateCurrentQuestStep(this.transform);
     }
 
     private void OnEnable()
     {
-        questOwner.GetComponent<EventManager>().questEvents.onStartQuest += StartQuest;
-        questOwner.GetComponent<EventManager>().questEvents.onAdvanceQuest += AdvanceQuest;
-        questOwner.GetComponent<EventManager>().questEvents.onFinishQuest += FinishQuest;
     }
 
     private void OnDisable()
     {
-        questOwner.GetComponent<EventManager>().questEvents.onStartQuest -= StartQuest;
-        questOwner.GetComponent<EventManager>().questEvents.onAdvanceQuest -= AdvanceQuest;
-        questOwner.GetComponent<EventManager>().questEvents.onFinishQuest -= FinishQuest;
     }
 
     private void Start()
     {
         foreach(Quest quest in questMap.Values)
         {
-            questOwner.GetComponent<EventManager>().questEvents.ChangeQuestState(quest);
+            ChangeQuestState(quest);
         }
     }
-
-    private void StartQuest(string id)
+    public void StartQuest(string id)
     {
         Debug.Log("Start Quest: " + id);
     }
 
-    private void AdvanceQuest(string id)
+    public void AdvanceQuest(string id)
     {
         Debug.Log("Advance Quest: " + id);
     }
 
-    private void FinishQuest(string id)
+    public void FinishQuest(string id)
     {
         Debug.Log("Finish Quest: " + id);
     }
 
+    public void ChangeQuestState(Quest quest)
+    {
+        if (onChangeQuestState != null)
+        {
+            onChangeQuestState(quest);
+        }
+    }
     private Dictionary<string, Quest> CreateQuestMap()
     {
         // loads all QuestInfoSO Scriptable Objects under the Assets/Resources/Quests folder

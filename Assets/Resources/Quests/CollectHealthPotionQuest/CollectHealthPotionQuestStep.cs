@@ -13,13 +13,13 @@ public class CollectHealthPotionQuestStep : QuestStep
 
     private void OnDisable()
     {
-        questOwner.GetComponent<EventManager>().onCollect -= CollectHealthPotion;
+        questOwner.GetComponent<PlayerEvent>().onCollect -= CollectHealthPotion;
     }
 
     private void Start()
     {
         currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
-        questOwner.GetComponent<EventManager>().onCollect += CollectHealthPotion;
+        questOwner.GetComponent<PlayerEvent>().onCollect += CollectHealthPotion;
 
         if (currentHealthPotionCount >= targetHealthPotionCount)
         {

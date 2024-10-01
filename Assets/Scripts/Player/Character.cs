@@ -7,7 +7,8 @@ using Cinemachine;
 using UnityEngine.TextCore.Text;
 using UnityEditorInternal;
 
-[RequireComponent(typeof(EventManager))]
+[RequireComponent(typeof(PlayerEvent))]
+[RequireComponent(typeof(Inventory))]
 public class Character : LivingEntity
 {
     public UsableItem quickSlot
@@ -54,7 +55,7 @@ public class Character : LivingEntity
 
     
     public Inventory inventory { get; private set; }
-    public EventManager eventManager { get; private set; }
+    public PlayerEvent eventManager { get; private set; }
 
     public override float health
     {
@@ -84,7 +85,7 @@ public class Character : LivingEntity
         playerHeight = GetComponent<CapsuleCollider>().height;
         input = GetComponent<PlayerInput>();
         inventory = GetComponent<Inventory>();
-        eventManager = GetComponent<EventManager>();
+        eventManager = GetComponent<PlayerEvent>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         uiStateMachine.ChangeState(uiStateMachine.closeState);

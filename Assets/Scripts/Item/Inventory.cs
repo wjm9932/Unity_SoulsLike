@@ -15,11 +15,11 @@ public class Inventory : MonoBehaviour
     private Dictionary<string, GameObject> itemContainer = new Dictionary<string, GameObject>(36);
     private PointerEventData pointerEventData;
 
-    private EventManager playerEvent;
+    private PlayerEvent playerEvent;
 
     private void Awake()
     {
-        playerEvent = GetComponent<EventManager>();
+        playerEvent = GetComponent<PlayerEvent>();
     }
 
     public UsableItem quickSlot
@@ -71,8 +71,6 @@ public class Inventory : MonoBehaviour
         }
 
         playerEvent.UpdateItemCount();
-        //and in quest script, lets assume the getPotionQuest, playerEvent.onCollect += CheckHealthPotionCount; CheckHealthPotionCount() : count = owner.inventory.FindItem("HealthPotion"); if(count >= target) FinishQeust();
-
         Destroy(item.gameObject);
         return true;
     }
