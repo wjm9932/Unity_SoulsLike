@@ -6,7 +6,15 @@ using System;
 public class EventManager : MonoBehaviour
 {
     public event Action onCollect;
+
+    public QuestEvent questEvents { get; private set; }
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        questEvents = new QuestEvent();
+    }
+
     void Start()
     {
         

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -11,9 +12,48 @@ public class QuestManager : MonoBehaviour
     private void Awake()
     {
         questMap = CreateQuestMap();
-        Quest quest = GetQuestById("CollectHealthPotionQuest");
-        quest.InstantiateCurrentQuestStep(this.transform);
+        
+        //Quest quest = GetQuestById("CollectHealthPotionQuest");
+        //quest.InstantiateCurrentQuestStep(this.transform);
     }
+
+    private void OnEnable()
+    {
+        player.GetComponent<EventManager>().questEvents.onStartQuest += StartQuest;
+        player.GetComponent<EventManager>().questEvents.onAdvanceQuest += AdvanceQuest;
+        player.GetComponent<EventManager>().questEvents.onFinishQuest += FinishQuest;
+    }
+
+    private void OnDisable()
+    {
+        player.GetComponent<EventManager>().questEvents.onStartQuest -= StartQuest;
+        player.GetComponent<EventManager>().questEvents.onAdvanceQuest -= AdvanceQuest;
+        player.GetComponent<EventManager>().questEvents.onFinishQuest -= FinishQuest;
+    }
+
+    private void Start()
+    {
+        foreach(Quest quest in questMap.Values)
+        {
+            player.GetComponent<EventManager>().questEvents.ChangeQuestState(quest);
+        }
+    }
+
+    private void StartQuest(string id)
+    {
+        Debug.Log("Start Quest: " + id);
+    }
+
+    private void AdvanceQuest(string id)
+    {
+        Debug.Log("Advance Quest: " + id);
+    }
+
+    private void FinishQuest(string id)
+    {
+        Debug.Log("Finish Quest: " + id);
+    }
+
     private Dictionary<string, Quest> CreateQuestMap()
     {
         // loads all QuestInfoSO Scriptable Objects under the Assets/Resources/Quests folder
