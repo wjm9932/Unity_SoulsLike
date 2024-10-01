@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UI;
 public class UIStateMachine
 {
     public OpenInventoryState openInventoryState { get; }

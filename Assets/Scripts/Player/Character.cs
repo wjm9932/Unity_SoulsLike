@@ -148,6 +148,11 @@ public class Character : LivingEntity
     {
         if (other.CompareTag("EnemySword") == true)
         {
+            if(playerMovementStateMachine.currentState is InteractState == true)
+            {
+                return;
+            }
+
             LivingEntity enemy = other.transform.root.GetComponent<LivingEntity>();
 
             if (enemy.canAttack == true && enemy != null)

@@ -27,10 +27,6 @@ public abstract class StateMachine
     {
         currentState?.LateUpdate();
     }
-    public void StartCoroutine()
-    {
-        currentState?.LateUpdate();
-    }
     public void OnAnimationEnterEvent()
     {
         currentState?.OnAnimationEnterEvent();
