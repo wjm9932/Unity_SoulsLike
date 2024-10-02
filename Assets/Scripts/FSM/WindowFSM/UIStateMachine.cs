@@ -5,16 +5,18 @@ using UnityEngine;
 public class UIStateMachine
 {
     public OpenInventoryState openInventoryState { get; }
+    public QuestInteractState questInteractState { get; }
     public CloseState closeState { get; }
 
     public IStateUI currentState { get; private set; }
-    public Character character { get; }
+    public Character owner { get; }
 
     public UIStateMachine(Character character)
     {
-        this.character = character;
+        this.owner = character;
 
         openInventoryState = new OpenInventoryState(this);
+        questInteractState = new QuestInteractState(this);
         closeState = new CloseState(this);
     }
 
@@ -31,5 +33,6 @@ public class UIStateMachine
     public void Update()
     {
         currentState?.Update();
+        Debug.Log(currentState);
     }
 }

@@ -48,13 +48,13 @@ namespace PlayerFSM
                 }
             }
 
+            if (sm.owner.uiStateMachine.currentState is InteractStateUI == true)
+            {
+                sm.ChangeState(sm.interactState);
+            }
+
             if (sm.owner.uiStateMachine.currentState is OpenState == false)
             {
-                if (sm.owner.input.isInteracting == true && QuestManager.Instance.InteractWithQuest() == true)
-                {
-                    sm.ChangeState(sm.questInteractState);
-                }
-
                 if (sm.owner.input.isDodging == true)
                 {
                     if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)

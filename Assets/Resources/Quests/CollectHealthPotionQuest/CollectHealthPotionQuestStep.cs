@@ -13,7 +13,10 @@ public class CollectHealthPotionQuestStep : QuestStep
 
     private void OnDisable()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onCollect -= CollectHealthPotion;
+        if(questOwner != null)
+        {
+            questOwner.GetComponent<PlayerQuestEvent>().onCollect -= CollectHealthPotion;
+        }
     }
 
     private void Start()

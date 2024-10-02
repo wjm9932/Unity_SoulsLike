@@ -18,7 +18,7 @@ public class PlayerMovementStateMachine : StateMachine
     public LockOnDodgeState lockOnDodgeState { get; }
     public HitState hitState { get; }
     public DrinkPotionState drinkPotionState { get; }
-    public QuestInteractState questInteractState { get; }
+    public InteractState interactState { get; }
 
     public PlayerMovementStateMachine(Character character)
     {
@@ -28,7 +28,7 @@ public class PlayerMovementStateMachine : StateMachine
         sprintState = new SprintState(this);
         dodgeState = new DodgeState(this);
         drinkPotionState = new DrinkPotionState(this);
-        questInteractState = new QuestInteractState(this);
+        interactState = new InteractState(this);
 
         combo_1AttackState = new Combo_1AttackState(this);
         combo_2AttackState = new Combo_2AttackState(this);

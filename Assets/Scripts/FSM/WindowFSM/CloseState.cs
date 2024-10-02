@@ -23,12 +23,15 @@ public class CloseState : IStateUI
         //    sm.ChangeState(sm.openState);
         //}
 
-        if(sm.character.playerMovementStateMachine.currentState is InteractState == false)
+        if(Input.GetKeyDown(KeyCode.E) == true && QuestManager.Instance.InteractWithQuest() == true)
         {
-            if (Input.GetKeyDown(KeyCode.I) == true) // Inventory
-            {
-                sm.ChangeState(sm.openInventoryState);
-            }
+            Debug.Log("???");
+            sm.ChangeState(sm.questInteractState);
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) == true) // Inventory
+        {
+            sm.ChangeState(sm.openInventoryState);
         }
     }
 

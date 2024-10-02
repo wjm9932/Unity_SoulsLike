@@ -23,7 +23,10 @@ namespace PlayerFSM
         {
             if (canComboAttack == true && sm.owner.input.isAttack == true)
             {
-                sm.ChangeState(sm.combo_3AttackState);
+                if (sm.owner.uiStateMachine.currentState is InteractStateUI == false)
+                {
+                    sm.ChangeState(sm.combo_3AttackState);
+                }
             }
             else
             {

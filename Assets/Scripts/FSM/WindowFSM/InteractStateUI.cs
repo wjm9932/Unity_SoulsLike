@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class OpenState : IStateUI
+public abstract class InteractStateUI : IStateUI
 {
     protected UIStateMachine sm;
     private float xCameraSpeed;
     private float yCameraSpeed;
-    public OpenState(UIStateMachine sm)
+    public InteractStateUI(UIStateMachine sm)
     {
         this.sm = sm;
         xCameraSpeed = sm.owner.lockOffCamera.m_XAxis.m_MaxSpeed;

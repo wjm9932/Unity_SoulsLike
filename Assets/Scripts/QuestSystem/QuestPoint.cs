@@ -32,6 +32,12 @@ public class QuestPoint : MonoBehaviour
         QuestManager.Instance.onInteractWithQuest -= InteractWithQuest;
     }
 
+
+    private void Update()
+    {
+        Debug.Log(isPlayerNearby);
+    }
+
     private bool InteractWithQuest()
     {
         if(isPlayerNearby == false)
@@ -61,7 +67,7 @@ public class QuestPoint : MonoBehaviour
             currentQuestState = quest.state;
             questIcon.SetState(currentQuestState, isStartPoint, isFinishPoint);
 
-            Debug.Log("Quest with id: " + this.quest.id + " is updated to state: " + currentQuestState);
+            //Debug.Log("Quest with id: " + this.quest.id + " is updated to state: " + currentQuestState);
         }
     }
 
@@ -75,7 +81,7 @@ public class QuestPoint : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") == false)
+        if (other.CompareTag("Player") == true)
         {
             isPlayerNearby = false;
         }

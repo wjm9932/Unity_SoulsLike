@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UI;
-public class OpenInventoryState : OpenState
+
+public class QuestInteractState : InteractStateUI
 {
-    public OpenInventoryState(UIStateMachine sm) : base(sm)
+    public QuestInteractState(UIStateMachine sm) : base(sm)
     {
 
     }
 
+    // Update is called once per frame
     public override void Enter()
     {
         base.Enter();
-        sm.owner.inventoryUI.SetActive(true);
     }
     public override void Update()
     {
@@ -21,6 +21,5 @@ public class OpenInventoryState : OpenState
     public override void Exit()
     {
         base.Exit();
-        sm.owner.inventoryUI.SetActive(false);
     }
 }

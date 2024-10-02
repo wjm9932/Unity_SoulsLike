@@ -63,7 +63,7 @@ public class QuestManager : MonoBehaviour
 
     public void StartQuest(string id)
     {
-        Debug.Log("Start Quest: " + id);
+        //Debug.Log("Start Quest: " + id);
 
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(this.transform);
