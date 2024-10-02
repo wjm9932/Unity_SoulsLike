@@ -33,10 +33,6 @@ public class QuestPoint : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        Debug.Log(isPlayerNearby);
-    }
 
     private bool InteractWithQuest()
     {
@@ -67,7 +63,7 @@ public class QuestPoint : MonoBehaviour
             currentQuestState = quest.state;
             questIcon.SetState(currentQuestState, isStartPoint, isFinishPoint);
 
-            //Debug.Log("Quest with id: " + this.quest.id + " is updated to state: " + currentQuestState);
+            Debug.Log("Quest with id: " + this.quest.id + " is updated to state: " + currentQuestState);
         }
     }
 

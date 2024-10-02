@@ -25,7 +25,6 @@ public class CloseState : IStateUI
 
         if(Input.GetKeyDown(KeyCode.E) == true && QuestManager.Instance.InteractWithQuest() == true)
         {
-            Debug.Log("???");
             sm.ChangeState(sm.questInteractState);
         }
 

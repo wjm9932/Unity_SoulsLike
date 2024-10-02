@@ -31,7 +31,7 @@ public class Quest
         if (questStepPrefab != null)
         {
             QuestStep questStep = Object.Instantiate<GameObject>(questStepPrefab, parentTransform).GetComponent<QuestStep>();
-            questStep.SetOwner(questOwner);
+            questStep.Initialize(questOwner, info.id);
         }
     }
     public void ChangeQuestState(QuestState state)

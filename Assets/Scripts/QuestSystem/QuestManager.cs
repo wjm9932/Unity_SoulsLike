@@ -73,6 +73,18 @@ public class QuestManager : MonoBehaviour
     public void AdvanceQuest(string id)
     {
         Debug.Log("Advance Quest: " + id);
+
+        Quest quest = GetQuestById(id);
+        quest.MoveToNextStep();
+
+        if(quest.CurrentStepExists() == true)
+        {
+            quest.InstantiateCurrentQuestStep(this.transform);
+        }
+        else
+        {
+            ChangeQuestState(quest, QuestState.CAN_FINISH);
+        }
     }
 
     public void FinishQuest(string id)
