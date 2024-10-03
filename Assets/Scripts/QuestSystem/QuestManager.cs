@@ -79,6 +79,7 @@ public class QuestManager : MonoBehaviour
 
         if(quest.CurrentStepExists() == true)
         {
+            quest.DestroyCurrentQuestStep();
             quest.InstantiateCurrentQuestStep(this.transform);
         }
         else
@@ -92,6 +93,13 @@ public class QuestManager : MonoBehaviour
         Debug.Log("Finish Quest: " + id);
 
         Quest quest = GetQuestById(id);
+
+        //if(quest.GetReward(quest.info.rewardItem, quest.info.rewardItemCount) == false)
+        //{
+        //    return;
+        //}
+
+        quest.DestroyCurrentQuestStep();
         ChangeQuestState(quest, QuestState.FINISHED);
         FindCanStartQuest();
     }
@@ -136,6 +144,15 @@ public class QuestManager : MonoBehaviour
         quest.ChangeQuestState(state);
         NotifyQuestStateToQuestPoints(quest);
     }
+
+
+    public void ChangeQuestState(string id, QuestState state)
+    {
+        Quest quest = GetQuestById(id);
+        quest.ChangeQuestState(state);
+        NotifyQuestStateToQuestPoints(quest);
+    }
+
     private Dictionary<string, Quest> CreateQuestMap()
     {
         QuestInfoSO[] allQuests = Resources.LoadAll<QuestInfoSO>("Quests");
@@ -143,11 +160,14 @@ public class QuestManager : MonoBehaviour
         Dictionary<string, Quest> idToQuestMap = new Dictionary<string, Quest>();
         foreach (QuestInfoSO questInfo in allQuests)
         {
-            if (idToQuestMap.ContainsKey(questInfo.id))
+            if (idToQuestMap.ContainsKey(questInfo.id) == true)
             {
                 Debug.LogWarning("Duplicate ID found when creating quest map: " + questInfo.id);
             }
-            idToQuestMap.Add(questInfo.id, new Quest(questInfo, questOwner));
+            else
+            {
+                idToQuestMap.Add(questInfo.id, new Quest(questInfo, questOwner));
+            }
         }
         return idToQuestMap;
     }

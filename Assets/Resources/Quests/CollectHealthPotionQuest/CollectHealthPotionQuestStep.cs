@@ -37,5 +37,9 @@ public class CollectHealthPotionQuestStep : QuestStep
         {
             FinishQuestStep();
         }
+        else
+        {
+            UpdateQuestStep();
+        }
     }
 }

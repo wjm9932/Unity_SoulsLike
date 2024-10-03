@@ -5,16 +5,16 @@ using UnityEngine;
 public abstract class QuestStep : MonoBehaviour
 {
     private bool isFinished;
-    private string questId;
+    protected string questId;
     protected Character questOwner;
+
     protected void FinishQuestStep()
     {
-        if(isFinished == false)
-        {
-            isFinished = true;
-            QuestManager.Instance.AdvanceQuest(questId);
-            Destroy(gameObject);
-        }
+        QuestManager.Instance.AdvanceQuest(questId);
+    }
+    protected void UpdateQuestStep()
+    {
+        QuestManager.Instance.ChangeQuestState(questId, QuestState.IN_PROGRESS);
     }
     public void Initialize(Character owner, string id)
     {
