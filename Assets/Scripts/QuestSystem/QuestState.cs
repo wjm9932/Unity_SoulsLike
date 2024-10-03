@@ -10,3 +10,9 @@ public enum QuestState
     CAN_FINISH,
     FINISHED
 }
+
+public enum QuestStepState
+{
+    IN_PROGRESS,
+    FINISHED
+}

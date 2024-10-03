@@ -7,14 +7,23 @@ public abstract class QuestStep : MonoBehaviour
     private bool isFinished;
     protected string questId;
     protected Character questOwner;
+    protected QuestStepState state = QuestStepState.IN_PROGRESS;
 
-    protected void FinishQuestStep()
+    protected void FinishQuestStep(QuestStepState state)
     {
-        QuestManager.Instance.AdvanceQuest(questId);
+        if (this.state != state)
+        {
+            QuestManager.Instance.AdvanceQuest(questId);
+            this.state = state;
+        }
     }
-    protected void UpdateQuestStep()
+    protected void UpdateQuestStep(QuestStepState state)
     {
-        QuestManager.Instance.ChangeQuestState(questId, QuestState.IN_PROGRESS);
+        if (this.state != state)
+        {
+            QuestManager.Instance.ChangeQuestState(questId, QuestState.IN_PROGRESS);
+            this.state = state;
+        }
     }
     public void Initialize(Character owner, string id)
     {

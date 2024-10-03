@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollectHealthPotionQuestStep : QuestStep
 {
     private string targetItemName = "HealthPotion";
-    
+
     private int currentHealthPotionCount = 0;
 
     [SerializeField]
@@ -13,7 +13,7 @@ public class CollectHealthPotionQuestStep : QuestStep
 
     private void OnDisable()
     {
-        if(questOwner != null)
+        if (questOwner != null)
         {
             questOwner.GetComponent<PlayerQuestEvent>().onCollect -= CollectHealthPotion;
         }
@@ -22,24 +22,24 @@ public class CollectHealthPotionQuestStep : QuestStep
     private void Start()
     {
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectHealthPotion;
-
+        
         currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
         if (currentHealthPotionCount >= targetHealthPotionCount)
         {
-            FinishQuestStep();
+            FinishQuestStep(QuestStepState.FINISHED);
         }
     }
 
     private void CollectHealthPotion()
     {
         currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
-        if(currentHealthPotionCount >= targetHealthPotionCount)
+        if (currentHealthPotionCount >= targetHealthPotionCount)
         {
-            FinishQuestStep();
+            FinishQuestStep(QuestStepState.FINISHED);
         }
         else
         {
-            UpdateQuestStep();
+            UpdateQuestStep(QuestStepState.IN_PROGRESS);
         }
     }
 }
