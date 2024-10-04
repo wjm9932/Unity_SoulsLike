@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 463104682473970383}
   - component: {fileID: 463104682473970382}
   - component: {fileID: 1697251688}
+  - component: {fileID: 3238243639156949440}
   m_Layer: 5
   m_Name: QuestLogWindow
   m_TagString: Untagged
@@ -226,6 +227,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a1070cf96d51241940cee230b95fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3238243639156949440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463104682473970380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013e6fba252da0d468d62c11545807aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questScrollList: {fileID: 4518462031984817022}
 --- !u!1 &1580434691274245846
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,8 +252,9 @@ GameObject:
   - component: {fileID: 5857009979429603010}
   - component: {fileID: 7919573469250334925}
   - component: {fileID: 6674707043836590129}
+  - component: {fileID: 4518462031984817022}
   m_Layer: 5
-  m_Name: QuestLog
+  m_Name: QuestLogScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,6 +350,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4518462031984817022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580434691274245846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e516371922f8f2459d5cc0a8bf38c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contentParent: {fileID: 5283961820014261723}
+  buttonPrefab: {fileID: 4478423108086623080, guid: 5be0d5d3431b8a84ba7f670be3d439ee, type: 3}
+  layOut: {fileID: 440060880}
 --- !u!1 &4841049193748299455
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +513,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.000061035156, y: 0.000030517578}
-  m_SizeDelta: {x: 288, y: 600}
+  m_SizeDelta: {x: 288, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &440060880
 MonoBehaviour:
@@ -500,7 +530,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 1
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 1
@@ -632,8 +662,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8393230959311479144}
   m_HandleRect: {fileID: 6427605937004120874}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6666667
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
