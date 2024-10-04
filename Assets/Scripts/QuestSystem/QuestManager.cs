@@ -99,6 +99,11 @@ public class QuestManager : MonoBehaviour
         //    return;
         //}
 
+        if(quest.GetReward() == false)
+        {
+            return;
+        }
+
         quest.DestroyCurrentQuestStep();
         ChangeQuestState(quest, QuestState.FINISHED);
         FindCanStartQuest();

@@ -16,6 +16,14 @@ public class QuestInfoSO : ScriptableObject
     [Header("Steps")]
     public GameObject[] questStepPrefabs;
 
+    [Header("Target Items")]
+    public GameObject targetItem;
+    public int targetItemCount;
+
+    [Header("Reward Items")]
+    public GameObject rewardItem;
+    public int rewardItemCount;
+
     // ensure the id is always the name of script
     private void OnValidate()
     {

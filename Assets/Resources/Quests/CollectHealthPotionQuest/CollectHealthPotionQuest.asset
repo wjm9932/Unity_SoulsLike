@@ -18,3 +18,7 @@ MonoBehaviour:
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 8766620630391108114, guid: aebc00cf9860efd4a8a84c4fda2370d2, type: 3}
+  targetItem: {fileID: 9189238838166180093, guid: b5e894cc0abea1b42aea387af6e1f7cd, type: 3}
+  targetItemCount: 3
+  rewardItem: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+  rewardItemCount: 5

@@ -22,7 +22,6 @@ namespace UI
             if (livingEntity.IsMaxHp() == false)
             {
                 --count;
-                UpdateCount(count);
                 
                 if (count <= 0)
                 {

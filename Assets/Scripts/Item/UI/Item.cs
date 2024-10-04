@@ -24,6 +24,7 @@ namespace UI
             set
             {
                 _count = value;
+                UpdateCount(_count);
             }
             get
             {

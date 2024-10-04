@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -37,20 +38,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     public bool AddItem(UX.Item item, int count)
     {
-        int emptySlot = FindEmptySlot(item);
-
-        if (emptySlot == -1)
-        {
-            return false;
-        }
-
         for (int i = 0; i < count; i++)
         {
             if (itemContainer.ContainsKey(item.tag) == false)
             {
+                int emptySlot = FindEmptySlot(item);
+
+                if (emptySlot == -1)
+                {
+                    return false;
+                }
+
                 GameObject inventoryItem = Instantiate(item.GetComponent<UX.Item>().icon, inventorySlot[emptySlot].transform);
                 inventoryItem.transform.tag = item.tag;
                 inventoryItem.GetComponent<UI.Item>().AddItem();
@@ -71,7 +71,6 @@ public class Inventory : MonoBehaviour
         }
 
         playerEvent.UpdateItemCount();
-        Destroy(item.gameObject);
         return true;
     }
     
@@ -101,6 +100,29 @@ public class Inventory : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    public bool RemoveItemFromInventory(GameObject targetItem, int count)
+    {
+        UI.Item item = itemContainer[targetItem.gameObject.tag].GetComponent<UI.Item>();
+        if(item.count < count)
+        {
+            return false;
+        }
+        else
+        {
+            if (item.count <= 0)
+            {
+                Destroy(item.gameObject);
+                RemoveItemFromInventory(targetItem);
+            }
+            else
+            {
+                item.count -= count;
+            }
+        }
+        
+        return true;
     }
 
     private void RemoveItemFromInventory(GameObject item)
@@ -156,6 +178,7 @@ public class Inventory : MonoBehaviour
                 if (AddItem(item, item.numOfItem) == true)
                 {
                     TextManager.Instance.PlayNotificationText("You've got " + item.itemName + " x" + item.numOfItem);
+                    Destroy(item.gameObject);
                 }
                 else
                 {

@@ -54,12 +54,24 @@ public class Quest
         }
         return questStepPrefab;
     }
-
-    public bool GetReward(string id, int count)
+    
+    public bool GetReward()
     {
-        //questOwner.inventory.AddItem()
-        //questOwner.inventory.RemoveItem()
-        return true;
+        if(questOwner.inventory.AddItem(info.rewardItem.GetComponent<UX.Item>(), info.rewardItemCount) == true)
+        {
+            if(questOwner.inventory.RemoveItemFromInventory(info.targetItem, info.targetItemCount) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void DestroyCurrentQuestStep()
