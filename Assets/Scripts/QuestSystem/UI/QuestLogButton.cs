@@ -11,25 +11,30 @@ public class QuestLogButton : MonoBehaviour
 {
     public Button button { get; private set; }
     private TextMeshProUGUI buttonText;
-    private event Action onSelectAction;
+    private event Action<Quest> onSelectAction;
+    private event Action<QuestLogButton> onClick;
+    public Quest quest { get; private set; }
 
-    // because we're instantiating the button and it may be disabled when we
-    // instantiate it, we need to manually initialize anything here.
-    public void Initialize(string displayName, Action selectAction)
+    public void Initialize(string displayName, Action<Quest> selectAction, Quest quest, Action<QuestLogButton> onClick)
     {
         this.button = this.GetComponent<Button>();
         this.buttonText = this.GetComponentInChildren<TextMeshProUGUI>();
 
+        this.quest = quest;
+        this.onClick = onClick;
         this.buttonText.text = displayName;
-        this.onSelectAction += selectAction;
+        this.onSelectAction = selectAction;
     }
 
     public void OnClicked()
     {
-        Debug.Log(this.gameObject.name);
+        if(onClick != null)
+        {
+            onClick(this);
+        }
         if(onSelectAction != null)
         {
-            onSelectAction();
+            onSelectAction(quest);
         }
     }
 

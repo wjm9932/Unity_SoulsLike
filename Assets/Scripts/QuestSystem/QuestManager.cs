@@ -9,6 +9,7 @@ public class QuestManager : MonoBehaviour
     public static QuestManager Instance { get; private set; }
 
     public event Action<Quest> onChangeQuestState;
+    public event Action<Quest> onUpdateQuestProgress;
     public event Func<bool> onInteractWithQuest;
 
     [SerializeField]
@@ -46,6 +47,25 @@ public class QuestManager : MonoBehaviour
             NotifyQuestStateToQuestPoints(quest);
         }
     }
+
+    public void UpdateQuestProgress(string id)
+    {
+        Quest quest = GetQuestById(id);
+
+        if(onUpdateQuestProgress!= null)
+        {
+            onUpdateQuestProgress(quest);
+        }
+    }
+
+    private void UpdateQuestProgress(Quest quest)
+    {
+        if (onUpdateQuestProgress != null)
+        {
+            onUpdateQuestProgress(quest);
+        }
+    }
+
     public bool InteractWithQuest()
     {
         if (onInteractWithQuest != null)
@@ -80,6 +100,7 @@ public class QuestManager : MonoBehaviour
         if(quest.CurrentStepExists() == true)
         {
             quest.InstantiateCurrentQuestStep(this.transform);
+            UpdateQuestProgress(id);
         }
         else
         {
@@ -154,14 +175,7 @@ public class QuestManager : MonoBehaviour
     private void ChangeQuestState(Quest quest, QuestState state)
     {
         quest.ChangeQuestState(state);
-        NotifyQuestStateToQuestPoints(quest);
-    }
-
-
-    public void ChangeQuestState(string id, QuestState state)
-    {
-        Quest quest = GetQuestById(id);
-        quest.ChangeQuestState(state);
+        UpdateQuestProgress(quest);
         NotifyQuestStateToQuestPoints(quest);
     }
 

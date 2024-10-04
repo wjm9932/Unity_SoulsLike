@@ -13,13 +13,13 @@ public class QuestScrollList : MonoBehaviour
 
     private Dictionary<string, QuestLogButton> idToButtonMap = new Dictionary<string, QuestLogButton>();
 
-    public QuestLogButton CreateButtonIfNotExists(Quest quest, Action selectAction)
+    public QuestLogButton CreateButtonIfNotExists(Quest quest, Action<Quest> clickedQuest, Action<QuestLogButton> clickedButton)
     {
         QuestLogButton questLogButton = null;
         // only create the button if we haven't seen this quest id before
         if (idToButtonMap.ContainsKey(quest.info.id) == false)
         {
-            questLogButton = InstantiateQuestLogButton(quest, selectAction);
+            questLogButton = InstantiateQuestLogButton(quest, clickedQuest, clickedButton);
         }
         else
         {
@@ -28,10 +28,15 @@ public class QuestScrollList : MonoBehaviour
         return questLogButton;
     }
 
-    private QuestLogButton InstantiateQuestLogButton(Quest quest, Action selectAction)
+    public QuestLogButton GetButton(Quest quest)
+    {
+        return idToButtonMap[quest.info.id];
+    }
+
+    private QuestLogButton InstantiateQuestLogButton(Quest quest, Action<Quest> clickedQuest, Action<QuestLogButton> clickedButton)
     {
         QuestLogButton questLogButton = Instantiate(buttonPrefab, contentParent.transform).GetComponent<QuestLogButton>();
-        questLogButton.Initialize(quest.info.displpayName, () => { selectAction(); });
+        questLogButton.Initialize(quest.info.displayName, clickedQuest, quest, clickedButton);
 
         RectTransform contentRectTransform = contentParent.GetComponent<RectTransform>();
         contentRectTransform.sizeDelta = new Vector2(contentParent.GetComponent<RectTransform>().sizeDelta.x, contentRectTransform.sizeDelta.y + 30f + layOut.spacing);

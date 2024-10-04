@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CollectHealthPotionQuest
   m_EditorClassIdentifier: 
   id: CollectHealthPotionQuest
-  displpayName: Collect Health Potions!
+  displayName: Test
   initialState: 1
   questPrerequisites: []
   questStepPrefabs:
