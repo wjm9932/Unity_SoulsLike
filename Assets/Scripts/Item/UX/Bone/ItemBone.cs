@@ -4,18 +4,15 @@ using UnityEngine;
 
 namespace UX
 {
-    public class HealthPotion : Item
+    public class ItemBone : Item
     {
         private void Awake()
         {
             triggerCount = 0;
             numOfItem = 1;
-            itemName = "Health Potion!";
-        }
-
-        private void Update()
-        {
-            
+            itemName = "Bone!";
         }
     }
 }
+
+

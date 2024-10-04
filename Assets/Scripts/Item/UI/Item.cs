@@ -52,6 +52,7 @@ namespace UI
         public void DropItem()
         {
             OnDrop?.Invoke(itemUX, count);
+            DestroyItem();
         }
     }
 }

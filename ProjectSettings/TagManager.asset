@@ -8,6 +8,7 @@ TagManager:
   - EnemySword
   - HealthPotion
   - Enemy
+  - Bone
   layers:
   - Default
   - TransparentFX

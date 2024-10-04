@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865df8965c057d443803e0f45758e2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetItem: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+  targetHealthPotionCount: 5

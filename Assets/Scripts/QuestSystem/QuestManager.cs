@@ -79,13 +79,25 @@ public class QuestManager : MonoBehaviour
 
         if(quest.CurrentStepExists() == true)
         {
-            quest.DestroyCurrentQuestStep();
             quest.InstantiateCurrentQuestStep(this.transform);
         }
         else
         {
-            ChangeQuestState(quest, QuestState.CAN_FINISH);
+            UpdateQuestState(quest);
         }
+    }
+
+    private void UpdateQuestState(Quest quest)
+    {
+        for (int i = 0; i < quest.questSteps.Count; i++)
+        {
+            if (quest.questSteps[i].state != QuestStepState.FINISHED)
+            {
+                ChangeQuestState(quest, QuestState.IN_PROGRESS);
+                return;
+            }
+        }
+        ChangeQuestState(quest, QuestState.CAN_FINISH);
     }
 
     public void FinishQuest(string id)
@@ -94,17 +106,12 @@ public class QuestManager : MonoBehaviour
 
         Quest quest = GetQuestById(id);
 
-        //if(quest.GetReward(quest.info.rewardItem, quest.info.rewardItemCount) == false)
-        //{
-        //    return;
-        //}
-
         if(quest.GetReward() == false)
         {
             return;
         }
 
-        quest.DestroyCurrentQuestStep();
+        quest.DestroyQuestSteps();
         ChangeQuestState(quest, QuestState.FINISHED);
         FindCanStartQuest();
     }
@@ -186,4 +193,21 @@ public class QuestManager : MonoBehaviour
         }
         return quest;
     }
+
+
+    public void UpdateQuestState(string id)
+    {
+        Quest quest = GetQuestById(id);
+
+        for (int i = 0; i < quest.questSteps.Count; i++)
+        {
+            if (quest.questSteps[i].state != QuestStepState.FINISHED)
+            {
+                ChangeQuestState(quest, QuestState.IN_PROGRESS);
+                return;
+            }
+        }
+        ChangeQuestState(quest, QuestState.CAN_FINISH);
+    }
+
 }

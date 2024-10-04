@@ -8,7 +8,7 @@ public class Quest
     public QuestState state { get; private set; }
     private int currentQuestStepIndex;
     private Character questOwner;
-    private GameObject currentQuestStep;
+    public List<QuestStep> questSteps { get; private set; } = new List<QuestStep>();
 
     public Quest(QuestInfoSO info, Character owner)
     {
@@ -33,7 +33,7 @@ public class Quest
         {
             QuestStep questStep = Object.Instantiate<GameObject>(questStepPrefab, parentTransform).GetComponent<QuestStep>();
             questStep.Initialize(questOwner, info.id);
-            currentQuestStep = questStep.gameObject;
+            questSteps.Add(questStep);
         }
     }
     public void ChangeQuestState(QuestState state)
@@ -74,11 +74,11 @@ public class Quest
         }
     }
 
-    public void DestroyCurrentQuestStep()
+    public void DestroyQuestSteps()
     {
-        if (currentQuestStep != null)
+        for(int i = 0; i < questSteps.Count; i++)
         {
-            Object.Destroy(currentQuestStep);
+            Object.Destroy(questSteps[i].gameObject);
         }
     }
 }

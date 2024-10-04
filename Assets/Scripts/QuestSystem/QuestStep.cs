@@ -4,25 +4,26 @@ using UnityEngine;
 
 public abstract class QuestStep : MonoBehaviour
 {
-    private bool isFinished;
+    protected bool isFinished;
     protected string questId;
     protected Character questOwner;
-    protected QuestStepState state = QuestStepState.IN_PROGRESS;
+    public QuestStepState state { get; protected set; } = QuestStepState.IN_PROGRESS;
 
     protected void FinishQuestStep(QuestStepState state)
     {
         if (this.state != state)
         {
-            QuestManager.Instance.AdvanceQuest(questId);
             this.state = state;
+            QuestManager.Instance.AdvanceQuest(questId);
+            isFinished = true;
         }
     }
-    protected void UpdateQuestStep(QuestStepState state)
+    protected void UpdateQuestStepState(QuestStepState state)
     {
         if (this.state != state)
         {
-            QuestManager.Instance.ChangeQuestState(questId, QuestState.IN_PROGRESS);
             this.state = state;
+            QuestManager.Instance.UpdateQuestState(questId);
         }
     }
     public void Initialize(Character owner, string id)

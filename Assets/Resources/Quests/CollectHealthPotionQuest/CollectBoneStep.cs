@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectHealthPotionQuestStep : QuestStep
+public class CollectBoneStep : QuestStep
 {
     [SerializeField]
     private GameObject targetItem;
 
     private string targetItemName;
-    private int currentHealthPotionCount = 0;
+    private int currentBoneCount = 0;
 
     [SerializeField]
-    private int targetHealthPotionCount = 5;
+    private int targetBoneCount = 5;
 
     private void OnDisable()
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onCollect -= CollectHealthPotion;
+            questOwner.GetComponent<PlayerQuestEvent>().onCollect -= CollectBone;
         }
     }
 
@@ -25,19 +25,19 @@ public class CollectHealthPotionQuestStep : QuestStep
     {
         targetItemName = targetItem.tag;
 
-        questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectHealthPotion;
-        
-        currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
-        if (currentHealthPotionCount >= targetHealthPotionCount)
+        questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectBone;
+
+        currentBoneCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
+        if (currentBoneCount >= targetBoneCount)
         {
             FinishQuestStep(QuestStepState.FINISHED);
         }
     }
 
-    private void CollectHealthPotion()
+    private void CollectBone()
     {
-        currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
-        if (currentHealthPotionCount >= targetHealthPotionCount)
+        currentBoneCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
+        if (currentBoneCount >= targetBoneCount)
         {
             if (isFinished == false)
             {
