@@ -13,13 +13,19 @@ public class QuestInteractState : InteractStateUI
     public override void Enter()
     {
         base.Enter();
+        sm.owner.questDialogueUI.SetActive(true);
     }
     public override void Update()
     {
         base.Update();
+        if(sm.owner.input.isInteracting == true)
+        {
+            sm.ChangeState(sm.closeState);
+        }
     }
     public override void Exit()
     {
         base.Exit();
+        sm.owner.questDialogueUI.SetActive(false);
     }
 }

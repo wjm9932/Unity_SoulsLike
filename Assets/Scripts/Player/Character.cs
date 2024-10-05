@@ -22,6 +22,7 @@ public class Character : LivingEntity
 
     public GameObject inventoryUI;
     public GameObject questLogUI;
+    public GameObject questDialogueUI;
     public Image hpBar;
     public CinemachineVirtualCamera lockOnCamera;
     public CinemachineFreeLook lockOffCamera;

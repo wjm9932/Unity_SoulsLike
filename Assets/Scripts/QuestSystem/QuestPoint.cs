@@ -16,6 +16,7 @@ public class QuestPoint : MonoBehaviour
     private QuestIcon questIcon;
     private QuestState currentQuestState;
     private bool isPlayerNearby = false;
+
     private void Awake()
     {
         questIcon = GetComponentInChildren<QuestIcon>();
@@ -31,7 +32,6 @@ public class QuestPoint : MonoBehaviour
         QuestManager.Instance.onChangeQuestState -= ChangeQuestState;
         QuestManager.Instance.onInteractWithQuest -= InteractWithQuest;
     }
-
 
 
     private bool InteractWithQuest()
