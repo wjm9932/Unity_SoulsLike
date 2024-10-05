@@ -40,20 +40,27 @@ public class QuestPoint : MonoBehaviour
         {
             return false;
         }
-
-        if (currentQuestState == QuestState.CAN_START && isStartPoint == true)
+        if(currentQuestState == QuestState.REQUIREMENTS_NOT_MET && isStartPoint == true)
+        {
+            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, "You have to complete other quest before start this quest!");
+        }
+        else if (currentQuestState == QuestState.CAN_START && isStartPoint == true)
         {
             QuestManager.Instance.StartQuest(quest.id);
-            QuestManager.Instance.UpdateQuestDialogue(quest.onStartDialogue);
+            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onStartDialogue);
         }
         else if (currentQuestState == QuestState.CAN_FINISH && isFinishPoint == true)
         {
             QuestManager.Instance.FinishQuest(quest.id);
-            QuestManager.Instance.UpdateQuestDialogue(quest.onFinishDialogue);
+            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onFinishDialogue);
+        }
+        else if (currentQuestState == QuestState.FINISHED)
+        {
+            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, "Thank you for your help");
         }
         else
         {
-            QuestManager.Instance.UpdateQuestDialogue(quest.onProgressDialogue);
+            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onProgressDialogue);
         }
         return true;
     }

@@ -6,6 +6,8 @@ using UnityEngine;
 public class QuestDialogue : MonoBehaviour
 {
     [SerializeField]
+    private TextMeshProUGUI questTitleText;
+    [SerializeField]
     private TextMeshProUGUI dialogueText;
 
     private void OnEnable()
@@ -18,8 +20,9 @@ public class QuestDialogue : MonoBehaviour
         QuestManager.Instance.onUpdateQuestDialogue -= SetDialogueText;
     }
 
-    private void SetDialogueText(string text)
+    private void SetDialogueText(string questName, string text)
     {
+        questTitleText.text = questName;
         dialogueText.text = text;
     }
 }

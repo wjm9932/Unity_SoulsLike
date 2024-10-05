@@ -10,7 +10,7 @@ public class QuestManager : MonoBehaviour
 
     public event Action<Quest> onChangeQuestState;
     public event Action<Quest> onUpdateQuestProgress;
-    public event Action<string> onUpdateQuestDialogue;
+    public event Action<string, string> onUpdateQuestDialogue;
     public event Func<bool> onInteractWithQuest;
 
     [SerializeField]
@@ -48,11 +48,11 @@ public class QuestManager : MonoBehaviour
             NotifyQuestStateToQuestPoints(quest);
         }
     }
-    public void UpdateQuestDialogue(string text)
+    public void UpdateQuestDialogue(string questName, string text)
     {
         if (onUpdateQuestDialogue != null)
         {
-            onUpdateQuestDialogue(text);
+            onUpdateQuestDialogue(questName, text);
         }
     }
     public void UpdateQuestProgress(string id)

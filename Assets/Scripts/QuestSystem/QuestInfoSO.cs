@@ -33,8 +33,8 @@ public class QuestInfoSO : ScriptableObject
     [System.Serializable]
     public class GameObjectInfo
     {
-        public string itemName;      
         public GameObject gameObject;
+        public string itemName;      
         public int count;            
     }
 

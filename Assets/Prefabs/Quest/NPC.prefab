@@ -816,6 +816,7 @@ GameObject:
   - component: {fileID: 3798287258692165535}
   - component: {fileID: 843325535774689827}
   - component: {fileID: 2048469865840267192}
+  - component: {fileID: 8764452601940795213}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -874,7 +875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b5a311c44dfdc499f60abc36b2c1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest: {fileID: 11400000, guid: 5dc20c392b40ba94d9f1a335267b47bf, type: 2}
+  quest: {fileID: 0}
   isStartPoint: 1
   isFinishPoint: 1
 --- !u!135 &2048469865840267192
@@ -889,6 +890,20 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &8764452601940795213
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371757723229760576}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1396360378670036990
 GameObject:

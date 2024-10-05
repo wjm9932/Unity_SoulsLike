@@ -15,17 +15,17 @@ MonoBehaviour:
   id: CollectBonePotionQuest
   displayName: Collect Bone
   initialState: 1
-  onStartDialogue: "Hey! \nBring me Bone!"
+  onStartDialogue: Hey! Bring me Bone!
   onFinishDialogue: Thank you!
   onProgressDialogue: Hey there
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 3256250704480034276, guid: 22fc08ceba58d384d87cd8b1910b4a25, type: 3}
   targetItem:
-  - itemName: Bone
-    gameObject: {fileID: 9189238838166180093, guid: d869f17c0b69e65429c1d51c96906913, type: 3}
+  - gameObject: {fileID: 9189238838166180093, guid: d869f17c0b69e65429c1d51c96906913, type: 3}
+    itemName: Bone
     count: 3
   rewards:
-  - itemName: Health Potion
-    gameObject: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+  - gameObject: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+    itemName: Health Potion
     count: 2
