@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
-public class OpenInventoryState : OpenState
+public class OpenQuestLogState : OpenState
 {
-    public OpenInventoryState(UIStateMachine sm) : base(sm)
+    public OpenQuestLogState(UIStateMachine sm) : base(sm)
     {
 
     }
@@ -12,12 +12,12 @@ public class OpenInventoryState : OpenState
     public override void Enter()
     {
         base.Enter();
-        sm.owner.inventoryUI.SetActive(true);
+        sm.owner.questLogUI.SetActive(true);
     }
     public override void Update()
     {
         base.Update();
-        if (sm.owner.input.isPressingInventoryKey == true)
+        if(sm.owner.input.isPressingQuestLogKey == true)
         {
             sm.ChangeState(sm.closeState);
         }
@@ -25,6 +25,6 @@ public class OpenInventoryState : OpenState
     public override void Exit()
     {
         base.Exit();
-        sm.owner.inventoryUI.SetActive(false);
+        sm.owner.questLogUI.SetActive(false);
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Quest
@@ -55,24 +54,39 @@ public class Quest
         }
         return questStepPrefab;
     }
-    
+
+    private UX.Item[] ConvertGameObjectInfoToItems(QuestInfoSO.GameObjectInfo[] gameObjectInfos)
+    {
+        UX.Item[] items = new UX.Item[gameObjectInfos.Length];
+        for (int i = 0; i < gameObjectInfos.Length; i++)
+        {
+            items[i] = gameObjectInfos[i].gameObject.GetComponent<UX.Item>();
+        }
+        return items;
+    }
+
     public bool GetReward()
     {
-        if(questOwner.inventory.AddItem(info.rewardItem.GetComponent<UX.Item>(), info.rewardItemCount) == true)
-        {
-            if(questOwner.inventory.RemoveItemFromInventory(info.targetItem, info.targetItemCount) == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
+        UX.Item[] rewardItems = ConvertGameObjectInfoToItems(info.rewards);
+        if (questOwner.inventory.HasEnoughSpace(rewardItems) == false)
         {
             return false;
+            
         }
+
+        for (int i = 0; i < info.rewards.Length; i++)
+        {
+            var itemInfo = info.rewards[i];
+            questOwner.inventory.AddItem(itemInfo.gameObject.GetComponent<UX.Item>(), itemInfo.count);
+        }
+
+        for (int i = 0; i < info.targetItem.Length; i++)
+        {
+            var itemInfo = info.targetItem[i];
+            questOwner.inventory.RemoveItemFromInventory(itemInfo.gameObject, itemInfo.count);
+        }
+
+        return true;
     }
 
     public string GetFullStatusText()
@@ -89,7 +103,7 @@ public class Quest
         }
         else
         {
-            for(int i = 0; i < questSteps.Count; i++)
+            for (int i = 0; i < questSteps.Count; i++)
             {
                 if (questSteps[i].state == QuestStepState.FINISHED)
                 {
@@ -116,7 +130,7 @@ public class Quest
 
     public void DestroyQuestSteps()
     {
-        for(int i = 0; i < questSteps.Count; i++)
+        for (int i = 0; i < questSteps.Count; i++)
         {
             Object.Destroy(questSteps[i].gameObject);
         }

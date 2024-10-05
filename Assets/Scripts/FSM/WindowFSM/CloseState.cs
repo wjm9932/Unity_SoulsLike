@@ -23,12 +23,20 @@ public class CloseState : IStateUI
         //    sm.ChangeState(sm.openState);
         //}
 
-        if(Input.GetKeyDown(KeyCode.E) == true && QuestManager.Instance.InteractWithQuest() == true)
+        if (sm.owner.input.isPressingQuestLogKey == true) // Quest
         {
-            sm.ChangeState(sm.questInteractState);
+            sm.ChangeState(sm.openQuestLogState);
         }
 
-        if (Input.GetKeyDown(KeyCode.I) == true) // Inventory
+        if (sm.owner.input.isInteracting == true)
+        {
+            if (QuestManager.Instance.InteractWithQuest() == true)
+            {
+                sm.ChangeState(sm.questInteractState);
+            }
+        }
+
+        if (sm.owner.input.isPressingInventoryKey == true) // Inventory
         {
             sm.ChangeState(sm.openInventoryState);
         }

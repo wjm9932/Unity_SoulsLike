@@ -22,6 +22,8 @@ public class CollectHealthPotionQuestStep : QuestStep
     }
     private void Awake()
     {
+        status = "Target item: Health Potion\n";
+        status += "Target count: " + targetHealthPotionCount + "\n";
     }
     private void Start()
     {
@@ -30,8 +32,8 @@ public class CollectHealthPotionQuestStep : QuestStep
         targetItemName = targetItem.tag;
        
         currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
-        status = "HealthPotion Collected: " + currentHealthPotionCount;
-
+        status = "HealthPotion Collected: " + currentHealthPotionCount + "/" + targetHealthPotionCount;
+        
         if (currentHealthPotionCount >= targetHealthPotionCount)
         {
             FinishQuestStep(QuestStepState.FINISHED);
@@ -41,7 +43,7 @@ public class CollectHealthPotionQuestStep : QuestStep
     private void CollectHealthPotion()
     {
         currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
-        status = "HealthPotion Collected: " + currentHealthPotionCount;
+        status = "HealthPotion Collected: " + currentHealthPotionCount + "/" + targetHealthPotionCount;
 
         if (currentHealthPotionCount >= targetHealthPotionCount)
         {

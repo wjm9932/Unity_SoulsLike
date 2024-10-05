@@ -10,15 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
-  m_Name: CollectHealthPotionQuest 1
+  m_Name: CollectBonePotionQuest
   m_EditorClassIdentifier: 
-  id: CollectHealthPotionQuest 1
-  displayName: Collect HP
+  id: CollectBonePotionQuest
+  displayName: Collect Bone
   initialState: 1
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 3256250704480034276, guid: 22fc08ceba58d384d87cd8b1910b4a25, type: 3}
-  targetItem: {fileID: 389273326533521918, guid: 66dff4c13da22234881bc5c9a6817920, type: 3}
-  targetItemCount: 3
-  rewardItem: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
-  rewardItemCount: 5
+  targetItem:
+  - itemName: Bone
+    gameObject: {fileID: 9189238838166180093, guid: d869f17c0b69e65429c1d51c96906913, type: 3}
+    count: 3
+  rewards:
+  - itemName: Health Potion
+    gameObject: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+    count: 2

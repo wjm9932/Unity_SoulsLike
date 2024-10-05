@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "QuestInfoSO", menuName = "ScriptableObject/QuestInfoSO")]
 public class QuestInfoSO : ScriptableObject
 {
-    [SerializeField]
     public string id;
     public string displayName;
     public QuestState initialState;
@@ -16,13 +15,19 @@ public class QuestInfoSO : ScriptableObject
     [Header("Steps")]
     public GameObject[] questStepPrefabs;
 
-    [Header("Target Items")]
-    public GameObject targetItem;
-    public int targetItemCount;
+    [Header("Target Items")] 
+    public GameObjectInfo[] targetItem;
 
     [Header("Reward Items")]
-    public GameObject rewardItem;
-    public int rewardItemCount;
+    public GameObjectInfo[] rewards;
+
+    [System.Serializable]
+    public class GameObjectInfo
+    {
+        public string itemName;      
+        public GameObject gameObject;
+        public int count;            
+    }
 
     // ensure the id is always the name of script
     private void OnValidate()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIStateMachine
 {
     public OpenInventoryState openInventoryState { get; }
+    public OpenQuestLogState openQuestLogState { get; }
     public QuestInteractState questInteractState { get; }
     public CloseState closeState { get; }
 
@@ -16,6 +17,7 @@ public class UIStateMachine
         this.owner = character;
 
         openInventoryState = new OpenInventoryState(this);
+        openQuestLogState = new OpenQuestLogState(this);
         questInteractState = new QuestInteractState(this);
         closeState = new CloseState(this);
     }

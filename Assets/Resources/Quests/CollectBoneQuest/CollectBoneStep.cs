@@ -22,6 +22,8 @@ public class CollectBoneStep : QuestStep
     }
     private void Awake()
     {
+        status = "Target item: Bone\n";
+        status += "Target count: " + targetBoneCount + "\n";
     }
     private void Start()
     {
@@ -29,8 +31,8 @@ public class CollectBoneStep : QuestStep
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectBone;
 
         currentBoneCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
+        status = "Bone Collected: " + currentBoneCount + "/" + targetBoneCount;
 
-        status = "Bone Collected: " + currentBoneCount;
         if (currentBoneCount >= targetBoneCount)
         {
             FinishQuestStep(QuestStepState.FINISHED);
@@ -41,7 +43,7 @@ public class CollectBoneStep : QuestStep
     {
         currentBoneCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
 
-        status = "Bone Collected: " + currentBoneCount;
+        status = "Bone Collected: " + currentBoneCount + "/" + targetBoneCount;
 
         if (currentBoneCount >= targetBoneCount)
         {

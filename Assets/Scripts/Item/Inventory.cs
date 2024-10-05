@@ -38,6 +38,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public bool HasEnoughSpace(UX.Item[] items)
+    {
+        for(int i = 0; i < items.Length; i++)
+        {
+            if (FindEmptySlot(items[i]) == -1)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public bool AddItem(UX.Item item, int count)
     {
         for (int i = 0; i < count; i++)
