@@ -10,6 +10,7 @@ public class QuestManager : MonoBehaviour
 
     public event Action<Quest> onChangeQuestState;
     public event Action<Quest> onUpdateQuestProgress;
+    public event Action<string> onUpdateQuestDialogue;
     public event Func<bool> onInteractWithQuest;
 
     [SerializeField]
@@ -42,17 +43,23 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        foreach(Quest quest in questMap.Values)
+        foreach (Quest quest in questMap.Values)
         {
             NotifyQuestStateToQuestPoints(quest);
         }
     }
-
+    public void UpdateQuestDialogue(string text)
+    {
+        if (onUpdateQuestDialogue != null)
+        {
+            onUpdateQuestDialogue(text);
+        }
+    }
     public void UpdateQuestProgress(string id)
     {
         Quest quest = GetQuestById(id);
 
-        if(onUpdateQuestProgress!= null)
+        if (onUpdateQuestProgress != null)
         {
             onUpdateQuestProgress(quest);
         }
@@ -97,7 +104,7 @@ public class QuestManager : MonoBehaviour
         Quest quest = GetQuestById(id);
         quest.MoveToNextStep();
 
-        if(quest.CurrentStepExists() == true)
+        if (quest.CurrentStepExists() == true)
         {
             quest.InstantiateCurrentQuestStep(this.transform);
             UpdateQuestProgress(id);
@@ -127,7 +134,7 @@ public class QuestManager : MonoBehaviour
 
         Quest quest = GetQuestById(id);
 
-        if(quest.GetReward() == false)
+        if (quest.GetReward() == false)
         {
             return;
         }
@@ -139,9 +146,9 @@ public class QuestManager : MonoBehaviour
 
     private void FindCanStartQuest()
     {
-        foreach(Quest quest in questMap.Values)
+        foreach (Quest quest in questMap.Values)
         {
-            if(IsRequirementMet(quest) == true && quest.state == QuestState.REQUIREMENTS_NOT_MET)
+            if (IsRequirementMet(quest) == true && quest.state == QuestState.REQUIREMENTS_NOT_MET)
             {
                 ChangeQuestState(quest, QuestState.CAN_START);
             }
@@ -152,7 +159,7 @@ public class QuestManager : MonoBehaviour
     {
         if (quest.info.questPrerequisites.Length == 0)
         {
-            return false; 
+            return false;
         }
 
         foreach (QuestInfoSO prerequisites in quest.info.questPrerequisites)

@@ -44,14 +44,16 @@ public class QuestPoint : MonoBehaviour
         if (currentQuestState == QuestState.CAN_START && isStartPoint == true)
         {
             QuestManager.Instance.StartQuest(quest.id);
+            QuestManager.Instance.UpdateQuestDialogue(quest.onStartDialogue);
         }
         else if (currentQuestState == QuestState.CAN_FINISH && isFinishPoint == true)
         {
             QuestManager.Instance.FinishQuest(quest.id);
+            QuestManager.Instance.UpdateQuestDialogue(quest.onFinishDialogue);
         }
         else
         {
-            Debug.Log("Can't start or finish quest");
+            QuestManager.Instance.UpdateQuestDialogue(quest.onProgressDialogue);
         }
         return true;
     }
