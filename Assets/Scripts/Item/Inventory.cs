@@ -42,9 +42,12 @@ public class Inventory : MonoBehaviour
     {
         for(int i = 0; i < items.Length; i++)
         {
-            if (FindEmptySlot(items[i]) == -1)
+            if (itemContainer.ContainsKey(items[i].tag) == false)
             {
-                return false;
+                if (FindEmptySlot(items[i]) == -1)
+                {
+                    return false;
+                }
             }
         }
 
