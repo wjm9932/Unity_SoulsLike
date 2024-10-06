@@ -102,17 +102,8 @@ public class QuestManager : MonoBehaviour
         Debug.Log("Advance Quest: " + id);
 
         Quest quest = GetQuestById(id);
-        quest.MoveToNextStep();
 
-        if (quest.CurrentStepExists() == true)
-        {
-            quest.InstantiateCurrentQuestStep(this.transform);
-            UpdateQuestProgress(id);
-        }
-        else
-        {
-            UpdateQuestState(quest);
-        }
+        UpdateQuestState(quest);
     }
 
     private void UpdateQuestState(Quest quest)
@@ -125,7 +116,19 @@ public class QuestManager : MonoBehaviour
                 return;
             }
         }
-        ChangeQuestState(quest, QuestState.CAN_FINISH);
+
+        quest.MoveToNextStep();
+
+        if (quest.CurrentStepExists() == true)
+        {
+            quest.InstantiateCurrentQuestStep(this.transform);
+            UpdateQuestProgress(quest);
+        }
+        else
+        {
+            ChangeQuestState(quest, QuestState.CAN_FINISH);
+        }
+
     }
 
     public void FinishQuest(string id)
@@ -215,20 +218,5 @@ public class QuestManager : MonoBehaviour
         return quest;
     }
 
-
-    public void UpdateQuestState(string id)
-    {
-        Quest quest = GetQuestById(id);
-
-        for (int i = 0; i < quest.questSteps.Count; i++)
-        {
-            if (quest.questSteps[i].state != QuestStepState.FINISHED)
-            {
-                ChangeQuestState(quest, QuestState.IN_PROGRESS);
-                return;
-            }
-        }
-        ChangeQuestState(quest, QuestState.CAN_FINISH);
-    }
 
 }

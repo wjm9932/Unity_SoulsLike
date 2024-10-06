@@ -36,7 +36,7 @@ public class CollectHealthPotionQuestStep : QuestStep
         
         if (currentHealthPotionCount >= targetHealthPotionCount)
         {
-            FinishQuestStep(QuestStepState.FINISHED);
+            UpdateQuestStepState(QuestStepState.FINISHED);
         }
     }
 
@@ -47,14 +47,7 @@ public class CollectHealthPotionQuestStep : QuestStep
 
         if (currentHealthPotionCount >= targetHealthPotionCount)
         {
-            if (isFinished == false)
-            {
-                FinishQuestStep(QuestStepState.FINISHED);
-            }
-            else
-            {
-                UpdateQuestStepState(QuestStepState.FINISHED);
-            }
+            UpdateQuestStepState(QuestStepState.FINISHED);
         }
         else
         {

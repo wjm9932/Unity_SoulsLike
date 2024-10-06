@@ -22,13 +22,19 @@ public class QuestInfoSO : ScriptableObject
     public QuestInfoSO[] questPrerequisites;
 
     [Header("Steps")]
-    public GameObject[] questStepPrefabs;
+    public QuestStepPrefabs[] questStepPrefabs;
 
     [Header("Target Items")] 
     public GameObjectInfo[] targetItem;
 
     [Header("Reward Items")]
     public GameObjectInfo[] rewards;
+
+    [System.Serializable]
+    public class QuestStepPrefabs
+    {
+        public GameObject[] stepPrefabs;  // Array of prefabs for each step
+    }
 
     [System.Serializable]
     public class GameObjectInfo

@@ -25,7 +25,8 @@ MonoBehaviour:
   questPrerequisites:
   - {fileID: 11400000, guid: 24c476bc39b3f9b47a9de947d4f28843, type: 2}
   questStepPrefabs:
-  - {fileID: 8766620630391108114, guid: aebc00cf9860efd4a8a84c4fda2370d2, type: 3}
+  - stepPrefabs:
+    - {fileID: 8766620630391108114, guid: aebc00cf9860efd4a8a84c4fda2370d2, type: 3}
   targetItem:
   - gameObject: {fileID: 9189238838166180093, guid: b5e894cc0abea1b42aea387af6e1f7cd, type: 3}
     itemName: Health Potion

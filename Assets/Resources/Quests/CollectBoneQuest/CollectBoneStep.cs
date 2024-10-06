@@ -35,7 +35,7 @@ public class CollectBoneStep : QuestStep
 
         if (currentBoneCount >= targetBoneCount)
         {
-            FinishQuestStep(QuestStepState.FINISHED);
+            UpdateQuestStepState(QuestStepState.FINISHED);
         }
     }
 
@@ -47,14 +47,7 @@ public class CollectBoneStep : QuestStep
 
         if (currentBoneCount >= targetBoneCount)
         {
-            if (isFinished == false)
-            {
-                FinishQuestStep(QuestStepState.FINISHED);
-            }
-            else
-            {
-                UpdateQuestStepState(QuestStepState.FINISHED);
-            }
+            UpdateQuestStepState(QuestStepState.FINISHED);
         }
         else
         {

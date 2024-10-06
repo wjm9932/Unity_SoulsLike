@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static QuestInfoSO;
 
 public class Quest
 {
@@ -28,21 +29,24 @@ public class Quest
     }
     public void InstantiateCurrentQuestStep(Transform parentTransform)
     {
-        GameObject questStepPrefab = GetCurrentQuestStepPrefab();
+        QuestStepPrefabs questStepPrefab = GetCurrentQuestStepPrefab();
         if (questStepPrefab != null)
         {
-            QuestStep questStep = Object.Instantiate<GameObject>(questStepPrefab, parentTransform).GetComponent<QuestStep>();
-            questStep.Initialize(questOwner, info.id);
-            questSteps.Add(questStep);
+            for(int i = 0; i < questStepPrefab.stepPrefabs.Length; i++)
+            {
+                QuestStep questStep = Object.Instantiate<GameObject>(questStepPrefab.stepPrefabs[i], parentTransform).GetComponent<QuestStep>();
+                questStep.Initialize(questOwner, info.id);
+                questSteps.Add(questStep);
+            }
         }
     }
     public void ChangeQuestState(QuestState state)
     {
         this.state = state;
     }
-    private GameObject GetCurrentQuestStepPrefab()
+    private QuestStepPrefabs GetCurrentQuestStepPrefab()
     {
-        GameObject questStepPrefab = null;
+        QuestStepPrefabs questStepPrefab = null;
         if (CurrentStepExists() == true)
         {
             questStepPrefab = info.questStepPrefabs[currentQuestStepIndex];
