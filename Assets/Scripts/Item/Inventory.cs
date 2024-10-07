@@ -79,7 +79,8 @@ public class Inventory : MonoBehaviour
 
                 if (inventoryItem.GetComponent<UsableItem>() != null)
                 {
-                    inventoryItem.GetComponent<UsableItem>().OnUseItem += playerEvent.UpdateItemCount;
+                    inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UpdateItemCount(item.itemName); };
+                    inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UseItem(item.itemName); };
                 }
 
                 itemContainer.Add(item.itemName, inventoryItem);
@@ -90,7 +91,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        playerEvent.UpdateItemCount();
+        playerEvent.UpdateItemCount(item.itemName);
         return true;
     }
 
@@ -183,7 +184,7 @@ public class Inventory : MonoBehaviour
         items.numOfItem = count;
 
         itemContainer[item.itemName].count = 0;
-        playerEvent.UpdateItemCount();
+        playerEvent.UpdateItemCount(item.itemName);
 
         TextManager.Instance.PlayNotificationText("You've dropped " + items.itemName + "x" + count);
     }

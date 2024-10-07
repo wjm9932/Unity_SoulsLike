@@ -26,11 +26,14 @@ public class FindHealthPotionQuestStep : QuestStep
             UpdateQuestStepState(QuestStepState.FINISHED);
         }
     }
-    private void FindHealthPotion()
+    private void FindHealthPotion(string itemName)
     {
-        if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>()) >= 1)
+        if(itemName == targetItem.GetComponent<UX.Item>().itemName)
         {
-            UpdateQuestStepState(QuestStepState.FINISHED);
+            if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>()) >= 1)
+            {
+                UpdateQuestStepState(QuestStepState.FINISHED);
+            }
         }
     }
 }

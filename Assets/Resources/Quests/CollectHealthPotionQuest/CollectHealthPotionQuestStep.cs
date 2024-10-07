@@ -36,18 +36,21 @@ public class CollectHealthPotionQuestStep : QuestStep
         }
     }
 
-    private void CollectHealthPotion()
+    private void CollectHealthPotion(string itemName)
     {
-        currentHealthPotionCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>());
-        status = "HealthPotion Collected: " + currentHealthPotionCount + "/" + targetHealthPotionCount;
+        if(itemName == targetItem.GetComponent<UX.Item>().itemName)
+        {
+            currentHealthPotionCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>());
+            status = "HealthPotion Collected: " + currentHealthPotionCount + "/" + targetHealthPotionCount;
 
-        if (currentHealthPotionCount >= targetHealthPotionCount)
-        {
-            UpdateQuestStepState(QuestStepState.FINISHED);
-        }
-        else
-        {
-            UpdateQuestStepState(QuestStepState.IN_PROGRESS);
+            if (currentHealthPotionCount >= targetHealthPotionCount)
+            {
+                UpdateQuestStepState(QuestStepState.FINISHED);
+            }
+            else
+            {
+                UpdateQuestStepState(QuestStepState.IN_PROGRESS);
+            }
         }
     }
 }

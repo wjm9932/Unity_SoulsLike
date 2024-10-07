@@ -36,19 +36,22 @@ public class CollectBoneStep : QuestStep
         }
     }
 
-    private void CollectBone()
+    private void CollectBone(string itemName)
     {
-        currentBoneCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>());
-
-        status = "Bone Collected: " + currentBoneCount + "/" + targetBoneCount;
-
-        if (currentBoneCount >= targetBoneCount)
+        if (itemName == targetItem.GetComponent<UX.Item>().itemName)
         {
-            UpdateQuestStepState(QuestStepState.FINISHED);
-        }
-        else
-        {
-            UpdateQuestStepState(QuestStepState.IN_PROGRESS);
+            currentBoneCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>());
+
+            status = "Bone Collected: " + currentBoneCount + "/" + targetBoneCount;
+
+            if (currentBoneCount >= targetBoneCount)
+            {
+                UpdateQuestStepState(QuestStepState.FINISHED);
+            }
+            else
+            {
+                UpdateQuestStepState(QuestStepState.IN_PROGRESS);
+            }
         }
     }
 }
