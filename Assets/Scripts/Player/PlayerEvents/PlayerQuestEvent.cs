@@ -6,6 +6,7 @@ using System;
 public class PlayerQuestEvent : MonoBehaviour
 {
     public event Action onCollect;
+    public event Action<string> onUse;
 
     // Start is called before the first frame update
 
@@ -32,4 +33,5 @@ public class PlayerQuestEvent : MonoBehaviour
             onCollect();
         }
     }
+
 }

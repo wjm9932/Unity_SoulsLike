@@ -23,9 +23,11 @@ MonoBehaviour:
 
     Here is Health potion!'
   questPrerequisites: []
-  questStepPrefabs: []
+  questStepPrefabs:
+  - stepPrefabs:
+    - {fileID: 2650874501750272427, guid: 211b736b26dd1e649a3061ac5c231394, type: 3}
   targetItem: []
   rewards:
-  - _itemPrefab: {fileID: 0}
+  - _itemPrefab: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
     itemName: Health Potion
     count: 3

@@ -10,7 +10,6 @@ public class Quest
     private int currentQuestStepIndex;
     private Character questOwner;
     public List<QuestStep> questSteps { get; private set; } = new List<QuestStep>();
-
     public Quest(QuestInfoSO info, Character owner)
     {
         this.info = info;

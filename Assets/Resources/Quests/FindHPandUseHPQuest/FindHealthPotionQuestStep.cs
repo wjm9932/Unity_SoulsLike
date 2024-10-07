@@ -9,14 +9,28 @@ public class FindHealthPotionQuestStep : QuestStep
 
     private void OnDisable()
     {
-        
+        questOwner.GetComponent<PlayerQuestEvent>().onCollect -= FindHealthPotion;
+    }
+    private void Awake()
+    {
+        status = "Objective: Find and Get Health Potion\n";
     }
 
     void Start()
     {
+        questOwner.GetComponent<PlayerQuestEvent>().onCollect += FindHealthPotion;
+        status = "Find and Get Health Potion\n";
+
+        if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>()) >= 1)
+        {
+            UpdateQuestStepState(QuestStepState.FINISHED);
+        }
     }
     private void FindHealthPotion()
     {
-        
+        if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>()) >= 1)
+        {
+            UpdateQuestStepState(QuestStepState.FINISHED);
+        }
     }
 }

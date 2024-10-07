@@ -216,6 +216,7 @@ public class Inventory : MonoBehaviour
 
         if (item != null)
         {
+
             if (item.triggerCount <= 0)
             {
                 if (AddItem(item, item.numOfItem) == true)
