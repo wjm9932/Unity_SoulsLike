@@ -90,15 +90,15 @@ public class Inventory : MonoBehaviour
         return true;
     }
     
-    public int FindItem(string item)
+    public int FindItemFromInventory(GameObject targetItem)
     {
-        if (itemContainer.ContainsKey(item) == false)
+        if (itemContainer.ContainsKey(targetItem.tag) == false)
         {
             return 0;
         }
         else
         {
-            return itemContainer[item].GetComponent<UI.Item>().count;
+            return itemContainer[targetItem.tag].GetComponent<UI.Item>().count;
         }
     }
 

@@ -6,8 +6,6 @@ public class CollectHealthPotionQuestStep : QuestStep
 {
     [SerializeField]
     private GameObject targetItem;
-
-    private string targetItemName;
     private int currentHealthPotionCount = 0;
 
     [SerializeField]
@@ -28,10 +26,8 @@ public class CollectHealthPotionQuestStep : QuestStep
     private void Start()
     {
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectHealthPotion;
-
-        targetItemName = targetItem.tag;
        
-        currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
+        currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItemFromInventory(targetItem);
         status = "HealthPotion Collected: " + currentHealthPotionCount + "/" + targetHealthPotionCount;
         
         if (currentHealthPotionCount >= targetHealthPotionCount)
@@ -42,7 +38,7 @@ public class CollectHealthPotionQuestStep : QuestStep
 
     private void CollectHealthPotion()
     {
-        currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
+        currentHealthPotionCount = questOwner.GetComponent<Inventory>().FindItemFromInventory(targetItem);
         status = "HealthPotion Collected: " + currentHealthPotionCount + "/" + targetHealthPotionCount;
 
         if (currentHealthPotionCount >= targetHealthPotionCount)

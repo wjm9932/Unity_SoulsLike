@@ -6,8 +6,6 @@ public class CollectBoneStep : QuestStep
 {
     [SerializeField]
     private GameObject targetItem;
-
-    private string targetItemName;
     private int currentBoneCount = 0;
 
     [SerializeField]
@@ -27,10 +25,9 @@ public class CollectBoneStep : QuestStep
     }
     private void Start()
     {
-        targetItemName = targetItem.tag;
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectBone;
 
-        currentBoneCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
+        currentBoneCount = questOwner.GetComponent<Inventory>().FindItemFromInventory(targetItem);
         status = "Bone Collected: " + currentBoneCount + "/" + targetBoneCount;
 
         if (currentBoneCount >= targetBoneCount)
@@ -41,7 +38,7 @@ public class CollectBoneStep : QuestStep
 
     private void CollectBone()
     {
-        currentBoneCount = questOwner.GetComponent<Inventory>().FindItem(targetItemName);
+        currentBoneCount = questOwner.GetComponent<Inventory>().FindItemFromInventory(targetItem);
 
         status = "Bone Collected: " + currentBoneCount + "/" + targetBoneCount;
 

@@ -12,9 +12,9 @@ public class QuestInfoSO : ScriptableObject
 
     [Header("Dialogue")]
     [TextArea(3, 10)]
-    public string requirementsNotMetDialogue;
+    public string requirementsNotMetDialogue = "You have to complete other quest before start this quest!";
     [TextArea(3, 10)]
-    public string doneDialogue;
+    public string doneDialogue = "Thank you for your help!";
     [TextArea(3, 10)]
     public string onStartDialogue;
     [TextArea(3, 10)]
