@@ -27,7 +27,7 @@ public class CollectBoneStep : QuestStep
     {
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectBone;
 
-        currentBoneCount = questOwner.GetComponent<Inventory>().FindItemFromInventory(targetItem);
+        currentBoneCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>());
         status = "Bone Collected: " + currentBoneCount + "/" + targetBoneCount;
 
         if (currentBoneCount >= targetBoneCount)
@@ -38,7 +38,7 @@ public class CollectBoneStep : QuestStep
 
     private void CollectBone()
     {
-        currentBoneCount = questOwner.GetComponent<Inventory>().FindItemFromInventory(targetItem);
+        currentBoneCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>());
 
         status = "Bone Collected: " + currentBoneCount + "/" + targetBoneCount;
 

@@ -10,7 +10,6 @@ namespace UX
         {
             triggerCount = 0;
             numOfItem = 1;
-            itemName = "Health Potion!";
         }
     }
 }

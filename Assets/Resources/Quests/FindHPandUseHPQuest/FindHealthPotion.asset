@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FindHealthPotion
   m_EditorClassIdentifier: 
   id: FindHealthPotion
-  displayName: 
+  displayName: Find Health Potion
   initialState: 1
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
@@ -26,6 +26,6 @@ MonoBehaviour:
   questStepPrefabs: []
   targetItem: []
   rewards:
-  - gameObject: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+  - _itemPrefab: {fileID: 0}
     itemName: Health Potion
     count: 3

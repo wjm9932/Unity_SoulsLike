@@ -59,12 +59,12 @@ public class Quest
         return questStepPrefab;
     }
 
-    private UX.Item[] ConvertGameObjectInfoToItems(QuestInfoSO.GameObjectInfo[] gameObjectInfos)
+    private UX.Item[] ConvertGameObjectInfoToItems(ItemInfo[] gameObjectInfos)
     {
         UX.Item[] items = new UX.Item[gameObjectInfos.Length];
         for (int i = 0; i < gameObjectInfos.Length; i++)
         {
-            items[i] = gameObjectInfos[i].gameObject.GetComponent<UX.Item>();
+            items[i] = gameObjectInfos[i].itemPrefab;
         }
         return items;
     }
@@ -80,14 +80,14 @@ public class Quest
 
         for (int i = 0; i < info.rewards.Length; i++)
         {
-            var itemInfo = info.rewards[i];
-            questOwner.inventory.AddItem(itemInfo.gameObject.GetComponent<UX.Item>(), itemInfo.count);
+            var rewardItem = info.rewards[i];
+            questOwner.inventory.AddItem(rewardItem.itemPrefab, rewardItem.count);
         }
 
         for (int i = 0; i < info.targetItem.Length; i++)
         {
-            var itemInfo = info.targetItem[i];
-            questOwner.inventory.RemoveItemFromInventory(itemInfo.gameObject, itemInfo.count);
+            var targetItem = info.targetItem[i];
+            questOwner.inventory.RemoveTargetItemFromInventory(targetItem.itemPrefab, targetItem.count);
         }
 
         return true;

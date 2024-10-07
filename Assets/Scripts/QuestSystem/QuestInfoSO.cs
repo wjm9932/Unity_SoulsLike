@@ -27,10 +27,10 @@ public class QuestInfoSO : ScriptableObject
     public QuestStepPrefabs[] questStepPrefabs;
 
     [Header("Target Items")] 
-    public GameObjectInfo[] targetItem;
+    public ItemInfo[] targetItem;
 
     [Header("Reward Items")]
-    public GameObjectInfo[] rewards;
+    public ItemInfo[] rewards;
 
     [System.Serializable]
     public class QuestStepPrefabs
@@ -39,12 +39,31 @@ public class QuestInfoSO : ScriptableObject
     }
 
     [System.Serializable]
-    public class GameObjectInfo
+    public class ItemInfo
     {
-        public GameObject gameObject;
+        [SerializeField]
+        private GameObject _itemPrefab;
+        public UX.Item itemPrefab
+        {
+            get
+            {
+                if (_itemPrefab.GetComponent<UX.Item>() == null)
+                {
+                    Debug.LogError(_itemPrefab.name + "does not have UX.Item component!");
+                    return null;
+                }
+                else
+                {
+                    return _itemPrefab.GetComponent<UX.Item>();
+                }
+
+            }
+        }
         public string itemName;      
         public int count;            
     }
+
+
 
     // ensure the id is always the name of script
     private void OnValidate()
