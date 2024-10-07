@@ -12,11 +12,13 @@ public class QuestInfoSO : ScriptableObject
 
     [Header("Dialogue")]
     [TextArea(3, 10)]
+    public string requirementsNotMetDialogue;
+    [TextArea(3, 10)]
+    public string doneDialogue;
+    [TextArea(3, 10)]
     public string onStartDialogue;
     [TextArea(3, 10)]
     public string onFinishDialogue;
-    [TextArea(3, 10)]
-    public string onProgressDialogue;
 
     [Header ("Requirements")]
     public QuestInfoSO[] questPrerequisites;

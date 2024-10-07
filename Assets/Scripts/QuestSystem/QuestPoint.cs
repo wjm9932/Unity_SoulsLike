@@ -42,7 +42,7 @@ public class QuestPoint : MonoBehaviour
         }
         if(currentQuestState == QuestState.REQUIREMENTS_NOT_MET && isStartPoint == true)
         {
-            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, "You have to complete other quest before start this quest!");
+            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.requirementsNotMetDialogue);
         }
         else if (currentQuestState == QuestState.CAN_START && isStartPoint == true)
         {
@@ -56,11 +56,11 @@ public class QuestPoint : MonoBehaviour
         }
         else if (currentQuestState == QuestState.FINISHED)
         {
-            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, "Thank you for your help");
+            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.doneDialogue);
         }
         else
         {
-            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onProgressDialogue);
+            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.id);
         }
         return true;
     }

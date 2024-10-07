@@ -48,13 +48,30 @@ public class QuestManager : MonoBehaviour
             NotifyQuestStateToQuestPoints(quest);
         }
     }
-    public void UpdateQuestDialogue(string questName, string text)
+    //public void UpdateQuestDialogue(string questName, string text)
+    //{
+    //    if (onUpdateQuestDialogue != null)
+    //    {
+    //        onUpdateQuestDialogue(questName, text);
+    //    }
+    //}
+    public void UpdateQuestDialogue(string questName, string id)
     {
-        if (onUpdateQuestDialogue != null)
+        Quest quest = GetQuestById(id);
+        if(quest != null)
         {
-            onUpdateQuestDialogue(questName, text);
+            if (onUpdateQuestDialogue != null)
+            {
+                onUpdateQuestDialogue(questName, quest.GetFullStatusText());
+            }
         }
+        else
+        {
+            onUpdateQuestDialogue(questName, id);
+        }
+
     }
+
     public void UpdateQuestProgress(string id)
     {
         Quest quest = GetQuestById(id);
@@ -210,12 +227,22 @@ public class QuestManager : MonoBehaviour
 
     private Quest GetQuestById(string id)
     {
-        Quest quest = questMap[id];
-        if (quest == null)
+        //Quest quest = questMap[id];
+        //if (quest == null)
+        //{
+        //    //Debug.LogError("ID not found in the Quest Map: " + id);
+        //}
+        //return quest;
+
+        if (questMap.ContainsKey(id) == true)
         {
-            Debug.LogError("ID not found in the Quest Map: " + id);
+            return questMap[id];
         }
-        return quest;
+        else
+        {
+            return null;
+        }
+
     }
 
 

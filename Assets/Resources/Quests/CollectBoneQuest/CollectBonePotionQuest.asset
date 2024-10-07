@@ -15,9 +15,11 @@ MonoBehaviour:
   id: CollectBonePotionQuest
   displayName: Collect Bone
   initialState: 1
+  requirementsNotMetDialogue: You have to complete other quest before start this
+    quest!
+  doneDialogue: Thank you for your help
   onStartDialogue: Hey! Bring me Bone!
   onFinishDialogue: Thank you!
-  onProgressDialogue: Hey there
   questPrerequisites: []
   questStepPrefabs:
   - stepPrefabs:

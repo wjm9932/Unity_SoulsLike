@@ -15,13 +15,15 @@ MonoBehaviour:
   id: CollectHealthPotionQuest
   displayName: Collect HP
   initialState: 0
+  requirementsNotMetDialogue: You have to complete other quest before start this
+    quest!
+  doneDialogue: Thank you for your help
   onStartDialogue: 'Hey!
 
     Bring me "Health potion"'
   onFinishDialogue: 'Thank you!
 
     Here are the rewards'
-  onProgressDialogue: Hey there!
   questPrerequisites:
   - {fileID: 11400000, guid: 24c476bc39b3f9b47a9de947d4f28843, type: 2}
   questStepPrefabs:
