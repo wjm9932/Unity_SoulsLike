@@ -46,7 +46,6 @@ namespace UI
         public void DestroyItem()
         {
             OnDestroy?.Invoke(gameObject);
-            Destroy(gameObject);
         }
 
         public void DropItem()

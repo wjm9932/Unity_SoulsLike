@@ -129,7 +129,6 @@ public class Inventory : MonoBehaviour
         {
             if (item.count <= 0)
             {
-                Destroy(item.gameObject);
                 RemoveItemFromInventory(targetItem);
             }
             else
@@ -146,6 +145,7 @@ public class Inventory : MonoBehaviour
         if (itemContainer.ContainsKey(item.gameObject.tag) == true)
         {
             itemContainer.Remove(item.gameObject.tag);
+            Destroy(item.gameObject);
         }
     }
     
