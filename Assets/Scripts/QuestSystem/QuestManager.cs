@@ -148,7 +148,7 @@ public class QuestManager : MonoBehaviour
 
     }
 
-    public void FinishQuest(string id)
+    public bool FinishQuest(string id)
     {
         Debug.Log("Finish Quest: " + id);
 
@@ -156,12 +156,13 @@ public class QuestManager : MonoBehaviour
 
         if (quest.GetReward() == false)
         {
-            return;
+            return false;
         }
 
         quest.DestroyQuestSteps();
         ChangeQuestState(quest, QuestState.FINISHED);
         FindCanStartQuest();
+        return true;
     }
 
     private void FindCanStartQuest()

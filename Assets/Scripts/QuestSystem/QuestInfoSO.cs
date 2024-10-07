@@ -19,6 +19,8 @@ public class QuestInfoSO : ScriptableObject
     public string onStartDialogue;
     [TextArea(3, 10)]
     public string onFinishDialogue;
+    [TextArea(3, 10)]
+    public string onFailFinishDialogue = "Not enough space!";
 
     [Header ("Requirements")]
     public QuestInfoSO[] questPrerequisites;

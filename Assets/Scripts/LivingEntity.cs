@@ -60,11 +60,11 @@ public abstract class LivingEntity : MonoBehaviour
         return health >= _maxHealth;
     }
 
-    public bool ApplyDamage(float damage)
+    public bool ApplyDamage(LivingEntity damager)
     {
         if (this.canBeDamaged == true)
         {
-            health -= damage;
+            health -= damager.damage;
             canBeDamaged = false;
             
             if(health <= 0)
@@ -73,9 +73,14 @@ public abstract class LivingEntity : MonoBehaviour
                 {
                     onDeath();
                 }
+
+                if(damager.GetComponent<Character>() != null)
+                {
+                    damager.GetComponent<Character>().KillLivingEntity();
+                }
             }
 
-            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damage);
+            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damager.damage);
             return true;
         }
         else
@@ -100,4 +105,5 @@ public abstract class LivingEntity : MonoBehaviour
     {
         this.damage = damage;
     }
+
 }

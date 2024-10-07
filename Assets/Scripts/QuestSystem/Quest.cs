@@ -70,11 +70,20 @@ public class Quest
 
     public bool GetReward()
     {
-        UX.Item[] rewardItems = ConvertGameObjectInfoToItems(info.rewards);
-        if (questOwner.inventory.HasEnoughSpace(rewardItems) == false)
+        for (int i = 0; i < info.rewards.Length; i++)
         {
-            return false;
-            
+            if (questOwner.inventory.HasEnoughSpace(info.rewards[i].itemPrefab) == false)
+            {
+                return false;
+            }
+        }
+        
+        for(int i = 0; i < info.targetItem.Length; i++)
+        {
+            if (questOwner.inventory.GetTargetItemCountFromInventory(info.targetItem[i].itemPrefab) <= info.targetItem[i].count)
+            {
+                return false;
+            }
         }
 
         for (int i = 0; i < info.rewards.Length; i++)

@@ -51,8 +51,14 @@ public class QuestPoint : MonoBehaviour
         }
         else if (currentQuestState == QuestState.CAN_FINISH && isFinishPoint == true)
         {
-            QuestManager.Instance.FinishQuest(quest.id);
-            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onFinishDialogue);
+            if(QuestManager.Instance.FinishQuest(quest.id) == true)
+            {
+                QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onFinishDialogue);
+            }
+            else
+            {
+                QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onFailFinishDialogue);
+            }
         }
         else if (currentQuestState == QuestState.FINISHED)
         {

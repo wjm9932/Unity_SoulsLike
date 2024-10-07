@@ -5,9 +5,6 @@ using UnityEngine.AI;
 
 public class Enemy : LivingEntity
 {
-    public bool isTest = true;
-
-
     public NavMeshAgent navMesh { get; private set; }
     public Animator animator { get; private set; }
     [SerializeField]
@@ -25,11 +22,9 @@ public class Enemy : LivingEntity
     private float lastTimeDamaged;
     private const float minTimeBetDamaged = 0.5f;
 
-
-
     private void Awake()
     {
-        health = maxHealth;
+        health = 10;
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
 
@@ -39,8 +34,6 @@ public class Enemy : LivingEntity
     // Start is called before the first frame update
     void Start()
     {
-        isTest = true;
-
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this, character);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
     }
@@ -116,7 +109,7 @@ public class Enemy : LivingEntity
 
             if (player != null && player.canAttack == true)
             {
-                if(ApplyDamage(player.damage) == true)
+                if(ApplyDamage(player) == true)
                 {
                     lastTimeDamaged = Time.time;
 

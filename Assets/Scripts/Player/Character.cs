@@ -159,7 +159,7 @@ public class Character : LivingEntity
 
             if (enemy.canAttack == true && enemy != null)
             {
-                if (ApplyDamage(enemy.damage) == true)
+                if (ApplyDamage(enemy) == true)
                 {
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
 
@@ -183,6 +183,12 @@ public class Character : LivingEntity
         {
             return false;
         }
+    }
+
+
+    public void KillLivingEntity()
+    {
+        eventManager.KillEnemy();
     }
 
     /************************************Test********************************************************/

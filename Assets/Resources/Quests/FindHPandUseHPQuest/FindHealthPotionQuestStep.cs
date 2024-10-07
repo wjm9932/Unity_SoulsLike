@@ -9,7 +9,10 @@ public class FindHealthPotionQuestStep : QuestStep
 
     private void OnDisable()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onCollect -= FindHealthPotion;
+        if (questOwner != null)
+        {
+            questOwner.GetComponent<PlayerQuestEvent>().onCollect -= FindHealthPotion;
+        }
     }
     private void Awake()
     {

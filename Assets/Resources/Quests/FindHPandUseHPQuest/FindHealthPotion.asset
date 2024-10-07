@@ -22,6 +22,7 @@ MonoBehaviour:
   onFinishDialogue: 'You are ready to use item!
 
     Here is Health potion!'
+  onFailFinishDialogue: Not enough space!
   questPrerequisites: []
   questStepPrefabs:
   - stepPrefabs:

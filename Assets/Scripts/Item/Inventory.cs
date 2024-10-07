@@ -36,16 +36,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool HasEnoughSpace(UX.Item[] items)
+    public bool HasEnoughSpace(UX.Item item)
     {
-        for (int i = 0; i < items.Length; i++)
+        if (itemContainer.ContainsKey(item.itemName) == false)
         {
-            if (itemContainer.ContainsKey(items[i].itemName) == false)
+            if (FindEmptySlot(item) == -1)
             {
-                if (FindEmptySlot(items[i]) == -1)
-                {
-                    return false;
-                }
+                return false;
             }
         }
 

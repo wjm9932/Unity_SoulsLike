@@ -25,11 +25,13 @@ public class UseHealthPotionQuestStep : QuestStep
         {
             UpdateQuestStepState(QuestStepState.FINISHED);
         }
-
     }
 
     private void OnDisable()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onUse -= UseHealthPotion;
+        if (questOwner != null)
+        {
+            questOwner.GetComponent<PlayerQuestEvent>().onUse -= UseHealthPotion;
+        }
     }
 }

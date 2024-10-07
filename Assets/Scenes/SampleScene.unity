@@ -2242,7 +2242,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438566681}
-  m_LocalRotation: {x: 0.20036504, y: -0.008850959, z: 0.0009426431, w: 0.9796809}
+  m_LocalRotation: {x: 0.20036504, y: -0.008850976, z: 0.00094264495, w: 0.9796809}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6643,7 +6643,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185923849}
-  m_LocalRotation: {x: 0.05955431, y: -0.008895242, z: -0.00032076632, w: 0.9981854}
+  m_LocalRotation: {x: 0.05955431, y: -0.0088952435, z: -0.0003207664, w: 0.9981854}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7112,7 +7112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageTextPosition: {fileID: 904737510}
   _maxHealth: 100
-  isTest: 0
   character: {fileID: 1089441782}
 --- !u!4 &1216107562 stripped
 Transform:
@@ -10713,7 +10712,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487898777}
-  m_LocalRotation: {x: 0.011773285, y: 0.0000000013167558, z: -1.5503614e-11, w: 0.99993074}
+  m_LocalRotation: {x: 0.011773285, y: -0.0000000013167558, z: 1.5503614e-11, w: 0.99993074}
   m_LocalPosition: {x: -0.07, y: 2.85, z: -3.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11491,7 +11490,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageTextPosition: {fileID: 0}
   _maxHealth: 100
-  isTest: 1
   character: {fileID: 1089441782}
 --- !u!1001 &1581723569
 PrefabInstance:
@@ -17248,7 +17246,7 @@ PrefabInstance:
     - target: {fileID: 843325535774689827, guid: db8a4f9fbbee77a408ebec3345d048ac, type: 3}
       propertyPath: quest
       value: 
-      objectReference: {fileID: 11400000, guid: d289c6d318298ec4ba4f07ed25ed70d4, type: 2}
+      objectReference: {fileID: 11400000, guid: d4cb7c66b21dde54c80b69ad33276cbe, type: 2}
     - target: {fileID: 843325535774689827, guid: db8a4f9fbbee77a408ebec3345d048ac, type: 3}
       propertyPath: isFinishPoint
       value: 1

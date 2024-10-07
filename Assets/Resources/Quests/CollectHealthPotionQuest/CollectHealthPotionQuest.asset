@@ -24,6 +24,7 @@ MonoBehaviour:
   onFinishDialogue: 'Thank you!
 
     Here are the rewards'
+  onFailFinishDialogue: Not enough space!
   questPrerequisites:
   - {fileID: 11400000, guid: 24c476bc39b3f9b47a9de947d4f28843, type: 2}
   questStepPrefabs:
