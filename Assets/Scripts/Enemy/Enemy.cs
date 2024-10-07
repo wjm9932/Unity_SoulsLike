@@ -121,4 +121,10 @@ public class Enemy : LivingEntity
         }
     }
 
+    public override void Die()
+    {
+        base.Die();
+        Destroy(this.gameObject, 2f);
+        GetComponent<Collider>().enabled = false;
+    }
 }

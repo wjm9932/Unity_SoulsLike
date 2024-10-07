@@ -69,10 +69,7 @@ public abstract class LivingEntity : MonoBehaviour
             
             if(health <= 0)
             {
-                if(onDeath != null)
-                {
-                    onDeath();
-                }
+                Die();
 
                 if(damager.GetComponent<Character>() != null)
                 {
@@ -105,5 +102,11 @@ public abstract class LivingEntity : MonoBehaviour
     {
         this.damage = damage;
     }
-
+    public virtual void Die()
+    {
+        if(onDeath != null)
+        {
+            onDeath();
+        }
+    }
 }
