@@ -14,6 +14,7 @@ public class CameraLockOnState : CameraState
     }
     public override void Enter()
     {
+        isCollisionDetected = false;
         base.Enter();
 
         target = ScanNearByEnemy();
@@ -89,9 +90,9 @@ public class CameraLockOnState : CameraState
 
             for (int i = 0; i < nearByTargets.Length; i++)
             {
-                Vector3 dir = nearByTargets[i].transform.position - csm.owner.transform.position;
+                Vector3 dir = nearByTargets[i].transform.position - csm.owner.camEyePos.position;
 
-                if (Physics.Raycast(csm.owner.transform.position, dir, dir.magnitude, csm.owner.lockOnCameraTargetLayer) == true)
+                if (Physics.Raycast(csm.owner.camEyePos.position, dir, dir.magnitude, csm.owner.lockOnCameraTargetLayer) == true)
                 {
                     continue;
                 }
@@ -129,7 +130,7 @@ public class CameraLockOnState : CameraState
                 isCollisionDetected = true;
                 startPlayerCollisionPosition = csm.owner.transform.position;
             }
-            if (Vector3.Distance(csm.owner.transform.position, startPlayerCollisionPosition) > 1.5f)
+            if (Vector3.Distance(csm.owner.transform.position, startPlayerCollisionPosition) > 1f)
             {
                 csm.ChangeState(csm.cameraLockOffState);
             }
