@@ -188,9 +188,9 @@ public class Character : LivingEntity
     }
 
 
-    public void KillLivingEntity()
+    public void KillLivingEntity(EntityType type)
     {
-        eventManager.KillEnemy();
+        eventManager.KillEnemy(type);
     }
 
     /************************************Test********************************************************/

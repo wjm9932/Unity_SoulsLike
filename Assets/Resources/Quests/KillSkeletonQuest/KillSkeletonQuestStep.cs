@@ -6,6 +6,7 @@ public class KillSkeletonQuestStep : QuestStep
 {
     private int currentKillCount = 0;
     [SerializeField] private int targetKillCount = 5;
+    [SerializeField] private EntityType targetType;
     private void OnDisable()
     {
         if (questOwner != null)
@@ -25,18 +26,21 @@ public class KillSkeletonQuestStep : QuestStep
         status = "Kill Skeleton: " + currentKillCount + "/" + targetKillCount;
     }
 
-    private void KillSkeleton()
+    private void KillSkeleton(EntityType type)
     {
-        ++currentKillCount;
-        status = "Kill Skeleton: " + currentKillCount + "/" + targetKillCount;
+        if(type == targetType)
+        {
+            ++currentKillCount;
+            status = "Kill Skeleton: " + currentKillCount + "/" + targetKillCount;
 
-        if (currentKillCount > targetKillCount)
-        {
-            UpdateQuestStepState(QuestStepState.FINISHED);
-        }
-        else
-        {
-            UpdateQuestStepState(QuestStepState.IN_PROGRESS);
+            if (currentKillCount > targetKillCount)
+            {
+                UpdateQuestStepState(QuestStepState.FINISHED);
+            }
+            else
+            {
+                UpdateQuestStepState(QuestStepState.IN_PROGRESS);
+            }
         }
     }
 

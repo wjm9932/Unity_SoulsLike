@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EntityType
+{
+    CHARACTER,
+    ENEMY,
+    BOSS
+}
+
 public abstract class LivingEntity : MonoBehaviour
 {
     private bool _canBeDamaged;
@@ -29,6 +36,9 @@ public abstract class LivingEntity : MonoBehaviour
 
     [SerializeField]
     Transform damageTextPosition;
+
+    [SerializeField]
+    private EntityType type;
 
     [SerializeField]
     private float _maxHealth = 100f;
@@ -75,7 +85,7 @@ public abstract class LivingEntity : MonoBehaviour
 
                 if(damager.GetComponent<Character>() != null)
                 {
-                    damager.GetComponent<Character>().KillLivingEntity();
+                    damager.GetComponent<Character>().KillLivingEntity(type);
                 }
             }
 

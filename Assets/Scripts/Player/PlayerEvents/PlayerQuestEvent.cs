@@ -7,7 +7,7 @@ public class PlayerQuestEvent : MonoBehaviour
 {
     public event Action<string> onCollect;
     public event Action<string> onUse;
-    public event Action OnKill;
+    public event Action<EntityType> OnKill;
 
     // Start is called before the first frame update
 
@@ -42,11 +42,11 @@ public class PlayerQuestEvent : MonoBehaviour
             onUse(item);
         }
     }
-    public void KillEnemy()
+    public void KillEnemy(EntityType type)
     {
         if(OnKill != null)
         {
-            OnKill();
+            OnKill(type);
         }
     }
 }
