@@ -9,23 +9,23 @@ namespace PlayerFSM
         private bool isDodgeFinished;
         private Vector3 moveDir;
         private Vector2 dodgeDir;
-
+        private Vector3 forward;
+        private Vector3 right;
         public LockOnDodgeState(PlayerMovementStateMachine sm) : base(sm)
         {
         }
         public override void Enter()
         {
             isDodgeFinished = false;
-            sm.owner.rb.velocity = Vector3.zero;
-
-            moveSpeed = 4f;
+            forward = sm.owner.mainCamera.transform.forward;
+            right = sm.owner.mainCamera.transform.right;
+            moveSpeed = 2f;
             dodgeDir = sm.owner.input.dodgeInput;
-            
-            Dodge();
             UpdateAnimation();
         }
         public override void Update()
         {
+            SpeedControl();
             if (isDodgeFinished == true)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
@@ -40,6 +40,7 @@ namespace PlayerFSM
         }
         public override void PhysicsUpdate()
         {
+            Dodge();
         }
         public override void LateUpdate()
         {
@@ -83,7 +84,7 @@ namespace PlayerFSM
                 }
                 else
                 {
-                    moveDir = sm.owner.mainCamera.transform.forward * dodgeDir.y + sm.owner.mainCamera.transform.right * dodgeDir.x;
+                    moveDir = forward * dodgeDir.y + right * dodgeDir.x;
                 }
                 sm.owner.rb.AddForce(moveDir.normalized * moveSpeed, ForceMode.Impulse);
             }
@@ -91,15 +92,16 @@ namespace PlayerFSM
 
         protected override Vector3 GetSlopeMoveDirection()
         {
-            moveDir = sm.owner.mainCamera.transform.forward * dodgeDir.y + sm.owner.mainCamera.transform.right * dodgeDir.x;
+            Vector3 moveDir = forward * dodgeDir.y + right * dodgeDir.x;
             return Vector3.ProjectOnPlane(moveDir, sm.owner.slopeHit.normal).normalized;
         }
 
         private void UpdateAnimation()
         {
-            Vector3 localMoveDir = sm.owner.transform.InverseTransformDirection(moveDir).normalized;
+            Vector3 dir = forward * dodgeDir.y + right * dodgeDir.x;
+            Vector3 localMoveDir = sm.owner.transform.InverseTransformDirection(dir).normalized;
 
-            sm.owner.animator.SetFloat("Horizontal", localMoveDir.x); 
+            sm.owner.animator.SetFloat("Horizontal", localMoveDir.x);
             sm.owner.animator.SetFloat("Vertical", localMoveDir.z);
             sm.owner.animator.SetBool("IsDodging", true);
         }
