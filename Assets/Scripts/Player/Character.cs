@@ -107,10 +107,12 @@ public class Character : LivingEntity
     private void FixedUpdate()
     {
         playerMovementStateMachine.PhysicsUpdate();
+        CameraStateMachine.Instance.PhysicsUpdate();
     }
     private void LateUpdate()
     {
         playerMovementStateMachine.LateUpdate();
+        CameraStateMachine.Instance.LateUpdate();
     }
     private void OnAnimationEnterEvent()
     {

@@ -24,7 +24,7 @@ public class CameraLockOffState : CameraState
     }
     public override void PhysicsUpdate()
     {
-        //base.PhysicsUpdate();
+        base.PhysicsUpdate();
     }
     public override void LateUpdate()
     {

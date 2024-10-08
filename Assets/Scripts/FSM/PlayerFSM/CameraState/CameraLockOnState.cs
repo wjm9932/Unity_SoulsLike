@@ -6,6 +6,9 @@ using Cinemachine;
 public class CameraLockOnState : CameraState
 {
     public Transform target { get; private set; }
+
+    Vector3 startPlayerCollisionPosition;
+    bool isCollisionDetected;
     public CameraLockOnState(CameraStateMachine CameraStateMachine) : base(CameraStateMachine)
     {
     }
@@ -38,6 +41,7 @@ public class CameraLockOnState : CameraState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        CheckCameraCollision();
     }
     public override void LateUpdate()
     {
@@ -103,5 +107,31 @@ public class CameraLockOnState : CameraState
     {
         yield return null;
         csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 1f;
+    }
+
+    
+    private void CheckCameraCollision()
+    {
+        Vector3 cameraPosition = csm.owner.camEyePos.position;
+        Vector3 direction = (target.position - cameraPosition).normalized;
+        float distanceToTarget = Vector3.Distance(cameraPosition, target.position);
+
+        if (Physics.Raycast(cameraPosition, direction, distanceToTarget, csm.owner.lockOnCameraTargetLayer) == true)
+        {
+            if (!isCollisionDetected)
+            {
+                isCollisionDetected = true;
+                startPlayerCollisionPosition = csm.owner.transform.position;
+            }
+            if (Vector3.Distance(csm.owner.transform.position, startPlayerCollisionPosition) > 1.5f)
+            {
+                csm.ChangeState(csm.cameraLockOffState);
+            }
+        }
+        else
+        {
+            isCollisionDetected = false;
+            startPlayerCollisionPosition = csm.owner.transform.position;
+        }
     }
 }
