@@ -15,18 +15,15 @@ namespace PlayerFSM
         public override void Enter()
         {
             moveSpeed = 4f;
-            sm.owner.rb.velocity = Vector3.zero;
             isDodgeFinished = false;
 
             sm.owner.animator.SetBool("IsDodging", true);
 
             SetMoveDirection();
-
-            Dodge();
-
         }
         public override void Update()
         {
+            SpeedControl();
             if (isDodgeFinished == true)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
@@ -41,6 +38,7 @@ namespace PlayerFSM
         }
         public override void PhysicsUpdate()
         {
+            Dodge();
         }
         public override void LateUpdate()
         {
@@ -71,16 +69,16 @@ namespace PlayerFSM
                 if (sm.owner.input.dodgeInput == Vector2.zero)
                 {
                     var dir = Vector3.ProjectOnPlane(sm.owner.transform.forward, sm.owner.slopeHit.normal).normalized;
-                    sm.owner.rb.AddForce(dir * moveSpeed, ForceMode.Impulse);
+                    sm.owner.rb.AddForce(dir * 40f, ForceMode.Force);
                 }
                 else
                 {
-                    sm.owner.rb.AddForce(GetSlopeMoveDirection().normalized * moveSpeed, ForceMode.Impulse);
+                    sm.owner.rb.AddForce(GetSlopeMoveDirection().normalized * 40f, ForceMode.Force);
                 }
             }
             else
             {
-                sm.owner.rb.AddForce(sm.owner.transform.forward * moveSpeed, ForceMode.Impulse);
+                sm.owner.rb.AddForce(sm.owner.transform.forward * 40f, ForceMode.Force);
             }
         }
 

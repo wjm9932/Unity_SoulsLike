@@ -49,7 +49,8 @@ namespace PlayerFSM
         {
             //Vector3 direction = new Vector3(CameraStateMachine.Instance.cameraLockOnState.target.transform.position.x - sm.owner.rb.position.x, 0, CameraStateMachine.Instance.cameraLockOnState.target.transform.position.z - sm.owner.rb.position.z);
             Vector3 direction = sm.owner.mainCamera.transform.forward;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            direction.y = 0f;
+            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
             sm.owner.rb.MoveRotation(Quaternion.Slerp(sm.owner.rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
         }
         protected override void Move()
