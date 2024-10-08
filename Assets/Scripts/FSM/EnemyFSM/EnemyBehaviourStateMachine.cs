@@ -4,7 +4,7 @@ using UnityEngine;
 using EnemyFSM;
 public class EnemyBehaviorStateMachine : StateMachine
 {
-    public Enemy enemy { get; }
+    public BossEnemy enemy { get; }
     public Character character { get; }
     public IdleState idleState { get; }
     public SwordAttackState swordAttackState { get; }
@@ -13,7 +13,7 @@ public class EnemyBehaviorStateMachine : StateMachine
     public StanbyStabAttackState stanbyStabAttackState { get; }
     public BackFlipState backFlipState { get; }
     public StabAttackState stabAttackState { get; }
-    public EnemyBehaviorStateMachine(Enemy enemy, Character character)
+    public EnemyBehaviorStateMachine(BossEnemy enemy, Character character)
     {   
         this.enemy = enemy;
         this.character = character;

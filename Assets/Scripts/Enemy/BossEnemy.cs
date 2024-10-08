@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : LivingEntity
+public class BossEnemy : LivingEntity
 {
     public NavMeshAgent navMesh { get; private set; }
     public Animator animator { get; private set; }
