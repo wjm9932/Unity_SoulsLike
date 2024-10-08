@@ -8,6 +8,7 @@ namespace PlayerFSM
     public class DodgeState : PlayerMovementState
     {
         private bool isDodgeFinished;
+        private Vector2 dodgeDir;
         public DodgeState(PlayerMovementStateMachine sm) : base(sm)
         {
 
@@ -16,7 +17,7 @@ namespace PlayerFSM
         {
             moveSpeed = 4f;
             isDodgeFinished = false;
-
+            dodgeDir = sm.owner.input.dodgeInput;
             sm.owner.animator.SetBool("IsDodging", true);
 
             SetMoveDirection();
@@ -66,7 +67,7 @@ namespace PlayerFSM
 
             if (sm.owner.IsOnSlope() == true)
             {
-                if (sm.owner.input.dodgeInput == Vector2.zero)
+                if (dodgeDir == Vector2.zero)
                 {
                     var dir = Vector3.ProjectOnPlane(sm.owner.transform.forward, sm.owner.slopeHit.normal).normalized;
                     sm.owner.rb.AddForce(dir * 40f, ForceMode.Force);
