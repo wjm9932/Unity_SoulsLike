@@ -30,6 +30,7 @@ public class Enemy : LivingEntity
 
         navMesh.updateRotation = false;
         canBeDamaged = true;
+        isDead = false;
     }
     // Start is called before the first frame update
     void Start()

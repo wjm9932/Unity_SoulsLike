@@ -72,7 +72,7 @@ public class AttackState : IState
         
         if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
         {
-            forward = CameraStateMachine.Instance.cameraLockOnState.target.position - sm.owner.transform.position;
+            forward = CameraStateMachine.Instance.cameraLockOnState.target.transform.position - sm.owner.transform.position;
             forward.y = 0;
             forward.Normalize();
         }

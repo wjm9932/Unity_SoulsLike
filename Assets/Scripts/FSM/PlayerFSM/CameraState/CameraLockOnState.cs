@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class CameraLockOnState : CameraState
 {
-    public Transform target { get; private set; }
+    public GameObject target { get; private set; }
 
     Vector3 startPlayerCollisionPosition;
     bool isCollisionDetected;
@@ -25,7 +25,7 @@ public class CameraLockOnState : CameraState
         else
         {
             csm.owner.animator.SetBool("IsLockOn", true);
-            csm.owner.lockOnCamera.LookAt = target;
+            csm.owner.lockOnCamera.LookAt = target.transform;
             csm.owner.lockOffCamera.Priority = 9;
             csm.owner.lockOnCamera.Priority = 10;
 
@@ -35,6 +35,12 @@ public class CameraLockOnState : CameraState
     }
     public override void Update()
     {
+        if (target.transform.parent.GetComponent<LivingEntity>().isDead == true)
+        {
+            csm.ChangeState(csm.cameraLockOffState);
+            return;
+        }
+
         UpdateCameraPosition();
         base.Update();
     }
@@ -54,7 +60,7 @@ public class CameraLockOnState : CameraState
     }
     private void UpdateCameraPosition()
     {
-        Vector3 dir = (target.position - csm.owner.camEyePos.position).normalized;
+        Vector3 dir = (target.transform.position - csm.owner.camEyePos.position).normalized;
         Vector3 camPos = csm.owner.camEyePos.position - dir * 4.5f;
 
         if (camPos.y < 0.2f)
@@ -63,10 +69,10 @@ public class CameraLockOnState : CameraState
         }
 
         csm.owner.lockOnCameraPosition.position = camPos;
-        csm.owner.lockOnCameraPosition.LookAt(target.position);
+        csm.owner.lockOnCameraPosition.LookAt(target.transform.position);
     }
 
-    private Transform ScanNearByEnemy()
+    private GameObject ScanNearByEnemy()
     {
         Collider[] nearByTargets = Physics.OverlapSphere(csm.owner.transform.position, 20f, csm.owner.enemyMask);
 
@@ -76,7 +82,7 @@ public class CameraLockOnState : CameraState
         }
         else
         {
-            Transform closetTarget = null;
+            GameObject closetTarget = null;
             float closestAngle = 30f;
             Vector3 camForward = csm.owner.mainCamera.transform.forward;
             camForward.y = 0f;
@@ -96,7 +102,7 @@ public class CameraLockOnState : CameraState
                     if (angle < closestAngle)
                     {
                         closestAngle = angle;
-                        closetTarget = nearByTargets[i].transform;
+                        closetTarget = nearByTargets[i].gameObject;
                     }
                 }
             }
@@ -113,8 +119,8 @@ public class CameraLockOnState : CameraState
     private void CheckCameraCollision()
     {
         Vector3 cameraPosition = csm.owner.camEyePos.position;
-        Vector3 direction = (target.position - cameraPosition).normalized;
-        float distanceToTarget = Vector3.Distance(cameraPosition, target.position);
+        Vector3 direction = (target.transform.position - cameraPosition).normalized;
+        float distanceToTarget = Vector3.Distance(cameraPosition, target.transform.position);
 
         if (Physics.Raycast(cameraPosition, direction, distanceToTarget, csm.owner.lockOnCameraTargetLayer) == true)
         {

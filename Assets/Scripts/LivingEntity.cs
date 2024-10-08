@@ -12,6 +12,8 @@ public abstract class LivingEntity : MonoBehaviour
         set { _canBeDamaged = value; }
     }
 
+    public bool isDead { get; protected set; }
+
     private float _health;
     public virtual float health 
     {
@@ -108,5 +110,6 @@ public abstract class LivingEntity : MonoBehaviour
         {
             onDeath();
         }
+        isDead = true;
     }
 }
