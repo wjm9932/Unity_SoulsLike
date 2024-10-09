@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class NormalEnemy : Enemy
 {
+    public Character target { get; set; }
 
     protected override void Awake()
     {
@@ -28,5 +29,13 @@ public class NormalEnemy : Enemy
     {
         int areaMask = NavMesh.GetAreaFromName(areaName);
         navMesh.areaMask = 1 << areaMask;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        Destroy(this.gameObject, 3f);
+        GetComponent<Collider>().enabled = false;
+        animator.SetTrigger("Die");
     }
 }
