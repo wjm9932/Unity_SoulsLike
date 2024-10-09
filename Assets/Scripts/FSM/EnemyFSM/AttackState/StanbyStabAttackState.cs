@@ -7,7 +7,7 @@ namespace EnemyFSM
     public class StanbyStabAttackState : EnemyPatternState
     {
         private bool isReadyToAttack;
-        public StanbyStabAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        public StanbyStabAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 0f;
         }

@@ -8,7 +8,7 @@ namespace EnemyFSM
     {
         
         private float distance;
-        public JumpAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        public JumpAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 2f;
         }

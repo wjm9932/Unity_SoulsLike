@@ -2171,6 +2171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageTextPosition: {fileID: 3794804743710657339}
+  type: 2
   _maxHealth: 100
   character: {fileID: 0}
 --- !u!1 &5066896814943569368

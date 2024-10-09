@@ -4,11 +4,11 @@ using UnityEngine;
 
 public abstract class EnemyPatternState : IState
 {
-    protected EnemyBehaviorStateMachine sm;
+    protected BossEnemyBehaviorStateMachine sm;
     protected float stoppingDistance;
     protected float agentSpeed;
     protected Quaternion dir;
-    public EnemyPatternState(EnemyBehaviorStateMachine sm)
+    public EnemyPatternState(BossEnemyBehaviorStateMachine sm)
     {
         this.sm = sm;
     }

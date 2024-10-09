@@ -6,7 +6,7 @@ namespace EnemyFSM
 {
     public class SwordAttackState : EnemyPatternState
     {
-        public SwordAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        public SwordAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
             
         }

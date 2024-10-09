@@ -8,7 +8,7 @@ namespace EnemyFSM
     {
         private float distance;
         private float timer;
-        public DashAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        public DashAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 0f;
         }

@@ -38,7 +38,8 @@ public abstract class LivingEntity : MonoBehaviour
     Transform damageTextPosition;
 
     [SerializeField]
-    private EntityType type;
+    private EntityType _entityType;
+    public EntityType entityType { get { return _entityType; } protected set { _entityType = value; } }
 
     [SerializeField]
     private float _maxHealth = 100f;
@@ -85,7 +86,7 @@ public abstract class LivingEntity : MonoBehaviour
 
                 if(damager.GetComponent<Character>() != null)
                 {
-                    damager.GetComponent<Character>().KillLivingEntity(type);
+                    damager.GetComponent<Character>().KillLivingEntity(entityType);
                 }
             }
 

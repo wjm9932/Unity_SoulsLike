@@ -3,30 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossEnemy : LivingEntity
+public class BossEnemy : Enemy
 {
-    public NavMeshAgent navMesh { get; private set; }
-    public Animator animator { get; private set; }
     [SerializeField]
     private Character character;
-    private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
+    private BossEnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
-    public override bool canBeDamaged
+    
+
+    protected override void Awake()
     {
-        get
-        {
-            return Time.time >= lastTimeDamaged + minTimeBetDamaged ? true : false;
-        }
-    }
+        base.Awake();
 
-    private float lastTimeDamaged;
-    private const float minTimeBetDamaged = 0.5f;
-
-    private void Awake()
-    {
         health = 10;
-        animator = GetComponent<Animator>();
-        navMesh = GetComponent<NavMeshAgent>();
 
         navMesh.updateRotation = false;
         canBeDamaged = true;
@@ -35,7 +24,7 @@ public class BossEnemy : LivingEntity
     // Start is called before the first frame update
     void Start()
     {
-        enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this, character);
+        enemyBehaviorStateMachine = new BossEnemyBehaviorStateMachine(this, character);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
     }
 
@@ -101,26 +90,6 @@ public class BossEnemy : LivingEntity
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
 
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Sword") == true)
-        {
-            LivingEntity player = other.transform.root.GetComponent<LivingEntity>();
-
-            if (player != null && player.canAttack == true)
-            {
-                if(ApplyDamage(player) == true)
-                {
-                    lastTimeDamaged = Time.time;
-
-                    var hitPoint = other.ClosestPoint(transform.position);
-                    Vector3 hitNormal = (transform.position - hitPoint).normalized;
-                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
-                }
-            }
-        }
-    }
 
     public override void Die()
     {

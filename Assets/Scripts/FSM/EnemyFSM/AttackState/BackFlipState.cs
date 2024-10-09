@@ -8,7 +8,7 @@ namespace EnemyFSM
     public class BackFlipState : EnemyPatternState
     {
         private float distance;
-        public BackFlipState(EnemyBehaviorStateMachine sm) : base(sm)
+        public BackFlipState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 0f;
         }

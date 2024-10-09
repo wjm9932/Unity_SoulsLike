@@ -6,7 +6,7 @@ namespace EnemyFSM
 {
     public class StabAttackState : EnemyPatternState
     {
-        public StabAttackState(EnemyBehaviorStateMachine sm) : base(sm)
+        public StabAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 0f;
         }

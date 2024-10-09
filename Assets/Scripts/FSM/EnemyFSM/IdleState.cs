@@ -7,7 +7,7 @@ namespace EnemyFSM
 {
     public class IdleState : EnemyPatternState
     {
-        public IdleState(EnemyBehaviorStateMachine sm) : base(sm)
+        public IdleState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 2f;
             agentSpeed = 4f;
