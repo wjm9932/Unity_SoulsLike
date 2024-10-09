@@ -13081,7 +13081,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105455475}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
   m_Name: 
@@ -13089,7 +13089,7 @@ MonoBehaviour:
   m_CollideAgainst:
     serializedVersion: 2
     m_Bits: 639
-  m_IgnoreTag: Player
+  m_IgnoreTag: Enemy
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -13822,6 +13822,10 @@ PrefabInstance:
     - target: {fileID: 4531836309446150035, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: m_Name
       value: BossEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4531836309446150035, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
