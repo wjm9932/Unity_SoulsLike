@@ -114,6 +114,8 @@ MonoBehaviour:
   damageTextPosition: {fileID: 8110367234516015605}
   _entityType: 1
   _maxHealth: 100
+  dropItem:
+  - {fileID: 389273326533521918, guid: 66dff4c13da22234881bc5c9a6817920, type: 3}
 --- !u!1 &177101665409242902
 GameObject:
   m_ObjectHideFlags: 0

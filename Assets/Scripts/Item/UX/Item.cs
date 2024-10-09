@@ -16,8 +16,12 @@ namespace UX
             private set { _itemName = value; }
         }
         public GameObject icon;
+        [HideInInspector]
         public int triggerCount;
-        public int numOfItem;
+        public int numOfItem = 1;
+        [SerializeField]
+        private int _dropChace;
+        public int dropChance { get { return _dropChace;  } private set { _dropChace = value; } }
     }
 }
 

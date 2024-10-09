@@ -114,4 +114,5 @@ MonoBehaviour:
   _itemName: Bone!
   icon: {fileID: 9189238838166180093, guid: d869f17c0b69e65429c1d51c96906913, type: 3}
   triggerCount: 0
-  numOfItem: 0
+  numOfItem: 1
+  _dropChace: 10

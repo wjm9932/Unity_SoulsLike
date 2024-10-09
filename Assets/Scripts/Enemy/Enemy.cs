@@ -7,6 +7,7 @@ public class Enemy : LivingEntity
 {
     public NavMeshAgent navMesh { get; private set; }
     public Animator animator { get; private set; }
+
     public override bool canBeDamaged
     {
         get

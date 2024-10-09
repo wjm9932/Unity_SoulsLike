@@ -7,12 +7,14 @@ public class NormalEnemy : Enemy
 {
     public Character target { get; set; }
 
+    [SerializeField]
+    private GameObject[] dropItem;
+
     protected override void Awake()
     {
         base.Awake();
 
         entityType = EntityType.ENEMY;
-        
     }
     // Start is called before the first frame update
     void Start()
@@ -34,8 +36,29 @@ public class NormalEnemy : Enemy
     public override void Die()
     {
         base.Die();
+
         Destroy(this.gameObject, 3f);
         GetComponent<Collider>().enabled = false;
         animator.SetTrigger("Die");
+        DropItem();
     }
+
+    private void DropItem()
+    {
+        for(int i = 0; i < dropItem.Length; i++)
+        {
+            UX.Item item = dropItem[i].GetComponent<UX.Item>();
+
+            if (IsDrop(item.dropChance) == true)
+            {
+                Instantiate(dropItem[i], this.gameObject.transform.position, Quaternion.identity);
+            }
+        }
+    }
+
+    private bool IsDrop(float chances)
+    {
+        return Random.Range(0f, 100f) <= chances;
+    }
+
 }

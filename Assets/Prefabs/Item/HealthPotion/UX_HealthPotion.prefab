@@ -101,7 +101,8 @@ MonoBehaviour:
   _itemName: Health Potion!
   icon: {fileID: 9189238838166180093, guid: b5e894cc0abea1b42aea387af6e1f7cd, type: 3}
   triggerCount: 0
-  numOfItem: 0
+  numOfItem: 1
+  _dropChace: 90
 --- !u!65 &4900398509422649167
 BoxCollider:
   m_ObjectHideFlags: 0
