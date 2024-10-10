@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: KillSkeletonQuest
   displayName: Kill Skeleton!
-  initialState: 1
+  initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
   onStartDialogue: "Kill 5 Skeleton and bring me 3 bones\t"
   onFinishDialogue: Thank you!
   onFailFinishDialogue: Not enough space!
-  questPrerequisites: []
+  questPrerequisites:
+  - {fileID: 11400000, guid: d289c6d318298ec4ba4f07ed25ed70d4, type: 2}
   questStepPrefabs:
   - stepPrefabs:
     - {fileID: 1932851225931441583, guid: 2d966e0310038564ebc11e4bca921e13, type: 3}
@@ -29,4 +30,4 @@ MonoBehaviour:
   rewards:
   - _itemPrefab: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
     itemName: Health Potion
-    count: 3
+    count: 5
