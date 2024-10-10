@@ -60,5 +60,4 @@ public class NormalEnemy : Enemy
     {
         return Random.Range(0f, 100f) <= chances;
     }
-
 }
