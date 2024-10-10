@@ -107,8 +107,6 @@ public class QuestManager : MonoBehaviour
 
     public void StartQuest(string id)
     {
-        //Debug.Log("Start Quest: " + id);
-
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(this.transform);
         ChangeQuestState(quest, QuestState.IN_PROGRESS);
@@ -116,10 +114,7 @@ public class QuestManager : MonoBehaviour
 
     public void AdvanceQuest(string id)
     {
-        Debug.Log("Advance Quest: " + id);
-
         Quest quest = GetQuestById(id);
-
         UpdateQuestState(quest);
     }
 
@@ -150,10 +145,7 @@ public class QuestManager : MonoBehaviour
 
     public bool FinishQuest(string id)
     {
-        Debug.Log("Finish Quest: " + id);
-
         Quest quest = GetQuestById(id);
-
         if (quest.GetReward() == false)
         {
             return false;

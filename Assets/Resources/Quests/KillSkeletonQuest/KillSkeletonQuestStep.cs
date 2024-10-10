@@ -5,7 +5,7 @@ using UnityEngine;
 public class KillSkeletonQuestStep : QuestStep
 {
     private int currentKillCount = 0;
-    [SerializeField] private int targetKillCount = 5;
+    [SerializeField] private int targetKillCount;
     [SerializeField] private EntityType targetType;
     private void OnDisable()
     {
@@ -33,7 +33,7 @@ public class KillSkeletonQuestStep : QuestStep
             ++currentKillCount;
             status = "Kill Skeleton: " + currentKillCount + "/" + targetKillCount;
 
-            if (currentKillCount > targetKillCount)
+            if (currentKillCount >= targetKillCount)
             {
                 UpdateQuestStepState(QuestStepState.FINISHED);
             }
