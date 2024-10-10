@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f683aa19d303d834489e0d7a34afb411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetKillCount: 5
+  targetKillCount: 3
   targetType: 1

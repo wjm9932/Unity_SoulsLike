@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetItem: {fileID: 389273326533521918, guid: 66dff4c13da22234881bc5c9a6817920, type: 3}
-  targetBoneCount: 5
+  targetBoneCount: 3
