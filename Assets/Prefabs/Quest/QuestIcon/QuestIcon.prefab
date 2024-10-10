@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanStartIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 871057117730491176, guid: aa56064e79543724a82b28068b97301c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6122286105601588767, guid: aa56064e79543724a82b28068b97301c, type: 3}
       propertyPath: m_RootOrder
       value: 1
