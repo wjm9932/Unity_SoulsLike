@@ -40,10 +40,18 @@ public class Enemy : LivingEntity
     {
         navMesh.areaMask = 1 << mask;
     }
+    protected virtual void OnEnemyTriggerStay(Collider other)
+    {
+        lastTimeDamaged = Time.time;
+
+        var hitPoint = other.ClosestPoint(transform.position);
+        Vector3 hitNormal = (transform.position - hitPoint).normalized;
+        EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Sword") == true)
+        if (other.CompareTag("Sword"))
         {
             LivingEntity player = other.transform.root.GetComponent<LivingEntity>();
 
@@ -51,11 +59,7 @@ public class Enemy : LivingEntity
             {
                 if (ApplyDamage(player) == true)
                 {
-                    lastTimeDamaged = Time.time;
-
-                    var hitPoint = other.ClosestPoint(transform.position);
-                    Vector3 hitNormal = (transform.position - hitPoint).normalized;
-                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+                    OnEnemyTriggerStay(other);
                 }
             }
         }

@@ -66,8 +66,13 @@ public class WarriorEnemy : Enemy
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
 
+    protected override void OnEnemyTriggerStay(Collider collider)
+    {
+        base.OnEnemyTriggerStay(collider);
 
-
+        //target = collider.gameObject;
+        //enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.trackingState);
+    }
     public override void Die()
     {
         base.Die();

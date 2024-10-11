@@ -37,31 +37,55 @@ public class Arrow : MonoBehaviour
     {
         if(isGotShot == false)
         {
-            if (other.CompareTag("Enemy") == false)
+            if(other.CompareTag("Player") == true)
             {
                 Character player = other.GetComponent<Character>();
                 if (player != null)
                 {
-                    if(player.canBeDamaged == true)
+                    if (player.canBeDamaged == true)
                     {
                         isGotShot = true;
                         rb.isKinematic = true;
+                        arrowEffect.enabled = false;
+                        GetComponent<Collider>().enabled = false;
                         transform.position = other.ClosestPoint(transform.position);
                         transform.SetParent(player.arrowParent);
-                        GetComponent<Collider>().enabled = false;
                     }
                 }
-                else
-                {
-                    isGotShot = true;
-                    rb.isKinematic = true;
-                    transform.position = other.ClosestPoint(transform.position);
-                    transform.SetParent(other.transform);
-                    GetComponent<Collider>().enabled = false;
-                }
-
-                arrowEffect.enabled = false;
             }
+            else if(other.CompareTag("Obstacle") == true)
+            {
+                isGotShot = true;
+                rb.isKinematic = true;
+                arrowEffect.enabled = false;
+                GetComponent<Collider>().enabled = false;
+                transform.position = other.ClosestPoint(transform.position);
+                transform.SetParent(other.transform);
+            }
+            //if (other.CompareTag("Enemy") == false)
+            //{
+            //    Character player = other.GetComponent<Character>();
+            //    if (player != null)
+            //    {
+            //        if(player.canBeDamaged == true)
+            //        {
+            //            isGotShot = true;
+            //            rb.isKinematic = true;
+            //            transform.position = other.ClosestPoint(transform.position);
+            //            transform.SetParent(player.arrowParent);
+            //            GetComponent<Collider>().enabled = false;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        isGotShot = true;
+            //        rb.isKinematic = true;
+            //        transform.position = other.ClosestPoint(transform.position);
+            //        transform.SetParent(other.transform);
+            //        GetComponent<Collider>().enabled = false;
+            //    }
+
+            //}
         }
     }
 }

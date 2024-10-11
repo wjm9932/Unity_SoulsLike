@@ -28,7 +28,7 @@ public class ArcherEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        health = 10f;
+        health = 100f;
         fieldOfView = 50f;
         viewDistance = 10f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
@@ -60,7 +60,13 @@ public class ArcherEnemy : Enemy
     {
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
+    protected override void OnEnemyTriggerStay(Collider collider)
+    {
+        base.OnEnemyTriggerStay(collider);
 
+        //target = collider.gameObject;
+        //enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.trackingState);
+    }
     public override void Die()
     {
         base.Die();
