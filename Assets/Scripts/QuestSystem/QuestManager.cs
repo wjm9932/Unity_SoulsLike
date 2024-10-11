@@ -10,6 +10,7 @@ public class QuestManager : MonoBehaviour
 
     public event Action<Quest> onChangeQuestState;
     public event Action<Quest> onUpdateQuestProgress;
+    public event Action<Quest> onFinishQuest;
     public event Action<string, string> onUpdateQuestDialogue;
     public event Func<bool> onInteractWithQuest;
 
@@ -48,17 +49,17 @@ public class QuestManager : MonoBehaviour
             NotifyQuestStateToQuestPoints(quest);
         }
     }
-    //public void UpdateQuestDialogue(string questName, string text)
-    //{
-    //    if (onUpdateQuestDialogue != null)
-    //    {
-    //        onUpdateQuestDialogue(questName, text);
-    //    }
-    //}
+    public void NotifyQuestFinished(Quest quest)
+    {
+        if (onFinishQuest != null)
+        {
+            onFinishQuest(quest);
+        }
+    }
     public void UpdateQuestDialogue(string questName, string id)
     {
         Quest quest = GetQuestById(id);
-        if(quest != null)
+        if (quest != null)
         {
             if (onUpdateQuestDialogue != null)
             {
@@ -153,6 +154,7 @@ public class QuestManager : MonoBehaviour
 
         quest.DestroyQuestSteps();
         ChangeQuestState(quest, QuestState.FINISHED);
+        NotifyQuestFinished(quest);
         FindCanStartQuest();
         return true;
     }

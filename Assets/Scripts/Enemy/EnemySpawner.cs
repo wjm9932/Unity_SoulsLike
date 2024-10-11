@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class EnemySpawner : MonoBehaviour
 {
     public Transform parent;
+    public QuestInfoSO quest;
 
     [SerializeField]
     private GameObject enemyPrefab;
@@ -18,7 +19,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private float spawnRadius = 5f;
     private int areaMask;
-
     [SerializeField]
     private int targetSpawnCount = 3;
     private List<Enemy> enemies = new List<Enemy>();
@@ -26,6 +26,22 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         areaMask = NavMesh.GetAreaFromName(targetNavMeshArea);
+    }
+
+    private void OnEnable()
+    {
+        if(quest != null)
+        {
+            QuestManager.Instance.onFinishQuest += EndWave;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (quest != null)
+        {
+            QuestManager.Instance.onFinishQuest -= EndWave;
+        }
     }
     void Start()
     {
@@ -73,5 +89,15 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         SpawnEnemy(); 
+    }
+    private void EndWave(Quest quest)
+    {
+        if(quest.info.id == this.quest.id)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                Destroy(enemies[i].gameObject);
+            }
+        }
     }
 }

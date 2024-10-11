@@ -9,17 +9,17 @@ public class OpenDoor : MonoBehaviour
 
     private void OnEnable()
     {
-        QuestManager.Instance.onChangeQuestState += OpenTheDoor;
+        QuestManager.Instance.onFinishQuest += OpenTheDoor;
     }
 
     private void OnDisable()
     {
-        QuestManager.Instance.onChangeQuestState -= OpenTheDoor;
+        QuestManager.Instance.onFinishQuest -= OpenTheDoor;
     }
 
     private void OpenTheDoor(Quest quest)
     {
-        if (targetQuest.id == quest.info.id && quest.state == QuestState.FINISHED)
+        if (targetQuest.id == quest.info.id)
         {
             this.gameObject.transform.rotation = Quaternion.identity;
             Destroy(this);
