@@ -46,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPosition = GetSpawnPosition();
 
         Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, parent).GetComponent<Enemy>();
+        enemy.SetNavMeshArea(areaMask);
         enemies.Add(enemy);
 
         enemy.onDeath += () => { enemies.Remove(enemy); };
@@ -66,7 +67,6 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogError("cannot find valid position");
             return transform.position;
         }
-
     }
 
     private IEnumerator SpawnEnemyAfterDelay(float delay)

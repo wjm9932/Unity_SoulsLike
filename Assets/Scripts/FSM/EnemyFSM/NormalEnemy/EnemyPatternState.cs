@@ -46,4 +46,12 @@ public class EnemyPatternState : IState
     {
 
     }
+
+    protected Quaternion GetMoveRotationAngle()
+    {
+        Vector3 direction = sm.owner.navMesh.velocity;
+        direction.y = 0;
+
+        return Quaternion.LookRotation(direction);
+    }
 }

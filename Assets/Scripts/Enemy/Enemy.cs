@@ -27,6 +27,10 @@ public class Enemy : LivingEntity
         isDead = false;
     }
 
+    public void SetNavMeshArea(int mask)
+    {
+        navMesh.areaMask = 1 << mask;
+    }
 
     private void OnTriggerStay(Collider other)
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace NormalEnemyFSM
 {
@@ -16,10 +17,13 @@ namespace NormalEnemyFSM
         {
             updatePathCoroutine = UpdatePath();
             sm.owner.navMesh.isStopped = false;
+            sm.owner.navMesh.speed = 1f;
+            sm.owner.navMesh.stoppingDistance = 1f;
             sm.owner.StartCoroutine(updatePathCoroutine);
         }
         public override void Update()
         {
+            sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
         }
         public override void PhysicsUpdate()
         {
@@ -51,17 +55,36 @@ namespace NormalEnemyFSM
         {
 
         }
+        private Vector3 GetSpawnPosition()
+        {
+            NavMeshHit hit;
+            Vector3 randomDirection = Random.insideUnitSphere * 10f + sm.owner.transform.position;
+
+            if (NavMesh.SamplePosition(randomDirection, out hit, 10f, sm.owner.navMesh.areaMask) == true)
+            {
+                return hit.position;
+            }
+            else
+            {
+                Debug.LogError("cannot find valid position");
+                return sm.owner.transform.transform.position;
+            }
+        }
+
         private IEnumerator UpdatePath()
         {
             while(sm.owner.isDead == false)
             {
                 if (IsTargetOnSight() == true)
                 {
-                    //sm.ChangeState(sm.patrolState);
+                    sm.ChangeState(sm.patrolState);
                 }
                 else
                 {
-
+                    if (sm.owner.navMesh.remainingDistance <= sm.owner.navMesh.stoppingDistance)
+                    {
+                        sm.owner.navMesh.SetDestination(GetSpawnPosition());
+                    }
                 }
                 yield return new WaitForSeconds(0.05f);
             }

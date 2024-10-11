@@ -75,11 +75,6 @@ public class NormalEnemy : Enemy
     }
 
 
-    private void SetNavMeshArea(string areaName)
-    {
-        int areaMask = NavMesh.GetAreaFromName(areaName);
-        navMesh.areaMask = 1 << areaMask;
-    }
 
     public override void Die()
     {
