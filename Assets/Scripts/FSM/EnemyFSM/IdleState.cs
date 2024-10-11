@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace NormalEnemyFSM
+namespace EnemyFSM
 {
     public class IdleState : EnemyPatternState
     {
@@ -35,7 +35,6 @@ namespace NormalEnemyFSM
         }
         public override void Exit()
         {
-            sm.owner.navMesh.isStopped = true;
             sm.owner.StopCoroutine(updatePathCoroutine);
             sm.owner.navMesh.ResetPath();
         }
@@ -55,7 +54,7 @@ namespace NormalEnemyFSM
         {
 
         }
-        private Vector3 GetDestinationPosition()
+        private Vector3 GetDestination()
         {
             NavMeshHit hit;
             Vector3 randomDirection = Random.insideUnitSphere * 10f + sm.owner.transform.position;
@@ -90,7 +89,7 @@ namespace NormalEnemyFSM
                 {
                     if (sm.owner.navMesh.remainingDistance <= sm.owner.navMesh.stoppingDistance)
                     {
-                        sm.owner.navMesh.SetDestination(GetDestinationPosition());
+                        sm.owner.navMesh.SetDestination(GetDestination());
                     }
                 }
                 yield return new WaitForSeconds(0.05f);

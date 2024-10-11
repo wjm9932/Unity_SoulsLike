@@ -22,8 +22,6 @@ public class WarriorEnemy : Enemy
     }
 #endif
 
-
-
     protected override void Awake()
     {
         base.Awake();
@@ -33,11 +31,13 @@ public class WarriorEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        health = 10f;
+        health = 100f;
         fieldOfView = 50f;
         viewDistance = 3f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
+
+        //onDeath += () => { enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.dieState); };
     }
 
     // Update is called once per frame
@@ -70,6 +70,10 @@ public class WarriorEnemy : Enemy
     {
         base.OnEnemyTriggerStay(collider);
 
+        if(enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.dieState)
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.hitState);
+        }
         //target = collider.gameObject;
         //enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.trackingState);
     }

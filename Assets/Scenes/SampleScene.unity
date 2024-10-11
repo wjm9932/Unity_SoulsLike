@@ -4798,6 +4798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArcherEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6019261130623370764, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6396068835311426742, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -19846,7 +19850,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116042896}
-  m_LocalRotation: {x: 0.23581965, y: -0.008810868, z: 0.0012635303, w: 0.9717561}
+  m_LocalRotation: {x: 0.23581965, y: -0.008810902, z: 0.0012635352, w: 0.9717561}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

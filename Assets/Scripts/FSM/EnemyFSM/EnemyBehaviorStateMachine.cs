@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NormalEnemyFSM;
+using EnemyFSM;
     public class EnemyBehaviorStateMachine : StateMachine
 {
     public Enemy owner { get; private set; }
     public DieState dieState { get; private set; }
+    public HitState hitState { get; private set; }
     public IdleState idleState { get; private set; }
     public TrackingState trackingState { get; private set; }
     public ShootArrowState shootArrowState { get; private set; }
@@ -15,6 +16,7 @@ using NormalEnemyFSM;
         this.owner = enemy;
 
         dieState = new DieState(this);
+        hitState = new HitState(this);
         idleState = new IdleState(this);
         trackingState = new TrackingState(this);
         shootArrowState = new ShootArrowState(this);

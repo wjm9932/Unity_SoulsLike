@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnemyFSM
+namespace BossEnemyFSM
 {
     public class JumpAttackState : BossEnemyPatternState
     {

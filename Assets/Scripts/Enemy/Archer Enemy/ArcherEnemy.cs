@@ -33,6 +33,9 @@ public class ArcherEnemy : Enemy
         viewDistance = 10f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
+
+
+        //onDeath += () => { enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.dieState); };
     }
 
     // Update is called once per frame
@@ -62,8 +65,11 @@ public class ArcherEnemy : Enemy
     }
     protected override void OnEnemyTriggerStay(Collider collider)
     {
-        base.OnEnemyTriggerStay(collider);
-
+        base.OnEnemyTriggerStay(collider); 
+        if (enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.dieState)
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.hitState);
+        }
         //target = collider.gameObject;
         //enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.trackingState);
     }

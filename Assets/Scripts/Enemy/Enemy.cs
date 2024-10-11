@@ -17,13 +17,13 @@ public class Enemy : LivingEntity
     [SerializeField]
     protected GameObject[] dropItem;
 
-    public override bool canBeDamaged
-    {
-        get
-        {
-            return Time.time >= lastTimeDamaged + minTimeBetDamaged ? true : false;
-        }
-    }
+    //public override bool canBeDamaged
+    //{
+    //    get
+    //    {
+    //        return Time.time >= lastTimeDamaged + minTimeBetDamaged ? true : false;
+    //    }
+    //}
 
     private float lastTimeDamaged;
     private const float minTimeBetDamaged = 0.5f;
@@ -35,14 +35,13 @@ public class Enemy : LivingEntity
         canBeDamaged = true;
         isDead = false;
     }
-
     public void SetNavMeshArea(int mask)
     {
         navMesh.areaMask = 1 << mask;
     }
     protected virtual void OnEnemyTriggerStay(Collider other)
     {
-        lastTimeDamaged = Time.time;
+        //lastTimeDamaged = Time.time;
 
         var hitPoint = other.ClosestPoint(transform.position);
         Vector3 hitNormal = (transform.position - hitPoint).normalized;
@@ -67,8 +66,6 @@ public class Enemy : LivingEntity
     public override void Die()
     {
         base.Die();
-
-        animator.SetTrigger("Die");
 
         Destroy(this.gameObject, 3f);
         GetComponent<Collider>().enabled = false;

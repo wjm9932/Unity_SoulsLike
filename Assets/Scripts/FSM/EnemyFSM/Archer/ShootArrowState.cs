@@ -11,8 +11,9 @@ public class ShootArrowState : EnemyPatternState
     }
     public override void Enter()
     {
-        sm.owner.SetDamage(0f);
         isShoot = false;
+        sm.owner.navMesh.isStopped = true;
+        sm.owner.SetDamage(0f);
         sm.owner.StartCoroutine(DelayForAnimation());
     }
     IEnumerator DelayForAnimation()
@@ -30,7 +31,6 @@ public class ShootArrowState : EnemyPatternState
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
             Arrow arrow = Object.Instantiate(sm.owner.GetComponent<ArcherEnemy>().arrow, sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position, targetRotation).GetComponent<Arrow>();
             arrow.parent = sm.owner;
-            isShoot = false;
             sm.ChangeState(sm.idleState); // this should be changed to tracking state not idle state
             
             
@@ -58,6 +58,7 @@ public class ShootArrowState : EnemyPatternState
     }
     public override void Exit()
     {
+        isShoot = false;
         sm.owner.animator.SetBool("IsShotArrow", false);
     }
     public override void OnAnimationEnterEvent()
