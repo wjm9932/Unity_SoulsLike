@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace EnemyFSM
+namespace BossEnemyFSM
 {
     public class BackFlipState : BossEnemyPatternState
     {

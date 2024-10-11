@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1091513591250150324}
   m_Layer: 0
   m_Name: Dungeon_Custom_Corner_Arched
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

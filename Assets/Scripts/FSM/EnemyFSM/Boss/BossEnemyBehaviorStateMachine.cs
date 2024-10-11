@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EnemyFSM;
+using BossEnemyFSM;
 public class BossEnemyBehaviorStateMachine : StateMachine
 {
     public BossEnemy owner { get; }

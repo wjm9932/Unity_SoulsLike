@@ -9,8 +9,6 @@ public class BossEnemy : Enemy
     private Character character;
     private BossEnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
-    
-
     protected override void Awake()
     {
         base.Awake();
@@ -94,7 +92,5 @@ public class BossEnemy : Enemy
     public override void Die()
     {
         base.Die();
-        Destroy(this.gameObject, 2f);
-        GetComponent<Collider>().enabled = false;
     }
 }

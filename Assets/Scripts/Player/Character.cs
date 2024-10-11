@@ -11,6 +11,7 @@ using UnityEditorInternal;
 [RequireComponent(typeof(Inventory))]
 public class Character : LivingEntity
 {
+    public Transform arrowParent;
     public UsableItem quickSlot
     {
         get
@@ -152,7 +153,7 @@ public class Character : LivingEntity
     {
         if (other.CompareTag("EnemySword") == true)
         {
-            if(playerMovementStateMachine.currentState is InteractState == true)
+            if (playerMovementStateMachine.currentState is InteractState == true)
             {
                 return;
             }
@@ -160,6 +161,31 @@ public class Character : LivingEntity
             LivingEntity enemy = other.transform.root.GetComponent<LivingEntity>();
 
             if (enemy.canAttack == true && enemy != null)
+            {
+                if (ApplyDamage(enemy) == true)
+                {
+                    playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+
+                    var hitPoint = other.ClosestPoint(transform.position);
+                    Vector3 hitNormal = (transform.position - hitPoint).normalized;
+                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Arrow") == true)
+        {
+            if (playerMovementStateMachine.currentState is InteractState == true)
+            {
+                return;
+            }
+
+            LivingEntity enemy = other.GetComponent<Arrow>().parent;
+
+            if(enemy != null)
             {
                 if (ApplyDamage(enemy) == true)
                 {

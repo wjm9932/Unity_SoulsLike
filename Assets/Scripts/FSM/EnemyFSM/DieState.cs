@@ -12,7 +12,7 @@ public class DieState : IState
 
     public virtual void Enter()
     {
-
+        sm.owner.animator.SetTrigger("Die");
     }
     public virtual void Update()
     {

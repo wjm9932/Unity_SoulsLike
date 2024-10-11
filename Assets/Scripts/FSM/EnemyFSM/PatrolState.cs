@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace NormalEnemyFSM
+namespace EnemyFSM
 {
-    public class IdleState : EnemyPatternState
+    public class PatrolState : EnemyPatternState
     {
         private IEnumerator updatePathCoroutine;
-        public IdleState(EnemyBehaviorStateMachine sm) : base(sm)
+        public PatrolState(EnemyBehaviorStateMachine sm) : base(sm)
         {
 
         }
 
         public override void Enter()
         {
+            sm.owner.target = null;
             updatePathCoroutine = UpdatePath();
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = 1f;
@@ -35,7 +36,6 @@ namespace NormalEnemyFSM
         }
         public override void Exit()
         {
-            sm.owner.navMesh.isStopped = true;
             sm.owner.StopCoroutine(updatePathCoroutine);
             sm.owner.navMesh.ResetPath();
         }
@@ -55,7 +55,7 @@ namespace NormalEnemyFSM
         {
 
         }
-        private Vector3 GetSpawnPosition()
+        private Vector3 GetDestination()
         {
             NavMeshHit hit;
             Vector3 randomDirection = Random.insideUnitSphere * 10f + sm.owner.transform.position;
@@ -77,13 +77,20 @@ namespace NormalEnemyFSM
             {
                 if (IsTargetOnSight() == true)
                 {
-                    sm.ChangeState(sm.patrolState);
+                    if(sm.owner.entityType == EntityType.ENEMY)
+                    {
+                        sm.ChangeState(sm.trackingState);
+                    }
+                    else if(sm.owner.entityType == EntityType.ARCHER)
+                    {
+                        sm.ChangeState(sm.shootArrowState);
+                    }
                 }
                 else
                 {
                     if (sm.owner.navMesh.remainingDistance <= sm.owner.navMesh.stoppingDistance)
                     {
-                        sm.owner.navMesh.SetDestination(GetSpawnPosition());
+                        sm.owner.navMesh.SetDestination(GetDestination());
                     }
                 }
                 yield return new WaitForSeconds(0.05f);
@@ -120,8 +127,6 @@ namespace NormalEnemyFSM
 
             return false;
         }
-
-
     }
 }
 

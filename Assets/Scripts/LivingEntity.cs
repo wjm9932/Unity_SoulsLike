@@ -7,6 +7,7 @@ public enum EntityType
 {
     CHARACTER,
     ENEMY,
+    ARCHER,
     BOSS
 }
 
