@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9149294904090068020}
   m_Layer: 0
   m_Name: Hallway_Half
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

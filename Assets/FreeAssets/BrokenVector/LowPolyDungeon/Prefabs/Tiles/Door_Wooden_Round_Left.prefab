@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2642311626253688301}
   m_Layer: 0
   m_Name: Door_Wooden_Round_Left
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Bone
   - Arrow
+  - Obstacle
   layers:
   - Default
   - TransparentFX

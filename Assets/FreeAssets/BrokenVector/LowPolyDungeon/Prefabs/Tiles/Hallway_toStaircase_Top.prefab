@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 141233252989338282}
   m_Layer: 0
   m_Name: Hallway_toStaircase_Top
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
