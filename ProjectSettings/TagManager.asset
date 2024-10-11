@@ -9,6 +9,7 @@ TagManager:
   - HealthPotion
   - Enemy
   - Bone
+  - Arrow
   layers:
   - Default
   - TransparentFX

@@ -83,7 +83,7 @@ namespace NormalEnemyFSM
                     }
                     else if(sm.owner.entityType == EntityType.ARCHER)
                     {
-
+                        sm.ChangeState(sm.shootArrowState);
                     }
                 }
                 else

@@ -6,11 +6,16 @@ using UnityEngine.AI;
 public class Enemy : LivingEntity
 {
 
-    [SerializeField]
-    protected GameObject[] dropItem;
-
+    public LayerMask whatIsTarget;
+    public Transform eyeTransform;
+    public GameObject target { get; set; }
+    public float viewDistance { get; protected set; }
+    public float fieldOfView { get; protected set; }
     public NavMeshAgent navMesh { get; private set; }
     public Animator animator { get; private set; }
+
+    [SerializeField]
+    protected GameObject[] dropItem;
 
     public override bool canBeDamaged
     {
@@ -54,5 +59,32 @@ public class Enemy : LivingEntity
                 }
             }
         }
+    }
+    public override void Die()
+    {
+        base.Die();
+
+        animator.SetTrigger("Die");
+
+        Destroy(this.gameObject, 3f);
+        GetComponent<Collider>().enabled = false;
+        DropItem();
+    }
+    protected void DropItem()
+    {
+        for (int i = 0; i < dropItem.Length; i++)
+        {
+            UX.Item item = dropItem[i].GetComponent<UX.Item>();
+
+            if (IsDrop(item.dropChance) == true)
+            {
+                Instantiate(dropItem[i], this.gameObject.transform.position, Quaternion.identity);
+            }
+        }
+    }
+
+    private bool IsDrop(float chances)
+    {
+        return Random.Range(0f, 100f) <= chances;
     }
 }

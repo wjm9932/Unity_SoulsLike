@@ -7,11 +7,6 @@ using UnityEngine.TextCore.Text;
 
 public class NormalEnemy : Enemy
 {
-    public LayerMask whatIsTarget;
-    public Transform eyeTransform;
-    public GameObject target { get; set; }
-    public float viewDistance { get; private set; }
-    public float fieldOfView { get; private set; }
 
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
@@ -78,28 +73,5 @@ public class NormalEnemy : Enemy
         base.Die();
 
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.dieState);
-        animator.SetTrigger("Die");
-
-        Destroy(this.gameObject, 3f);
-        GetComponent<Collider>().enabled = false;
-        DropItem();
-    }
-
-    private void DropItem()
-    {
-        for(int i = 0; i < dropItem.Length; i++)
-        {
-            UX.Item item = dropItem[i].GetComponent<UX.Item>();
-
-            if (IsDrop(item.dropChance) == true)
-            {
-                Instantiate(dropItem[i], this.gameObject.transform.position, Quaternion.identity);
-            }
-        }
-    }
-
-    private bool IsDrop(float chances)
-    {
-        return Random.Range(0f, 100f) <= chances;
     }
 }
