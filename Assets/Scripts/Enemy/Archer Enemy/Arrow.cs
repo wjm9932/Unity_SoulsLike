@@ -13,10 +13,12 @@ public class Arrow : MonoBehaviour
 
     private bool isGotShot;
     private Rigidbody rb;
+    private TrailRenderer arrowEffect;
     // Start is called before the first frame update
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        arrowEffect = GetComponent<TrailRenderer>();
     }
     void Start()
     {
@@ -57,6 +59,8 @@ public class Arrow : MonoBehaviour
                     transform.SetParent(other.transform);
                     GetComponent<Collider>().enabled = false;
                 }
+
+                arrowEffect.enabled = false;
             }
         }
     }
