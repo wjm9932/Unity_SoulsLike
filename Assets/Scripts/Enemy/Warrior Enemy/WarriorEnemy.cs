@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
 
-public class NormalEnemy : Enemy
+public class WarriorEnemy : Enemy
 {
 
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;

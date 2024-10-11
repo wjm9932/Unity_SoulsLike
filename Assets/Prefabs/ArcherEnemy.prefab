@@ -2591,12 +2591,12 @@ MonoBehaviour:
   damageTextPosition: {fileID: 2483790712937218645}
   _entityType: 2
   _maxHealth: 100
-  dropItem: []
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
   eyeTransform: {fileID: 3925785323940902640}
-  arrow: {fileID: 8192706639216898399, guid: 58d28b6451c9a0c4fa09fb09fc546f49, type: 3}
+  dropItem: []
+  arrow: {fileID: 8813609505244664587, guid: 6db75a620ec6521459038b7b1b937a62, type: 3}
   arrowPosition: {fileID: 364283556699512594}
 --- !u!1 &6091671905732200309
 GameObject:

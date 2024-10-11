@@ -5,10 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Arrow : MonoBehaviour
 {
+    [HideInInspector]
     public LivingEntity parent;
-    private bool isGotShot;
+    
     [SerializeField]
     private float speed = 20f;
+
+    private bool isGotShot;
     private Rigidbody rb;
     // Start is called before the first frame update
     private void Awake()
@@ -30,7 +33,6 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         if(isGotShot == false)
         {
             if (other.CompareTag("Enemy") == false)
