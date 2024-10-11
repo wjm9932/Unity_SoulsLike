@@ -178,6 +178,11 @@ public class Character : LivingEntity
     {
         if (other.CompareTag("Arrow") == true)
         {
+            if (playerMovementStateMachine.currentState is InteractState == true)
+            {
+                return;
+            }
+
             LivingEntity enemy = other.GetComponent<Arrow>().parent;
 
             if(enemy != null)
