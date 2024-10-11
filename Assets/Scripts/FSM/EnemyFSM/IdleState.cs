@@ -55,7 +55,7 @@ namespace NormalEnemyFSM
         {
 
         }
-        private Vector3 GetSpawnPosition()
+        private Vector3 GetDestinationPosition()
         {
             NavMeshHit hit;
             Vector3 randomDirection = Random.insideUnitSphere * 10f + sm.owner.transform.position;
@@ -90,7 +90,7 @@ namespace NormalEnemyFSM
                 {
                     if (sm.owner.navMesh.remainingDistance <= sm.owner.navMesh.stoppingDistance)
                     {
-                        sm.owner.navMesh.SetDestination(GetSpawnPosition());
+                        sm.owner.navMesh.SetDestination(GetDestinationPosition());
                     }
                 }
                 yield return new WaitForSeconds(0.05f);
@@ -127,8 +127,6 @@ namespace NormalEnemyFSM
 
             return false;
         }
-
-
     }
 }
 
