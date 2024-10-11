@@ -16,7 +16,7 @@ public class EnemyPatternState : IState
     }
     public virtual void Update()
     {
-
+        sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
     }
     public virtual void PhysicsUpdate()
     {

@@ -18,7 +18,7 @@ public class ShootArrowState : EnemyPatternState
     }
     IEnumerator DelayForAnimation()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame(); // the reason why I do this is that if I dont do this, the sm.owner.animator.SetBool("IsShotArrow", false); is never set to false because isShotArrow true->false->true in one frame
         sm.owner.animator.SetBool("IsShotArrow", true);
     }
     public override void Update()

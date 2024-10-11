@@ -24,7 +24,7 @@ namespace EnemyFSM
         }
         public override void Update()
         {
-            sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
+            base.Update();
         }
         public override void PhysicsUpdate()
         {
@@ -77,14 +77,7 @@ namespace EnemyFSM
             {
                 if (IsTargetOnSight() == true)
                 {
-                    if(sm.owner.entityType == EntityType.ENEMY)
-                    {
-                        sm.ChangeState(sm.trackingState);
-                    }
-                    else if(sm.owner.entityType == EntityType.ARCHER)
-                    {
-                        sm.ChangeState(sm.shootArrowState);
-                    }
+                    ChangeTargetState(sm.owner.entityType);
                 }
                 else
                 {
@@ -96,7 +89,22 @@ namespace EnemyFSM
                 yield return new WaitForSeconds(0.05f);
             }
         }
+        private void ChangeTargetState(EntityType entityType)
+        {
+            switch (entityType)
+            {
+                case EntityType.ENEMY:
+                    sm.ChangeState(sm.trackingState);
+                    break;
+                case EntityType.ARCHER:
+                    sm.ChangeState(sm.shootArrowState);
+                    break;
+                default:
+                    Debug.Log("There is no type");
+                    break;
+            }
 
+        }
         private bool IsTargetOnSight()
         {
             Transform eyeTransform = sm.owner.eyeTransform;
