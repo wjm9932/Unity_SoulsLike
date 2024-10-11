@@ -13,8 +13,6 @@ public class NormalEnemy : Enemy
     public float viewDistance { get; private set; }
     public float fieldOfView { get; private set; }
 
-    [SerializeField]
-    private GameObject[] dropItem;
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
 
@@ -22,7 +20,6 @@ public class NormalEnemy : Enemy
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-
         var leftEyeRotation = Quaternion.AngleAxis(-fieldOfView * 0.5f, Vector3.up);
         var leftRayDirection = leftEyeRotation * transform.forward;
         Handles.color = new Color(1f, 1f, 1f, 0.2f);

@@ -77,7 +77,14 @@ namespace NormalEnemyFSM
             {
                 if (IsTargetOnSight() == true)
                 {
-                    sm.ChangeState(sm.patrolState);
+                    if(sm.owner.entityType == EntityType.ENEMY)
+                    {
+                        sm.ChangeState(sm.trackingState);
+                    }
+                    else if(sm.owner.entityType == EntityType.ARCHER)
+                    {
+
+                    }
                 }
                 else
                 {

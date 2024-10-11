@@ -11,16 +11,14 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private GameObject enemyPrefab;
-
-
     [SerializeField]
     private string targetNavMeshArea;
-
     [SerializeField]
     private float spawnRadius = 5f;
-    private int areaMask;
     [SerializeField]
     private int targetSpawnCount = 3;
+
+    private int areaMask;
     private List<Enemy> enemies = new List<Enemy>();
     // Start is called before the first frame update
     private void Awake()

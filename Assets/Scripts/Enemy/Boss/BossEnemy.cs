@@ -9,8 +9,6 @@ public class BossEnemy : Enemy
     private Character character;
     private BossEnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
-    
-
     protected override void Awake()
     {
         base.Awake();

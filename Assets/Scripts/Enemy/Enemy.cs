@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class Enemy : LivingEntity
 {
+
+    [SerializeField]
+    protected GameObject[] dropItem;
+
     public NavMeshAgent navMesh { get; private set; }
     public Animator animator { get; private set; }
 
