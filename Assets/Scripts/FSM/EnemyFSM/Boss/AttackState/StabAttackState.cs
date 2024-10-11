@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class StabAttackState : EnemyPatternState
+    public class StabAttackState : BossEnemyPatternState
     {
         public StabAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
@@ -15,15 +15,15 @@ namespace EnemyFSM
         {
             dir = GetLookAtAngle();
 
-            sm.enemy.navMesh.isStopped = true;
-            sm.enemy.animator.SetTrigger("Stab");
-            sm.enemy.SetDamage(5f);
+            sm.owner.navMesh.isStopped = true;
+            sm.owner.animator.SetTrigger("Stab");
+            sm.owner.SetDamage(5f);
         }
         public override void Update()
         {
-            sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 10);
+            sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, dir, Time.deltaTime * 10);
 
-            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.75f && sm.enemy.animator.IsInTransition(0) == false)
+            if (sm.owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.75f && sm.owner.animator.IsInTransition(0) == false)
             {
                 GetBossPattern();
                 //sm.ChangeState(sm.idleState);
@@ -39,7 +39,7 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-            sm.enemy.navMesh.isStopped = false;
+            sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
         {

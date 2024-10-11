@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyPatternState : IState
+public abstract class BossEnemyPatternState : IState
 {
     protected BossEnemyBehaviorStateMachine sm;
     protected float stoppingDistance;
     protected float agentSpeed;
     protected Quaternion dir;
-    public EnemyPatternState(BossEnemyBehaviorStateMachine sm)
+    public BossEnemyPatternState(BossEnemyBehaviorStateMachine sm)
     {
         this.sm = sm;
     }
@@ -51,7 +51,7 @@ public abstract class EnemyPatternState : IState
     }
     protected virtual Quaternion GetLookAtAngle()
     {
-        Vector3 dir = sm.character.transform.position - sm.enemy.transform.position;
+        Vector3 dir = sm.character.transform.position - sm.owner.transform.position;
         dir.y = 0;
 
         return Quaternion.LookRotation(dir);

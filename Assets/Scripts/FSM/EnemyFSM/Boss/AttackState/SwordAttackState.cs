@@ -4,37 +4,29 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class JumpAttackState : EnemyPatternState
+    public class SwordAttackState : BossEnemyPatternState
     {
-        
-        private float distance;
-        public JumpAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
+        public SwordAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
-            stoppingDistance = 2f;
+            
         }
 
         public override void Enter()
         {
             dir = GetLookAtAngle();
-            
-            distance = Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position);
-            agentSpeed = (distance - stoppingDistance) / 1f;
-
-            sm.enemy.navMesh.speed = agentSpeed;
-            sm.enemy.navMesh.stoppingDistance = stoppingDistance;
-            sm.enemy.navMesh.SetDestination(sm.character.transform.position);
-            sm.enemy.animator.SetTrigger("Jump Attack");
-            sm.enemy.SetDamage(20f);
+            sm.owner.navMesh.isStopped = true;
+            sm.owner.animator.SetTrigger("Attack");
+            sm.owner.SetDamage(10f);
         }
         public override void Update()
         {
-            sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 10);
+            sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, dir, Time.deltaTime * 10);
 
-            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
+            if (sm.owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.owner.animator.IsInTransition(0) == false)
             {
                 GetBossPattern();
-
                 //sm.ChangeState(sm.idleState);
+                //sm.ChangeState(sm.stabAttackState);
             }
         }
         public override void PhysicsUpdate()
@@ -47,7 +39,7 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-
+            sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
         {
@@ -59,7 +51,6 @@ namespace EnemyFSM
         }
         public override void OnAnimationTransitionEvent()
         {
-
         }
         public override void OnAnimatorIK()
         {
@@ -67,18 +58,29 @@ namespace EnemyFSM
         }
         private void GetBossPattern()
         {
-            int pattern = Random.Range(0, 2);
+            int pattern = Random.Range(0, 5);
+            
             switch (pattern)
             {
                 case 0:
                     sm.ChangeState(sm.idleState);
                     break;
                 case 1:
+                    sm.ChangeState(sm.stabAttackState);
+                    break;
+                case 2:
+                    sm.ChangeState(sm.stabAttackState);
+                    break;
+                case 3:
+                    sm.ChangeState(sm.jumpAttackState);
+                    break;
+                case 4:
                     sm.ChangeState(sm.backFlipState);
                     break;
                 default:
                     break;
             }
         }
+        
     }
 }

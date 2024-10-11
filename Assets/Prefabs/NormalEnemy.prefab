@@ -40,6 +40,7 @@ Transform:
   - {fileID: 9069605926396102926}
   - {fileID: 8110367232642103932}
   - {fileID: 8110367234516015605}
+  - {fileID: 7245960344117620048}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -114,6 +115,10 @@ MonoBehaviour:
   damageTextPosition: {fileID: 8110367234516015605}
   _entityType: 1
   _maxHealth: 100
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 256
+  eyeTransform: {fileID: 7245960344117620048}
   dropItem:
   - {fileID: 389273326533521918, guid: 66dff4c13da22234881bc5c9a6817920, type: 3}
 --- !u!1 &177101665409242902
@@ -3008,6 +3013,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7902056142867027058}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7069344119085881657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7245960344117620048}
+  m_Layer: 0
+  m_Name: Eye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7245960344117620048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069344119085881657}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 735921613076023062}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7156483961468669282
 GameObject:

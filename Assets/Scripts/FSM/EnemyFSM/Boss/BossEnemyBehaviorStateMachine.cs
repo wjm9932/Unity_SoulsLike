@@ -4,7 +4,7 @@ using UnityEngine;
 using EnemyFSM;
 public class BossEnemyBehaviorStateMachine : StateMachine
 {
-    public BossEnemy enemy { get; }
+    public BossEnemy owner { get; }
     public Character character { get; }
     public IdleState idleState { get; }
     public SwordAttackState swordAttackState { get; }
@@ -15,7 +15,7 @@ public class BossEnemyBehaviorStateMachine : StateMachine
     public StabAttackState stabAttackState { get; }
     public BossEnemyBehaviorStateMachine(BossEnemy enemy, Character character)
     {   
-        this.enemy = enemy;
+        this.owner = enemy;
         this.character = character;
 
         idleState = new IdleState(this);

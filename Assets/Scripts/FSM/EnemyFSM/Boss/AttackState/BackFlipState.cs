@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class BackFlipState : EnemyPatternState
+    public class BackFlipState : BossEnemyPatternState
     {
         private float distance;
         public BackFlipState(BossEnemyBehaviorStateMachine sm) : base(sm)
@@ -15,17 +15,17 @@ namespace EnemyFSM
 
         public override void Enter()
         {
-            sm.enemy.navMesh.stoppingDistance = stoppingDistance;
+            sm.owner.navMesh.stoppingDistance = stoppingDistance;
 
             dir = GetLookAtAngle();
             SetDashDestinationAndSpeed();
-            sm.enemy.animator.SetTrigger("BackFlip");
+            sm.owner.animator.SetTrigger("BackFlip");
         }
         public override void Update()
         {
-            sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, dir, Time.deltaTime * 30);
+            sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, dir, Time.deltaTime * 30);
 
-            if (sm.enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.enemy.animator.IsInTransition(0) == false)
+            if (sm.owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.owner.animator.IsInTransition(0) == false)
             {
                 GetBossPattern();
             }
@@ -78,13 +78,13 @@ namespace EnemyFSM
         {
             Vector3 forwardDirection = dir * Vector3.forward;
             Vector3 backOffset = forwardDirection * -5;
-            Vector3 dashDestination = sm.enemy.transform.position + backOffset;
+            Vector3 dashDestination = sm.owner.transform.position + backOffset;
 
-            sm.enemy.navMesh.SetDestination(dashDestination);
+            sm.owner.navMesh.SetDestination(dashDestination);
 
-            distance = Vector3.Distance(sm.enemy.transform.position, dashDestination);
+            distance = Vector3.Distance(sm.owner.transform.position, dashDestination);
             agentSpeed = distance / 0.75f;
-            sm.enemy.navMesh.speed = agentSpeed;
+            sm.owner.navMesh.speed = agentSpeed;
         }
     }
 }

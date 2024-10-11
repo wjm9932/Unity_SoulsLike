@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class StanbyStabAttackState : EnemyPatternState
+    public class StanbyStabAttackState : BossEnemyPatternState
     {
         private bool isReadyToAttack;
         public StanbyStabAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
@@ -14,17 +14,17 @@ namespace EnemyFSM
 
         public override void Enter()
         {
-            sm.enemy.StartCoroutine(GetReady());
+            sm.owner.StartCoroutine(GetReady());
 
             isReadyToAttack = false;
-            sm.enemy.navMesh.isStopped = true;
-            sm.enemy.animator.SetTrigger("StabReady");
+            sm.owner.navMesh.isStopped = true;
+            sm.owner.animator.SetTrigger("StabReady");
         }
         public override void Update()
         {
-            if (isReadyToAttack == false && Vector3.Distance(sm.enemy.transform.position, sm.character.transform.position) >= 3f)
+            if (isReadyToAttack == false && Vector3.Distance(sm.owner.transform.position, sm.character.transform.position) >= 3f)
             {
-                sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetLookAtAngle(), Time.deltaTime * 10);
+                sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, GetLookAtAngle(), Time.deltaTime * 10);
             }
             else
             {
@@ -41,7 +41,7 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-            sm.enemy.navMesh.isStopped = false;
+            sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
         {

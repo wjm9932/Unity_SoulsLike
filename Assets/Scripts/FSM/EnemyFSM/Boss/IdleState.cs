@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EnemyFSM
 {
-    public class IdleState : EnemyPatternState
+    public class IdleState : BossEnemyPatternState
     {
         public IdleState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
@@ -15,16 +15,16 @@ namespace EnemyFSM
 
         public override void Enter()
         {
-            sm.enemy.navMesh.isStopped = false;
-            sm.enemy.navMesh.speed = agentSpeed;
-            sm.enemy.navMesh.stoppingDistance = stoppingDistance;
+            sm.owner.navMesh.isStopped = false;
+            sm.owner.navMesh.speed = agentSpeed;
+            sm.owner.navMesh.stoppingDistance = stoppingDistance;
         }
         public override void Update()
         {
-            if (Vector3.Distance(sm.character.transform.position, sm.enemy.transform.position) >= stoppingDistance)
+            if (Vector3.Distance(sm.character.transform.position, sm.owner.transform.position) >= stoppingDistance)
             {
-                sm.enemy.transform.rotation = Quaternion.Slerp(sm.enemy.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
-                sm.enemy.navMesh.SetDestination(sm.character.transform.position);
+                sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
+                sm.owner.navMesh.SetDestination(sm.character.transform.position);
             }
             else
             {
@@ -41,8 +41,8 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-            sm.enemy.navMesh.isStopped = true;
-            sm.enemy.navMesh.ResetPath();
+            sm.owner.navMesh.isStopped = true;
+            sm.owner.navMesh.ResetPath();
         }
         public override void OnAnimationEnterEvent()
         {
@@ -62,7 +62,7 @@ namespace EnemyFSM
         }
         private Quaternion GetMoveRotationAngle()
         {
-            Vector3 direction = sm.enemy.navMesh.velocity;
+            Vector3 direction = sm.owner.navMesh.velocity;
             direction.y = 0; 
 
             return Quaternion.LookRotation(direction);
