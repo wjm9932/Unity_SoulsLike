@@ -36,8 +36,6 @@ public class WarriorEnemy : Enemy
         viewDistance = 3f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
-
-        //onDeath += () => { enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.dieState); };
     }
 
     // Update is called once per frame
@@ -71,11 +69,10 @@ public class WarriorEnemy : Enemy
         base.OnEnemyTriggerStay(collider);
 
         if(enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.dieState)
-        {
+        {   
+            target = collider.gameObject;
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.hitState);
         }
-        //target = collider.gameObject;
-        //enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.trackingState);
     }
     public override void Die()
     {

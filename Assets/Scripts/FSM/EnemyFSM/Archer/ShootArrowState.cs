@@ -13,7 +13,7 @@ public class ShootArrowState : EnemyPatternState
     {
         isShoot = false;
         sm.owner.navMesh.isStopped = true;
-        sm.owner.SetDamage(0f);
+        sm.owner.SetDamage(10f);
         sm.owner.StartCoroutine(DelayForAnimation());
     }
     IEnumerator DelayForAnimation()
@@ -32,16 +32,6 @@ public class ShootArrowState : EnemyPatternState
             Arrow arrow = Object.Instantiate(sm.owner.GetComponent<ArcherEnemy>().arrow, sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position, targetRotation).GetComponent<Arrow>();
             arrow.parent = sm.owner;
             sm.ChangeState(sm.idleState); // this should be changed to tracking state not idle state
-            
-            
-            //if(Vector3.Distance(sm.owner.target.transform.position, sm.owner.transform.position) >= sm.owner.navMesh.stoppingDistance)
-            //{
-            //    sm.ChangeState(sm.trackingState);
-            //}
-            //else
-            //{
-            //    sm.ChangeState(sm.shootArrowState);
-            //}
         }
         else
         {

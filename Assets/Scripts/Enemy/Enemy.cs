@@ -17,17 +17,6 @@ public class Enemy : LivingEntity
     [SerializeField]
     protected GameObject[] dropItem;
 
-    //public override bool canBeDamaged
-    //{
-    //    get
-    //    {
-    //        return Time.time >= lastTimeDamaged + minTimeBetDamaged ? true : false;
-    //    }
-    //}
-
-    private float lastTimeDamaged;
-    private const float minTimeBetDamaged = 0.5f;
-
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
@@ -41,8 +30,6 @@ public class Enemy : LivingEntity
     }
     protected virtual void OnEnemyTriggerStay(Collider other)
     {
-        //lastTimeDamaged = Time.time;
-
         var hitPoint = other.ClosestPoint(transform.position);
         Vector3 hitNormal = (transform.position - hitPoint).normalized;
         EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);

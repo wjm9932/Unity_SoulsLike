@@ -5,16 +5,17 @@ using UnityEngine.AI;
 
 namespace EnemyFSM
 {
-    public class IdleState : EnemyPatternState
+    public class PatrolState : EnemyPatternState
     {
         private IEnumerator updatePathCoroutine;
-        public IdleState(EnemyBehaviorStateMachine sm) : base(sm)
+        public PatrolState(EnemyBehaviorStateMachine sm) : base(sm)
         {
 
         }
 
         public override void Enter()
         {
+            sm.owner.target = null;
             updatePathCoroutine = UpdatePath();
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = 1f;

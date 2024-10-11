@@ -7,7 +7,7 @@ using EnemyFSM;
     public Enemy owner { get; private set; }
     public DieState dieState { get; private set; }
     public HitState hitState { get; private set; }
-    public IdleState idleState { get; private set; }
+    public PatrolState idleState { get; private set; }
     public TrackingState trackingState { get; private set; }
     public ShootArrowState shootArrowState { get; private set; }
     // Start is called before the first frame update
@@ -17,7 +17,7 @@ using EnemyFSM;
 
         dieState = new DieState(this);
         hitState = new HitState(this);
-        idleState = new IdleState(this);
+        idleState = new PatrolState(this);
         trackingState = new TrackingState(this);
         shootArrowState = new ShootArrowState(this);
     }
