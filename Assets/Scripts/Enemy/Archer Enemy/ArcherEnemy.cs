@@ -28,9 +28,11 @@ public class ArcherEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        trackingStopDistance = 5f;
+
         health = 100f;
         fieldOfView = 50f;
-        viewDistance = 5f;
+        viewDistance = 7f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);
     }

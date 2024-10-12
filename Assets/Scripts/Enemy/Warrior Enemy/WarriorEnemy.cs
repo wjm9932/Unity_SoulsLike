@@ -10,8 +10,6 @@ public class WarriorEnemy : Enemy
 
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
-
-
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
@@ -31,6 +29,8 @@ public class WarriorEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        trackingStopDistance = 1f;
+
         health = 100f;
         fieldOfView = 50f;
         viewDistance = 5f;
@@ -41,6 +41,7 @@ public class WarriorEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(enemyBehaviorStateMachine.currentState);
         enemyBehaviorStateMachine.Update();
     }
     private void FixedUpdate()
@@ -70,7 +71,7 @@ public class WarriorEnemy : Enemy
 
         if(enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.dieState)
         {   
-            target = collider.gameObject;
+            target = collider.transform.root.gameObject;
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.hitState);
         }
     }

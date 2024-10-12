@@ -16,13 +16,13 @@ namespace EnemyFSM
         public override void Enter()
         {
             sm.owner.target = null;
-            updatePathCoroutine = UpdatePath();
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = 1f;
             sm.owner.navMesh.stoppingDistance = 1f;
-            sm.owner.StartCoroutine(updatePathCoroutine);
-
             sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
+            
+            updatePathCoroutine = UpdatePath();
+            sm.owner.StartCoroutine(updatePathCoroutine);
         }
         public override void Update()
         {
@@ -75,11 +75,11 @@ namespace EnemyFSM
 
         private IEnumerator UpdatePath()
         {
-            while (sm.owner.isDead == false)
+            while (sm.owner.isDead == false && sm.currentState == this)
             {
                 if (IsTargetOnSight() == true)
                 {
-                    ChangeTargetState(sm.owner.entityType);
+                    sm.ChangeState(sm.trackingState);
                 }
                 else
                 {
@@ -91,22 +91,7 @@ namespace EnemyFSM
                 yield return new WaitForSeconds(0.05f);
             }
         }
-        private void ChangeTargetState(EntityType entityType)
-        {
-            switch (entityType)
-            {
-                case EntityType.ENEMY:
-                    sm.ChangeState(sm.trackingState);
-                    break;
-                case EntityType.ARCHER:
-                    sm.ChangeState(sm.shootArrowState);
-                    break;
-                default:
-                    Debug.Log("There is no type");
-                    break;
-            }
-
-        }
+        
         private bool IsTargetOnSight()
         {
             Transform eyeTransform = sm.owner.eyeTransform;
