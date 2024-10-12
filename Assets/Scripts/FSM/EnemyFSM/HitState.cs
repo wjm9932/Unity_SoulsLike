@@ -23,7 +23,7 @@ namespace EnemyFSM
         {
             if(isDone == true)
             {
-                sm.ChangeState(sm.idleState); // this need to be changed trackingState
+                sm.ChangeState(sm.trackingState); // this need to be changed trackingState
             }
         }
         public override void PhysicsUpdate()

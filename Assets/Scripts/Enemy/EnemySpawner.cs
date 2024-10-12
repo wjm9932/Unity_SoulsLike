@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public Transform parent;
     public QuestInfoSO quest;
 
     [SerializeField]
@@ -59,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector3 spawnPosition = GetSpawnPosition();
 
-        Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, parent).GetComponent<Enemy>();
+        Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<Enemy>();
         enemy.SetNavMeshArea(areaMask);
         enemies.Add(enemy);
 

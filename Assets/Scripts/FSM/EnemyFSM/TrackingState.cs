@@ -11,9 +11,12 @@ public class TrackingState : EnemyPatternState
     }
     public override void Enter()
     {
+        sm.owner.navMesh.isStopped = false;
         sm.owner.navMesh.speed = 2f;
+        sm.owner.navMesh.stoppingDistance = 1f;
         TrackTargetCoroutine = TrackTarget();
         sm.owner.StartCoroutine(TrackTargetCoroutine);
+        sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
     }
     public override void Update()
     {
@@ -50,22 +53,27 @@ public class TrackingState : EnemyPatternState
 
     IEnumerator TrackTarget()
     {
-        while(!sm.owner.isDead)
+        while (!sm.owner.isDead && sm.currentState == this)
         {
             sm.owner.navMesh.SetDestination(sm.owner.target.transform.position);
+
+
+            yield return new WaitForSeconds(0.05f);
 
             if (sm.owner.navMesh.remainingDistance <= sm.owner.navMesh.stoppingDistance)
             {
                 ChangeTargetState(sm.owner.entityType);
             }
-            
-            yield return new WaitForSeconds(0.05f);
+            else if (sm.owner.navMesh.remainingDistance >= sm.owner.viewDistance)
+            {
+                sm.ChangeState(sm.patrolState);
+            }
         }
     }
     private void ChangeTargetState(EntityType entityType)
     {
         switch (entityType)
-        { 
+        {
             case EntityType.ENEMY:
                 sm.ChangeState(sm.swordAttackState);
                 break;

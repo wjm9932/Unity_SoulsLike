@@ -30,9 +30,9 @@ public class ArcherEnemy : Enemy
     {
         health = 100f;
         fieldOfView = 50f;
-        viewDistance = 10f;
+        viewDistance = 5f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
-        enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
+        enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);
     }
 
     // Update is called once per frame

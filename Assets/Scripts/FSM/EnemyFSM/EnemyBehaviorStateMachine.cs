@@ -7,7 +7,7 @@ using EnemyFSM;
     public Enemy owner { get; private set; }
     public DieState dieState { get; private set; }
     public HitState hitState { get; private set; }
-    public PatrolState idleState { get; private set; }
+    public PatrolState patrolState { get; private set; }
     public TrackingState trackingState { get; private set; }
     public ShootArrowState shootArrowState { get; private set; }
     public SwordAttackState swordAttackState { get; private set; }
@@ -18,7 +18,7 @@ using EnemyFSM;
 
         dieState = new DieState(this);
         hitState = new HitState(this);
-        idleState = new PatrolState(this);
+        patrolState = new PatrolState(this);
         trackingState = new TrackingState(this);
         shootArrowState = new ShootArrowState(this);
         swordAttackState = new SwordAttackState(this);

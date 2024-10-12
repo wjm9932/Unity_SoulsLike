@@ -21,6 +21,8 @@ namespace EnemyFSM
             sm.owner.navMesh.speed = 1f;
             sm.owner.navMesh.stoppingDistance = 1f;
             sm.owner.StartCoroutine(updatePathCoroutine);
+
+            sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
         }
         public override void Update()
         {
@@ -73,7 +75,7 @@ namespace EnemyFSM
 
         private IEnumerator UpdatePath()
         {
-            while(sm.owner.isDead == false)
+            while (sm.owner.isDead == false)
             {
                 if (IsTargetOnSight() == true)
                 {
@@ -116,7 +118,7 @@ namespace EnemyFSM
                 var direction = collider.transform.position - eyeTransform.position;
                 direction.y = eyeTransform.forward.y;
 
-                if (Vector3.Angle(direction, eyeTransform.forward) > sm.owner.fieldOfView * 0.5f) 
+                if (Vector3.Angle(direction, eyeTransform.forward) > sm.owner.fieldOfView * 0.5f)
                 {
                     return false;
                 }

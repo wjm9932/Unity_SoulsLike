@@ -31,7 +31,7 @@ public class ShootArrowState : EnemyPatternState
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
             Arrow arrow = Object.Instantiate(sm.owner.GetComponent<ArcherEnemy>().arrow, sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position, targetRotation).GetComponent<Arrow>();
             arrow.parent = sm.owner;
-            sm.ChangeState(sm.idleState); // this should be changed to tracking state not idle state
+            sm.ChangeState(sm.patrolState); // this should be changed to tracking state not idle state
         }
         else
         {
