@@ -57,6 +57,8 @@ public class TrackingState : EnemyPatternState
         {
             sm.owner.navMesh.SetDestination(sm.owner.target.transform.position);
 
+            yield return new WaitForSeconds(0.05f);
+
             if (sm.owner.navMesh.remainingDistance <= sm.owner.navMesh.stoppingDistance)
             {
                 ChangeTargetState(sm.owner.entityType);
@@ -65,7 +67,6 @@ public class TrackingState : EnemyPatternState
             {
                 sm.ChangeState(sm.patrolState);
             }
-            yield return new WaitForSeconds(0.05f);
         }
     }
     private void ChangeTargetState(EntityType entityType)
