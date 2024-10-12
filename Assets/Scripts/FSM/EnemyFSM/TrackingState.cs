@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TrackingState : EnemyPatternState
 {
@@ -14,8 +15,10 @@ public class TrackingState : EnemyPatternState
         sm.owner.navMesh.isStopped = false;
         sm.owner.navMesh.speed = 2f;
         sm.owner.navMesh.stoppingDistance = sm.owner.trackingStopDistance;
+
         TrackTargetCoroutine = TrackTarget();
         sm.owner.StartCoroutine(TrackTargetCoroutine);
+
         sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
         sm.owner.navMesh.avoidancePriority = 51;
     }
@@ -64,7 +67,7 @@ public class TrackingState : EnemyPatternState
             {
                 ChangeTargetState(sm.owner.entityType);
             }
-            else if (sm.owner.navMesh.remainingDistance >= sm.owner.viewDistance)
+            else if (sm.owner.navMesh.remainingDistance >= sm.owner.viewDistance || IsPlayerOnNavMesh() == false)
             {
                 sm.ChangeState(sm.patrolState);
             }
@@ -85,5 +88,11 @@ public class TrackingState : EnemyPatternState
                 break;
         }
 
+    }
+
+    bool IsPlayerOnNavMesh()
+    {
+        NavMeshHit hit;
+        return NavMesh.SamplePosition(sm.owner.target.transform.position, out hit, 1.0f, sm.owner.navMesh.areaMask);
     }
 }
