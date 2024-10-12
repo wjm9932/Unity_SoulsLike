@@ -20,6 +20,7 @@ namespace EnemyFSM
             sm.owner.navMesh.isStopped = true;
             sm.owner.SetDamage(10f);
             sm.owner.StartCoroutine(DelayForAnimation());
+            sm.owner.navMesh.avoidancePriority = 50;
         }
         IEnumerator DelayForAnimation()
         {

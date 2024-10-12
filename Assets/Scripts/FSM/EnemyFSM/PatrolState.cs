@@ -15,17 +15,13 @@ namespace EnemyFSM
 
         public override void Enter()
         {
-            if (updatePathCoroutine != null)
-            {
-                sm.owner.StopCoroutine(updatePathCoroutine);
-            }
-
             sm.owner.target = null;
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = 1f;
             sm.owner.navMesh.stoppingDistance = 1f;
             sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
-            
+            sm.owner.navMesh.avoidancePriority = 50;
+
             updatePathCoroutine = UpdatePath();
             sm.owner.StartCoroutine(updatePathCoroutine);
         }
@@ -43,11 +39,7 @@ namespace EnemyFSM
         }
         public override void Exit()
         {
-            if (updatePathCoroutine != null)
-            {
-                sm.owner.StopCoroutine(updatePathCoroutine);
-                updatePathCoroutine = null;
-            }
+            sm.owner.StopCoroutine(updatePathCoroutine);
             sm.owner.navMesh.ResetPath();
         }
         public override void OnAnimationEnterEvent()

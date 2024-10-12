@@ -17,6 +17,7 @@ public class TrackingState : EnemyPatternState
         TrackTargetCoroutine = TrackTarget();
         sm.owner.StartCoroutine(TrackTargetCoroutine);
         sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
+        sm.owner.navMesh.avoidancePriority = 51;
     }
     public override void Update()
     {
