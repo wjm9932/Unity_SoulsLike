@@ -191,9 +191,9 @@ public class Character : LivingEntity
                 {
                     other.GetComponent<Arrow>().rb.isKinematic = true;
                     other.GetComponent<Arrow>().arrowEffect.enabled = false;
+                    other.GetComponent<Arrow>().enabled = false;
                     other.GetComponent<Collider>().enabled = false;
                     other.transform.SetParent(arrowParent);
-                    Destroy(other.GetComponent<Arrow>());
 
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
 

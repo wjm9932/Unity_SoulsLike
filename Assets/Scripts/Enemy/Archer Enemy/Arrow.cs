@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Arrow : MonoBehaviour
+public class Arrow : MonoBehaviour, IPoolableObject
 {
     [HideInInspector]
     public LivingEntity parent;
 
     [SerializeField]
     private float speed = 20f;
+
+
+    public IObjectPool<GameObject> pool { get; private set; }
 
     public Rigidbody rb { get; private set; }
     public TrailRenderer arrowEffect { get; private set; }
@@ -19,10 +23,15 @@ public class Arrow : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         arrowEffect = GetComponent<TrailRenderer>();
     }
+    private void OnEnable()
+    {
+    }
+    private void OnDisable()
+    {
+    }
     void Start()
     {
-        rb.AddForce(this.transform.forward * speed, ForceMode.Impulse);
-        Destroy(this.gameObject, 3f);
+        
     }
 
     // Update is called once per frame
@@ -30,6 +39,27 @@ public class Arrow : MonoBehaviour
     {
         
     }
+
+    public void Initialize(Vector3 position, Quaternion rotation, Enemy parent)
+    {
+        this.parent = parent;
+        this.enabled = true;
+        this.gameObject.transform.position = position;
+        this.gameObject.transform.rotation = rotation;
+
+        rb.isKinematic = false;
+        arrowEffect.enabled = true;
+        GetComponent<Collider>().enabled = true;
+
+        rb.AddForce(this.transform.forward * speed, ForceMode.Impulse);
+        StartCoroutine(Release(3f));
+    }
+
+    public void SetPool(IObjectPool<GameObject> pool)
+    {
+        this.pool = pool;
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -40,7 +70,14 @@ public class Arrow : MonoBehaviour
             GetComponent<Collider>().enabled = false;
             transform.position = other.ClosestPoint(transform.position);
             transform.SetParent(other.transform);
-            Destroy(this);
+            this.enabled = false;
         }
+    }
+
+    private IEnumerator Release(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        transform.SetParent(null);
+        pool.Release(this.gameObject);
     }
 }

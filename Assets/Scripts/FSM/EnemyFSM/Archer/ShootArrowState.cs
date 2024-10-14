@@ -27,11 +27,12 @@ public class ShootArrowState : EnemyPatternState
         {
             Vector3 directionToTarget = sm.owner.target.transform.position - sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position;
             directionToTarget.y = 0; 
-
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-            Arrow arrow = Object.Instantiate(sm.owner.GetComponent<ArcherEnemy>().arrow, sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position, targetRotation).GetComponent<Arrow>();
-            arrow.parent = sm.owner;
-            sm.ChangeState(sm.trackingState); // this should be changed to tracking state not idle state
+
+            Arrow arrow = ObjectPoolManager.Instance.GetPoolableObject(ObjectPoolManager.ObjectType.ARROW).GetComponent<Arrow>();
+            arrow.Initialize(sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position, targetRotation, sm.owner);
+
+            sm.ChangeState(sm.trackingState);
         }
         else
         {

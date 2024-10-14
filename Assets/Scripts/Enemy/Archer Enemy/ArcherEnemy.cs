@@ -19,6 +19,8 @@ public class ArcherEnemy : Enemy
         Handles.DrawSolidArc(eyeTransform.position, Vector3.up, leftRayDirection, fieldOfView, viewDistance);
     }
 #endif
+
+
     protected override void Awake()
     {
         base.Awake();

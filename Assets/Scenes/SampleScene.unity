@@ -3359,7 +3359,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438566681}
-  m_LocalRotation: {x: 0.10995603, y: -0.008900065, z: 0.00012947341, w: 0.99389666}
+  m_LocalRotation: {x: 0.10995604, y: -0.008900099, z: 0.00012947396, w: 0.99389666}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3434,6 +3434,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8011076794458981704, guid: b78909d98814b3d42aa488a008c30001, type: 3}
   m_PrefabInstance: {fileID: 439827450}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &440805046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 440805047}
+  - component: {fileID: 440805048}
+  m_Layer: 0
+  m_Name: ObjectPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &440805047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440805046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 442986234}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &440805048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440805046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e813dd2e1237d1b4c8893bbb8077710f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectInfos:
+  - objectType: 0
+    prefab: {fileID: 8813609505244664587, guid: 6db75a620ec6521459038b7b1b937a62, type: 3}
+    count: 10
 --- !u!1 &442173692
 GameObject:
   m_ObjectHideFlags: 0
@@ -3542,6 +3590,7 @@ Transform:
   - {fileID: 573046113}
   - {fileID: 1909101849}
   - {fileID: 783194690}
+  - {fileID: 440805047}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5706,6 +5755,10 @@ PrefabInstance:
     - target: {fileID: 9127586027668007992, guid: 2f2ff5c103656c94ca51d5bbd62d1ca9, type: 3}
       propertyPath: m_Name
       value: Dungeon_Custom_Border_Arched
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127586027668007992, guid: 2f2ff5c103656c94ca51d5bbd62d1ca9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9127586027668500504, guid: 2f2ff5c103656c94ca51d5bbd62d1ca9, type: 3}
       propertyPath: m_RootOrder
