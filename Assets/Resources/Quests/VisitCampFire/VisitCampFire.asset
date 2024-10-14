@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: VisitCampFire
   displayName: Visit Camp Fire
-  initialState: 1
+  initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Hey
   onStartDialogue: Hey, Visit the came fire over there and find out something special
   onFinishDialogue: "Great job! \nAs you can see, you can heal at the campfire"
   onFailFinishDialogue: Not enough space!
-  questPrerequisites: []
+  questPrerequisites:
+  - {fileID: 11400000, guid: d289c6d318298ec4ba4f07ed25ed70d4, type: 2}
   questStepPrefabs:
   - stepPrefabs:
     - {fileID: 4269398714128404377, guid: d63b86fb39e7ef441b88b7ca0ebd82ab, type: 3}

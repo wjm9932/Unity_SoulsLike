@@ -10,7 +10,7 @@ public class HealByCampFire : MonoBehaviour
     [SerializeField] private float healAmount;
     [SerializeField] private float totalHealDuration;
     [SerializeField] private float healDuration;
-    private float healInterval = 0.05f; // 0.05??? ??
+    private float healInterval = 0.01f; 
 
     // Start is called before the first frame update
     void Start()
