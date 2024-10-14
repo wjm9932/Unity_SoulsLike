@@ -33,8 +33,8 @@ public class Enemy : LivingEntity
     protected virtual void OnEnemyTriggerStay(Collider other)
     {
         var hitPoint = other.ClosestPoint(transform.position);
-        Vector3 hitNormal = (transform.position - hitPoint).normalized;
-        EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+        Vector3 hitNormal = (hitPoint - transform.position).normalized;
+        EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, transform, EffectManager.EffectType.Flesh);
     }
 
     private void OnTriggerStay(Collider other)

@@ -167,8 +167,8 @@ public class Character : LivingEntity
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
 
                     var hitPoint = other.ClosestPoint(transform.position);
-                    Vector3 hitNormal = (transform.position - hitPoint).normalized;
-                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+                    Vector3 hitNormal = (hitPoint - transform.position).normalized;
+                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, transform, EffectManager.EffectType.Flesh);
                 }
             }
         }
@@ -189,11 +189,17 @@ public class Character : LivingEntity
             {
                 if (ApplyDamage(enemy) == true)
                 {
+                    other.GetComponent<Arrow>().rb.isKinematic = true;
+                    other.GetComponent<Arrow>().arrowEffect.enabled = false;
+                    other.GetComponent<Collider>().enabled = false;
+                    other.transform.SetParent(arrowParent);
+                    Destroy(other.GetComponent<Arrow>());
+
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
 
-                    var hitPoint = other.ClosestPoint(transform.position);
-                    Vector3 hitNormal = (transform.position - hitPoint).normalized;
-                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, other.transform, EffectManager.EffectType.Flesh);
+                    var hitPoint = other.transform.position;
+                    Vector3 hitNormal = (hitPoint - transform.position).normalized;
+                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, transform, EffectManager.EffectType.Flesh);
                 }
             }
         }

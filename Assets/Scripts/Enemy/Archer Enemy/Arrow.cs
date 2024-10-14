@@ -7,13 +7,12 @@ public class Arrow : MonoBehaviour
 {
     [HideInInspector]
     public LivingEntity parent;
-    
+
     [SerializeField]
     private float speed = 20f;
 
-    private bool isGotShot;
-    private Rigidbody rb;
-    private TrailRenderer arrowEffect;
+    public Rigidbody rb { get; private set; }
+    public TrailRenderer arrowEffect { get; private set; }
     // Start is called before the first frame update
     private void Awake()
     {
@@ -22,7 +21,6 @@ public class Arrow : MonoBehaviour
     }
     void Start()
     {
-        isGotShot = false;
         rb.AddForce(this.transform.forward * speed, ForceMode.Impulse);
         Destroy(this.gameObject, 3f);
     }
@@ -35,34 +33,14 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isGotShot == false)
+        if (other.CompareTag("Obstacle") == true)
         {
-            if(other.CompareTag("Player") == true)
-            {
-                Character player = other.GetComponent<Character>();
-                if (player != null)
-                {
-                    if (player.canBeDamaged == true)
-                    {
-                        isGotShot = true;
-                        rb.isKinematic = true;
-                        arrowEffect.enabled = false;
-                        GetComponent<Collider>().enabled = false;
-                        transform.position = other.ClosestPoint(transform.position);
-                        transform.SetParent(player.arrowParent);
-                    }
-                }
-            }
-            else if(other.CompareTag("Obstacle") == true)
-            {
-                isGotShot = true;
-                rb.isKinematic = true;
-                arrowEffect.enabled = false;
-                GetComponent<Collider>().enabled = false;
-                transform.position = other.ClosestPoint(transform.position);
-                transform.SetParent(other.transform);
-            }
-          
+            rb.isKinematic = true;
+            arrowEffect.enabled = false;
+            GetComponent<Collider>().enabled = false;
+            transform.position = other.ClosestPoint(transform.position);
+            transform.SetParent(other.transform);
+            Destroy(this);
         }
     }
 }
