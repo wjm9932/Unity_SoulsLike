@@ -7,25 +7,9 @@ public class PlayerQuestEvent : MonoBehaviour
 {
     public event Action<string> onCollect;
     public event Action<string> onUse;
+    public event Action<string> onVisit;
     public event Action<EntityType> OnKill;
 
-    // Start is called before the first frame update
-
-    private void Awake()
-    {
-
-    }
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void UpdateItemCount(string item)
     {
@@ -47,6 +31,14 @@ public class PlayerQuestEvent : MonoBehaviour
         if(OnKill != null)
         {
             OnKill(type);
+        }
+    }
+
+    public void Visit(string place)
+    {
+        if(onVisit != null)
+        {
+            onVisit(place);
         }
     }
 }

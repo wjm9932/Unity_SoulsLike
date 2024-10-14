@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
+  m_Name: VisitCampFire
+  m_EditorClassIdentifier: 
+  id: VisitCampFire
+  displayName: Visit Camp Fire
+  initialState: 1
+  requirementsNotMetDialogue: You have to complete other quest before start this
+    quest!
+  doneDialogue: Hey
+  onStartDialogue: Hey, Visit the came fire over there and find out something special
+  onFinishDialogue: "Great job! \nAs you can see, you can heal at the campfire"
+  onFailFinishDialogue: Not enough space!
+  questPrerequisites: []
+  questStepPrefabs:
+  - stepPrefabs:
+    - {fileID: 4269398714128404377, guid: d63b86fb39e7ef441b88b7ca0ebd82ab, type: 3}
+  targetItem: []
+  rewards: []

@@ -58,7 +58,7 @@ public class Character : LivingEntity
 
 
     public Inventory inventory { get; private set; }
-    public PlayerQuestEvent eventManager { get; private set; }
+    public PlayerQuestEvent playerEvents { get; private set; }
 
     public override float health
     {
@@ -88,7 +88,7 @@ public class Character : LivingEntity
         playerHeight = GetComponent<CapsuleCollider>().height;
         input = GetComponent<PlayerInput>();
         inventory = GetComponent<Inventory>();
-        eventManager = GetComponent<PlayerQuestEvent>();
+        playerEvents = GetComponent<PlayerQuestEvent>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         uiStateMachine.ChangeState(uiStateMachine.closeState);
@@ -222,7 +222,7 @@ public class Character : LivingEntity
 
     public void KillLivingEntity(EntityType type)
     {
-        eventManager.KillEnemy(type);
+        playerEvents.KillEnemy(type);
     }
 
     /************************************Test********************************************************/

@@ -11,6 +11,8 @@ TagManager:
   - Bone
   - Arrow
   - Obstacle
+  - FxTemporaire
+  - CampFire
   layers:
   - Default
   - TransparentFX
