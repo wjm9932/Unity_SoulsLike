@@ -92,7 +92,7 @@ public abstract class LivingEntity : MonoBehaviour
                 }
             }
 
-            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damager.damage);
+            //TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damager.damage);
             return true;
         }
         else

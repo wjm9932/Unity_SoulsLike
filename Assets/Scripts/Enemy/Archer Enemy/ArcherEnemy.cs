@@ -6,9 +6,16 @@ using UnityEngine;
 public class ArcherEnemy : Enemy
 {
     public Transform arrowPosition;
+
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
-
-
+    public override float health
+    {
+        protected set
+        {
+            base.health = value;
+            hpBar.UpdateHealthBar(health, maxHealth);
+        }
+    }
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {

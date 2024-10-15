@@ -10,6 +10,15 @@ public class WarriorEnemy : Enemy
 
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
+    public override float health
+    {
+        protected set
+        {
+            base.health = value;
+            hpBar.UpdateHealthBar(health, maxHealth);
+        }
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {

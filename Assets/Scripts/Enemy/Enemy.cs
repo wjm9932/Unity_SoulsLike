@@ -5,19 +5,22 @@ using UnityEngine.AI;
 
 public class Enemy : LivingEntity
 {
-
+    [Header("NavMesh")]
     public LayerMask whatIsTarget;
     public Transform eyeTransform;
-    public GameObject target { get; set; }
+
+    [Header("Drop Item")]
+    [SerializeField] protected GameObject[] dropItem;
+
+    [Header("Health Bar")]
+    [SerializeField] protected EnemyHealthBar hpBar;
+
     public float viewDistance { get; protected set; }
     public float fieldOfView { get; protected set; }
     public float trackingStopDistance { get; protected set; }
-
     public NavMeshAgent navMesh { get; private set; }
+    public GameObject target { get; set; }
     public Animator animator { get; private set; }
-
-    [SerializeField]
-    protected GameObject[] dropItem;
 
     protected virtual void Awake()
     {
