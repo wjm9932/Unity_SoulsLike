@@ -9,13 +9,18 @@ public class EnemySpawner : MonoBehaviour
     public QuestInfoSO quest;
 
     [SerializeField]
-    private GameObject enemyPrefab;
+    TargetEnemiesInfo[] info;
     [SerializeField]
     private string targetNavMeshArea;
     [SerializeField]
     private float spawnRadius = 5f;
-    [SerializeField]
-    private int targetSpawnCount = 3;
+
+    [System.Serializable]
+    private struct TargetEnemiesInfo
+    {
+        public GameObject targetEnemy;
+        public int targetCount;
+    }
 
     private int areaMask;
     private List<Enemy> enemies = new List<Enemy>();
@@ -42,9 +47,12 @@ public class EnemySpawner : MonoBehaviour
     }
     void Start()
     {
-        for(int i = 0; i < targetSpawnCount; i++)
+        for (int i = 0; i < info.Length; i++)
         {
-            SpawnEnemy();
+            for (int j = 0; j < info[i].targetCount; j++)
+            {
+                SpawnEnemy(info[i].targetEnemy);
+            }
         }
     }
 
@@ -54,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    private void SpawnEnemy()
+    private void SpawnEnemy(GameObject enemyPrefab)
     {
         Vector3 spawnPosition = GetSpawnPosition();
 
@@ -63,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
         enemies.Add(enemy);
 
         enemy.onDeath += () => { enemies.Remove(enemy); };
-        enemy.onDeath += () => { StartCoroutine(SpawnEnemyAfterDelay(5f)); };
+        enemy.onDeath += () => { StartCoroutine(SpawnEnemyAfterDelay(enemyPrefab, 5f)); };
     }
 
     private Vector3 GetSpawnPosition()
@@ -82,10 +90,10 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnEnemyAfterDelay(float delay)
+    private IEnumerator SpawnEnemyAfterDelay(GameObject targetEnemy, float delay)
     {
         yield return new WaitForSeconds(delay);
-        SpawnEnemy(); 
+        SpawnEnemy(targetEnemy); 
     }
     private void EndWave(Quest quest)
     {

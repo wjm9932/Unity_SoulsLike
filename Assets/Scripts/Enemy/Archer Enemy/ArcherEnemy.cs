@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ArcherEnemy : Enemy
 {
-    public GameObject arrow;
     public Transform arrowPosition;
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
