@@ -10,12 +10,7 @@ public class DamageText : MonoBehaviour
 
     private void Awake()
     {
-        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        if(mainCamera == null)
-        {
-            Debug.LogError("Camera is null");
-        }
-
+      
         time = 2f;
     }
     // Start is called before the first frame update
@@ -27,7 +22,7 @@ public class DamageText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = transform.position - mainCamera.transform.position;
+        Vector3 direction = transform.position - Camera.main.transform.position;
         direction.y = 0; 
 
         transform.rotation = Quaternion.LookRotation(direction);
