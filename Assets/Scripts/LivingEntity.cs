@@ -38,6 +38,7 @@ public abstract class LivingEntity : MonoBehaviour
     [SerializeField]
     Transform damageTextPosition;
 
+    [Header("Entitiy")]
     [SerializeField]
     private EntityType _entityType;
     public EntityType entityType { get { return _entityType; } protected set { _entityType = value; } }

@@ -11,7 +11,6 @@ using UnityEditorInternal;
 [RequireComponent(typeof(Inventory))]
 public class Character : LivingEntity
 {
-    public Transform arrowParent;
     public UsableItem quickSlot
     {
         get
@@ -21,26 +20,36 @@ public class Character : LivingEntity
         }
     }
 
+    [Header("Quest")]
     public GameObject inventoryUI;
     public GameObject questLogUI;
     public GameObject questDialogueUI;
-    public Image hpBar;
+
+    [Header("Health Bar")]
+    public PlayerHealthBar hpBar;
+
+    [Header("Camera")]
     public CinemachineVirtualCamera lockOnCamera;
     public CinemachineFreeLook lockOffCamera;
-
     public Transform lockOnCameraPosition;
     public Transform camEyePos;
-    public Transform leftHandPos;
 
-    public TrailRenderer swordEffect;
-
+    [Header("Layer Mask")]
     public LayerMask whatIsGround;
     public LayerMask enemyMask;
     public LayerMask lockOnCameraTargetLayer;
 
+    [Header("Movement")]
     public float walkSpeed;
     public float sprintSpeed;
+    [SerializeField]
+    private float maxSlopeAngle;
+    public RaycastHit slopeHit;
 
+    [Space]
+    public Transform leftHandPos;
+    public TrailRenderer swordEffect;
+    public Transform arrowHitPositionParent;
     public UsableItem toBeUsedItem { get; private set; }
 
     public Animator animator { get; private set; }
@@ -51,10 +60,6 @@ public class Character : LivingEntity
     public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
     public UIStateMachine uiStateMachine { get; private set; }
 
-    [SerializeField]
-    private float maxSlopeAngle;
-
-    public RaycastHit slopeHit;
 
 
     public Inventory inventory { get; private set; }
@@ -65,7 +70,7 @@ public class Character : LivingEntity
         protected set
         {
             base.health = value;
-            hpBar.fillAmount = health / maxHealth;
+            hpBar.UpdateHealthBar(health, maxHealth);
         }
     }
 
@@ -80,7 +85,7 @@ public class Character : LivingEntity
     }
     void Start()
     {
-        health = 10f;
+        health = 100f;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -193,7 +198,7 @@ public class Character : LivingEntity
                     other.GetComponent<Arrow>().arrowEffect.enabled = false;
                     other.GetComponent<Arrow>().enabled = false;
                     other.GetComponent<Collider>().enabled = false;
-                    other.transform.SetParent(arrowParent);
+                    other.transform.SetParent(arrowHitPositionParent);
 
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
 
