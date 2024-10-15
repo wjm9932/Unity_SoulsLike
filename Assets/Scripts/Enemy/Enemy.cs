@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 public class Enemy : LivingEntity
@@ -14,6 +15,9 @@ public class Enemy : LivingEntity
 
     [Header("Health Bar")]
     [SerializeField] protected EnemyHealthBar hpBar;
+
+    [Header("Lock On Indicator")]
+    public Image lockOnIndicator;
 
     public float viewDistance { get; protected set; }
     public float fieldOfView { get; protected set; }
