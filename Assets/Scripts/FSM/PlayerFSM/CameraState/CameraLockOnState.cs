@@ -30,8 +30,9 @@ public class CameraLockOnState : CameraState
             csm.owner.lockOffCamera.Priority = 9;
             csm.owner.lockOnCamera.Priority = 10;
 
-            UpdateCameraPosition();
-            csm.owner.StartCoroutine(ApplyDampingAfterFirstFrame());
+            target.transform.root.GetComponent<Enemy>().lockOn.gameObject.SetActive(true);
+            //UpdateCameraPosition();
+            csm.owner.StartCoroutine(ApplyDampingAfterTwoFrame());
         }
     }
     public override void Update()
@@ -57,6 +58,7 @@ public class CameraLockOnState : CameraState
     public override void Exit()
     {
         base.Exit();
+        target.transform.root.GetComponent<Enemy>().lockOn.gameObject.SetActive(false);
         csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
     }
     private void UpdateCameraPosition()
@@ -110,8 +112,9 @@ public class CameraLockOnState : CameraState
             return closetTarget;
         }
     }
-    private IEnumerator ApplyDampingAfterFirstFrame()
+    private IEnumerator ApplyDampingAfterTwoFrame()
     {
+        yield return null;
         yield return null;
         csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 1f;
     }
