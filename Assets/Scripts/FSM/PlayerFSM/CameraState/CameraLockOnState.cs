@@ -30,7 +30,6 @@ public class CameraLockOnState : CameraState
             csm.owner.lockOffCamera.Priority = 9;
             csm.owner.lockOnCamera.Priority = 10;
 
-            target.transform.root.GetComponent<Enemy>().lockOn.gameObject.SetActive(true);
             //UpdateCameraPosition();
             csm.owner.StartCoroutine(ApplyDampingAfterTwoFrame());
         }
@@ -58,7 +57,6 @@ public class CameraLockOnState : CameraState
     public override void Exit()
     {
         base.Exit();
-        target.transform.root.GetComponent<Enemy>().lockOn.gameObject.SetActive(false);
         csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
     }
     private void UpdateCameraPosition()
