@@ -18,11 +18,6 @@ public class CloseState : IStateUI
 
     public void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Q) == true) // Quest
-        //{
-        //    sm.ChangeState(sm.openState);
-        //}
-
         if (sm.owner.input.isPressingQuestLogKey == true) // Quest
         {
             sm.ChangeState(sm.openQuestLogState);
