@@ -39,7 +39,7 @@ public class ArcherEnemy : Enemy
         trackingStopDistance = 5f;
 
         health = 100f;
-        fieldOfView = 50f;
+        fieldOfView = 100f;
         viewDistance = 7f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);

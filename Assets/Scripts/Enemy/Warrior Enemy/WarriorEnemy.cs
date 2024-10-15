@@ -41,7 +41,7 @@ public class WarriorEnemy : Enemy
         trackingStopDistance = 1f;
 
         health = 100f;
-        fieldOfView = 50f;
+        fieldOfView = 100f;
         viewDistance = 5f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);

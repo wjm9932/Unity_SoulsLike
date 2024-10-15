@@ -21,6 +21,7 @@ public class CameraLockOnState : CameraState
 
         if (target == null)
         {
+            Debug.Log("123");
             csm.ChangeState(csm.cameraLockOffState);
         }
         else
@@ -58,7 +59,10 @@ public class CameraLockOnState : CameraState
     public override void Exit()
     {
         base.Exit();
-        target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(false);
+        if(target != null)
+        {
+            target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(false);
+        }
         csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
     }
     private void UpdateCameraPosition()
