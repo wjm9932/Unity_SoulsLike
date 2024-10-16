@@ -196,7 +196,9 @@ public class Character : LivingEntity
 
                     other.GetComponent<Arrow>().rb.isKinematic = true;
                     other.GetComponent<Arrow>().arrowEffect.enabled = false;
-                    other.transform.position = other.ClosestPoint(arrowHitPositionParent.position);
+                    other.transform.position = arrowHitPositionParent.position;
+
+
                     other.transform.SetParent(arrowHitPositionParent);
                     other.GetComponent<Arrow>().enabled = false;
                     other.GetComponent<Collider>().enabled = false;

@@ -11771,7 +11771,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185923849}
-  m_LocalRotation: {x: 0.060366254, y: -0.0088955, z: -0.00031353044, w: 0.9981366}
+  m_LocalRotation: {x: 0.060366254, y: -0.008895499, z: -0.00031353044, w: 0.9981366}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12149,6 +12149,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205656786}
   m_CullTransparentMesh: 1
+--- !u!1 &1209147707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209147708}
+  m_Layer: 8
+  m_Name: ArrowHitParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1209147708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209147707}
+  m_LocalRotation: {x: -0.48787877, y: 0.4454389, z: 0.54370624, w: 0.5176313}
+  m_LocalPosition: {x: -0.30586353, y: 0.06904161, z: -0.0034904182}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 294341236}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1209488902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15049,7 +15080,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487898777}
-  m_LocalRotation: {x: 0.01258667, y: 0.0000000010080339, z: -1.2688794e-11, w: 0.9999208}
+  m_LocalRotation: {x: 0.01258667, y: 0.0000000013169847, z: -1.6577765e-11, w: 0.9999208}
   m_LocalPosition: {x: 20.49, y: 1.9264634, z: 105.93561}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23257,7 +23288,7 @@ PrefabInstance:
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: arrowHitPositionParent
       value: 
-      objectReference: {fileID: 294341236}
+      objectReference: {fileID: 1209147708}
     - target: {fileID: 3702315721447772401, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_Enabled
       value: 1
