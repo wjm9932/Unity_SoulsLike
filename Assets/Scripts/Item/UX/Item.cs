@@ -9,7 +9,9 @@ namespace UX
     {
         [SerializeField]
         private string _itemName;
-
+        [SerializeField]
+        private int _dropChace;
+        public int dropChance { get { return _dropChace; } private set { _dropChace = value; } }
         public string itemName
         {
             get { return _itemName; }
@@ -19,9 +21,6 @@ namespace UX
         [HideInInspector]
         public int triggerCount;
         public int numOfItem = 1;
-        [SerializeField]
-        private int _dropChace;
-        public int dropChance { get { return _dropChace;  } private set { _dropChace = value; } }
     }
 }
 

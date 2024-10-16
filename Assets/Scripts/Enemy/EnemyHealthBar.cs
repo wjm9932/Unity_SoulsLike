@@ -26,9 +26,6 @@ public class EnemyHealthBar : MonoBehaviour
             easeBar.value = Mathf.Lerp(easeBar.value, hpBar.value, lerpSpeed * Time.deltaTime);
         }
 
-        Vector3 direction = transform.position - Camera.main.transform.position;
-        direction.y = 0;
-
-        transform.rotation = Quaternion.LookRotation(direction);
+        transform.LookAt(transform.position + Camera.main.transform.forward);
     }
 }

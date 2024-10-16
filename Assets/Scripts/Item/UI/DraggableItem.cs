@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
+
     private Transform _originParent;
     public Transform originParent
     { 
@@ -22,10 +23,12 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     private Image image;
     private Vector3 offset;
+    private UI.Item item;
 
     private void Awake()
     {
-        image = GetComponent<Image>(); 
+        image = GetComponent<Image>();
+        item = GetComponent<UI.Item>();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -37,6 +40,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if(item != null)
+        {
+            ToolTipManager.Instance.HideToolTip();
+        }
+
         transform.position = Input.mousePosition + offset;
     }
     public void OnEndDrag(PointerEventData eventData)
@@ -51,5 +59,20 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
         transform.SetParent(_originParent);
         image.raycastTarget = true;
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            ToolTipManager.Instance.SetToolTip(item.toolTipText);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            ToolTipManager.Instance.HideToolTip();
+        }
     }
 }

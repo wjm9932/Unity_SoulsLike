@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
 namespace UI
 {
     public class HealthPotion : Item, UsableItem
     {
-        [SerializeField]
-        private ItemData dataField;
+        [Header("Item Info")]
+        [SerializeField] private ItemData dataField;
 
         public ItemData data
         {
@@ -40,7 +39,7 @@ namespace UI
                 return false;
             }
         }
-
+        
         public IState GetTargetState(PlayerMovementStateMachine stateMachine)
         {
             return stateMachine.drinkPotionState;

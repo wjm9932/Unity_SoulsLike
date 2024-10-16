@@ -238,6 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f6e6518b343468408b0bccb26f551c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countText: {fileID: 2512434278917518307}
   _itemUX: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+  countText: {fileID: 2512434278917518307}
+  toolTipText: '*Usable Item*
+
+    Health Potion: Recover the health'
   dataField: {fileID: 11400000, guid: 272aba066580d2c4981d96f07b7baf74, type: 2}

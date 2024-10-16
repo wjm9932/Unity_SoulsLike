@@ -13,10 +13,14 @@ namespace UI
         public delegate void OnDropEventHandler(UI.Item item, int count);
         public event OnDropEventHandler OnDrop;
 
-        public TextMeshProUGUI countText;
+        [Space]
+        [SerializeField] private GameObject _itemUX;
+        [SerializeField] public TextMeshProUGUI countText;
 
-        [SerializeField]
-        private GameObject _itemUX;
+        [Header("Tool Tip Text")]
+        [TextArea(3, 10)]
+        [SerializeField] public string toolTipText;
+
         public GameObject itemUX 
         {
             get { return _itemUX; }
