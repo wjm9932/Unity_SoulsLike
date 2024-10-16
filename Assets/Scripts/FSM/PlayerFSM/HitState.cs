@@ -14,8 +14,9 @@ namespace PlayerFSM
         }
         public virtual void Enter()
         {
-            sm.owner.animator.SetBool("IsHit", true);
             exit = false;
+            sm.owner.SetCanAttack(0);
+            sm.owner.animator.SetBool("IsHit", true);
             sm.owner.canBeDamaged = false;
             sm.owner.rb.velocity = Vector3.zero;
         }
@@ -37,7 +38,6 @@ namespace PlayerFSM
         public virtual void Exit()
         {
             sm.owner.canBeDamaged = true;
-            sm.owner.SetCanAttack(0);
             sm.owner.animator.SetBool("IsHit", false);
         }
         public virtual void OnAnimationEnterEvent()

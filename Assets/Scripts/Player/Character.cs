@@ -104,7 +104,6 @@ public class Character : LivingEntity
     void Update()
     {
         rb.useGravity = !IsOnSlope();
-
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
 

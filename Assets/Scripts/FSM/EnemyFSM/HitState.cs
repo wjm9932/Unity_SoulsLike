@@ -15,6 +15,7 @@ namespace EnemyFSM
         public override void Enter()
         {
             isDone = false;
+            sm.owner.SetCanAttack(0);
             sm.owner.animator.SetBool("IsHit", true);
             sm.owner.canBeDamaged = false;
             sm.owner.navMesh.isStopped = true;
