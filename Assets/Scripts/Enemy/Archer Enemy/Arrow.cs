@@ -68,7 +68,6 @@ public class Arrow : MonoBehaviour, IPoolableObject
             rb.isKinematic = true;
             arrowEffect.enabled = false;
             GetComponent<Collider>().enabled = false;
-            transform.position = other.ClosestPoint(transform.position);
             transform.SetParent(other.transform);
             this.enabled = false;
         }
