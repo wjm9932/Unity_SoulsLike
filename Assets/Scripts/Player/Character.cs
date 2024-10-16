@@ -194,11 +194,13 @@ public class Character : LivingEntity
             {
                 if (ApplyDamage(enemy) == true)
                 {
+
                     other.GetComponent<Arrow>().rb.isKinematic = true;
                     other.GetComponent<Arrow>().arrowEffect.enabled = false;
+                    other.transform.position = other.ClosestPoint(arrowHitPositionParent.position);
+                    other.transform.SetParent(arrowHitPositionParent);
                     other.GetComponent<Arrow>().enabled = false;
                     other.GetComponent<Collider>().enabled = false;
-                    other.transform.SetParent(arrowHitPositionParent);
 
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
 
