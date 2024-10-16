@@ -15,13 +15,14 @@ namespace PlayerFSM
         public virtual void Enter()
         {
             exit = false;
-            sm.owner.SetCanAttack(0);
             sm.owner.animator.SetBool("IsHit", true);
             sm.owner.canBeDamaged = false;
             sm.owner.rb.velocity = Vector3.zero;
         }
         public virtual void Update()
         {
+            sm.owner.SetCanAttack(0);
+
             if (exit == true)
             {
                 sm.ChangeState(sm.idleState);
