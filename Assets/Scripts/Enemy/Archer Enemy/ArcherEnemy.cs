@@ -75,7 +75,7 @@ public class ArcherEnemy : Enemy
         base.OnEnemyTriggerStay(collider); 
         if (enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.dieState)
         {
-            target = collider.gameObject;
+            target = collider.transform.root.gameObject;
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.hitState);
         }
     }
