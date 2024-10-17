@@ -140,13 +140,11 @@ public class Inventory : MonoBehaviour
         }
         else
         {
+            item.count -= count;
+
             if (item.count <= 0)
             {
                 RemoveItemFromInventory(item);
-            }
-            else
-            {
-                item.count -= count;
             }
         }
 

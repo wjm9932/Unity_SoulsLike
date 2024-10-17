@@ -80,7 +80,7 @@ public class Quest
         
         for(int i = 0; i < info.targetItem.Length; i++)
         {
-            if (questOwner.inventory.GetTargetItemCountFromInventory(info.targetItem[i].itemPrefab) <= info.targetItem[i].count)
+            if (questOwner.inventory.GetTargetItemCountFromInventory(info.targetItem[i].itemPrefab) < info.targetItem[i].count)
             {
                 return false;
             }
