@@ -58,6 +58,11 @@ public class EnemyPatternState : IState
         Vector3 direction = sm.owner.navMesh.velocity;
         direction.y = 0;
 
+        if(direction == Vector3.zero)
+        {
+            return Quaternion.identity;
+        }
+
         return Quaternion.LookRotation(direction);
     }
 }

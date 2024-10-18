@@ -86,7 +86,12 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject GetPoolableObject(ObjectType objectType)
     {
+        if(objectPools.ContainsKey(objectType) == false)
+        {
+            Debug.LogError("There is no target object type  in object pool");
+            return null;
+        }
+
         return objectPools[objectType].Get();
     }
-
 }
