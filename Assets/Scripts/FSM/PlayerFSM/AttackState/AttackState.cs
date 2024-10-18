@@ -9,7 +9,8 @@ public class AttackState : IState
     protected float dashForce;
     protected bool canComboAttack;
     protected bool canAttack;
-    Quaternion rotation;
+    protected int staminaCost;
+    protected Quaternion rotation;
 
     public AttackState(PlayerMovementStateMachine sm)
     {
@@ -43,6 +44,7 @@ public class AttackState : IState
     }
     public virtual void Exit()
     {
+        canComboAttack = false;
         sm.owner.swordEffect.enabled = false;
         sm.owner.rb.drag = 0f;
         sm.owner.SetCanAttack(0);

@@ -8,15 +8,21 @@ namespace PlayerFSM
     {
         public Combo_3AttackState(PlayerMovementStateMachine sm) : base(sm)
         {
+            staminaCost = 30;
+            dashForce = 6f;
         }
         public override void Enter()
         {
-            dashForce = 6f;
-            sm.owner.animator.SetTrigger("IsAttack3");
-            canComboAttack = false;
-            sm.owner.SetDamage(30f);
-
-            base.Enter();
+            if (sm.owner.UseStamina(staminaCost) == true)
+            {
+                base.Enter();
+                sm.owner.animator.SetTrigger("IsAttack3");
+                sm.owner.SetDamage(30f);
+            }
+            else
+            {
+                rotation = sm.owner.transform.rotation;
+            }
         }
 
         public override void Update()

@@ -51,7 +51,6 @@ public class Character : LivingEntity
     public TrailRenderer swordEffect;
     public Transform arrowHitPositionParent;
     public UsableItem toBeUsedItem { get; private set; }
-
     public Animator animator { get; private set; }
     public Camera mainCamera { get; private set; }
     public Rigidbody rb { get; private set; }
@@ -61,9 +60,9 @@ public class Character : LivingEntity
     public UIStateMachine uiStateMachine { get; private set; }
 
 
-
     public Inventory inventory { get; private set; }
     public PlayerQuestEvent playerEvents { get; private set; }
+    public int stamina { get; private set; }
 
     public override float health
     {
@@ -78,6 +77,7 @@ public class Character : LivingEntity
     // Start is called before the first frame update
     private void Awake()
     {
+        stamina = 40;
         canBeDamaged = true;
         CameraStateMachine.Initialize(this);
         uiStateMachine = new UIStateMachine(this);
@@ -103,6 +103,8 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(stamina);
+        //Debug.Log(playerMovementStateMachine.currentState);
         rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
@@ -227,6 +229,18 @@ public class Character : LivingEntity
         }
     }
 
+    public bool UseStamina(int cost)
+    {
+        if(stamina < cost)
+        {
+            return false;
+        }
+        else
+        {
+            stamina -= cost;
+            return true;
+        }
+    }
 
     public void KillLivingEntity(EntityType type)
     {

@@ -10,16 +10,23 @@ namespace PlayerFSM
 
         public Combo_1AttackState(PlayerMovementStateMachine sm) : base(sm)
         {
+            staminaCost = 10;
+            dashForce = 1.5f;
         }
 
         public override void Enter()
         {
-            dashForce = 1.5f;
-            sm.owner.animator.SetTrigger("IsAttack1");
-            canComboAttack = false;
-            sm.owner.SetDamage(10f);
+            if(sm.owner.UseStamina(staminaCost) == true)
+            {
+                base.Enter();
 
-            base.Enter();
+                sm.owner.animator.SetTrigger("IsAttack1");
+                sm.owner.SetDamage(10f);
+            }
+            else
+            {
+                sm.ChangeState(sm.walkState);
+            }
         }
 
         public override void Update()
