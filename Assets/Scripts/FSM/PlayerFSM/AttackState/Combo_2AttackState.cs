@@ -8,7 +8,7 @@ namespace PlayerFSM
     {
         public Combo_2AttackState(PlayerMovementStateMachine sm) : base(sm)
         {
-            staminaCost = 20;
+            staminaCost = 20f;
             dashForce = 1.5f;
         }
         public override void Enter()
@@ -17,6 +17,7 @@ namespace PlayerFSM
             {
                 base.Enter();
 
+                sm.owner.staminaRecoverCoolTime = Character.targetStaminaRecoverCoolTime;
                 sm.owner.animator.SetTrigger("IsAttack2");
                 sm.owner.SetDamage(20f);
             }

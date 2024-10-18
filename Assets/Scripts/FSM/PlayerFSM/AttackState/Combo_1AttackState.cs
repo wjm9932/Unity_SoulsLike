@@ -10,7 +10,7 @@ namespace PlayerFSM
 
         public Combo_1AttackState(PlayerMovementStateMachine sm) : base(sm)
         {
-            staminaCost = 10;
+            staminaCost = 10f;
             dashForce = 1.5f;
         }
 
@@ -20,6 +20,7 @@ namespace PlayerFSM
             {
                 base.Enter();
 
+                sm.owner.staminaRecoverCoolTime = Character.targetStaminaRecoverCoolTime;
                 sm.owner.animator.SetTrigger("IsAttack1");
                 sm.owner.SetDamage(10f);
             }

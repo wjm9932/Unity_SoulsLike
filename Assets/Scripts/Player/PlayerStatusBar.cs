@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthBar : MonoBehaviour
+public class PlayerStatusBar : MonoBehaviour
 {
-    [SerializeField] private Image hpBar;
+    [SerializeField]
+    private Image hpBar;
     private Slider easeBar;
     private float lerpSpeed = 3f;
+
     private void Awake()
     {
         easeBar = GetComponent<Slider>();
@@ -18,9 +20,9 @@ public class PlayerHealthBar : MonoBehaviour
     {
 
     }
-    public void UpdateHealthBar(float health, float maxHealth)
+    public void UpdateStatusBar(float value, float maxValue)
     {
-        hpBar.fillAmount = health / maxHealth;
+        hpBar.fillAmount = value / maxValue;
     }
     // Update is called once per frame
     void Update()

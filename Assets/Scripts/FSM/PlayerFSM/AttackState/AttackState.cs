@@ -9,7 +9,7 @@ public class AttackState : IState
     protected float dashForce;
     protected bool canComboAttack;
     protected bool canAttack;
-    protected int staminaCost;
+    protected float staminaCost;
     protected Quaternion rotation;
 
     public AttackState(PlayerMovementStateMachine sm)

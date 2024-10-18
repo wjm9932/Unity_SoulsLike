@@ -25,8 +25,9 @@ public class Character : LivingEntity
     public GameObject questLogUI;
     public GameObject questDialogueUI;
 
-    [Header("Health Bar")]
-    public PlayerHealthBar hpBar;
+    [Header("Status Bar")]
+    public PlayerStatusBar hpBar;
+    public PlayerStatusBar staminaBar;
 
     [Header("Camera")]
     public CinemachineVirtualCamera lockOnCamera;
@@ -62,14 +63,30 @@ public class Character : LivingEntity
 
     public Inventory inventory { get; private set; }
     public PlayerQuestEvent playerEvents { get; private set; }
-    public int stamina { get; private set; }
+
+    public const float targetStaminaRecoverCoolTime = 1.5f;
+    public float staminaRecoverCoolTime;
+    private float maxStamina;
+    private float _stamina;
+    public float stamina
+    {
+        get
+        {
+            return _stamina;
+        }
+        private set
+        {
+            _stamina = value;
+            staminaBar.UpdateStatusBar(stamina, maxStamina);
+        }
+    }
 
     public override float health
     {
         protected set
         {
             base.health = value;
-            hpBar.UpdateHealthBar(health, maxHealth);
+            hpBar.UpdateStatusBar(health, maxHealth);
         }
     }
 
@@ -77,7 +94,7 @@ public class Character : LivingEntity
     // Start is called before the first frame update
     private void Awake()
     {
-        stamina = 40;
+        maxStamina = 100f;
         canBeDamaged = true;
         CameraStateMachine.Initialize(this);
         uiStateMachine = new UIStateMachine(this);
@@ -86,6 +103,7 @@ public class Character : LivingEntity
     void Start()
     {
         health = 100f;
+        stamina = 40f;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -103,8 +121,11 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(stamina);
-        //Debug.Log(playerMovementStateMachine.currentState);
+
+        // ???? 0? ??? ? ???? ?? ?? ??
+        RecoverStamina();
+
+
         rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
@@ -191,7 +212,7 @@ public class Character : LivingEntity
 
             LivingEntity enemy = other.GetComponent<Arrow>().parent;
 
-            if(enemy != null)
+            if (enemy != null)
             {
                 if (ApplyDamage(enemy) == true)
                 {
@@ -229,9 +250,9 @@ public class Character : LivingEntity
         }
     }
 
-    public bool UseStamina(int cost)
+    public bool UseStamina(float cost)
     {
-        if(stamina < cost)
+        if (stamina < cost)
         {
             return false;
         }
@@ -245,6 +266,23 @@ public class Character : LivingEntity
     public void KillLivingEntity(EntityType type)
     {
         playerEvents.KillEnemy(type);
+    }
+
+
+    void RecoverStamina()
+    {
+        if (staminaRecoverCoolTime > 0)
+        {
+            staminaRecoverCoolTime -= Time.deltaTime;
+        }
+        else
+        {
+            if (stamina < maxStamina)
+            {
+                stamina += 20f * Time.deltaTime;
+                stamina = Mathf.Clamp(stamina, 0, maxStamina);
+            }
+        }
     }
 
     /************************************Test********************************************************/
