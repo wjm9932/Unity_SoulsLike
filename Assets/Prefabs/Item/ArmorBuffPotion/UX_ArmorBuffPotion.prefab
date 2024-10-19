@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 41957414295564363}
   - component: {fileID: 2842307111253640321}
   - component: {fileID: 2093987299}
+  - component: {fileID: -6188344068773093943}
   m_Layer: 0
   m_Name: UX_ArmorBuffPotion
   m_TagString: Untagged
@@ -98,3 +99,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.25, z: 0.2}
   m_Center: {x: 0.00000028684735, y: 0.11774358, z: -0.004665613}
+--- !u!114 &-6188344068773093943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355292216650409300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemName: Armor Buff Potion!
+  _dropChace: 30
+  icon: {fileID: 3895640531818722762, guid: bab2f23bc0d9ed14d89a7a5073c5951b, type: 3}
+  triggerCount: 0
+  numOfItem: 1

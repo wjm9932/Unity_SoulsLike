@@ -5,7 +5,7 @@ using System;
 
 namespace UI
 {
-    public class HealthPotion : Item, UsableItem
+    public class HealthPotion : UI_Item, UsableItem
     {
         [Header("Item Info")]
         [SerializeField] private ItemData dataField;

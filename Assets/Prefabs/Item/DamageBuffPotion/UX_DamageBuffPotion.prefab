@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1166291150333747070}
   - component: {fileID: 4020457548590345140}
   - component: {fileID: 1586019331999741702}
-  - component: {fileID: 2000387512262375995}
+  - component: {fileID: 2018536115975439436}
   m_Layer: 0
   m_Name: UX_DamageBuffPotion
   m_TagString: Untagged
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.25, z: 0.2}
   m_Center: {x: 0, y: 0.11774354, z: 0.0003422983}
---- !u!114 &2000387512262375995
+--- !u!114 &2018536115975439436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3227801818095176289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca87452f3aa775d4ca8482ae7d91cd59, type: 3}
+  m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: Damage Buff Potion!

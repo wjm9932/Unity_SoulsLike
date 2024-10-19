@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UX
 {
-    public abstract class Item : MonoBehaviour
+    public class UX_Item : MonoBehaviour
     {
         [SerializeField]
         private string _itemName;
@@ -19,7 +19,8 @@ namespace UX
         }
         public GameObject icon;
         [HideInInspector]
-        public int triggerCount;
+        public int triggerCount = 0;
+        [HideInInspector]
         public int numOfItem = 1;
     }
 }

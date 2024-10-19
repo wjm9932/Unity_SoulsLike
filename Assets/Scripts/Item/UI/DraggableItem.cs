@@ -23,12 +23,12 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     private Image image;
     private Vector3 offset;
-    private UI.Item item;
+    private UI.UI_Item item;
 
     private void Awake()
     {
         image = GetComponent<Image>();
-        item = GetComponent<UI.Item>();
+        item = GetComponent<UI.UI_Item>();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -49,11 +49,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(gameObject.GetComponent<Item>() != null)
+        if(gameObject.GetComponent<UI_Item>() != null)
         {
             if (EventSystem.current.IsPointerOverGameObject() == false)
             {
-                gameObject.GetComponent<Item>().DropItem();
+                gameObject.GetComponent<UI_Item>().DropItem();
                 return;
             }
         }

@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 1351741200380013442}
   - component: {fileID: 2241511395697934197}
   - component: {fileID: 295345742998526297}
+  - component: {fileID: 2331215363778330256}
   m_Layer: 5
   m_Name: UI_ArmorBuffPotion
   m_TagString: HealthPotion
@@ -225,3 +226,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a1070cf96d51241940cee230b95fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2331215363778330256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895640531818722762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736b886f0db9d22418b37d9e1ab0e823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemUX: {fileID: 4355292216650409300, guid: 0b164067c57557247990105930882c9f, type: 3}
+  countText: {fileID: 4829944420768456495}
+  toolTipText: '*Usable Item*
+
+    Increase defense: 30%'
+  dataField: {fileID: 11400000, guid: 6e9443f1eadd73544903bb32848ec7b2, type: 2}

@@ -24,16 +24,16 @@ public class FindHealthPotionQuestStep : QuestStep
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += FindHealthPotion;
         status = "Find and Get Health Potion\n";
 
-        if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>()) >= 1)
+        if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
         {
             UpdateQuestStepState(QuestStepState.FINISHED);
         }
     }
     private void FindHealthPotion(string itemName)
     {
-        if(itemName == targetItem.GetComponent<UX.Item>().itemName)
+        if(itemName == targetItem.GetComponent<UX.UX_Item>().itemName)
         {
-            if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.Item>()) >= 1)
+            if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
             {
                 UpdateQuestStepState(QuestStepState.FINISHED);
             }

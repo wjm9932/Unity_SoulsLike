@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace UI
 {
-    public abstract class Item : MonoBehaviour
+    public class UI_Item : MonoBehaviour
     {
-        public delegate void OnDestroyEventHandler(UI.Item item);
+        public delegate void OnDestroyEventHandler(UI.UI_Item item);
         public event OnDestroyEventHandler OnDestroy;
 
-        public delegate void OnDropEventHandler(UI.Item item, int count);
+        public delegate void OnDropEventHandler(UI.UI_Item item, int count);
         public event OnDropEventHandler OnDrop;
 
         [Space]
@@ -57,12 +57,12 @@ namespace UI
         }
         public void DestroyItem()
         {
-            OnDestroy?.Invoke(gameObject.GetComponent<UI.Item>());
+            OnDestroy?.Invoke(gameObject.GetComponent<UI.UI_Item>());
         }
 
         public void DropItem()
         {
-            OnDrop?.Invoke(gameObject.GetComponent<UI.Item>(), count);
+            OnDrop?.Invoke(gameObject.GetComponent<UI.UI_Item>(), count);
             DestroyItem();
         }
     }

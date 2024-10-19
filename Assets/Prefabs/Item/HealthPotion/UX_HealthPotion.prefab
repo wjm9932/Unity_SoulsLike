@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7645084891088923987}
   - component: {fileID: 1154394828959774546}
   - component: {fileID: 2478347463577542601}
-  - component: {fileID: 1788393479776242529}
   - component: {fileID: 4900398509422649167}
+  - component: {fileID: 5842584100653340801}
   m_Layer: 3
   m_Name: UX_HealthPotion
   m_TagString: HealthPotion
@@ -86,23 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1788393479776242529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5252429312154143949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d7f1bafc5017042a72b23559125a81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemName: Health Potion!
-  icon: {fileID: 9189238838166180093, guid: b5e894cc0abea1b42aea387af6e1f7cd, type: 3}
-  triggerCount: 0
-  numOfItem: 1
-  _dropChace: 30
 --- !u!65 &4900398509422649167
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116,3 +99,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.2, z: 0.2}
   m_Center: {x: 0.015, y: 0.1, z: 0}
+--- !u!114 &5842584100653340801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5252429312154143949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemName: Health Potion!
+  _dropChace: 30
+  icon: {fileID: 9189238838166180093, guid: b5e894cc0abea1b42aea387af6e1f7cd, type: 3}
+  triggerCount: 0
+  numOfItem: 1

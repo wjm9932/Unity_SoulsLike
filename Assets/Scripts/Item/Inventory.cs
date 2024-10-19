@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> inventorySlot = new List<GameObject>(36);
-    private Dictionary<string, UI.Item> itemContainer = new Dictionary<string, UI.Item>(36);
+    private Dictionary<string, UI.UI_Item> itemContainer = new Dictionary<string, UI.UI_Item>(36);
     private PointerEventData pointerEventData;
     private PlayerQuestEvent playerEvent;
 
@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool HasEnoughSpace(UX.Item item)
+    public bool HasEnoughSpace(UX.UX_Item item)
     {
         if (itemContainer.ContainsKey(item.itemName) == false)
         {
@@ -49,11 +49,11 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public bool AddItem(UX.Item item, int count)
+    public bool AddItem(UX.UX_Item item, int count)
     {
         if (item == null)
         {
-            Debug.LogError("targetItem has no UX.Item Component");
+            Debug.LogError("targetItem has no UX.UX_Item Component");
             return false;
         }
 
@@ -68,7 +68,7 @@ public class Inventory : MonoBehaviour
                     return false;
                 }
 
-                UI.Item inventoryItem = Instantiate(item.icon, inventorySlot[emptySlot].transform).GetComponent<UI.Item>();
+                UI.UI_Item inventoryItem = Instantiate(item.icon, inventorySlot[emptySlot].transform).GetComponent<UI.UI_Item>();
                 inventoryItem.AddItem();
                 inventoryItem.SetName(item.itemName);
                 inventoryItem.OnDestroy += RemoveItemFromInventory;
@@ -92,11 +92,11 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public int GetTargetItemCountFromInventory(UX.Item targetItem)
+    public int GetTargetItemCountFromInventory(UX.UX_Item targetItem)
     {
         if(targetItem == null)
         {
-            Debug.LogError("targetItem has no UX.Item Component");
+            Debug.LogError("targetItem has no UX.UX_Item Component");
             return -1;
         }
         if (itemContainer.ContainsKey(targetItem.itemName) == false)
@@ -109,7 +109,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private int FindEmptySlot(UX.Item item)
+    private int FindEmptySlot(UX.UX_Item item)
     {
         for (int i = 0; i < inventorySlot.Count; i++)
         {
@@ -125,15 +125,15 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
-    public bool RemoveTargetItemFromInventory(UX.Item targetItem, int count)
+    public bool RemoveTargetItemFromInventory(UX.UX_Item targetItem, int count)
     {
         if (targetItem == null)
         {
-            Debug.LogError("targetItem has no UX.Item Component");
+            Debug.LogError("targetItem has no UX.UX_Item Component");
             return false;
         }
 
-        UI.Item item = itemContainer[targetItem.itemName].GetComponent<UI.Item>();
+        UI.UI_Item item = itemContainer[targetItem.itemName].GetComponent<UI.UI_Item>();
         if (item.count < count)
         {
             return false;
@@ -151,11 +151,11 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    private void RemoveItemFromInventory(UI.Item item)
+    private void RemoveItemFromInventory(UI.UI_Item item)
     {
         if (item == null)
         {
-            Debug.LogError("targetItem has no UX.Item Component");
+            Debug.LogError("targetItem has no UX.UX_Item Component");
             return;
         }
 
@@ -166,15 +166,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void DropItem(UI.Item item, int count)
+    private void DropItem(UI.UI_Item item, int count)
     {
         if (item == null)
         {
-            Debug.LogError("targetItem has no UX.Item Component");
+            Debug.LogError("targetItem has no UX.UX_Item Component");
             return;
         }
 
-        UX.Item items = Instantiate(item.itemUX, gameObject.transform.position, Quaternion.identity).GetComponent<UX.Item>();
+        UX.UX_Item items = Instantiate(item.itemUX, gameObject.transform.position, Quaternion.identity).GetComponent<UX.UX_Item>();
         items.triggerCount = 1;
         items.numOfItem = count;
 
@@ -208,7 +208,7 @@ public class Inventory : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        UX.Item item = other.gameObject.GetComponent<UX.Item>();
+        UX.UX_Item item = other.gameObject.GetComponent<UX.UX_Item>();
 
         if (item != null)
         {

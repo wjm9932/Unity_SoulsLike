@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5665020175481323569}
   - component: {fileID: 5665020175477899281}
   - component: {fileID: 5665020175479030481}
-  - component: {fileID: -7977535571046667521}
   - component: {fileID: 6874714634189810716}
+  - component: {fileID: 4332465071884171495}
   m_Layer: 0
   m_Name: UX_Bone
   m_TagString: Untagged
@@ -85,23 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-7977535571046667521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5665020175481297937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42812ad634114894c80a6597a2103cd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemName: Bone!
-  _dropChace: 80
-  icon: {fileID: 9189238838166180093, guid: d869f17c0b69e65429c1d51c96906913, type: 3}
-  triggerCount: 0
-  numOfItem: 1
 --- !u!65 &6874714634189810716
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -115,3 +98,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.1, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4332465071884171495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665020175481297937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemName: Bone!
+  _dropChace: 80
+  icon: {fileID: 9189238838166180093, guid: d869f17c0b69e65429c1d51c96906913, type: 3}
+  triggerCount: 0
+  numOfItem: 1

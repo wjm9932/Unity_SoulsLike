@@ -5,7 +5,7 @@ using System;
 
 namespace UI
 {
-    public class UI_DamageBuffPotion : UI.Item, UsableItem
+    public class UI_DamageBuffPotion : UI.UI_Item, UsableItem
     {
         [Header("Item Info")]
         [SerializeField] private ItemData dataField;

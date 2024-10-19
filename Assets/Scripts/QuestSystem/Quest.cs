@@ -58,9 +58,9 @@ public class Quest
         return questStepPrefab;
     }
 
-    private UX.Item[] ConvertGameObjectInfoToItems(ItemInfo[] gameObjectInfos)
+    private UX.UX_Item[] ConvertGameObjectInfoToItems(ItemInfo[] gameObjectInfos)
     {
-        UX.Item[] items = new UX.Item[gameObjectInfos.Length];
+        UX.UX_Item[] items = new UX.UX_Item[gameObjectInfos.Length];
         for (int i = 0; i < gameObjectInfos.Length; i++)
         {
             items[i] = gameObjectInfos[i].itemPrefab;

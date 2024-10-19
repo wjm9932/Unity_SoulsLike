@@ -54,6 +54,7 @@ public class BuffManager : MonoBehaviour
             buff.onDestroy += () => { RemoveFromBuffContainer(type); };
             buff.SetOwner(this.gameObject.GetComponent<LivingEntity>());
             buff.Initialize(value);
+
             buffContainer.Add(type, buff);  
         }
     }

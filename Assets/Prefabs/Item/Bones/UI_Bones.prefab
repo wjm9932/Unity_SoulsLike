@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 9189238838166180088}
   - component: {fileID: 9189238838166180095}
   - component: {fileID: 9189238838166180089}
-  - component: {fileID: -3622214871657391019}
+  - component: {fileID: -6338286829788815350}
   m_Layer: 5
   m_Name: UI_Bones
   m_TagString: Bone
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a1070cf96d51241940cee230b95fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-3622214871657391019
+--- !u!114 &-6338286829788815350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9189238838166180093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52f49eb1858eb6458f0e9d58e8476f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b425bcdbca87234c8b77cd99ff1fc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _itemUX: {fileID: 5665020175481297937, guid: 89ba8210040c7494ea412d0111f91850, type: 3}

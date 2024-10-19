@@ -71,7 +71,7 @@ public class Enemy : LivingEntity
     {
         for (int i = 0; i < dropItem.Length; i++)
         {
-            UX.Item item = dropItem[i].GetComponent<UX.Item>();
+            UX.UX_Item item = dropItem[i].GetComponent<UX.UX_Item>();
 
             if (IsDrop(item.dropChance) == true)
             {
