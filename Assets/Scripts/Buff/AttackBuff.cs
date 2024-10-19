@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class AttackBuff : Buff
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Initialize(float value)
     {
         elapsedTime = duration;
-        owner.buffDamage = 10f;
+        owner.buffDamage = value;
     }
+
     private void OnDisable()
     {
         owner.buffDamage = 0f;

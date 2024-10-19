@@ -8,5 +8,5 @@ public interface UsableItem
     public bool UseItem(LivingEntity livingEntity);
     public IState GetTargetState(PlayerMovementStateMachine stateMachine);
 
-    event Action OnUseItem;
+    public event Action OnUseItem;
 }

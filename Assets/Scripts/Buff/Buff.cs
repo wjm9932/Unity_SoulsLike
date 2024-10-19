@@ -15,6 +15,8 @@ public abstract class Buff : MonoBehaviour
     
     protected LivingEntity owner;
 
+    public abstract void Initialize(float value);
+
     public void Update()
     {
         if (elapsedTime <= 0)

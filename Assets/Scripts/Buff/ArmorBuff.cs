@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ArmorBuff : Buff
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Initialize(float value)
     {
         elapsedTime = duration;
         owner.buffArmorPercent = 0.3f;

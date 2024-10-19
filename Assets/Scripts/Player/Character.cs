@@ -125,11 +125,11 @@ public class Character : LivingEntity
     {
         if(Input.GetKeyDown(KeyCode.K))
         {
-            playerBuff.AddBuff(BuffManager.BuffType.ATTACK);
+            playerBuff.AddBuff(BuffManager.BuffType.ATTACK, 10f);
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            playerBuff.AddBuff(BuffManager.BuffType.ARMOR);
+            playerBuff.AddBuff(BuffManager.BuffType.ARMOR, 0.5f);
         }
 
         RecoverStamina();

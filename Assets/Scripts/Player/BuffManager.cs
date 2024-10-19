@@ -42,17 +42,18 @@ public class BuffManager : MonoBehaviour
         
     }
 
-    public void AddBuff(BuffType type)
+    public void AddBuff(BuffType type, float value)
     {
         if(buffContainer.ContainsKey(type) == true)
         {
-            buffContainer[type].ResetTime();
+            buffContainer[type].Initialize(value);
         }
         else
         {
             Buff buff = Instantiate(buffPrefabs[type], buffIndicatorPanel).GetComponent<Buff>();
             buff.onDestroy += () => { RemoveFromBuffContainer(type); };
             buff.SetOwner(this.gameObject.GetComponent<LivingEntity>());
+            buff.Initialize(value);
             buffContainer.Add(type, buff);  
         }
     }
