@@ -121,10 +121,7 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-
-        // ???? 0? ??? ? ???? ?? ?? ??
         RecoverStamina();
-
 
         rb.useGravity = !IsOnSlope();
         playerMovementStateMachine.Update();
@@ -216,15 +213,12 @@ public class Character : LivingEntity
             {
                 if (ApplyDamage(enemy) == true)
                 {
-
                     other.GetComponent<Arrow>().rb.isKinematic = true;
                     other.GetComponent<Arrow>().arrowEffect.enabled = false;
-                    other.transform.position = arrowHitPositionParent.position;
-
-
-                    other.transform.SetParent(arrowHitPositionParent);
                     other.GetComponent<Arrow>().enabled = false;
                     other.GetComponent<Collider>().enabled = false;
+                    other.transform.SetParent(arrowHitPositionParent);
+                    other.transform.position = arrowHitPositionParent.position;
 
                     playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
 
