@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UI;
 
-public class UI_ArmorBuffPotion : UI_Item,UsableItem
+public class UI_ArmorBuffPotion : UI_Item, UsableItem
 {
     [Header("Item Info")]
     [SerializeField] private ItemData dataField;

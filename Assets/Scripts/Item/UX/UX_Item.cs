@@ -19,10 +19,18 @@ namespace UX
         }
         public GameObject icon;
         [HideInInspector]
-        public int triggerCount = 0;
+        public int triggerCount;
         [HideInInspector]
-        public int numOfItem = 1;
+        public int numOfItem;
+
+
+        void Awake()
+        {
+            triggerCount = 0;
+            numOfItem = 1;
+        }
     }
+
 }
 
 
