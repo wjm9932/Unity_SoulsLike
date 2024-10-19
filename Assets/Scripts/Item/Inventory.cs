@@ -181,7 +181,7 @@ public class Inventory : MonoBehaviour
         itemContainer[item.itemName].count = 0;
         playerEvent.UpdateItemCount(item.itemName);
 
-        TextManager.Instance.PlayNotificationText("You've dropped " + items.itemName + "x" + count);
+        TextManager.Instance.PlayNotificationText("You've dropped " + items.itemName + " x" + count);
     }
     public UsableItem GetItemUI()
     {

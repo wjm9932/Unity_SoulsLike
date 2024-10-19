@@ -22,7 +22,7 @@ public class FindHealthPotionQuestStep : QuestStep
     void Start()
     {
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += FindHealthPotion;
-        status = "Find and Get Health Potion\n";
+        status = "Find and Get Health Potion";
 
         if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
         {

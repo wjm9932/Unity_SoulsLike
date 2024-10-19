@@ -15,7 +15,7 @@ public class UseHealthPotionQuestStep : QuestStep
     void Start()
     {
         questOwner.GetComponent<PlayerQuestEvent>().onUse += UseHealthPotion;
-        status = "Use Health Potion\n";
+        status = "Use Health Potion";
     }
 
 
