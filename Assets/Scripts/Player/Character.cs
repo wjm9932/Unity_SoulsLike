@@ -63,6 +63,7 @@ public class Character : LivingEntity
 
     public Inventory inventory { get; private set; }
     public PlayerQuestEvent playerEvents { get; private set; }
+    public BuffManager playerBuff { get; private set; } 
 
     public const float targetStaminaRecoverCoolTime = 1.5f;
     public float staminaRecoverCoolTime;
@@ -103,7 +104,7 @@ public class Character : LivingEntity
     void Start()
     {
         health = 100f;
-        stamina = 40f;
+        stamina = 100f;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -112,6 +113,7 @@ public class Character : LivingEntity
         input = GetComponent<PlayerInput>();
         inventory = GetComponent<Inventory>();
         playerEvents = GetComponent<PlayerQuestEvent>();
+        playerBuff = GetComponent<BuffManager>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         uiStateMachine.ChangeState(uiStateMachine.closeState);
@@ -121,6 +123,15 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            playerBuff.AddBuff(BuffManager.BuffType.ATTACK);
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            playerBuff.AddBuff(BuffManager.BuffType.ARMOR);
+        }
+
         RecoverStamina();
 
         rb.useGravity = !IsOnSlope();

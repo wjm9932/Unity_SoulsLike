@@ -13,14 +13,9 @@ public enum EntityType
 
 public abstract class LivingEntity : MonoBehaviour
 {
-    private bool _canBeDamaged;
-    public virtual bool canBeDamaged
-    {
-        get { return _canBeDamaged; }
-        set { _canBeDamaged = value; }
-    }
-
+    public event Action onDeath;
     public bool isDead { get; protected set; }
+    public bool canBeDamaged { get; set; }
 
     private float _health;
     public virtual float health 
@@ -31,9 +26,12 @@ public abstract class LivingEntity : MonoBehaviour
             _health = value;
         }
     }
+
     public bool canAttack { get; private set; }
     public float damage { get; private set; }
-    public event Action onDeath;
+
+    public float buffDamage { get; set; }
+    public float buffArmorPercent {get; set;}
 
     [SerializeField]
     Transform damageTextPosition;
@@ -79,8 +77,10 @@ public abstract class LivingEntity : MonoBehaviour
     {
         if (this.canBeDamaged == true)
         {
-            health -= damager.damage;
             canBeDamaged = false;
+
+            float damageToApply = damager.damage * (1f - buffArmorPercent);
+            health -= damageToApply;
             
             if(health <= 0)
             {
@@ -92,7 +92,7 @@ public abstract class LivingEntity : MonoBehaviour
                 }
             }
 
-            //TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damager.damage);
+            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damageToApply);
             return true;
         }
         else
@@ -115,7 +115,7 @@ public abstract class LivingEntity : MonoBehaviour
 
     public void SetDamage(float damage)
     {
-        this.damage = damage;
+        this.damage = damage + buffDamage;
     }
     public virtual void Die()
     {
