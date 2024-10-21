@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4355292216650409300
+--- !u!1 &4172410750723670968
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3979717102361182190}
-  - component: {fileID: 41957414295564363}
-  - component: {fileID: 2842307111253640321}
-  - component: {fileID: 2093987299}
-  - component: {fileID: -6188344068773093943}
+  - component: {fileID: 3651488922910300418}
+  - component: {fileID: 361249224426821287}
+  - component: {fileID: 2515151577200222829}
+  - component: {fileID: 8510475398818871849}
+  - component: {fileID: 8510475398818871848}
   m_Layer: 0
-  m_Name: UX_ArmorBuffPotion
+  m_Name: UX_StaminaBuffPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3979717102361182190
+--- !u!4 &3651488922910300418
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355292216650409300}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_GameObject: {fileID: 4172410750723670968}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18.907778, y: 0.156, z: 109.87566}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &41957414295564363
+--- !u!33 &361249224426821287
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355292216650409300}
-  m_Mesh: {fileID: 4738096057612882050, guid: 9adef80c96ce71a40af694fd352beb23, type: 3}
---- !u!23 &2842307111253640321
+  m_GameObject: {fileID: 4172410750723670968}
+  m_Mesh: {fileID: -5521478554001990079, guid: 9e8d89a88100f484990ce1a29dd859e1, type: 3}
+--- !u!23 &2515151577200222829
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355292216650409300}
+  m_GameObject: {fileID: 4172410750723670968}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,8 +63,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4815649156946952674, guid: 9adef80c96ce71a40af694fd352beb23, type: 3}
-  - {fileID: 3850466104811336786, guid: 9adef80c96ce71a40af694fd352beb23, type: 3}
+  - {fileID: 2110655244918223227, guid: 9e8d89a88100f484990ce1a29dd859e1, type: 3}
+  - {fileID: 3850466104811336786, guid: 9e8d89a88100f484990ce1a29dd859e1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,33 +86,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2093987299
+--- !u!65 &8510475398818871849
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355292216650409300}
+  m_GameObject: {fileID: 4172410750723670968}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.25, z: 0.2}
-  m_Center: {x: 0.00000028684735, y: 0.11774358, z: -0.004665613}
---- !u!114 &-6188344068773093943
+  m_Size: {x: 0.2, y: 0.2, z: 0.2}
+  m_Center: {x: -0.000000026077032, y: 0.09493179, z: -0.0033755265}
+--- !u!114 &8510475398818871848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355292216650409300}
+  m_GameObject: {fileID: 4172410750723670968}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemName: Armor Buff Potion!
+  _itemName: Stamina buff potion
   _dropChace: 30
-  icon: {fileID: 3895640531818722762, guid: bab2f23bc0d9ed14d89a7a5073c5951b, type: 3}
+  icon: {fileID: 4078479804993434640, guid: a671d3140b8d41548a2bb17c07b26863, type: 3}
   triggerCount: 0
-  numOfItem: 1
+  numOfItem: 0

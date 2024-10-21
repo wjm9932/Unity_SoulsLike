@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrinkDamageBuffPotionState : PlayerMovementState
+public class DrinkStaminaBuffPotionState : PlayerMovementState
 {
     private bool isDrinkFinished;
-    public DrinkDamageBuffPotionState(PlayerMovementStateMachine sm) : base(sm)
+    public DrinkStaminaBuffPotionState(PlayerMovementStateMachine sm) : base(sm)
     {
     }
-    // Start is called before the first frame update
     public override void Enter()
     {
-        base.Enter(); 
-        
+        base.Enter();
+
         isDrinkFinished = false;
         sm.owner.animator.SetBool("IsDrinkingPotion", true);
         moveSpeed = sm.owner.walkSpeed;
@@ -31,7 +30,7 @@ public class DrinkDamageBuffPotionState : PlayerMovementState
         if (isDrinkFinished == true)
         {
             sm.owner.toBeUsedItem.UseItem(sm.owner);
-            sm.owner.playerBuff.AddBuff(Buff.BuffType.ATTACK, sm.owner.toBeUsedItem.data.value);
+            sm.owner.playerBuff.AddBuff(Buff.BuffType.STAMINA, sm.owner.toBeUsedItem.data.value);
             sm.ChangeState(sm.walkState);
         }
     }

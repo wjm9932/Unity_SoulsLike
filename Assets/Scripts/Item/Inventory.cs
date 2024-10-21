@@ -206,29 +206,28 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        UX.UX_Item item = other.gameObject.GetComponent<UX.UX_Item>();
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    UX.UX_Item item = other.gameObject.GetComponent<UX.UX_Item>();
 
-        if (item != null)
-        {
-
-            if (item.triggerCount <= 0)
-            {
-                if (AddItem(item, item.numOfItem) == true)
-                {
-                    TextManager.Instance.PlayNotificationText("You've got " + item.itemName + " x" + item.numOfItem);
-                    Destroy(item.gameObject);
-                }
-                else
-                {
-                    TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
-                }
-            }
-            else
-            {
-                --item.triggerCount;
-            }
-        }
-    }
+    //    if (item != null)
+    //    {
+    //        if (item.triggerCount <= 0)
+    //        {
+    //            if (AddItem(item, item.numOfItem) == true)
+    //            {
+    //                TextManager.Instance.PlayNotificationText("You've got " + item.itemName + " x" + item.numOfItem);
+    //                Destroy(item.gameObject);
+    //            }
+    //            else
+    //            {
+    //                TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
+    //            }
+    //        }
+    //        else
+    //        {
+    //            --item.triggerCount;
+    //        }
+    //    }
+    //}
 }

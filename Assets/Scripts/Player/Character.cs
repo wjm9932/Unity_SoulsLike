@@ -63,7 +63,12 @@ public class Character : LivingEntity
 
     public Inventory inventory { get; private set; }
     public PlayerQuestEvent playerEvents { get; private set; }
-    public BuffManager playerBuff { get; private set; } 
+    public BuffManager playerBuff { get; private set; }
+
+    public float buffDamage { get; set; }
+    public float buffArmorPercent { get; set; }
+    public float buffStaminaPercent { get; set; }
+
 
     public const float targetStaminaRecoverCoolTime = 1.5f;
     public float staminaRecoverCoolTime;
@@ -123,14 +128,7 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            playerBuff.AddBuff(BuffManager.BuffType.ATTACK, 10f);
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            playerBuff.AddBuff(BuffManager.BuffType.ARMOR, 0.5f);
-        }
+
 
         RecoverStamina();
 
@@ -240,6 +238,29 @@ public class Character : LivingEntity
             }
         }
     }
+    public override bool ApplyDamage(LivingEntity damager)
+    {
+        if (this.canBeDamaged == true)
+        {
+            canBeDamaged = false;
+
+            float damageToApply = damager.damage * (1f - buffArmorPercent);
+            health -= damageToApply;
+
+            if (health <= 0)
+            {
+                Die();
+                KillLivingEntity(entityType);
+            }
+
+            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damageToApply);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public bool OnClickItem()
     {
@@ -257,23 +278,25 @@ public class Character : LivingEntity
 
     public bool UseStamina(float cost)
     {
-        if (stamina < cost)
+        float actualCost = cost * (1 - buffStaminaPercent);
+        if (stamina < actualCost)
         {
             return false;
         }
         else
         {
-            stamina -= cost;
+            stamina -= actualCost;
             return true;
         }
     }
-
+    public override void SetDamage(float damage)
+    {
+        this.damage = damage + buffDamage;
+    }
     public void KillLivingEntity(EntityType type)
     {
         playerEvents.KillEnemy(type);
     }
-
-
     void RecoverStamina()
     {
         if (staminaRecoverCoolTime > 0)

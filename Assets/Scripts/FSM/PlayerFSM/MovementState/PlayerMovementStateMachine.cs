@@ -20,6 +20,7 @@ public class PlayerMovementStateMachine : StateMachine
     public DrinkPotionState drinkPotionState { get; }
     public DrinkDamageBuffPotionState drinkDamageBuffPotionState { get; }
     public DrinkArmorBuffPotionState drinkArmorBuffPotionState { get; }
+    public DrinkStaminaBuffPotionState drinkStaminaBuffPotionState { get; }
     public InteractState interactState { get; }
 
     public PlayerMovementStateMachine(Character character)
@@ -32,6 +33,7 @@ public class PlayerMovementStateMachine : StateMachine
         drinkPotionState = new DrinkPotionState(this);
         drinkDamageBuffPotionState = new DrinkDamageBuffPotionState(this);
         drinkArmorBuffPotionState = new DrinkArmorBuffPotionState(this);
+        drinkStaminaBuffPotionState = new DrinkStaminaBuffPotionState(this);
         interactState = new InteractState(this);
 
         combo_1AttackState = new Combo_1AttackState(this);

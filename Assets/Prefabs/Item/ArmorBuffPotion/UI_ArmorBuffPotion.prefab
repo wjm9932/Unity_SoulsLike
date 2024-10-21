@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemUX: {fileID: 4355292216650409300, guid: 0b164067c57557247990105930882c9f, type: 3}
   countText: {fileID: 4829944420768456495}
-  toolTipText: '*Usable Item*
+  toolTipText: 'Armor Buff Potion
 
-    Increase defense: 30%'
+    Increase defense about 30%'
   dataField: {fileID: 11400000, guid: 6e9443f1eadd73544903bb32848ec7b2, type: 2}

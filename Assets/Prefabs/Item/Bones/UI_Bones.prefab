@@ -240,4 +240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemUX: {fileID: 5665020175481297937, guid: 89ba8210040c7494ea412d0111f91850, type: 3}
   countText: {fileID: 2512434278917518307}
-  toolTipText: 'Skeleton''s Bone: This is Skeleton''s bone'
+  toolTipText: 'Bone
+
+    This is Skeleton''s bone'

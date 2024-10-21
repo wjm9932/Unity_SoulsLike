@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmorBuff : Buff
+public class StaminaBuff : Buff
 {
     public override void Initialize(float value)
     {
         elapsedTime = duration;
-        owner.buffArmorPercent = value;
+        owner.buffStaminaPercent = value;
     }
     private void OnDisable()
     {
-        owner.buffArmorPercent = 0f;
+        owner.buffStaminaPercent = 0f;
     }
 }

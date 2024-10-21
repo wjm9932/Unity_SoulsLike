@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2447640876723100384
+--- !u!1 &4078479804993434640
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,31 +8,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2447640876723100387}
-  - component: {fileID: 2447640876723100389}
-  - component: {fileID: 2447640876723100386}
-  - component: {fileID: 2447640876723100388}
-  - component: {fileID: 8655112707011411255}
+  - component: {fileID: 7989883370839484223}
+  - component: {fileID: 2038981503764851288}
+  - component: {fileID: 1266286751165939375}
+  - component: {fileID: 761377481802258563}
+  - component: {fileID: 8382425797281137032}
   m_Layer: 5
-  m_Name: UI_DamageBuffPotion
+  m_Name: UI_StaminaBuffPotion
   m_TagString: HealthPotion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &2447640876723100387
+--- !u!224 &7989883370839484223
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447640876723100384}
+  m_GameObject: {fileID: 4078479804993434640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4925845948328818442}
+  - {fileID: 8402698327722725094}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41,21 +41,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2447640876723100389
+--- !u!222 &2038981503764851288
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447640876723100384}
+  m_GameObject: {fileID: 4078479804993434640}
   m_CullTransparentMesh: 1
---- !u!114 &2447640876723100386
+--- !u!114 &1266286751165939375
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447640876723100384}
+  m_GameObject: {fileID: 4078479804993434640}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3a481bc5b3972b54ab4918d5226622af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 805736230f06ac449a72b0ecb951e522, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -79,37 +79,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2447640876723100388
+--- !u!114 &761377481802258563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447640876723100384}
+  m_GameObject: {fileID: 4078479804993434640}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a1070cf96d51241940cee230b95fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8655112707011411255
+--- !u!114 &8382425797281137032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447640876723100384}
+  m_GameObject: {fileID: 4078479804993434640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1da0e2b28cb321a45bad0ad62c4831cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fd36a3f0e0f6274ba6e68235a28ee51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemUX: {fileID: 3227801818095176289, guid: 82e2378669100bc4ca44e826ab37276f, type: 3}
-  countText: {fileID: 8983711263736773118}
-  toolTipText: 'Damage Buff Potion
+  _itemUX: {fileID: 4172410750723670968, guid: b64b5c794bda8ab45b605fa1bd45bfbb, type: 3}
+  countText: {fileID: 5588645487925223157}
+  toolTipText: 'Stamina Buff Potion
 
-    Additional damage about 10'
-  dataField: {fileID: 11400000, guid: 94f7e81dc56208c43922e5ca4f06eaaf, type: 2}
---- !u!1 &7091327091609753209
+    Reduce cost of stamina about 30%'
+  dataField: {fileID: 11400000, guid: 0330724f90476634caea9f1b11a2c7ba, type: 2}
+--- !u!1 &4258840641975253087
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,9 +117,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4925845948328818442}
-  - component: {fileID: 3587930019997209412}
-  - component: {fileID: 8983711263736773118}
+  - component: {fileID: 8402698327722725094}
+  - component: {fileID: 6958648631146601896}
+  - component: {fileID: 5588645487925223157}
   m_Layer: 5
   m_Name: Count
   m_TagString: Untagged
@@ -127,19 +127,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4925845948328818442
+--- !u!224 &8402698327722725094
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7091327091609753209}
+  m_GameObject: {fileID: 4258840641975253087}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2447640876723100387}
+  m_Father: {fileID: 7989883370839484223}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
@@ -147,21 +147,21 @@ RectTransform:
   m_AnchoredPosition: {x: -2.5, y: 0}
   m_SizeDelta: {x: 60, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3587930019997209412
+--- !u!222 &6958648631146601896
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7091327091609753209}
+  m_GameObject: {fileID: 4258840641975253087}
   m_CullTransparentMesh: 1
---- !u!114 &8983711263736773118
+--- !u!114 &5588645487925223157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7091327091609753209}
+  m_GameObject: {fileID: 4258840641975253087}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}

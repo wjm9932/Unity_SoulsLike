@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 namespace UX
@@ -29,8 +30,30 @@ namespace UX
             triggerCount = 0;
             numOfItem = 1;
         }
+        private void OnTriggerEnter(Collider other)
+        {
+            Character character = other.GetComponent<Character>();
+            if(character != null)
+            {
+                if(triggerCount  <= 0)
+                {
+                    if(character.inventory.AddItem(this, numOfItem) == true)
+                    {
+                        TextManager.Instance.PlayNotificationText("You've got " + itemName + " x" + numOfItem);
+                        Destroy(this.gameObject);
+                    }
+                    else
+                    {
+                        TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
+                    }
+                }
+                else
+                {
+                    --triggerCount;
+                }
+            }
+        }
     }
-
 }
 
 

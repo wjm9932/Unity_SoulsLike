@@ -32,7 +32,7 @@ public class DrinkArmorBuffPotionState : PlayerMovementState
         if (isDrinkFinished == true)
         {
             sm.owner.toBeUsedItem.UseItem(sm.owner);
-            sm.owner.playerBuff.AddBuff(BuffManager.BuffType.ARMOR, sm.owner.toBeUsedItem.data.value);
+            sm.owner.playerBuff.AddBuff(Buff.BuffType.ARMOR, sm.owner.toBeUsedItem.data.value);
             sm.ChangeState(sm.walkState);
         }
     }

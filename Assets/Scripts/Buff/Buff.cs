@@ -6,14 +6,20 @@ using UnityEngine.UI;
 
 public abstract class Buff : MonoBehaviour
 {
+    public enum BuffType
+    {
+        ATTACK,
+        ARMOR,
+        STAMINA,
+    }
+
     public Action onDestroy;
 
-    [SerializeField] Image icon;
-    [SerializeField]
-    protected float duration;
+    [SerializeField] private Image icon;
+    [SerializeField] protected float duration;
     protected float elapsedTime;
     
-    protected LivingEntity owner;
+    protected Character owner;
 
     public abstract void Initialize(float value);
 
@@ -45,7 +51,7 @@ public abstract class Buff : MonoBehaviour
         elapsedTime = duration;
     }
 
-    public void SetOwner(LivingEntity owner)
+    public void SetOwner(Character owner)
     {
         this.owner = owner; 
     }

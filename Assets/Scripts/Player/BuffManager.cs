@@ -5,22 +5,18 @@ using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
     [SerializeField] private Transform buffIndicatorPanel;
-    public enum BuffType
-    {
-        ATTACK,
-        ARMOR,
-    }
+    
 
     [System.Serializable]
     private struct BuffInfo
     {
-        public BuffType buffType;
+        public Buff.BuffType buffType;
         public GameObject buff;
     }
     [SerializeField] private BuffInfo[] buffs;
 
-    private Dictionary<BuffType, GameObject> buffPrefabs = new Dictionary<BuffType, GameObject>();
-    private Dictionary<BuffType, Buff> buffContainer = new Dictionary<BuffType, Buff>();
+    private Dictionary<Buff.BuffType, GameObject> buffPrefabs = new Dictionary<Buff.BuffType, GameObject>();
+    private Dictionary<Buff.BuffType, Buff> buffContainer = new Dictionary<Buff.BuffType, Buff>();
 
     private void Awake()
     {
@@ -42,7 +38,7 @@ public class BuffManager : MonoBehaviour
         
     }
 
-    public void AddBuff(BuffType type, float value)
+    public void AddBuff(Buff.BuffType type, float value)
     {
         if(buffContainer.ContainsKey(type) == true)
         {
@@ -52,14 +48,14 @@ public class BuffManager : MonoBehaviour
         {
             Buff buff = Instantiate(buffPrefabs[type], buffIndicatorPanel).GetComponent<Buff>();
             buff.onDestroy += () => { RemoveFromBuffContainer(type); };
-            buff.SetOwner(this.gameObject.GetComponent<LivingEntity>());
+            buff.SetOwner(this.gameObject.GetComponent<Character>());
             buff.Initialize(value);
 
             buffContainer.Add(type, buff);  
         }
     }
 
-    private void RemoveFromBuffContainer(BuffType type)
+    private void RemoveFromBuffContainer(Buff.BuffType type)
     {
         if (buffContainer.ContainsKey(type) == true)
         {

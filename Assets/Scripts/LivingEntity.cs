@@ -28,13 +28,10 @@ public abstract class LivingEntity : MonoBehaviour
     }
 
     public bool canAttack { get; private set; }
-    public float damage { get; private set; }
-
-    public float buffDamage { get; set; }
-    public float buffArmorPercent {get; set;}
+    public float damage { get; protected set; }
 
     [SerializeField]
-    Transform damageTextPosition;
+    protected Transform damageTextPosition;
 
     [Header("Entitiy")]
     [SerializeField]
@@ -73,26 +70,20 @@ public abstract class LivingEntity : MonoBehaviour
         return health >= _maxHealth;
     }
 
-    public bool ApplyDamage(LivingEntity damager)
+    public virtual bool ApplyDamage(LivingEntity damager)
     {
         if (this.canBeDamaged == true)
         {
             canBeDamaged = false;
 
-            float damageToApply = damager.damage * (1f - buffArmorPercent);
-            health -= damageToApply;
-            
-            if(health <= 0)
+            health -= damager.damage;
+
+            if (health <= 0)
             {
                 Die();
-
-                if(damager.GetComponent<Character>() != null)
-                {
-                    damager.GetComponent<Character>().KillLivingEntity(entityType);
-                }
             }
 
-            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damageToApply);
+            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damager.damage);
             return true;
         }
         else
@@ -113,9 +104,9 @@ public abstract class LivingEntity : MonoBehaviour
         }
     }
 
-    public void SetDamage(float damage)
+    public virtual void SetDamage(float damage)
     {
-        this.damage = damage + buffDamage;
+        this.damage = damage;
     }
     public virtual void Die()
     {
