@@ -3398,7 +3398,7 @@ GameObject:
   - component: {fileID: 371181682}
   - component: {fileID: 371181681}
   m_Layer: 5
-  m_Name: Hp
+  m_Name: Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4107,7 +4107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010518324f9c7cd4ba886e7be6fd8d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 127245775}
+  statusBar: {fileID: 127245775}
 --- !u!1 &442986233
 GameObject:
   m_ObjectHideFlags: 0
@@ -15089,7 +15089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010518324f9c7cd4ba886e7be6fd8d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 371181681}
+  statusBar: {fileID: 371181681}
 --- !u!114 &1435799851
 MonoBehaviour:
   m_ObjectHideFlags: 0

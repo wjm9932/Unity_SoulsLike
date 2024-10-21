@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerStatusBar : MonoBehaviour
 {
     [SerializeField]
-    private Image hpBar;
+    private Image statusBar;
     private Slider easeBar;
     private float lerpSpeed = 3f;
 
@@ -15,21 +15,21 @@ public class PlayerStatusBar : MonoBehaviour
         easeBar = GetComponent<Slider>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     public void UpdateStatusBar(float value, float maxValue)
     {
-        hpBar.fillAmount = value / maxValue;
+        statusBar.fillAmount = value / maxValue;
+
+        if(statusBar.fillAmount >= easeBar.value)
+        {
+            easeBar.value = statusBar.fillAmount;
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        if (hpBar.fillAmount != easeBar.value)
+        if (statusBar.fillAmount <= easeBar.value)
         {
-            easeBar.value = Mathf.Lerp(easeBar.value, hpBar.fillAmount, lerpSpeed * Time.deltaTime);
+            easeBar.value = Mathf.Lerp(easeBar.value, statusBar.fillAmount, lerpSpeed * Time.deltaTime);
         }
     }
 }

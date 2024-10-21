@@ -71,7 +71,7 @@ public class Character : LivingEntity
 
 
     public const float targetStaminaRecoverCoolTime = 1.5f;
-    public float staminaRecoverCoolTime;
+    [HideInInspector] public float staminaRecoverCoolTime;
     private float maxStamina;
     private float _stamina;
     public float stamina
@@ -100,6 +100,7 @@ public class Character : LivingEntity
     // Start is called before the first frame update
     private void Awake()
     {
+        staminaRecoverCoolTime = 0f;
         maxStamina = 100f;
         canBeDamaged = true;
         CameraStateMachine.Initialize(this);
