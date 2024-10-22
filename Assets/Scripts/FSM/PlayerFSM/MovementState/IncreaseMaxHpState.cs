@@ -23,7 +23,7 @@ public class IncreaseMaxHpState : PlayerMovementState
         if (sm.owner.toBeUsedItem.UseItem(sm.owner) == true)
         {
             isDrinkFinished = false;
-            sm.owner.animator.SetBool("IsDrinkingPotion", true);
+            sm.owner.animator.SetBool("IsIncreaseHp", true);
             moveSpeed = sm.owner.walkSpeed;
             sm.owner.StartCoroutine(sm.owner.hpBar.ResizeStatusBarSize(sm.owner.toBeUsedItem.data.value));
             sm.owner.StartCoroutine(SetMaxHealth(sm.owner.toBeUsedItem.data.value));
@@ -53,7 +53,7 @@ public class IncreaseMaxHpState : PlayerMovementState
     public override void Exit()
     {
         base.Exit();
-        sm.owner.animator.SetBool("IsDrinkingPotion", false);
+        sm.owner.animator.SetBool("IsIncreaseHp", false);
     }
 
     public override void OnAnimationExitEvent()

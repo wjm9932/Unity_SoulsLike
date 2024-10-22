@@ -242,5 +242,5 @@ MonoBehaviour:
   countText: {fileID: 4829944420768456495}
   toolTipText: 'Book
 
-    Increase max hp about 10'
+    Increase max health about 10'
   dataField: {fileID: 11400000, guid: c46aa13f36ffc6444862c08b2a5cb9e4, type: 2}

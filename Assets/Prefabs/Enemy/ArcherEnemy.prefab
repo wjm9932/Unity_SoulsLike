@@ -2598,6 +2598,8 @@ MonoBehaviour:
   eyeTransform: {fileID: 3925785323940902640}
   dropItem:
   - {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+  - {fileID: 5665020175481297937, guid: 89ba8210040c7494ea412d0111f91850, type: 3}
+  - {fileID: 6797317372116547010, guid: bd9359f43d9f6c94a8de27017b33dd76, type: 3}
   hpBar: {fileID: 6684347474770500124}
   lockOnIndicator: {fileID: 4021273976666996669}
   arrowPosition: {fileID: 364283556699512594}
