@@ -13,26 +13,26 @@ public class IncreaseMaxHpState : PlayerMovementState
     {
         base.Enter();
 
-        sm.owner.StartCoroutine(sm.owner.hpBar.ResizeStatusBarSize(10));
-        sm.owner.StartCoroutine(SetMaxHealth(10));
+        //sm.owner.StartCoroutine(sm.owner.hpBar.ResizeStatusBarSize(10));
+        //sm.owner.StartCoroutine(SetMaxHealth(10));
 
-        isDrinkFinished = false;
-        sm.owner.animator.SetBool("IsDrinkingPotion", true);
-        moveSpeed = sm.owner.walkSpeed;
+        //isDrinkFinished = false;
+        //sm.owner.animator.SetBool("IsDrinkingPotion", true);
+        //moveSpeed = sm.owner.walkSpeed;
 
-        //if (sm.owner.toBeUsedItem.UseItem(sm.owner) == true)
-        //{
-        //    isDrinkFinished = false;
-        //    sm.owner.animator.SetBool("IsDrinkingPotion", true);
-        //    moveSpeed = sm.owner.walkSpeed;
-        //    sm.owner.StartCoroutine(sm.owner.hpBar.ResizeStatusBarSize(sm.owner.toBeUsedItem.data.value));
-        //    sm.owner.StartCoroutine(SetMaxHealth(sm.owner.toBeUsedItem.data.value));
-        //}
-        //else
-        //{
-        //    TextManager.Instance.PlayNotificationText(TextManager.DisplayText.HP_IS_FULL);
-        //    sm.ChangeState(sm.walkState);
-        //}
+        if (sm.owner.toBeUsedItem.UseItem(sm.owner) == true)
+        {
+            isDrinkFinished = false;
+            sm.owner.animator.SetBool("IsDrinkingPotion", true);
+            moveSpeed = sm.owner.walkSpeed;
+            sm.owner.StartCoroutine(sm.owner.hpBar.ResizeStatusBarSize(sm.owner.toBeUsedItem.data.value));
+            sm.owner.StartCoroutine(SetMaxHealth(sm.owner.toBeUsedItem.data.value));
+        }
+        else
+        {
+            TextManager.Instance.PlayNotificationText(TextManager.DisplayText.HP_IS_FULL);
+            sm.ChangeState(sm.walkState);
+        }
     }
 
     public override void Update()

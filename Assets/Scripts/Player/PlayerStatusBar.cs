@@ -41,7 +41,7 @@ public class PlayerStatusBar : MonoBehaviour
     {
         isResizingDone = false;
         float percentage = amount / originMaxHp;
-        float duration = 1f;
+        float duration = 0.5f;
 
         float elapsedTime = 0f;
         float amountPerTick = (barBackGroundSize * percentage) / 100f;

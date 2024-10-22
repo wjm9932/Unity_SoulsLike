@@ -139,12 +139,6 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            //StartCoroutine(hpBar.ResizeStatusBarSize(10f));
-            playerMovementStateMachine.ChangeState(playerMovementStateMachine.increaseMaxHpState);
-        }
-
         RecoverStamina();
 
         rb.useGravity = !IsOnSlope();
