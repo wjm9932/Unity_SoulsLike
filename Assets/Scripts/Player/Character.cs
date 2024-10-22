@@ -96,6 +96,16 @@ public class Character : LivingEntity
         }
     }
 
+    public override float maxHealth
+    {
+        set
+        {
+            base.maxHealth = value;
+            hpBar.UpdateStatusBar(health, maxHealth);
+        }
+    }
+
+
 
     // Start is called before the first frame update
     private void Awake()
@@ -129,7 +139,11 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            //StartCoroutine(hpBar.ResizeStatusBarSize(10f));
+            playerMovementStateMachine.ChangeState(playerMovementStateMachine.increaseMaxHpState);
+        }
 
         RecoverStamina();
 

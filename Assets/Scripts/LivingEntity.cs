@@ -41,9 +41,13 @@ public abstract class LivingEntity : MonoBehaviour
     [SerializeField]
     private float _maxHealth = 100f;
 
-    public float maxHealth
+    public virtual float maxHealth
     {
         get { return _maxHealth; }
+        set
+        {
+            _maxHealth = value;
+        }
     }
 
 
