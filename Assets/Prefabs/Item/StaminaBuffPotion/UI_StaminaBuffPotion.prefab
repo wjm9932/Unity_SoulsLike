@@ -107,7 +107,7 @@ MonoBehaviour:
   countText: {fileID: 5588645487925223157}
   toolTipText: 'Stamina Buff Potion
 
-    Reduce cost of stamina about 30%'
+    Reduce cost of stamina about 50%'
   dataField: {fileID: 11400000, guid: 0330724f90476634caea9f1b11a2c7ba, type: 2}
 --- !u!1 &4258840641975253087
 GameObject:

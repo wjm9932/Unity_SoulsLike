@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b903c42b857cbc42a376a3356fffa4b, type: 3}
   m_Name: ArmorBuffPotion
   m_EditorClassIdentifier: 
-  value: 0.3
+  value: 0.5

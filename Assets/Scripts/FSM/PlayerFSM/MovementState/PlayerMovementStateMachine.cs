@@ -31,6 +31,7 @@ public class PlayerMovementStateMachine : StateMachine
         walkState = new WalkSate(this);
         sprintState = new SprintState(this);
         dodgeState = new DodgeState(this);
+
         drinkPotionState = new DrinkPotionState(this);
         drinkDamageBuffPotionState = new DrinkDamageBuffPotionState(this);
         drinkArmorBuffPotionState = new DrinkArmorBuffPotionState(this);
@@ -44,6 +45,7 @@ public class PlayerMovementStateMachine : StateMachine
         combo_3AttackState = new Combo_3AttackState(this);
         lockOnWalkState = new LockOnWalkState(this);
         lockOnDodgeState = new LockOnDodgeState(this);
+
         hitState = new HitState(this);  
     }
 }

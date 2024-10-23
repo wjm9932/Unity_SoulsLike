@@ -22,7 +22,9 @@ namespace EnemyFSM
         }
         public override void Update()
         {
-            if(isDone == true)
+            sm.owner.SetCanAttack(0);
+
+            if (isDone == true)
             {
                 sm.ChangeState(sm.trackingState); 
             }

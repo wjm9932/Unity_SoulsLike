@@ -242,5 +242,5 @@ MonoBehaviour:
   countText: {fileID: 4829944420768456495}
   toolTipText: 'Armor Buff Potion
 
-    Increase defense about 30%'
+    Increase defense about 50%'
   dataField: {fileID: 11400000, guid: 6e9443f1eadd73544903bb32848ec7b2, type: 2}

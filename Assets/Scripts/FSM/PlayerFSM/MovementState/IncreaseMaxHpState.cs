@@ -13,13 +13,6 @@ public class IncreaseMaxHpState : PlayerMovementState
     {
         base.Enter();
 
-        //sm.owner.StartCoroutine(sm.owner.hpBar.ResizeStatusBarSize(10));
-        //sm.owner.StartCoroutine(SetMaxHealth(10));
-
-        //isDrinkFinished = false;
-        //sm.owner.animator.SetBool("IsDrinkingPotion", true);
-        //moveSpeed = sm.owner.walkSpeed;
-
         if (sm.owner.toBeUsedItem.UseItem(sm.owner) == true)
         {
             isDrinkFinished = false;
@@ -67,6 +60,7 @@ public class IncreaseMaxHpState : PlayerMovementState
         {
             yield return null;
         }
+        yield return null;
         sm.owner.maxHealth += amount;
     }
 }
