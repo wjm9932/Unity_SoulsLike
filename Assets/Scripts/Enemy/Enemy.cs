@@ -75,7 +75,10 @@ public class Enemy : LivingEntity
 
             if (IsDrop(item.dropChance) == true)
             {
-                Instantiate(dropItem[i], this.gameObject.transform.position, Quaternion.identity);
+                Vector2 randomOffset = Random.insideUnitCircle * 0.5f; 
+                Vector3 dropPosition = this.gameObject.transform.position + new Vector3(randomOffset.x, 0, randomOffset.y);
+
+                Instantiate(dropItem[i], dropPosition, Quaternion.identity);
             }
         }
     }

@@ -18,6 +18,7 @@ namespace UX
             get { return _itemName; }
             private set { _itemName = value; }
         }
+        [SerializeField]
         public GameObject icon;
         [HideInInspector]
         public int triggerCount;
