@@ -87,6 +87,7 @@ public class QuestPoint : MonoBehaviour
         if (other.CompareTag("Player") == true)
         {
             isPlayerNearby = true;
+            other.GetComponent<InteractionIndicator>().Show();
         }
     }
 
@@ -95,6 +96,7 @@ public class QuestPoint : MonoBehaviour
         if (other.CompareTag("Player") == true)
         {
             isPlayerNearby = false;
+            other.GetComponent<InteractionIndicator>().Hide();
         }
     }
 }
