@@ -21,7 +21,6 @@ public class CameraLockOnState : CameraState
 
         if (target == null)
         {
-            Debug.Log("123");
             csm.ChangeState(csm.cameraLockOffState);
         }
         else
@@ -30,8 +29,8 @@ public class CameraLockOnState : CameraState
             csm.owner.lockOnCamera.LookAt = target.transform;
             csm.owner.lockOffCamera.Priority = 9;
             csm.owner.lockOnCamera.Priority = 10;
+            csm.owner.playerEvents.CameraLockOn();
 
-            //UpdateCameraPosition();
             target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(true);
             csm.owner.StartCoroutine(ApplyDampingAfterTwoFrame());
         }

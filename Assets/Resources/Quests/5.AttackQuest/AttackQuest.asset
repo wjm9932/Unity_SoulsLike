@@ -21,7 +21,9 @@ MonoBehaviour:
   onStartDialogue: 'Let''s attack
 
     Press left mouse button!'
-  onFinishDialogue: Great job!
+  onFinishDialogue: 'Great job!
+
+    Now, you can attack enemy'
   onFailFinishDialogue: Not enough space!
   questPrerequisites:
   - {fileID: 11400000, guid: d473f3ab3e68e754ba7c7434f752054f, type: 2}

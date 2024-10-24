@@ -10,28 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
-  m_Name: SprintQuest
+  m_Name: CameraLockOnQuest
   m_EditorClassIdentifier: 
-  id: SprintQuest
-  displayName: Sprint!
+  id: CameraLockOnQuest
+  displayName: Lock On Camera!
   initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Great job!
-  onStartDialogue: 'Sprint for 5 seconds!
+  onStartDialogue: 'Let''s lock on to enemy!
 
-    Press left shit to sprint'
+    Press F to lock on while looking
+    at the enemy'
   onFinishDialogue: 'Great job!
 
-    Now, you can sprint'
+    Lock on camera would be useful'
   onFailFinishDialogue: Not enough space!
   questPrerequisites:
-  - {fileID: 11400000, guid: d2ed99bff45c81348888e1ed54de2d97, type: 2}
+  - {fileID: 11400000, guid: a38edb19f45da084490ec1e4fa9cd92b, type: 2}
   questStepPrefabs:
   - stepPrefabs:
-    - {fileID: 4854004548644933055, guid: 222a817569596da48a45410938f1b667, type: 3}
+    - {fileID: 8301076691625764753, guid: a9d2365cccc0daf42af9465410484610, type: 3}
   targetItem: []
-  rewards:
-  - _itemPrefab: {fileID: 4172410750723670968, guid: b64b5c794bda8ab45b605fa1bd45bfbb, type: 3}
-    itemName: Stamina buff potion
-    count: 3
+  rewards: []

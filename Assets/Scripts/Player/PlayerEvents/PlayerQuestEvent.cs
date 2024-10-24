@@ -12,6 +12,7 @@ public class PlayerQuestEvent : MonoBehaviour
     public event Action<string> onAttack;
     public event Action<float> onSprint;
     public event Action onDodge;
+    public event Action onCameraLockOn;
 
     public void UpdateItemCount(string item)
     {
@@ -64,6 +65,14 @@ public class PlayerQuestEvent : MonoBehaviour
         if(onDodge != null)
         {
             onDodge();
+        }
+    }
+
+    public void CameraLockOn()
+    {
+        if(onCameraLockOn != null)
+        {
+            onCameraLockOn();
         }
     }
 }
