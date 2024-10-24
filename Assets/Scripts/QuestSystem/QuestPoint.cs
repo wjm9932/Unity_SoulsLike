@@ -6,19 +6,20 @@ using UnityEngine;
 public class QuestPoint : MonoBehaviour
 {
     [Header("Quest")]
-    [SerializeField] private QuestInfoSO quest;
+    [SerializeField] private QuestInfoSO[] quests;
 
     [Header("Config")]
     [SerializeField] private bool isStartPoint = true;
     [SerializeField] private bool isFinishPoint = true;
 
-
+    private int questIndex;
     private QuestIcon questIcon;
     private QuestState currentQuestState;
     private bool isPlayerNearby = false;
 
     private void Awake()
     {
+        questIndex = 0;
         questIcon = GetComponentInChildren<QuestIcon>();
     }
     private void OnEnable()
@@ -42,43 +43,52 @@ public class QuestPoint : MonoBehaviour
         }
         if(currentQuestState == QuestState.REQUIREMENTS_NOT_MET && isStartPoint == true)
         {
-            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.requirementsNotMetDialogue);
+            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].requirementsNotMetDialogue);
         }
         else if (currentQuestState == QuestState.CAN_START && isStartPoint == true)
         {
-            QuestManager.Instance.StartQuest(quest.id);
-            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onStartDialogue);
+            QuestManager.Instance.StartQuest(quests[questIndex].id);
+            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].onStartDialogue);
         }
         else if (currentQuestState == QuestState.CAN_FINISH && isFinishPoint == true)
         {
-            if(QuestManager.Instance.FinishQuest(quest.id) == true)
+            if(QuestManager.Instance.FinishQuest(quests[questIndex].id, ref questIndex) == true)
             {
-                QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onFinishDialogue);
+                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].onFinishDialogue);
             }
             else
             {
-                QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.onFailFinishDialogue);
+                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].onFailFinishDialogue);
             }
         }
         else if (currentQuestState == QuestState.FINISHED)
         {
-            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.doneDialogue);
+            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].doneDialogue);
         }
         else
         {
-            QuestManager.Instance.UpdateQuestDialogue(quest.displayName, quest.id);
+            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].id);
         }
         return true;
     }
 
     private void ChangeQuestState(Quest quest)
     {
-        if (this.quest.id == quest.info.id)
+        if (quests.Length <= questIndex)
+        {
+            questIndex = quests.Length - 1;
+        }
+
+        if (this.quests[questIndex].id == quest.info.id)
         {
             currentQuestState = quest.state;
             questIcon.SetState(currentQuestState, isStartPoint, isFinishPoint);
 
-            Debug.Log("Quest with id: " + this.quest.id + " is updated to state: " + currentQuestState);
+            //if (currentQuestState == QuestState.FINISHED)
+            //{
+            //    Destroy(this);
+            //    return;
+            //}
         }
     }
 
