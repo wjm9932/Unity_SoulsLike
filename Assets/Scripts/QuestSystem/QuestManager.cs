@@ -144,7 +144,7 @@ public class QuestManager : MonoBehaviour
 
     }
 
-    public bool FinishQuest(string id, ref int index)
+    public bool FinishQuest(string id)
     {
         Quest quest = GetQuestById(id);
         if (quest.GetReward() == false)
@@ -153,7 +153,6 @@ public class QuestManager : MonoBehaviour
         }
 
         quest.DestroyQuestSteps();
-        index++;
         ChangeQuestState(quest, QuestState.FINISHED);
         NotifyQuestFinished(quest);
         FindCanStartQuest();

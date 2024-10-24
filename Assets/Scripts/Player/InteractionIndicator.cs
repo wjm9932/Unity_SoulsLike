@@ -12,7 +12,8 @@ public class InteractionIndicator : MonoBehaviour
     {
         if(interactionIndicator.activeSelf == true)
         {
-            if (this.GetComponent<Character>().playerMovementStateMachine.currentState is InteractState == true)
+            if (this.GetComponent<Character>().playerMovementStateMachine.currentState is InteractState == true ||
+                this.GetComponent<Character>().uiStateMachine.currentState is OpenState == true)
             {
                 interactionIndicator.SetActive(false);
             }
@@ -21,7 +22,10 @@ public class InteractionIndicator : MonoBehaviour
 
     public void Show()
     {
-        interactionIndicator.SetActive(true);
+        if(this.GetComponent<Character>().uiStateMachine.currentState is OpenState == false)
+        {
+            interactionIndicator.SetActive(true);
+        }
     }
     public void Hide()
     {

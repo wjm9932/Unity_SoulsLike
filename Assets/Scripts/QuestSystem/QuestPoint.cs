@@ -37,11 +37,11 @@ public class QuestPoint : MonoBehaviour
 
     private bool InteractWithQuest()
     {
-        if(isPlayerNearby == false)
+        if (isPlayerNearby == false)
         {
             return false;
         }
-        if(currentQuestState == QuestState.REQUIREMENTS_NOT_MET && isStartPoint == true)
+        if (currentQuestState == QuestState.REQUIREMENTS_NOT_MET && isStartPoint == true)
         {
             QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].requirementsNotMetDialogue);
         }
@@ -52,9 +52,9 @@ public class QuestPoint : MonoBehaviour
         }
         else if (currentQuestState == QuestState.CAN_FINISH && isFinishPoint == true)
         {
-            if(QuestManager.Instance.FinishQuest(quests[questIndex].id, ref questIndex) == true)
+            if (QuestManager.Instance.FinishQuest(quests[questIndex].id) == true)
             {
-                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].onFinishDialogue);
+                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex - 1].displayName, quests[questIndex - 1].onFinishDialogue);
             }
             else
             {
@@ -74,21 +74,19 @@ public class QuestPoint : MonoBehaviour
 
     private void ChangeQuestState(Quest quest)
     {
-        if (quests.Length <= questIndex)
-        {
-            questIndex = quests.Length - 1;
-        }
-
         if (this.quests[questIndex].id == quest.info.id)
         {
             currentQuestState = quest.state;
-            questIcon.SetState(currentQuestState, isStartPoint, isFinishPoint);
 
-            //if (currentQuestState == QuestState.FINISHED)
-            //{
-            //    Destroy(this);
-            //    return;
-            //}
+            if (currentQuestState == QuestState.FINISHED)
+            {
+                if (questIndex + 1 < quests.Length)
+                {
+                    currentQuestState = quests[++questIndex].initialState;
+                }
+            }
+
+            questIcon.SetState(currentQuestState, isStartPoint, isFinishPoint);
         }
     }
 
