@@ -9,13 +9,13 @@ public class UseHealthPotionQuestStep : QuestStep
 
     private void Awake()
     {
-        status = "Objective: Use Health Potion\n";
+        status = "Objective: Use a Health Potion\n";
     }
     // Start is called before the first frame update
     void Start()
     {
         questOwner.GetComponent<PlayerQuestEvent>().onUse += UseHealthPotion;
-        status = "Use Health Potion";
+        status = "Use a Health Potion";
     }
 
 

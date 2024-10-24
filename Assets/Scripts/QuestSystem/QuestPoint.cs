@@ -74,6 +74,12 @@ public class QuestPoint : MonoBehaviour
 
     private void ChangeQuestState(Quest quest)
     {
+        if (quests.Length <= questIndex)
+        {
+            QuestManager.Instance.onChangeQuestState -= ChangeQuestState;
+            return;
+        }
+
         if (this.quests[questIndex].id == quest.info.id)
         {
             currentQuestState = quest.state;
