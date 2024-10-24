@@ -16,13 +16,13 @@ public class FindBookQuestStep : QuestStep
     }
     private void Awake()
     {
-        status = "Objective: Find and Get a Book\n";
+        status = "Objective: Find a Book\n";
     }
 
     void Start()
     {
         questOwner.GetComponent<PlayerQuestEvent>().onCollect += FindBook;
-        status = "Find and Get a Book";
+        status = "Find a Book";
 
         if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
         {

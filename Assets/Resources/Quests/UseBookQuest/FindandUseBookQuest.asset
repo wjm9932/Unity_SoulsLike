@@ -18,8 +18,9 @@ MonoBehaviour:
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
-  onStartDialogue: Find book and use it!
-  onFinishDialogue: if you use book, your max health would be increased about 10!
+  onStartDialogue: Find a book and use it!
+  onFinishDialogue: if you use the book, your max health would be increased about
+    10!
   onFailFinishDialogue: Not enough space!
   questPrerequisites: []
   questStepPrefabs:

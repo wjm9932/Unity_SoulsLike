@@ -18,7 +18,8 @@ MonoBehaviour:
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Hey
-  onStartDialogue: Hey, Visit the came fire over there and find out something special
+  onStartDialogue: Hey, Visit the came fire next to the room and find out something
+    special!
   onFinishDialogue: "Great job! \nAs you can see, you can heal at the campfire"
   onFailFinishDialogue: Not enough space!
   questPrerequisites: []

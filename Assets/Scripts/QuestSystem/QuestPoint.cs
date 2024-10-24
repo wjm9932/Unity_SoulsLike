@@ -58,12 +58,12 @@ public class QuestPoint : MonoBehaviour
             }
             else
             {
-                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].onFailFinishDialogue);
+                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex - 1].displayName, quests[questIndex - 1].onFailFinishDialogue);
             }
         }
         else if (currentQuestState == QuestState.FINISHED)
         {
-            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].doneDialogue);
+            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex - 1].displayName, quests[questIndex - 1].doneDialogue);
         }
         else
         {
@@ -80,9 +80,9 @@ public class QuestPoint : MonoBehaviour
 
             if (currentQuestState == QuestState.FINISHED)
             {
-                if (questIndex + 1 < quests.Length)
+                if (++questIndex < quests.Length)
                 {
-                    currentQuestState = quests[++questIndex].initialState;
+                    currentQuestState = quests[questIndex].initialState;
                 }
             }
 
