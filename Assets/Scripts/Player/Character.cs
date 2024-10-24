@@ -119,7 +119,7 @@ public class Character : LivingEntity
     }
     void Start()
     {
-        health = 100f;
+        health = 0f;
         stamina = 100f;
 
         mainCamera = Camera.main;
