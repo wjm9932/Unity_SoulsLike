@@ -85,7 +85,6 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogError("cannot find valid position");
             return transform.position;
         }
     }

@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: FindHealthPotion
   m_EditorClassIdentifier: 
   id: FindHealthPotion
-  displayName: Find Health Potion
-  initialState: 1
+  displayName: Find Health Potion!
+  initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
-  onStartDialogue: Hey Find  aHealth Potion and use it!
+  onStartDialogue: Hey, find  a health potion and use it!
   onFinishDialogue: 'You are ready to use item!
 
     Here is Health potion!'
   onFailFinishDialogue: Not enough space!
-  questPrerequisites: []
+  questPrerequisites:
+  - {fileID: 11400000, guid: 677dfc4b87a74bb4aa9634044d3156ac, type: 2}
   questStepPrefabs:
   - stepPrefabs:
     - {fileID: 2650874501750272427, guid: 211b736b26dd1e649a3061ac5c231394, type: 3}

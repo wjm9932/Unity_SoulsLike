@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
+  m_Name: SprintQuest
+  m_EditorClassIdentifier: 
+  id: SprintQuest
+  displayName: Sprint!
+  initialState: 0
+  requirementsNotMetDialogue: You have to complete other quest before start this
+    quest!
+  doneDialogue: Great job!
+  onStartDialogue: 'Sprint for 5 seconds!
+
+    Press left shit to sprint'
+  onFinishDialogue: Great job!
+  onFailFinishDialogue: Not enough space!
+  questPrerequisites:
+  - {fileID: 11400000, guid: d2ed99bff45c81348888e1ed54de2d97, type: 2}
+  questStepPrefabs:
+  - stepPrefabs:
+    - {fileID: 4854004548644933055, guid: 222a817569596da48a45410938f1b667, type: 3}
+  targetItem: []
+  rewards:
+  - _itemPrefab: {fileID: 4172410750723670968, guid: b64b5c794bda8ab45b605fa1bd45bfbb, type: 3}
+    itemName: Stamina buff potion
+    count: 3

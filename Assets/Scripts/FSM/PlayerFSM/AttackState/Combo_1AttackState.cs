@@ -20,6 +20,7 @@ namespace PlayerFSM
             {
                 base.Enter();
 
+                sm.owner.playerEvents.Attack("First");
                 sm.owner.staminaRecoverCoolTime = Character.targetStaminaRecoverCoolTime;
                 sm.owner.animator.SetTrigger("IsAttack1");
                 sm.owner.SetDamage(10f);

@@ -17,6 +17,7 @@ namespace PlayerFSM
             {
                 base.Enter();
 
+                sm.owner.playerEvents.Attack("Second");
                 sm.owner.staminaRecoverCoolTime = Character.targetStaminaRecoverCoolTime;
                 sm.owner.animator.SetTrigger("IsAttack2");
                 sm.owner.SetDamage(20f);

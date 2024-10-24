@@ -9,7 +9,8 @@ public class PlayerQuestEvent : MonoBehaviour
     public event Action<string> onUse;
     public event Action<string> onVisit;
     public event Action<EntityType> OnKill;
-
+    public event Action<string> onAttack;
+    public event Action<float> onSprint;
 
     public void UpdateItemCount(string item)
     {
@@ -39,6 +40,21 @@ public class PlayerQuestEvent : MonoBehaviour
         if(onVisit != null)
         {
             onVisit(place);
+        }
+    }
+
+    public void Attack(string combo)
+    {
+        if(onAttack != null)
+        {
+            onAttack(combo);
+        }
+    }
+    public void Sprint(float sprintTime)
+    {
+        if(onSprint != null)
+        {
+            onSprint(sprintTime);
         }
     }
 }

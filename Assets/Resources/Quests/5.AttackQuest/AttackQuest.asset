@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
+  m_Name: AttackQuest
+  m_EditorClassIdentifier: 
+  id: AttackQuest
+  displayName: Attack!
+  initialState: 0
+  requirementsNotMetDialogue: You have to complete other quest before start this
+    quest!
+  doneDialogue: Great job!
+  onStartDialogue: 'Let''s attack
+
+    Press left mouse button!'
+  onFinishDialogue: Great job!
+  onFailFinishDialogue: Not enough space!
+  questPrerequisites:
+  - {fileID: 11400000, guid: d473f3ab3e68e754ba7c7434f752054f, type: 2}
+  questStepPrefabs:
+  - stepPrefabs:
+    - {fileID: 8510088113357860788, guid: 035cdd99770c32643bb5250e44e71904, type: 3}
+  - stepPrefabs:
+    - {fileID: 2808751758583832179, guid: 6b3f9b7d5a3727c4ea0f6bb5003a2742, type: 3}
+  - stepPrefabs:
+    - {fileID: 5057725671274519245, guid: 984a3fc7c1d50de468021fb86d3b2620, type: 3}
+  targetItem: []
+  rewards:
+  - _itemPrefab: {fileID: 3227801818095176289, guid: 82e2378669100bc4ca44e826ab37276f, type: 3}
+    itemName: Damage buff potion
+    count: 3

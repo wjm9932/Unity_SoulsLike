@@ -18,6 +18,8 @@ namespace PlayerFSM
 
         public override void Update()
         {
+            sm.owner.playerEvents.Sprint(Time.deltaTime);
+
             if (sm.owner.input.isSprinting == false)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
