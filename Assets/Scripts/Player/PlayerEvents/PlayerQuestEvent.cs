@@ -11,6 +11,7 @@ public class PlayerQuestEvent : MonoBehaviour
     public event Action<EntityType> OnKill;
     public event Action<string> onAttack;
     public event Action<float> onSprint;
+    public event Action onDodge;
 
     public void UpdateItemCount(string item)
     {
@@ -55,6 +56,14 @@ public class PlayerQuestEvent : MonoBehaviour
         if(onSprint != null)
         {
             onSprint(sprintTime);
+        }
+    }
+
+    public void Dodge()
+    {
+        if(onDodge != null)
+        {
+            onDodge();
         }
     }
 }

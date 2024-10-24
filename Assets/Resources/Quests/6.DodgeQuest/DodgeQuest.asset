@@ -10,22 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
-  m_Name: VisitCampFire
+  m_Name: DodgeQuest
   m_EditorClassIdentifier: 
-  id: VisitCampFire
-  displayName: Visit Camp Fire!
+  id: DodgeQuest
+  displayName: Dodge!
   initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
-  doneDialogue: Hey
-  onStartDialogue: Hey, visit the campfire next to the room and find out something
-    special!
-  onFinishDialogue: "Great job! \nAs you can see, you can heal at the campfire"
+  doneDialogue: Great job!
+  onStartDialogue: "Let's dodge\t\nPress space to dodge!"
+  onFinishDialogue: 'Great job!
+
+    you can dodge enemy''s attack'
   onFailFinishDialogue: Not enough space!
   questPrerequisites:
-  - {fileID: 11400000, guid: d289c6d318298ec4ba4f07ed25ed70d4, type: 2}
+  - {fileID: 11400000, guid: 400ad2d5a6c243f4c8811381bcb97c64, type: 2}
   questStepPrefabs:
   - stepPrefabs:
-    - {fileID: 4269398714128404377, guid: d63b86fb39e7ef441b88b7ca0ebd82ab, type: 3}
+    - {fileID: 5115975555260015519, guid: 121d4e59685755542b4944fb465a67fb, type: 3}
   targetItem: []
-  rewards: []
+  rewards:
+  - _itemPrefab: {fileID: 4355292216650409300, guid: 0b164067c57557247990105930882c9f, type: 3}
+    itemName: Armor buff potion
+    count: 3

@@ -18,7 +18,7 @@ MonoBehaviour:
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
-  onStartDialogue: Hey, find  a health potion and use it!
+  onStartDialogue: Hey, find a health potion and use it!
   onFinishDialogue: 'You are ready to use item!
 
     Here is Health potion!'

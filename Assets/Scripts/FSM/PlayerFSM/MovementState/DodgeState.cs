@@ -19,7 +19,7 @@ namespace PlayerFSM
             isDodgeFinished = false;
             dodgeDir = sm.owner.input.dodgeInput;
             sm.owner.animator.SetBool("IsDodging", true);
-
+            sm.owner.playerEvents.Dodge();
             SetMoveDirection();
         }
         public override void Update()
