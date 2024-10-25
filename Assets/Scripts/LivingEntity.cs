@@ -13,12 +13,24 @@ public enum EntityType
 
 public abstract class LivingEntity : MonoBehaviour
 {
-    public event Action onDeath;
-    public bool isDead { get; protected set; }
-    public bool canBeDamaged { get; set; }
+    [SerializeField] protected Transform damageTextPosition;
 
+    [Header("Entitiy")]
+    [SerializeField] private EntityType _entityType;
+    public EntityType entityType { get { return _entityType; } protected set { _entityType = value; } }
+
+    [SerializeField] private float _maxHealth = 100f;
+    public virtual float maxHealth
+    {
+        get { return _maxHealth; }
+        set
+        {
+            _maxHealth = value;
+        }
+    }
+    
     private float _health;
-    public virtual float health 
+    public virtual float health
     {
         get { return _health; }
         protected set
@@ -29,26 +41,10 @@ public abstract class LivingEntity : MonoBehaviour
 
     public bool canAttack { get; private set; }
     public float damage { get; protected set; }
-
-    [SerializeField]
-    protected Transform damageTextPosition;
-
-    [Header("Entitiy")]
-    [SerializeField]
-    private EntityType _entityType;
-    public EntityType entityType { get { return _entityType; } protected set { _entityType = value; } }
-
-    [SerializeField]
-    private float _maxHealth = 100f;
-
-    public virtual float maxHealth
-    {
-        get { return _maxHealth; }
-        set
-        {
-            _maxHealth = value;
-        }
-    }
+    public float buffArmorPercent { get; set; }
+    public bool isDead { get; protected set; }
+    public bool canBeDamaged { get; set; }
+    public event Action onDeath;
 
 
     private void Start()
@@ -80,18 +76,15 @@ public abstract class LivingEntity : MonoBehaviour
         {
             canBeDamaged = false;
 
-            health -= damager.damage;
+            float damageToApply = damager.damage * (1f - buffArmorPercent);
+            health -= damageToApply;
 
             if (health <= 0)
             {
                 Die();
-                if(damager.GetComponent<Character>() != null)
-                {
-                    damager.GetComponent<Character>().KillLivingEntity(entityType);
-                }
             }
 
-            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damager.damage);
+            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damageToApply);
             return true;
         }
         else

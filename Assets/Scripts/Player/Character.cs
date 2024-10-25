@@ -66,7 +66,6 @@ public class Character : LivingEntity
     public BuffManager playerBuff { get; private set; }
 
     public float buffDamage { get; set; }
-    public float buffArmorPercent { get; set; }
     public float buffStaminaPercent { get; set; }
 
 
@@ -247,28 +246,6 @@ public class Character : LivingEntity
                     EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, transform, EffectManager.EffectType.Flesh);
                 }
             }
-        }
-    }
-    public override bool ApplyDamage(LivingEntity damager)
-    {
-        if (this.canBeDamaged == true)
-        {
-            canBeDamaged = false;
-
-            float damageToApply = damager.damage * (1f - buffArmorPercent);
-            health -= damageToApply;
-
-            if (health <= 0)
-            {
-                Die();
-            }
-
-            TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damageToApply);
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 

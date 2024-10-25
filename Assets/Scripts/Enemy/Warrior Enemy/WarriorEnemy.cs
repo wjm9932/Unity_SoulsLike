@@ -38,6 +38,8 @@ public class WarriorEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        buffArmorPercent = 0f;
+
         trackingStopDistance = 1f;
 
         health = 100f;

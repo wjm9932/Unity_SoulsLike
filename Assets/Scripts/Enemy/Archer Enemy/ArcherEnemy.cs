@@ -36,6 +36,8 @@ public class ArcherEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        buffArmorPercent = -0.3f;
+
         trackingStopDistance = 5f;
 
         health = 100f;
