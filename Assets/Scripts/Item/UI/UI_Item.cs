@@ -58,6 +58,7 @@ namespace UI
         public void DestroyItem()
         {
             OnDestroy?.Invoke(gameObject.GetComponent<UI.UI_Item>());
+            ToolTipManager.Instance.HideToolTip();
         }
 
         public void DropItem()
