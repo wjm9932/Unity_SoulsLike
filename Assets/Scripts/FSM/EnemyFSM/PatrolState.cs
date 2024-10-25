@@ -69,7 +69,6 @@ namespace EnemyFSM
             }
             else
             {
-                Debug.LogError("cannot find valid position");
                 return sm.owner.transform.transform.position;
             }
         }
