@@ -14,14 +14,14 @@ public class SprintQuestStep : QuestStep
     // Start is called before the first frame update
     void Start()
     {
-        status = "Sprint time: " + currentSprintTime.ToString();
+        status = "Sprint time: " + currentSprintTime.ToString() + "s";
         questOwner.playerEvents.onSprint += Sprint;
     }
 
     private void Sprint(float deltaTime)
     {
         currentSprintTime += deltaTime;
-        status = "Sprint time: " + currentSprintTime.ToString("F2");
+        status = "Sprint time: " + currentSprintTime.ToString("F2") + "s";
 
         if (currentSprintTime > targetSprintTime)
         {
