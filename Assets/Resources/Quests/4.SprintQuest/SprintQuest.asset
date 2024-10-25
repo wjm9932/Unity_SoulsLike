@@ -20,7 +20,7 @@ MonoBehaviour:
   doneDialogue: Great job!
   onStartDialogue: 'Sprint for 5 seconds!
 
-    Press left shit to sprint'
+    Press left shift to sprint'
   onFinishDialogue: 'Great job!
 
     Now, you can sprint'

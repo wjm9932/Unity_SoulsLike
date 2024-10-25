@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: Skull
-  _dropChace: 50
+  _dropChace: 80
   icon: {fileID: 3462686693902797349, guid: 9a43eefdddfa642449137150c6248e79, type: 3}
   triggerCount: 0
   numOfItem: 0

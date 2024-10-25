@@ -82,6 +82,10 @@ public abstract class LivingEntity : MonoBehaviour
             if (health <= 0)
             {
                 Die();
+                if(damager.GetComponent<Character>() != null)
+                {
+                    damager.GetComponent<Character>().KillLivingEntity(this.entityType);
+                }
             }
 
             TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damageToApply);
