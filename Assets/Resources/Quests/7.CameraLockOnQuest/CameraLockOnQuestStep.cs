@@ -23,7 +23,10 @@ public class CameraLockOnQuestStep : QuestStep
 
     private void OnDisable()
     {
-        questOwner.playerEvents.onCameraLockOn -= CameraLockOn;
+        if (questOwner != null)
+        {
+            questOwner.playerEvents.onCameraLockOn -= CameraLockOn;
+        }
     }
 }
 

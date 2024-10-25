@@ -261,7 +261,6 @@ public class Character : LivingEntity
             if (health <= 0)
             {
                 Die();
-                KillLivingEntity(entityType);
             }
 
             TextManager.Instance.PlayDamageText(damageTextPosition.position, damageTextPosition, damageToApply);

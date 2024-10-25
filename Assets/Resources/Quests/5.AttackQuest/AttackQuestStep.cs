@@ -26,6 +26,9 @@ public class AttackQuestStep : QuestStep
     }
     private void OnDisable()
     {
-        questOwner.playerEvents.onAttack -= Attack;
+        if (questOwner != null)
+        {
+            questOwner.playerEvents.onAttack -= Attack;
+        }
     }
 }

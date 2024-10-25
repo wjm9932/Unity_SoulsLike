@@ -14,15 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: KillSkeletonQuest
   displayName: Kill Skeleton!
-  initialState: 0
+  initialState: 1
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
   onStartDialogue: "Kill 3 Skeleton and bring me 3 bones\t"
   onFinishDialogue: Thank you!
   onFailFinishDialogue: Not enough space!
-  questPrerequisites:
-  - {fileID: 11400000, guid: 2fb09e7ef68c4884eb35ef8b606837af, type: 2}
+  questPrerequisites: []
   questStepPrefabs:
   - stepPrefabs:
     - {fileID: 3256250704480034276, guid: 22fc08ceba58d384d87cd8b1910b4a25, type: 3}

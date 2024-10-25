@@ -33,4 +33,11 @@ public class SprintQuestStep : QuestStep
             UpdateQuestStepState(QuestStepState.IN_PROGRESS);
         }
     }
+    private void OnDisable()
+    {
+        if (questOwner != null)
+        {
+            questOwner.playerEvents.onSprint -= Sprint;
+        }
+    }
 }

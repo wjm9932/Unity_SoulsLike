@@ -36,6 +36,7 @@ public class FindHealthPotionQuestStep : QuestStep
             if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
             {
                 UpdateQuestStepState(QuestStepState.FINISHED);
+                questOwner.GetComponent<PlayerQuestEvent>().onCollect -= FindHealthPotion;
             }
         }
     }

@@ -23,6 +23,9 @@ public class DodgeQuestStep : QuestStep
 
     private void OnDisable()
     {
-        questOwner.playerEvents.onDodge -= Dodge;
+        if (questOwner != null)
+        {
+            questOwner.playerEvents.onDodge -= Dodge;
+        }
     }
 }

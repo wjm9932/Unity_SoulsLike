@@ -24,6 +24,7 @@ public class UseBookQuestStep : QuestStep
         if (itemName == targetItem.GetComponent<UX.UX_Item>().itemName)
         {
             UpdateQuestStepState(QuestStepState.FINISHED);
+            questOwner.GetComponent<PlayerQuestEvent>().onUse -= UseBook;
         }
     }
 
