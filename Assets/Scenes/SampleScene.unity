@@ -3870,7 +3870,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438566681}
-  m_LocalRotation: {x: 0.12266566, y: -0.008897691, z: 0.00024335475, w: 0.99240816}
+  m_LocalRotation: {x: 0.12266566, y: -0.008897699, z: 0.00024335503, w: 0.99240816}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5851,7 +5851,7 @@ MonoBehaviour:
   damageText: {fileID: 4877062208703764034, guid: 41ec45cae8252c444ba95dc44dac2009, type: 3}
   hpIsFullText: {fileID: 1063961605903607206, guid: 492c66305a170a648b0b49b4be12efdf, type: 3}
   inventoryIsFullText: {fileID: 5127708622421105912, guid: eb18e0fd511de604ebda36d7586dbb29, type: 3}
-  itemActionText: {fileID: 1063961605903607206, guid: 760d869414b8ba1489e945daaa8255c2, type: 3}
+  textPrefabs: {fileID: 1063961605903607206, guid: 760d869414b8ba1489e945daaa8255c2, type: 3}
   notificationPanel: {fileID: 1228901576}
 --- !u!4 &573046113
 Transform:
@@ -12415,7 +12415,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185923849}
-  m_LocalRotation: {x: 0.06354384, y: -0.008896452, z: -0.00028520718, w: 0.99793935}
+  m_LocalRotation: {x: 0.06354384, y: -0.008896455, z: -0.00028520724, w: 0.99793935}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16041,7 +16041,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487898777}
-  m_LocalRotation: {x: 0.01577018, y: 0.0000000019458803, z: -3.0690703e-11, w: 0.99987566}
+  m_LocalRotation: {x: 0.01577018, y: -0.000000002633526, z: 4.1536344e-11, w: 0.99987566}
   m_LocalPosition: {x: -0.03, y: 1.7503401, z: 98.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

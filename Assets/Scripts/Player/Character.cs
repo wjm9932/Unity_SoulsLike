@@ -268,6 +268,7 @@ public class Character : LivingEntity
         float actualCost = cost * (1 - buffStaminaPercent);
         if (stamina < actualCost)
         {
+            TextManager.Instance.PlayNotificationText("Not enough stamina!");
             return false;
         }
         else

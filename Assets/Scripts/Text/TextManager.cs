@@ -32,7 +32,7 @@ public class TextManager : MonoBehaviour
     private TextMeshProUGUI inventoryIsFullText;
 
     [SerializeField]
-    private TextMeshProUGUI itemActionText;
+    private TextMeshProUGUI textPrefabs;
 
     [SerializeField]
     private GameObject notificationPanel;
@@ -79,15 +79,15 @@ public class TextManager : MonoBehaviour
         notificationTextQueue.Enqueue(text);
     }
 
-    public void PlayNotificationText(string itemName)
+    public void PlayNotificationText(string text)
     {
         CheckNotificationTextQueueCount();
 
-        var text = Instantiate(itemActionText, notificationPanel.transform);
-        text.text += itemName;
-        text.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += () => notificationTextQueue.Dequeue();
+        var textobject = Instantiate(textPrefabs, notificationPanel.transform);
+        textobject.text += text;
+        textobject.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += () => notificationTextQueue.Dequeue();
 
-        notificationTextQueue.Enqueue(text.gameObject);
+        notificationTextQueue.Enqueue(textobject.gameObject);
     }
 
     private void CheckNotificationTextQueueCount()
