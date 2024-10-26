@@ -8,6 +8,7 @@ public enum EntityType
     CHARACTER,
     ENEMY,
     ARCHER,
+    TANK,
     BOSS
 }
 
