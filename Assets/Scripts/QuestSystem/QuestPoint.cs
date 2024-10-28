@@ -65,9 +65,13 @@ public class QuestPoint : MonoBehaviour
         {
             QuestManager.Instance.UpdateQuestDialogue(quests[questIndex - 1].displayName, quests[questIndex - 1].doneDialogue);
         }
-        else
+        else if(currentQuestState == QuestState.IN_PROGRESS && isFinishPoint == true)
         {
             QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, quests[questIndex].id);
+        }
+        else
+        {
+            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].displayName, "Hey");
         }
         return true;
     }
