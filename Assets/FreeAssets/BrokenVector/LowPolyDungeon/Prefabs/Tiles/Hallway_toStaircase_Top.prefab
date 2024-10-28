@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2176493999149833452}
   - component: {fileID: 4165973190189295654}
   - component: {fileID: 141233252989338282}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hallway_toStaircase_Top
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

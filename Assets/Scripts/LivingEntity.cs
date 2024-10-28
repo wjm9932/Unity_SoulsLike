@@ -48,7 +48,7 @@ public abstract class LivingEntity : MonoBehaviour
     public event Action onDeath;
 
 
-    private void Start()
+    protected virtual void Start()
     {
         canAttack = false;
     }

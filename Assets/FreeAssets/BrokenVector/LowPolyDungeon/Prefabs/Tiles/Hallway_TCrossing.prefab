@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2603595325514887951}
   - component: {fileID: 2603595325516018127}
   - component: {fileID: 2603595325513722281}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hallway_TCrossing
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

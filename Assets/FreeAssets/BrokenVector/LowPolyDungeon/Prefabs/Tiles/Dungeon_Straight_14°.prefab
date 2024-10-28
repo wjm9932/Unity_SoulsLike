@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3754544204702501804}
   - component: {fileID: 3754544204703467884}
   - component: {fileID: 3754544204705501442}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: "Dungeon_Straight_14\xB0"
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

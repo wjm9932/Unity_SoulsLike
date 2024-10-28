@@ -20,8 +20,9 @@ public class BossEnemy : Enemy
         isDead = false;
     }
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         enemyBehaviorStateMachine = new BossEnemyBehaviorStateMachine(this, character);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
     }

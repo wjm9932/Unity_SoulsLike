@@ -33,8 +33,9 @@ public class ArcherEnemy : Enemy
         navMesh.updateRotation = false;
     }
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         buffArmorPercent = -0.3f;
 
         trackingSpeed = 2f;

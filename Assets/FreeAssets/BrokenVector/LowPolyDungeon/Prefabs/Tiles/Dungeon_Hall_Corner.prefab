@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1907596199298118131}
   - component: {fileID: 1907596199299248947}
   - component: {fileID: 1907596199303529299}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dungeon_Hall_Corner
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

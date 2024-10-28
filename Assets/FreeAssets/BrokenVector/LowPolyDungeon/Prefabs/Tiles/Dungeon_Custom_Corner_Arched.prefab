@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3113259643909497420}
   - component: {fileID: 3113259643910594700}
   - component: {fileID: 1091513591250150324}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dungeon_Custom_Corner_Arched
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

@@ -27,7 +27,10 @@ MonoBehaviour:
   onFailFinishDialogue: Not enough space!
   questPrerequisites:
   - {fileID: 11400000, guid: d4cb7c66b21dde54c80b69ad33276cbe, type: 2}
-  questStepPrefabs: []
+  questStepPrefabs:
+  - stepPrefabs:
+    - {fileID: 4198007873071637398, guid: abca7e85a8ee31d4b88fa0fa88766e17, type: 3}
+    - {fileID: 3158423860181390428, guid: ff5087253dccfc4428aa96d7b3be8fb4, type: 3}
   targetItem:
   - _itemPrefab: {fileID: 6328879130854674886, guid: e589e18d6bcb65c41a71a1cb7eac1ac6, type: 3}
     count: 3
