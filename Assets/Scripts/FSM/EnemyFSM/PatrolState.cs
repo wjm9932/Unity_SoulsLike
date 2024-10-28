@@ -100,6 +100,11 @@ namespace EnemyFSM
 
             foreach (var collider in colliders)
             {
+                if (IsPlayerOnNavMesh(collider.gameObject) == false)
+                {
+                    return false;
+                }
+
                 var direction = collider.transform.position - eyeTransform.position;
                 direction.y = eyeTransform.forward.y;
 
@@ -107,7 +112,7 @@ namespace EnemyFSM
                 {
                     return false;
                 }
-
+                
                 RaycastHit hit;
 
                 if (Physics.Raycast(eyeTransform.position, direction, out hit, viewDistance, sm.owner.whatIsTarget) == true)
@@ -121,6 +126,12 @@ namespace EnemyFSM
             }
 
             return false;
+        }
+
+        bool IsPlayerOnNavMesh(GameObject target)
+        {
+            NavMeshHit hit;
+            return NavMesh.SamplePosition(target.transform.position, out hit, 0.1f, sm.owner.navMesh.areaMask);
         }
     }
 }

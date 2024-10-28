@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class ArcherEnemy : Enemy
+public class TankEnemy : Enemy
 {
-    public Transform arrowPosition;
 
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
+
     public override float health
     {
         protected set
@@ -16,6 +16,7 @@ public class ArcherEnemy : Enemy
             hpBar.UpdateHealthBar(health, maxHealth);
         }
     }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
@@ -26,7 +27,6 @@ public class ArcherEnemy : Enemy
     }
 #endif
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -35,14 +35,14 @@ public class ArcherEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        buffArmorPercent = -0.3f;
+        buffArmorPercent = 0.3f;
 
-        trackingSpeed = 2f;
-        trackingStopDistance = 5f;
+        trackingSpeed = 1.5f;
+        trackingStopDistance = 1f;
 
-        health = 100f;
+        health = maxHealth;
         fieldOfView = 100f;
-        viewDistance = 7f;
+        viewDistance = 5f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);
     }
@@ -72,9 +72,11 @@ public class ArcherEnemy : Enemy
     {
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
+
     protected override void OnEnemyTriggerStay(Collider collider)
     {
-        base.OnEnemyTriggerStay(collider); 
+        base.OnEnemyTriggerStay(collider);
+
         if (enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.dieState)
         {
             target = collider.transform.root.gameObject;

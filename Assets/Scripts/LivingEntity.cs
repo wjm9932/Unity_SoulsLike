@@ -6,7 +6,7 @@ using UnityEngine;
 public enum EntityType
 {
     CHARACTER,
-    ENEMY,
+    WARRIOR,
     ARCHER,
     TANK,
     BOSS

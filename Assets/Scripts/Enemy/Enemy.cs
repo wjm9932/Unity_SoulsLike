@@ -22,6 +22,7 @@ public class Enemy : LivingEntity
     public float viewDistance { get; protected set; }
     public float fieldOfView { get; protected set; }
     public float trackingStopDistance { get; protected set; }
+    public float trackingSpeed { get; protected set; }
     public NavMeshAgent navMesh { get; private set; }
     public GameObject target { get; set; }
     public Animator animator { get; private set; }

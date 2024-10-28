@@ -13,7 +13,7 @@ public class TrackingState : EnemyPatternState
     public override void Enter()
     {
         sm.owner.navMesh.isStopped = false;
-        sm.owner.navMesh.speed = 2f;
+        sm.owner.navMesh.speed = sm.owner.trackingSpeed;
         sm.owner.navMesh.stoppingDistance = sm.owner.trackingStopDistance;
 
         TrackTargetCoroutine = TrackTarget();
@@ -62,14 +62,14 @@ public class TrackingState : EnemyPatternState
             sm.owner.navMesh.SetDestination(sm.owner.target.transform.position);
 
             yield return new WaitForSeconds(0.05f);
-
-            if (sm.owner.navMesh.remainingDistance <= sm.owner.navMesh.stoppingDistance)
-            {
-                ChangeTargetState(sm.owner.entityType);
-            }
-            else if (sm.owner.navMesh.remainingDistance >= sm.owner.viewDistance || IsPlayerOnNavMesh() == false)
+            
+            if (sm.owner.navMesh.remainingDistance >= sm.owner.viewDistance || IsPlayerOnNavMesh() == false)
             {
                 sm.ChangeState(sm.patrolState);
+            }
+            else if (sm.owner.navMesh.remainingDistance <= sm.owner.navMesh.stoppingDistance)
+            {
+                ChangeTargetState(sm.owner.entityType);
             }
         }
     }
@@ -77,11 +77,14 @@ public class TrackingState : EnemyPatternState
     {
         switch (entityType)
         {
-            case EntityType.ENEMY:
+            case EntityType.WARRIOR:
                 sm.ChangeState(sm.swordAttackState);
                 break;
             case EntityType.ARCHER:
                 sm.ChangeState(sm.shootArrowState);
+                break;
+            case EntityType.TANK:
+                sm.ChangeState(sm.hammerAttackState);
                 break;
             default:
                 Debug.Log("There is no type");
@@ -93,6 +96,6 @@ public class TrackingState : EnemyPatternState
     bool IsPlayerOnNavMesh()
     {
         NavMeshHit hit;
-        return NavMesh.SamplePosition(sm.owner.target.transform.position, out hit, 1.0f, sm.owner.navMesh.areaMask);
+        return NavMesh.SamplePosition(sm.owner.target.transform.position, out hit, 0.1f, sm.owner.navMesh.areaMask);
     }
 }

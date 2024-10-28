@@ -33,13 +33,13 @@ public class WarriorEnemy : Enemy
     {
         base.Awake();
         navMesh.updateRotation = false;
-        entityType = EntityType.ENEMY;
     }
     // Start is called before the first frame update
     void Start()
     {
         buffArmorPercent = 0f;
 
+        trackingSpeed = 2f;
         trackingStopDistance = 1f;
 
         health = 100f;

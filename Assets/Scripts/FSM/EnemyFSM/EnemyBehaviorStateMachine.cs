@@ -11,6 +11,7 @@ using EnemyFSM;
     public TrackingState trackingState { get; private set; }
     public ShootArrowState shootArrowState { get; private set; }
     public SwordAttackState swordAttackState { get; private set; }
+    public HammerAttackState hammerAttackState { get; private set; }
     // Start is called before the first frame update
     public EnemyBehaviorStateMachine(Enemy enemy)
     {
@@ -22,5 +23,6 @@ using EnemyFSM;
         trackingState = new TrackingState(this);
         shootArrowState = new ShootArrowState(this);
         swordAttackState = new SwordAttackState(this);
+        hammerAttackState = new HammerAttackState(this);
     }
 }
