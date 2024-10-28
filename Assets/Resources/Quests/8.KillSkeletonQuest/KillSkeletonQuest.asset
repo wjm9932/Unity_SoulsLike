@@ -29,9 +29,7 @@ MonoBehaviour:
     - {fileID: 1932851225931441583, guid: 2d966e0310038564ebc11e4bca921e13, type: 3}
   targetItem:
   - _itemPrefab: {fileID: 5665020175481297937, guid: 89ba8210040c7494ea412d0111f91850, type: 3}
-    itemName: Bone
     count: 3
   rewards:
   - _itemPrefab: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
-    itemName: Health Potion
     count: 5

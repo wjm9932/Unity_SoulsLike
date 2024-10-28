@@ -31,5 +31,4 @@ MonoBehaviour:
   targetItem: []
   rewards:
   - _itemPrefab: {fileID: 4355292216650409300, guid: 0b164067c57557247990105930882c9f, type: 3}
-    itemName: Armor buff potion
     count: 3

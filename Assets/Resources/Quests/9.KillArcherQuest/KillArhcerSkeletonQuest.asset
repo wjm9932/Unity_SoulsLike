@@ -10,26 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
-  m_Name: FindHealthPotion
+  m_Name: KillArhcerSkeletonQuest
   m_EditorClassIdentifier: 
-  id: FindHealthPotion
-  displayName: Find Health Potion!
+  id: KillArhcerSkeletonQuest
+  displayName: Kill Arhcer
   initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
-  onStartDialogue: Hey, find a health potion and use it!
-  onFinishDialogue: 'You are ready to use item!
+  onStartDialogue: Kill the archer skeleton, collect their skull, and bring it to
+    the NPC in the next room
+  onFinishDialogue: 'Thank you for killing skeletons and collecting skull!
 
-    Here is Health potion!'
+    Here
+    is reward!'
   onFailFinishDialogue: Not enough space!
   questPrerequisites:
-  - {fileID: 11400000, guid: 677dfc4b87a74bb4aa9634044d3156ac, type: 2}
-  questStepPrefabs:
-  - stepPrefabs:
-    - {fileID: 2650874501750272427, guid: 211b736b26dd1e649a3061ac5c231394, type: 3}
-    - {fileID: 97180393731738311, guid: daa686e2d44b579499620cb0c4592fa2, type: 3}
-  targetItem: []
+  - {fileID: 11400000, guid: d4cb7c66b21dde54c80b69ad33276cbe, type: 2}
+  questStepPrefabs: []
+  targetItem:
+  - _itemPrefab: {fileID: 6328879130854674886, guid: e589e18d6bcb65c41a71a1cb7eac1ac6, type: 3}
+    count: 3
   rewards:
   - _itemPrefab: {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
     count: 3

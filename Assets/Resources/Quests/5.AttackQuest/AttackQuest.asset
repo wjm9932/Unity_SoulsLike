@@ -37,5 +37,4 @@ MonoBehaviour:
   targetItem: []
   rewards:
   - _itemPrefab: {fileID: 3227801818095176289, guid: 82e2378669100bc4ca44e826ab37276f, type: 3}
-    itemName: Damage buff potion
     count: 3

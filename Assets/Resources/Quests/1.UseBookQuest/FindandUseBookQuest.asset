@@ -32,5 +32,4 @@ MonoBehaviour:
   targetItem: []
   rewards:
   - _itemPrefab: {fileID: 6797317372116547010, guid: bd9359f43d9f6c94a8de27017b33dd76, type: 3}
-    itemName: Book
     count: 1

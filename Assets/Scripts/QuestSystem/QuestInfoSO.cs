@@ -61,7 +61,6 @@ public class QuestInfoSO : ScriptableObject
 
             }
         }
-        public string itemName;      
         public int count;            
     }
 

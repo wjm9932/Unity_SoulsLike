@@ -33,5 +33,4 @@ MonoBehaviour:
   targetItem: []
   rewards:
   - _itemPrefab: {fileID: 4172410750723670968, guid: b64b5c794bda8ab45b605fa1bd45bfbb, type: 3}
-    itemName: Stamina buff potion
     count: 3
