@@ -116,7 +116,7 @@ public class Character : LivingEntity
         uiStateMachine = new UIStateMachine(this);
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
     }
-    void Start()
+    protected override void Start()
     {
         health = 30f;
         stamina = 100f;
