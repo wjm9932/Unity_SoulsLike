@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2922107563029181350}
   - component: {fileID: 2922107563028214118}
   - component: {fileID: 2922107563542401957}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fireplace
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

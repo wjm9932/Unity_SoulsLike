@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9218377935298186583}
   - component: {fileID: 9218377935297056663}
   - component: {fileID: 5824447511790668872}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Carpet_Red
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
