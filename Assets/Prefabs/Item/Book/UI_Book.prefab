@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fb7404f2c052a4c8669d3e6a8827da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemUX: {fileID: 6797317372116547010, guid: bd9359f43d9f6c94a8de27017b33dd76, type: 3}
+  _itemUX: {fileID: 4359170919485928153, guid: 78f210f127df91b4a86d8176f2eaf054, type: 3}
   countText: {fileID: 4829944420768456495}
   toolTipText: 'Book
 

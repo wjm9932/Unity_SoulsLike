@@ -2597,7 +2597,7 @@ MonoBehaviour:
     m_Bits: 256
   eyeTransform: {fileID: 3925785323940902640}
   dropItem:
-  - {fileID: 6797317372116547010, guid: bd9359f43d9f6c94a8de27017b33dd76, type: 3}
+  - {fileID: 4359170919485928153, guid: 78f210f127df91b4a86d8176f2eaf054, type: 3}
   - {fileID: 3227801818095176289, guid: 82e2378669100bc4ca44e826ab37276f, type: 3}
   - {fileID: 4172410750723670968, guid: b64b5c794bda8ab45b605fa1bd45bfbb, type: 3}
   - {fileID: 6328879130854674886, guid: e589e18d6bcb65c41a71a1cb7eac1ac6, type: 3}

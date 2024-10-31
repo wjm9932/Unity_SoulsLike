@@ -31,5 +31,5 @@ MonoBehaviour:
     - {fileID: 4809752947368908503, guid: 2b2caf643124670469da61b9149e1871, type: 3}
   targetItem: []
   rewards:
-  - _itemPrefab: {fileID: 6797317372116547010, guid: bd9359f43d9f6c94a8de27017b33dd76, type: 3}
+  - _itemPrefab: {fileID: 4359170919485928153, guid: 78f210f127df91b4a86d8176f2eaf054, type: 3}
     count: 1
