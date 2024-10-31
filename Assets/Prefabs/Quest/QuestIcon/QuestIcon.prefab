@@ -67,6 +67,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7542848186949691788}
     m_Modifications:
+    - target: {fileID: 3820959580793465428, guid: 933fb1083fcf87347acf86503c923e31, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820959580793465428, guid: 933fb1083fcf87347acf86503c923e31, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3820959580793465429, guid: 933fb1083fcf87347acf86503c923e31, type: 3}
       propertyPath: m_Name
       value: CanFinish
@@ -394,6 +402,18 @@ PrefabInstance:
     - target: {fileID: 6024939109891181006, guid: bd774102091be1f409ff75aeffe95add, type: 3}
       propertyPath: m_Name
       value: StillProgress
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024939109891181007, guid: bd774102091be1f409ff75aeffe95add, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024939109891181007, guid: bd774102091be1f409ff75aeffe95add, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5238624
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024939109891181007, guid: bd774102091be1f409ff75aeffe95add, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5660378
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd774102091be1f409ff75aeffe95add, type: 3}

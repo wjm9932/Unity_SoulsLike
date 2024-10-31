@@ -1412,15 +1412,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1642700871432104558, guid: 06b9d15b7d33e854cb23fe58a33238aa, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4027376600884704207, guid: 06b9d15b7d33e854cb23fe58a33238aa, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 1023
       objectReference: {fileID: 0}
-    - target: {fileID: 6882612807002113377, guid: 06b9d15b7d33e854cb23fe58a33238aa, type: 3}
+    - target: {fileID: 5431858955463304436, guid: 06b9d15b7d33e854cb23fe58a33238aa, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5896778833987692535, guid: 06b9d15b7d33e854cb23fe58a33238aa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882612807002113377, guid: 06b9d15b7d33e854cb23fe58a33238aa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8021562540970052646, guid: 06b9d15b7d33e854cb23fe58a33238aa, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -11241,7 +11249,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.351
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -15010,7 +15018,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185923849}
-  m_LocalRotation: {x: 0.060311686, y: -0.008895482, z: -0.00031401677, w: 0.9981399}
+  m_LocalRotation: {x: 0.060311686, y: -0.008895483, z: -0.0003140168, w: 0.9981399}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17629,6 +17637,10 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 1023
       objectReference: {fileID: 0}
+    - target: {fileID: 3474235370440126395, guid: c559a22601843db4c927941c06a8b94b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4725356937742542618, guid: c559a22601843db4c927941c06a8b94b, type: 3}
       propertyPath: m_Name
       value: Candlestick_Wall (1)
@@ -18991,7 +19003,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487898777}
-  m_LocalRotation: {x: 0.0125319995, y: 9.312497e-10, z: -1.1671337e-11, w: 0.9999215}
+  m_LocalRotation: {x: 0.0125319995, y: 3.8588585e-10, z: -4.8363006e-12, w: 0.9999215}
   m_LocalPosition: {x: 0.06, y: 1.9399402, z: 98.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29031,11 +29043,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1279167789182119373, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: m_Color.g
-      value: 0.33962262
+      value: 0.54467785
       objectReference: {fileID: 0}
     - target: {fileID: 1279167789182119373, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: m_Color.r
-      value: 0.32305568
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266565724005881038, guid: a698a62cf39261f4887b479790a6a556, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266565724005881038, guid: a698a62cf39261f4887b479790a6a556, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5763875296104343533, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: m_IsActive
