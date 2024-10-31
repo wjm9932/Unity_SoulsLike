@@ -53,7 +53,6 @@ public class WarriorEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(enemyBehaviorStateMachine.currentState);
         enemyBehaviorStateMachine.Update();
     }
     private void FixedUpdate()

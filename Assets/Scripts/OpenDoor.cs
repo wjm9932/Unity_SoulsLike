@@ -6,6 +6,8 @@ public class OpenDoor : MonoBehaviour
 {
     [SerializeField]
     private QuestInfoSO targetQuest;
+    [SerializeField]
+    private GameObject minimapIcon;
 
     private void OnEnable()
     {
@@ -22,6 +24,7 @@ public class OpenDoor : MonoBehaviour
         if (targetQuest.id == quest.info.id)
         {
             this.gameObject.transform.rotation = Quaternion.identity;
+            minimapIcon.SetActive(false);
             Destroy(this);
         }
     }

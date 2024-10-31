@@ -87,7 +87,7 @@ public class TrackingState : EnemyPatternState
                 sm.ChangeState(sm.hammerAttackState);
                 break;
             default:
-                Debug.Log("There is no type");
+                Debug.Log("There is no entitiy type");
                 break;
         }
 
