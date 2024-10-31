@@ -15,15 +15,15 @@ public class QuestLogButton : MonoBehaviour
     private event Action<QuestLogButton> onClick;
     public Quest quest { get; private set; }
 
-    public void Initialize(string displayName, Action<Quest> selectAction, Quest quest, Action<QuestLogButton> onClick)
+    public void Initialize(string displayName, Quest quest, Action<Quest> selectAction, Action<QuestLogButton> onClick)
     {
         this.button = this.GetComponent<Button>();
         this.buttonText = this.GetComponentInChildren<TextMeshProUGUI>();
 
-        this.quest = quest;
-        this.onClick = onClick;
         this.buttonText.text = displayName;
+        this.quest = quest;
         this.onSelectAction = selectAction;
+        this.onClick = onClick;
     }
 
     public void OnClicked()
