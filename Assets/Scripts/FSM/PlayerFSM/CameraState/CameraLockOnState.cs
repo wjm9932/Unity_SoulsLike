@@ -136,7 +136,7 @@ public class CameraLockOnState : CameraState
                 isCollisionDetected = true;
                 startPlayerCollisionPosition = csm.owner.transform.position;
             }
-            if (Vector3.Distance(csm.owner.transform.position, startPlayerCollisionPosition) > 1f)
+            if (Vector3.Distance(csm.owner.transform.position, startPlayerCollisionPosition) > 0.5f)
             {
                 csm.ChangeState(csm.cameraLockOffState);
             }
