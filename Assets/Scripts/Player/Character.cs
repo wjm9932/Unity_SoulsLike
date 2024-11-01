@@ -20,6 +20,8 @@ public class Character : LivingEntity
         }
     }
 
+    [SerializeField] private float maxStamina;
+
     [Header("Quest")]
     public GameObject inventoryUI;
     public GameObject questLogUI;
@@ -71,7 +73,6 @@ public class Character : LivingEntity
 
     public const float targetStaminaRecoverCoolTime = 1.5f;
     [HideInInspector] public float staminaRecoverCoolTime;
-    private float maxStamina;
     private float _stamina;
     public float stamina
     {
@@ -110,7 +111,6 @@ public class Character : LivingEntity
     private void Awake()
     {
         staminaRecoverCoolTime = 0f;
-        maxStamina = 100f;
         canBeDamaged = true;
         CameraStateMachine.Initialize(this);
         uiStateMachine = new UIStateMachine(this);
@@ -119,7 +119,7 @@ public class Character : LivingEntity
     protected override void Start()
     {
         health = 30f;
-        stamina = 100f;
+        stamina = maxStamina;
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();

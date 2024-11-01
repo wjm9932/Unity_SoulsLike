@@ -41,7 +41,7 @@ public class ArcherEnemy : Enemy
         trackingSpeed = 2f;
         trackingStopDistance = 5f;
 
-        health = 100f;
+        health = maxHealth;
         fieldOfView = 100f;
         viewDistance = 7f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
