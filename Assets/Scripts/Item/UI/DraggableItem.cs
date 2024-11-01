@@ -45,7 +45,22 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             ToolTipManager.Instance.HideToolTip();
         }
 
-        transform.position = Input.mousePosition + offset;
+        Vector3 newPosition = Input.mousePosition + offset;
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        Vector3[] canvasCorners = new Vector3[4];
+        rectTransform.GetComponentInParent<Canvas>().GetComponent<RectTransform>().GetWorldCorners(canvasCorners);
+
+        float minX = canvasCorners[0].x + rectTransform.rect.width * rectTransform.lossyScale.x / 2;
+        float maxX = canvasCorners[2].x - rectTransform.rect.width * rectTransform.lossyScale.x / 2;
+        float minY = canvasCorners[0].y + rectTransform.rect.height * rectTransform.lossyScale.y / 2;
+        float maxY = canvasCorners[2].y - rectTransform.rect.height * rectTransform.lossyScale.y / 2;
+
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+        newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+
+        transform.position = newPosition;
+
     }
     public void OnEndDrag(PointerEventData eventData)
     {
