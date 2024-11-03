@@ -10,6 +10,8 @@ public class CameraLockOffState : CameraState
     float cameraTargetPitch;
     float bottonClamp;
     float topClamp;
+
+    private IEnumerator coroutineReference;
     public CameraLockOffState(CameraStateMachine CameraStateMachine) : base(CameraStateMachine)
     {
         bottonClamp = -30f;
@@ -19,7 +21,11 @@ public class CameraLockOffState : CameraState
     {
         base.Enter();
         csm.owner.animator.SetBool("IsLockOn", false);
+        cameraTargetYaw = csm.owner.cameraTargetYaw;
+        cameraTargetPitch = csm.owner.cameraTargetPitch;
 
+        coroutineReference = ReduceDamping();
+        csm.owner.StartCoroutine(coroutineReference);
     }
     public override void Update()
     {
@@ -36,28 +42,47 @@ public class CameraLockOffState : CameraState
     }
     public override void Exit()
     {
+        if(coroutineReference != null)
+        {
+            csm.owner.StopCoroutine(coroutineReference);
+        }
         //base.Exit();
     }
 
     private void CameraRotation()
     {
-
-        // if there is an input and camera position is not fixed
-        cameraTargetYaw += csm.owner.input.mouseInput.x * 1.5f;
+        cameraTargetYaw += csm.owner.input.mouseInput.x * 1.8f;
         cameraTargetPitch -= csm.owner.input.mouseInput.y;
 
-        // clamp our rotations so our values are limited 360 degrees
-        cameraTargetYaw = ClampAngle(cameraTargetYaw, float.MinValue, float.MaxValue);
         cameraTargetPitch = ClampAngle(cameraTargetPitch, bottonClamp, topClamp);
 
         // Cinemachine will follow this target
         csm.owner.cameraTransform.rotation = Quaternion.Euler(cameraTargetPitch,
             cameraTargetYaw, 0.0f);
     }
-    private float ClampAngle(float lfAngle, float lfMin, float lfMax)
+
+    private float ClampAngle(float angle, float minClamp, float maxClamp)
     {
-        if (lfAngle < -360f) lfAngle += 360f;
-        if (lfAngle > 360f) lfAngle -= 360f;
-        return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        angle %= 360;
+        if (angle > 180) angle -= 360;
+        else if (angle < -180) angle += 360;
+
+        return Mathf.Clamp(angle, minClamp, maxClamp);
+    }
+
+    private IEnumerator ReduceDamping()
+    {
+        var cinemachineComponent = csm.owner.followCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        float targetDamping = 0f;
+        float dampingSpeed = 5f;
+
+        while (cinemachineComponent.Damping.x > 0.1f)
+        {
+            cinemachineComponent.Damping.x = Mathf.Lerp(cinemachineComponent.Damping.x, targetDamping, dampingSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        cinemachineComponent.Damping.x = 0f;
+        coroutineReference = null;
     }
 }

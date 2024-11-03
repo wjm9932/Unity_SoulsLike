@@ -69,6 +69,8 @@ public class Character : LivingEntity
     public float buffDamage { get; set; }
     public float buffStaminaPercent { get; set; }
 
+    public float cameraTargetYaw;
+    public float cameraTargetPitch;
 
     public const float targetStaminaRecoverCoolTime = 1.5f;
     [HideInInspector] public float staminaRecoverCoolTime;
