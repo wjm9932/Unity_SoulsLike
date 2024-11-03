@@ -56,9 +56,7 @@ public class CameraLockOffState : CameraState
 
         cameraTargetPitch = ClampAngle(cameraTargetPitch, bottonClamp, topClamp);
 
-        // Cinemachine will follow this target
-        csm.owner.cameraTransform.rotation = Quaternion.Euler(cameraTargetPitch,
-            cameraTargetYaw, 0.0f);
+        csm.owner.cameraTransform.rotation = Quaternion.Euler(cameraTargetPitch, cameraTargetYaw, 0.0f);
     }
 
     private float ClampAngle(float angle, float minClamp, float maxClamp)
