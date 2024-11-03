@@ -12,6 +12,7 @@ public class PlayerInput : MonoBehaviour
     private string moveVerticalAxisName = "Vertical";
     private string attackButtonName = "Fire1";
 
+    public Vector2 mouseInput { get; private set; }
     public Vector2 moveInput { get; private set; }
     public Vector2 dodgeInput { get; private set; }
     public Vector2 rotationInput { get; private set; }
@@ -53,6 +54,7 @@ public class PlayerInput : MonoBehaviour
             inputY = 0f;
         }
 
+        mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         moveInput = new Vector2(inputX, inputY);
         dodgeInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rotationInput = new Vector2(Input.GetAxis(moveHorizontalAxisName), Input.GetAxis(moveVerticalAxisName));

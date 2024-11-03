@@ -32,9 +32,8 @@ public class Character : LivingEntity
     public PlayerStatusBar staminaBar;
 
     [Header("Camera")]
-    public CinemachineVirtualCamera lockOnCamera;
-    public CinemachineFreeLook lockOffCamera;
-    public Transform lockOnCameraPosition;
+    public CinemachineVirtualCamera followCamera;
+    public Transform cameraTransform;
     public Transform camEyePos;
 
     [Header("Layer Mask")]

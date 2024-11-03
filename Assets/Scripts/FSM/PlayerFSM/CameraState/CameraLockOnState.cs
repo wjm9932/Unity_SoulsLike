@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using static System.TimeZoneInfo;
 
 public class CameraLockOnState : CameraState
 {
+    private bool isTransitioning = true; // ?? ?? ??
+    private float rotationSmoothFactor = 5f; // ?? ?? ???? ??
+    private Vector3 initialTargetRotation; // ?? ?? ??
     public GameObject target { get; private set; }
 
     Vector3 startPlayerCollisionPosition;
@@ -14,6 +18,7 @@ public class CameraLockOnState : CameraState
     }
     public override void Enter()
     {
+        isTransitioning = true;
         isCollisionDetected = false;
         base.Enter();
 
@@ -26,13 +31,13 @@ public class CameraLockOnState : CameraState
         else
         {
             csm.owner.animator.SetBool("IsLockOn", true);
-            csm.owner.lockOnCamera.LookAt = target.transform;
-            csm.owner.lockOffCamera.Priority = 9;
-            csm.owner.lockOnCamera.Priority = 10;
             csm.owner.playerEvents.CameraLockOn();
 
             target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(true);
-            csm.owner.StartCoroutine(ApplyDampingAfterTwoFrame());
+
+            initialTargetRotation = (target.transform.position - csm.owner.cameraTransform.position).normalized;
+
+            //csm.owner.StartCoroutine(ApplyDampingAfterTwoFrame());
         }
     }
     public override void Update()
@@ -62,20 +67,27 @@ public class CameraLockOnState : CameraState
         {
             target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(false);
         }
-        csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
+        csm.owner.followCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
     }
     private void UpdateCameraPosition()
     {
-        Vector3 dir = (target.transform.position - csm.owner.camEyePos.position).normalized;
-        Vector3 camPos = csm.owner.camEyePos.position - dir * 4.5f;
-
-        if (camPos.y < 0.2f)
+        if (isTransitioning)
         {
-            camPos.y = 0.2f;
-        }
+            // ?? ?? ?: Slerp? ???? ??
+            csm.owner.cameraTransform.forward = Vector3.Slerp(csm.owner.cameraTransform.forward, initialTargetRotation, Time.deltaTime * rotationSmoothFactor);
 
-        csm.owner.lockOnCameraPosition.position = camPos;
-        csm.owner.lockOnCameraPosition.LookAt(target.transform.position);
+            // ?? ??? ?? ???? ?? ??? ??? ??
+            if (Vector3.Angle(csm.owner.cameraTransform.forward, initialTargetRotation) < 0.1f)
+            {
+                isTransitioning = false; // ?? ?? ??
+            }
+        }
+        else
+        {
+            // ?? ?? ?? ?: ?? ??? ???? ??
+            Vector3 directionToTarget = (target.transform.position - csm.owner.cameraTransform.position).normalized;
+            csm.owner.cameraTransform.rotation = Quaternion.LookRotation(directionToTarget);
+        }
     }
 
     private GameObject ScanNearByEnemy()
@@ -119,7 +131,7 @@ public class CameraLockOnState : CameraState
     {
         yield return null;
         yield return null;
-        csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 1f;
+        //csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 1f;
     }
 
     
