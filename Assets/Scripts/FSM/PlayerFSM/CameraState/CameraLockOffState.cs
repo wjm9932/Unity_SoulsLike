@@ -51,12 +51,15 @@ public class CameraLockOffState : CameraState
 
     private void CameraRotation()
     {
-        cameraTargetYaw += csm.owner.input.mouseInput.x * 1.8f;
-        cameraTargetPitch -= csm.owner.input.mouseInput.y;
+        if(csm.owner.input.canGetMouseInput == true)
+        {
+            cameraTargetYaw += csm.owner.input.mouseInput.x * 1.8f;
+            cameraTargetPitch -= csm.owner.input.mouseInput.y;
 
-        cameraTargetPitch = ClampAngle(cameraTargetPitch, bottonClamp, topClamp);
+            cameraTargetPitch = ClampAngle(cameraTargetPitch, bottonClamp, topClamp);
 
-        csm.owner.cameraTransform.rotation = Quaternion.Euler(cameraTargetPitch, cameraTargetYaw, 0.0f);
+            csm.owner.cameraTransform.rotation = Quaternion.Euler(cameraTargetPitch, cameraTargetYaw, 0.0f);
+        }
     }
 
     private float ClampAngle(float angle, float minClamp, float maxClamp)

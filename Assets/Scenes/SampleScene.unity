@@ -7215,7 +7215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6019261130623370764, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6396068835311426742, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_RootOrder
@@ -7271,11 +7271,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7731697132335757175, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7731697132335757175, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8357322205833953460, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_Color.b
@@ -7303,11 +7303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8682181209207948676, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.748
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8682181209207948676, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
@@ -27694,7 +27694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293926496069630896, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: info.Array.data[0].targetCount
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 293926496069630896, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: info.Array.data[0].targetEnemy

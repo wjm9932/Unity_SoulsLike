@@ -24,6 +24,7 @@ public class PlayerInput : MonoBehaviour
     public bool isInteracting { get; private set; }
     public bool isPressingInventoryKey { get; private set; }
     public bool isPressingQuestLogKey { get; private set; }
+    public bool canGetMouseInput { get; set; }
 
     private float inputX;
     private float inputY;
@@ -31,6 +32,7 @@ public class PlayerInput : MonoBehaviour
     private float duration;
     private void Start()
     {
+        canGetMouseInput = true;
         Application.targetFrameRate = 144;
     }
 

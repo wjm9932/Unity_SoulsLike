@@ -12,6 +12,7 @@ public class CloseState : IStateUI
 
     public void Enter()
     {
+        sm.owner.input.canGetMouseInput = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
