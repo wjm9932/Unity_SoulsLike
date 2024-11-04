@@ -18,6 +18,7 @@ namespace PlayerFSM
             sm.owner.animator.SetBool("IsHit", true);
             sm.owner.canBeDamaged = false;
             sm.owner.rb.velocity = Vector3.zero;
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.PLAYER_HIT, 0.5f);
         }
         public virtual void Update()
         {

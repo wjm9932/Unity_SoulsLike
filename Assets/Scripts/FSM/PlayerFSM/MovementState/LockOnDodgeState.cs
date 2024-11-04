@@ -25,7 +25,7 @@ namespace PlayerFSM
             
             UpdateAnimation();
 
-            SoundManager.Instance.PlaySoundEffect(SoundManager.SoundEffectType.DODGE);
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.DODGE);
         }
         public override void Update()
         {
@@ -65,7 +65,7 @@ namespace PlayerFSM
         }
         public override void OnAnimationTransitionEvent()
         {
-            SoundManager.Instance.PlaySoundEffect(SoundManager.SoundEffectType.DODGE_LANDING, 1f);
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.DODGE_LANDING, 1f);
         }
         private void Dodge()
         {

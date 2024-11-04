@@ -18,20 +18,23 @@ public class SoundManager : MonoBehaviour
         ATTACK_1,
         ATTACK_2,
         ATTACK_3,
+        WARRIOR_ENEMY_ATTACK,
         DRINK,
         PICKUP,
+        PLAYER_HIT,
+        ENEMY_HIT,
     }
     [System.Serializable]
     private struct SoundEffectInfo
     {
         public SoundEffectType effectType;
-        public AudioClip audioClip;
+        public AudioClip[] audioClips;
     }
 
     [SerializeField]
     private SoundEffectInfo[] effectInfos;
 
-    private Dictionary<SoundEffectType, AudioClip> audioClips = new Dictionary<SoundEffectType, AudioClip>();
+    private Dictionary<SoundEffectType, List<AudioClip>> audioClipsContainer = new Dictionary<SoundEffectType, List<AudioClip>>();
  
 
     private void Awake()
@@ -43,7 +46,14 @@ public class SoundManager : MonoBehaviour
 
         for(int i = 0; i < effectInfos.Length; i++)
         {
-            audioClips.Add(effectInfos[i].effectType, effectInfos[i].audioClip);
+            List<AudioClip> clips = new List<AudioClip>(effectInfos[i].audioClips.Length);
+
+            for(int j = 0; j < effectInfos[i].audioClips.Length; j++)
+            {
+                clips.Add(effectInfos[i].audioClips[j]);
+            }
+            
+            audioClipsContainer.Add(effectInfos[i].effectType, clips);
         }
     }
     // Start is called before the first frame update
@@ -65,11 +75,39 @@ public class SoundManager : MonoBehaviour
         playerFootStepSoundSource.PlayOneShot(footStepClips[index]);
     }
 
-    public void PlaySoundEffect(SoundEffectType type, float volume = 0.3f)
+    public void Play2DSoundEffect(SoundEffectType type, float volume = 0.2f)
     {
         var audioSource = ObjectPoolManager.Instance.GetPoolableObject(ObjectType.SOUND);
         audioSource.GetComponent<AudioSource>().volume = volume;
-        audioSource.GetComponent<AudioSource>().PlayOneShot(audioClips[type]);
+        audioSource.GetComponent<AudioSource>().spatialBlend = 0f;
 
+        if (audioClipsContainer[type].Count == 1)
+        {
+            audioSource.GetComponent<AudioSource>().PlayOneShot(audioClipsContainer[type][0]);
+        }
+        else
+        {
+            int index = Random.Range(0, audioClipsContainer[type].Count);
+            audioSource.GetComponent<AudioSource>().PlayOneShot(audioClipsContainer[type][index]);
+        }
+    }
+
+    public void Play3DSoundEffect(SoundEffectType type, float volume, Vector3 position, Quaternion rotation, Transform parent)
+    {
+        var audioSource = ObjectPoolManager.Instance.GetPoolableObject(ObjectType.SOUND);
+        audioSource.GetComponent<AudioSource>().volume = volume;
+        audioSource.GetComponent<AudioSource>().spatialBlend = 1f;
+
+        if (audioClipsContainer[type].Count == 1)
+        {
+            audioSource.GetComponent<AudioSource>().PlayOneShot(audioClipsContainer[type][0]);
+        }
+        else
+        {
+            int index = Random.Range(0, audioClipsContainer[type].Count);
+            audioSource.GetComponent<AudioSource>().PlayOneShot(audioClipsContainer[type][index]);
+        }
+
+        audioSource.GetComponent<IPoolableObject>().Initialize(position, rotation, parent);
     }
 }

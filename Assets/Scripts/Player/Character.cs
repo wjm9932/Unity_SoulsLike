@@ -139,7 +139,6 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(canBeDamaged);
         RecoverStamina();
 
         rb.useGravity = !IsOnSlope();

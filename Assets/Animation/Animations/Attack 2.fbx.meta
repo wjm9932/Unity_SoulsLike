@@ -67,17 +67,24 @@ ModelImporter:
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.59206796
+      - time: 0.46687698
         functionName: OnAnimationTransitionEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.6142857
+      - time: 0.5652203
         functionName: SetCanAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a786a064620d7ea41a54fe7fc852b60a, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.59206796
+        functionName: OnAnimationExitEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

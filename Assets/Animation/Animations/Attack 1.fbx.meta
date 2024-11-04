@@ -75,6 +75,13 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.5522215
+        functionName: OnAnimationExitEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4384858
         functionName: OnAnimationTransitionEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}

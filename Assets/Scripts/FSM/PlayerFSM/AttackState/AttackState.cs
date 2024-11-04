@@ -55,11 +55,11 @@ public class AttackState : IState
     }
     public virtual void OnAnimationExitEvent()
     {
-
+        canComboAttack = true;
     }
     public virtual void OnAnimationTransitionEvent()
     {
-        canComboAttack = true;
+        
     }
     public virtual void OnAnimatorIK()
     {
