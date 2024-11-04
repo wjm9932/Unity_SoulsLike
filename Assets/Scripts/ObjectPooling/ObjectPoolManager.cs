@@ -13,6 +13,7 @@ public class ObjectPoolManager : MonoBehaviour
     { 
         ARROW,
         EFFECT,
+        SOUND,
     }
 
     [System.Serializable]

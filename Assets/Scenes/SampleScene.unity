@@ -5412,6 +5412,9 @@ MonoBehaviour:
   - objectType: 1
     prefab: {fileID: 1218726591950707117, guid: 7fa07ad8afc788845a6ef5461d4f3d31, type: 3}
     count: 10
+  - objectType: 2
+    prefab: {fileID: 417128770627686191, guid: e72913d49e0123a4cae1a0d2db8b4c52, type: 3}
+    count: 10
 --- !u!1 &442173692
 GameObject:
   m_ObjectHideFlags: 0
