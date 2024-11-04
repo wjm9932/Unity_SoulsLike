@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using static System.TimeZoneInfo;
 
 public class CameraLockOnState : CameraState
 {
+    float rotationSpeed = 25f;
+    private float downAngle = 7f;
     public GameObject target { get; private set; }
 
     Vector3 startPlayerCollisionPosition;
@@ -26,13 +29,10 @@ public class CameraLockOnState : CameraState
         else
         {
             csm.owner.animator.SetBool("IsLockOn", true);
-            csm.owner.lockOnCamera.LookAt = target.transform;
-            csm.owner.lockOffCamera.Priority = 9;
-            csm.owner.lockOnCamera.Priority = 10;
             csm.owner.playerEvents.CameraLockOn();
 
             target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(true);
-            csm.owner.StartCoroutine(ApplyDampingAfterTwoFrame());
+            csm.owner.followCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0.8f;
         }
     }
     public override void Update()
@@ -62,20 +62,26 @@ public class CameraLockOnState : CameraState
         {
             target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(false);
         }
-        csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0f;
+
+        Vector3 currentEulerAngles = csm.owner.cameraTransform.eulerAngles;
+        csm.owner.cameraTargetPitch = currentEulerAngles.x;
+        csm.owner.cameraTargetYaw = currentEulerAngles.y;
     }
     private void UpdateCameraPosition()
     {
-        Vector3 dir = (target.transform.position - csm.owner.camEyePos.position).normalized;
-        Vector3 camPos = csm.owner.camEyePos.position - dir * 4.5f;
+        Vector3 directionToTarget = (target.transform.position - csm.owner.camEyePos.position).normalized;
 
-        if (camPos.y < 0.2f)
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+
+        Quaternion downRotation = Quaternion.Euler(downAngle, 0, 0);
+        targetRotation = targetRotation * downRotation;
+
+        csm.owner.cameraTransform.rotation = Quaternion.Slerp(csm.owner.cameraTransform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+        if (Quaternion.Angle(csm.owner.cameraTransform.rotation, targetRotation) < 1f)
         {
-            camPos.y = 0.2f;
+            csm.owner.cameraTransform.rotation = targetRotation;
         }
-
-        csm.owner.lockOnCameraPosition.position = camPos;
-        csm.owner.lockOnCameraPosition.LookAt(target.transform.position);
     }
 
     private GameObject ScanNearByEnemy()
@@ -115,13 +121,7 @@ public class CameraLockOnState : CameraState
             return closetTarget;
         }
     }
-    private IEnumerator ApplyDampingAfterTwoFrame()
-    {
-        yield return null;
-        yield return null;
-        csm.owner.lockOnCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 1f;
-    }
-
+  
     
     private void CheckCameraCollision()
     {

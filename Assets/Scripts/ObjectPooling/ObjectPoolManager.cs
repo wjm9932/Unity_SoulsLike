@@ -12,7 +12,7 @@ public class ObjectPoolManager : MonoBehaviour
     public enum ObjectType
     { 
         ARROW,
-        ENEMY,
+        EFFECT,
     }
 
     [System.Serializable]

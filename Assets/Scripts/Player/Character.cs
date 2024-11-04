@@ -32,9 +32,8 @@ public class Character : LivingEntity
     public PlayerStatusBar staminaBar;
 
     [Header("Camera")]
-    public CinemachineVirtualCamera lockOnCamera;
-    public CinemachineFreeLook lockOffCamera;
-    public Transform lockOnCameraPosition;
+    public CinemachineVirtualCamera followCamera;
+    public Transform cameraTransform;
     public Transform camEyePos;
 
     [Header("Layer Mask")]
@@ -70,6 +69,8 @@ public class Character : LivingEntity
     public float buffDamage { get; set; }
     public float buffStaminaPercent { get; set; }
 
+    public float cameraTargetYaw;
+    public float cameraTargetPitch;
 
     public const float targetStaminaRecoverCoolTime = 1.5f;
     [HideInInspector] public float staminaRecoverCoolTime;
@@ -296,6 +297,14 @@ public class Character : LivingEntity
                 stamina += 20f * Time.deltaTime;
                 stamina = Mathf.Clamp(stamina, 0, maxStamina);
             }
+        }
+    }
+
+    private void PlayFootStepSound(AnimationEvent ev)
+    {
+        if (ev.animatorClipInfo.weight >= 0.5f)
+        {
+            SoundManager.Instance.PlayFootStepSound();
         }
     }
 

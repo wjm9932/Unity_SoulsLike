@@ -23,20 +23,7 @@ public class EffectManager : MonoBehaviour
 
     public void PlayHitEffect(Vector3 pos, Vector3 normal, Transform parent, EffectType effectType)
     {
-        var targetPrefab = fleshHitEffectPrefab;
-
-        if (effectType == EffectType.Flesh)
-        {
-            targetPrefab = fleshHitEffectPrefab;
-        }
-
-        var effect = Instantiate(targetPrefab, pos, Quaternion.LookRotation(normal));
-
-        if (parent != null)
-        {
-            effect.transform.SetParent(parent);
-        }
-
-        effect.Play();
+        var effect = ObjectPoolManager.Instance.GetPoolableObject(ObjectPoolManager.ObjectType.EFFECT).GetComponent<IPoolableObject>();
+        effect.Initialize(pos, Quaternion.LookRotation(normal), parent);
     }
 }

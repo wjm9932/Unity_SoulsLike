@@ -30,7 +30,7 @@ public class ShootArrowState : EnemyPatternState
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
 
             Arrow arrow = ObjectPoolManager.Instance.GetPoolableObject(ObjectPoolManager.ObjectType.ARROW).GetComponent<Arrow>();
-            arrow.Initialize(sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position, targetRotation, sm.owner);
+            arrow.Initialize(sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position, targetRotation, sm.owner.transform);
 
             sm.ChangeState(sm.trackingState);
         }
