@@ -65,9 +65,11 @@ public class SoundManager : MonoBehaviour
         playerFootStepSoundSource.PlayOneShot(footStepClips[index]);
     }
 
-    public void PlaySoundEffect(SoundEffectType type)
+    public void PlaySoundEffect(SoundEffectType type, float volume = 0.3f)
     {
         var audioSource = ObjectPoolManager.Instance.GetPoolableObject(ObjectType.SOUND);
+        audioSource.GetComponent<AudioSource>().volume = volume;
         audioSource.GetComponent<AudioSource>().PlayOneShot(audioClips[type]);
+
     }
 }

@@ -32,7 +32,8 @@ ModelImporter:
       discarded.\n\t'Toes_R' has translation animation that will be discarded.\n\t'Knee_L'
       has translation animation that will be discarded.\n\t'Ankle_L' has translation
       animation that will be discarded.\n\t'Toes_L' has translation animation that
-      will be discarded.\n"
+      will be discarded.\nEvent OnAnimationEnterEvent has a time (0.000000) outside
+      the clip's valid range (0.000000..1.333333). It will never be fired"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -79,6 +80,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.7772529
         functionName: OnAnimationExitEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.2555205
+        functionName: OnAnimationTransitionEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
         floatParameter: 0

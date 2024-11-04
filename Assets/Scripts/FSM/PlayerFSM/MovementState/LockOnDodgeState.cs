@@ -16,6 +16,7 @@ namespace PlayerFSM
         }
         public override void Enter()
         {
+            sm.owner.canBeDamaged = false;
             isDodgeFinished = false;
             forward = sm.owner.mainCamera.transform.forward;
             right = sm.owner.mainCamera.transform.right;
@@ -52,11 +53,10 @@ namespace PlayerFSM
         public override void Exit()
         {
             sm.owner.animator.SetBool("IsDodging", false);
-            SoundManager.Instance.PlaySoundEffect(SoundManager.SoundEffectType.DODGE_LANDING);
         }
         public override void OnAnimationEnterEvent()
         {
-            sm.owner.canBeDamaged = false;
+            //sm.owner.canBeDamaged = false;
         }
         public override void OnAnimationExitEvent()
         {
@@ -65,6 +65,7 @@ namespace PlayerFSM
         }
         public override void OnAnimationTransitionEvent()
         {
+            SoundManager.Instance.PlaySoundEffect(SoundManager.SoundEffectType.DODGE_LANDING, 1f);
         }
         private void Dodge()
         {

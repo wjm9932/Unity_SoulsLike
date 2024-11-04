@@ -139,6 +139,7 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(canBeDamaged);
         RecoverStamina();
 
         rb.useGravity = !IsOnSlope();
@@ -170,7 +171,6 @@ public class Character : LivingEntity
     }
     private void OnAnimationTransitionEvent(AnimationEvent ev)
     {
-        Debug.Log(ev.animatorClipInfo.weight);
         if (ev.animatorClipInfo.weight >= 0.5f)
         {
             playerMovementStateMachine.OnAnimationTransitionEvent();
