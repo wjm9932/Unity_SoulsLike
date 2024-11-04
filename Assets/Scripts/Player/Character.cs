@@ -300,6 +300,14 @@ public class Character : LivingEntity
         }
     }
 
+    private void PlayFootStepSound(AnimationEvent ev)
+    {
+        if (ev.animatorClipInfo.weight >= 0.5f)
+        {
+            SoundManager.Instance.PlayFootStepSound();
+        }
+    }
+
     /************************************Test********************************************************/
     private void CloseQuestWindow()
     {
