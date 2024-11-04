@@ -168,9 +168,13 @@ public class Character : LivingEntity
             playerMovementStateMachine.OnAnimationExitEvent();
         }
     }
-    private void OnAnimationTransitionEvent()
+    private void OnAnimationTransitionEvent(AnimationEvent ev)
     {
-        playerMovementStateMachine.OnAnimationTransitionEvent();
+        Debug.Log(ev.animatorClipInfo.weight);
+        if (ev.animatorClipInfo.weight >= 0.5f)
+        {
+            playerMovementStateMachine.OnAnimationTransitionEvent();
+        }
     }
     private void OnAnimatorIK()
     {

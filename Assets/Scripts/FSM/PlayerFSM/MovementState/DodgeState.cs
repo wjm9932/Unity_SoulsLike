@@ -21,6 +21,8 @@ namespace PlayerFSM
             sm.owner.animator.SetBool("IsDodging", true);
             sm.owner.playerEvents.Dodge();
             SetMoveDirection();
+
+            SoundManager.Instance.PlaySoundEffect(SoundManager.SoundEffectType.DODGE);
         }
         public override void Update()
         {
@@ -48,6 +50,7 @@ namespace PlayerFSM
         public override void Exit()
         {
             sm.owner.animator.SetBool("IsDodging", false);
+            SoundManager.Instance.PlaySoundEffect(SoundManager.SoundEffectType.DODGE_LANDING);
         }
         public override void OnAnimationEnterEvent()
         {

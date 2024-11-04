@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
     public enum SoundEffectType
     {
         DODGE,
+        DODGE_LANDING,
         ATTACK_1,
         ATTACK_2,
         ATTACK_3,
@@ -30,7 +31,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private SoundEffectInfo[] effectInfos;
 
-    private Dictionary<SoundEffectType, AudioClip> audioClips;
+    private Dictionary<SoundEffectType, AudioClip> audioClips = new Dictionary<SoundEffectType, AudioClip>();
  
 
     private void Awake()
@@ -67,7 +68,6 @@ public class SoundManager : MonoBehaviour
     public void PlaySoundEffect(SoundEffectType type)
     {
         var audioSource = ObjectPoolManager.Instance.GetPoolableObject(ObjectType.SOUND);
-        audioSource.GetComponent<AudioSource>().clip = audioClips[type];
-
+        audioSource.GetComponent<AudioSource>().PlayOneShot(audioClips[type]);
     }
 }

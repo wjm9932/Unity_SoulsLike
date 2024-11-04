@@ -21,7 +21,10 @@ namespace PlayerFSM
             right = sm.owner.mainCamera.transform.right;
             moveSpeed = 2f;
             dodgeDir = sm.owner.input.dodgeInput;
+            
             UpdateAnimation();
+
+            SoundManager.Instance.PlaySoundEffect(SoundManager.SoundEffectType.DODGE);
         }
         public override void Update()
         {
@@ -49,6 +52,7 @@ namespace PlayerFSM
         public override void Exit()
         {
             sm.owner.animator.SetBool("IsDodging", false);
+            SoundManager.Instance.PlaySoundEffect(SoundManager.SoundEffectType.DODGE_LANDING);
         }
         public override void OnAnimationEnterEvent()
         {
