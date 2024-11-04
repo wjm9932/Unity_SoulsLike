@@ -24,8 +24,6 @@ namespace PlayerFSM
             dodgeDir = sm.owner.input.dodgeInput;
             
             UpdateAnimation();
-
-            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.DODGE);
         }
         public override void Update()
         {

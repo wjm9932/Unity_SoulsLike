@@ -22,8 +22,6 @@ namespace PlayerFSM
             sm.owner.animator.SetBool("IsDodging", true);
             sm.owner.playerEvents.Dodge();
             SetMoveDirection();
-
-            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.DODGE);
         }
         public override void Update()
         {

@@ -48,6 +48,11 @@ public class Character : LivingEntity
     private float maxSlopeAngle;
     public RaycastHit slopeHit;
 
+
+    [Header("Player FootStep Sound")]
+    [SerializeField] private AudioClip[] footStepClips;
+    private AudioSource playerFootStepSoundSource;
+
     [Space]
     public Transform leftHandPos;
     public TrailRenderer swordEffect;
@@ -130,6 +135,7 @@ public class Character : LivingEntity
         inventory = GetComponent<Inventory>();
         playerEvents = GetComponent<PlayerQuestEvent>();
         playerBuff = GetComponent<BuffManager>();
+        playerFootStepSoundSource = GetComponent<AudioSource>();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         uiStateMachine.ChangeState(uiStateMachine.closeState);
@@ -307,7 +313,8 @@ public class Character : LivingEntity
     {
         if (ev.animatorClipInfo.weight >= 0.5f)
         {
-            SoundManager.Instance.PlayFootStepSound();
+            int index = Random.Range(0, footStepClips.Length);
+            playerFootStepSoundSource.PlayOneShot(footStepClips[index]);
         }
     }
 

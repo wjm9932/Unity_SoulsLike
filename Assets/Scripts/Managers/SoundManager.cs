@@ -7,9 +7,6 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
-    [Header("Player FootStep")]
-    [SerializeField] private AudioSource playerFootStepSoundSource;
-    [SerializeField] private AudioClip[] footStepClips;
 
     public enum SoundEffectType
     {
@@ -66,13 +63,6 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         
-    }
-
-
-    public void PlayFootStepSound()
-    {
-        int index = Random.Range(0, footStepClips.Length);
-        playerFootStepSoundSource.PlayOneShot(footStepClips[index]);
     }
 
     public void Play2DSoundEffect(SoundEffectType type, float volume = 0.2f)

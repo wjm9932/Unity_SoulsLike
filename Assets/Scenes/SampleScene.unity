@@ -12400,16 +12400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3655b870aedd99459d056e0b55fd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFootStepSoundSource: {fileID: 1438546957634691687}
-  footStepClips:
-  - {fileID: 8300000, guid: b993df4a93c1d304ab19d8b2eb88c9a5, type: 3}
-  - {fileID: 8300000, guid: 5c9bdbce37b06a24fa6ea793bcfd1907, type: 3}
-  - {fileID: 8300000, guid: 0909de896e9029541b92ae05fe15e4b6, type: 3}
-  - {fileID: 8300000, guid: 6ad0cf00f050bee41a2dee098475dc78, type: 3}
-  - {fileID: 8300000, guid: 7ca5a9710db4327439c9f8cb8204615e, type: 3}
-  - {fileID: 8300000, guid: 14ae706fef2303e4cb71112dbd5d250b, type: 3}
-  - {fileID: 8300000, guid: b995bc1775ea83b4b8f861763e9a1424, type: 3}
-  - {fileID: 8300000, guid: d15f7338d693f0343843a6b9096d27f6, type: 3}
   effectInfos:
   - effectType: 0
     audioClips:
@@ -28624,6 +28614,82 @@ PrefabInstance:
       propertyPath: arrowHitPositionParent
       value: 
       objectReference: {fileID: 1209147708}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b993df4a93c1d304ab19d8b2eb88c9a5, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5c9bdbce37b06a24fa6ea793bcfd1907, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0909de896e9029541b92ae05fe15e4b6, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ad0cf00f050bee41a2dee098475dc78, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ca5a9710db4327439c9f8cb8204615e, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 14ae706fef2303e4cb71112dbd5d250b, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: b995bc1775ea83b4b8f861763e9a1424, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: d15f7338d693f0343843a6b9096d27f6, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9b1f6289334342841afe6a5a8349e7ec, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: afeb90013e6764449ae1616f47705ff7, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: b993df4a93c1d304ab19d8b2eb88c9a5, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5c9bdbce37b06a24fa6ea793bcfd1907, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0909de896e9029541b92ae05fe15e4b6, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[13]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ad0cf00f050bee41a2dee098475dc78, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[14]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ca5a9710db4327439c9f8cb8204615e, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[15]
+      value: 
+      objectReference: {fileID: 8300000, guid: 14ae706fef2303e4cb71112dbd5d250b, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[16]
+      value: 
+      objectReference: {fileID: 8300000, guid: b995bc1775ea83b4b8f861763e9a1424, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: footStepClips.Array.data[17]
+      value: 
+      objectReference: {fileID: 8300000, guid: d15f7338d693f0343843a6b9096d27f6, type: 3}
     - target: {fileID: 3702315721447772401, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_Enabled
       value: 1
