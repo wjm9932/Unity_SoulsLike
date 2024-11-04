@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ObjectPoolManager;
 
 public class SoundManager : MonoBehaviour
 {
@@ -10,12 +11,39 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource playerFootStepSoundSource;
     [SerializeField] private AudioClip[] footStepClips;
 
+    public enum SoundEffectType
+    {
+        DODGE,
+        ATTACK_1,
+        ATTACK_2,
+        ATTACK_3,
+        DRINK,
+        PICKUP,
+    }
+    [System.Serializable]
+    private struct SoundEffectInfo
+    {
+        public SoundEffectType effectType;
+        public AudioClip audioClip;
+    }
+
+    [SerializeField]
+    private SoundEffectInfo[] effectInfos;
+
+    private Dictionary<SoundEffectType, AudioClip> audioClips;
+ 
+
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
             Destroy(this.gameObject);
+
+        for(int i = 0; i < effectInfos.Length; i++)
+        {
+            audioClips.Add(effectInfos[i].effectType, effectInfos[i].audioClip);
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -34,5 +62,12 @@ public class SoundManager : MonoBehaviour
     {
         int index = Random.Range(0, footStepClips.Length);
         playerFootStepSoundSource.PlayOneShot(footStepClips[index]);
+    }
+
+    public void PlaySoundEffect(SoundEffectType type)
+    {
+        var audioSource = ObjectPoolManager.Instance.GetPoolableObject(ObjectType.SOUND);
+        audioSource.GetComponent<AudioSource>().clip = audioClips[type];
+
     }
 }
