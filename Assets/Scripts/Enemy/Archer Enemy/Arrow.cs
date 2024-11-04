@@ -40,9 +40,9 @@ public class Arrow : MonoBehaviour, IPoolableObject
         
     }
 
-    public void Initialize(Vector3 position, Quaternion rotation, Enemy parent)
+    public void Initialize(Vector3 position, Quaternion rotation, Transform parent = null)
     {
-        this.parent = parent;
+        this.parent = parent.gameObject.GetComponent<LivingEntity>();
         this.enabled = true;
         this.gameObject.transform.position = position;
         this.gameObject.transform.rotation = rotation;
