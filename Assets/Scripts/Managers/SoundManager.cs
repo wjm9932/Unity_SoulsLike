@@ -7,6 +7,10 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
+    private struct EnemySoundEffect
+    { 
+    }
+
 
     public enum SoundEffectType
     {
@@ -20,6 +24,7 @@ public class SoundManager : MonoBehaviour
         PICKUP,
         PLAYER_HIT,
         ENEMY_HIT,
+        ENEMY_DIE,
     }
     [System.Serializable]
     private struct SoundEffectInfo
