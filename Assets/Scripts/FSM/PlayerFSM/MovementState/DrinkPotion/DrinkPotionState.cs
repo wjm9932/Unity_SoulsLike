@@ -53,6 +53,10 @@ public class DrinkPotionState : PlayerMovementState
         sm.owner.animator.SetBool("IsDrinkingPotion", false);
         sm.owner.StopCoroutine(recoverCoroutine);
     }
+    public override void OnAnimationTransitionEvent()
+    {
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.DRINK, 0.7f);
+    }
 
     public override void OnAnimationExitEvent()
     {

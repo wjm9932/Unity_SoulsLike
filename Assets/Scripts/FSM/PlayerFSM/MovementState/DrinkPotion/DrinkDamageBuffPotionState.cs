@@ -33,6 +33,8 @@ public class DrinkDamageBuffPotionState : PlayerMovementState
             sm.owner.toBeUsedItem.UseItem(sm.owner);
             sm.owner.playerBuff.AddBuff(Buff.BuffType.ATTACK, sm.owner.toBeUsedItem.data.value);
             sm.ChangeState(sm.walkState);
+
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.BUFF, 0.1f);
         }
     }
     public override void Exit()

@@ -60,7 +60,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
 
         transform.position = newPosition;
-
     }
     public void OnEndDrag(PointerEventData eventData)
     {

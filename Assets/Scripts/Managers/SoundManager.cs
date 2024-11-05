@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
     {
         PICKUP,
         DRINK,
+        BUFF,
         ALERT,
         DODGE_LANDING,
         ATTACK_1,
@@ -39,6 +40,7 @@ public class SoundManager : MonoBehaviour
     private Dictionary<SoundEffectType, List<AudioClip>> audioClipsContainer = new Dictionary<SoundEffectType, List<AudioClip>>();
     private int maxPickUpSoundEffect = 3;
     private int currentPlayingPickupEffect = 0;
+    public AudioSource drinkAudioSource { get; private set; }
 
     private void Awake()
     {
@@ -78,7 +80,12 @@ public class SoundManager : MonoBehaviour
         if (type == SoundEffectType.PICKUP)
         {
             currentPlayingPickupEffect++;
-            soundObjectPool.removeFromIndex += () => { --currentPlayingPickupEffect; };
+            soundObjectPool.removeAction += () => { --currentPlayingPickupEffect; };
+        }
+        if(type == SoundEffectType.DRINK)
+        {
+            drinkAudioSource = audioComponent;
+            soundObjectPool.removeAction += () => { drinkAudioSource = null; };
         }
         
         audioComponent.volume = volume;

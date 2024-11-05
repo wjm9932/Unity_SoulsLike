@@ -8,7 +8,7 @@ public class SoundObjectPool : MonoBehaviour, IPoolableObject
 {
     public IObjectPool<GameObject> pool { get; private set; }
     public AudioSource audioSource { get; private set; }
-    public Action removeFromIndex;
+    public Action removeAction;
 
     void Awake()
     {
@@ -18,10 +18,10 @@ public class SoundObjectPool : MonoBehaviour, IPoolableObject
     {
         if (audioSource.isPlaying == false)
         {
-            if (removeFromIndex != null)
+            if (removeAction != null)
             {
-                removeFromIndex();
-                removeFromIndex = null;
+                removeAction();
+                removeAction = null;
             }
 
             transform.parent = null;
