@@ -12328,9 +12328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectInfos:
-  - effectType: 0
-    audioClips:
-    - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
   - effectType: 1
     audioClips:
     - {fileID: 8300000, guid: ccfb18eb53b37384b9632ae00f725881, type: 3}
@@ -12373,6 +12370,9 @@ MonoBehaviour:
   - effectType: 5
     audioClips:
     - {fileID: 8300000, guid: df788ab6bd4de1940acc3dab8ae1895a, type: 3}
+  - effectType: 10
+    audioClips:
+    - {fileID: 8300000, guid: 479a473fc7115c1488ea8f30875e9c22, type: 3}
 --- !u!1001 &900981971
 PrefabInstance:
   m_ObjectHideFlags: 0

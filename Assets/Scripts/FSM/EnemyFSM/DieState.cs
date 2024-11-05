@@ -13,6 +13,7 @@ public class DieState : IState
     public virtual void Enter()
     {
         sm.owner.SetCanAttack(0);
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ENEMY_DIE, 0.2f);
         sm.owner.animator.SetTrigger("Die");
     }
     public virtual void Update()
