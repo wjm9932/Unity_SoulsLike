@@ -1830,8 +1830,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageTextPosition: {fileID: 3910947327579446000}
-  _entityType: 2
+  _entityType: 4
   _maxHealth: 100
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 0
+  eyeTransform: {fileID: 0}
+  dropItem: []
+  hpBar: {fileID: 0}
+  lockOnIndicator: {fileID: 0}
   character: {fileID: 0}
 --- !u!1 &4772777636287535821
 GameObject:

@@ -27,8 +27,13 @@ public class Enemy : LivingEntity
     public GameObject target { get; set; }
     public Animator animator { get; private set; }
 
+    [Header("Foot Step Sound")]
+    [SerializeField] private AudioClip[] footStepClips;
+    private AudioSource audioSource;
+
     protected virtual void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
         canBeDamaged = true;
@@ -83,7 +88,11 @@ public class Enemy : LivingEntity
             }
         }
     }
-
+    private void PlayFootStepSound()
+    {
+        int index = Random.Range(0, footStepClips.Length);
+        audioSource.PlayOneShot(footStepClips[index]);
+    }
     private bool IsDrop(float chances)
     {
         return Random.Range(0f, 100f) <= chances;
