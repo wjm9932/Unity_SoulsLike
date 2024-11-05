@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b903c42b857cbc42a376a3356fffa4b, type: 3}
   m_Name: IncreaseMaxHp
   m_EditorClassIdentifier: 
-  value: 10
+  value: 15
