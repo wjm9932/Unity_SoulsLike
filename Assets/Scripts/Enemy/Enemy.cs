@@ -25,16 +25,16 @@ public class Enemy : LivingEntity
     public float trackingSpeed { get; protected set; }
     public NavMeshAgent navMesh { get; private set; }
     public GameObject target { get; set; }
-    public Animator animator { get; private set; }
 
     [Header("Foot Step Sound")]
     [SerializeField] private AudioClip[] footStepClips;
     private AudioSource audioSource;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
         canBeDamaged = true;
         isDead = false;

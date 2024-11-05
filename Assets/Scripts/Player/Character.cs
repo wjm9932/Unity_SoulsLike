@@ -58,7 +58,6 @@ public class Character : LivingEntity
     public TrailRenderer swordEffect;
     public Transform arrowHitPositionParent;
     public UsableItem toBeUsedItem { get; private set; }
-    public Animator animator { get; private set; }
     public Camera mainCamera { get; private set; }
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
@@ -114,8 +113,9 @@ public class Character : LivingEntity
 
 
     // Start is called before the first frame update
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         staminaRecoverCoolTime = 0f;
         canBeDamaged = true;
         CameraStateMachine.Initialize(this);
@@ -128,7 +128,6 @@ public class Character : LivingEntity
         stamina = maxStamina;
 
         mainCamera = Camera.main;
-        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         playerHeight = GetComponent<CapsuleCollider>().height;
         input = GetComponent<PlayerInput>();

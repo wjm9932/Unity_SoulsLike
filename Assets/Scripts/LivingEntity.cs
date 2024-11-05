@@ -14,6 +14,7 @@ public enum EntityType
 
 public abstract class LivingEntity : MonoBehaviour
 {
+    public Animator animator { get; private set; }
     [SerializeField] protected Transform damageTextPosition;
 
     [Header("Entitiy")]
@@ -40,14 +41,17 @@ public abstract class LivingEntity : MonoBehaviour
         }
     }
 
-    public bool canAttack { get; private set; }
+    public bool canAttack { get; set; }
     public float damage { get; protected set; }
     public float buffArmorPercent { get; set; }
     public bool isDead { get; protected set; }
     public bool canBeDamaged { get; set; }
     public event Action onDeath;
 
-
+    protected virtual void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     protected virtual void Start()
     {
         canAttack = false;
@@ -100,6 +104,11 @@ public abstract class LivingEntity : MonoBehaviour
 
     public void SetCanAttack(int flag)
     {
+        if (animator.IsInTransition(0) == true)
+        {
+            return;
+        }
+
         if (flag == 1)
         {
             canAttack = true;

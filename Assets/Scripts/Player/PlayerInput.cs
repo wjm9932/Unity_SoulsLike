@@ -70,7 +70,7 @@ public class PlayerInput : MonoBehaviour
         isUsingQuickSlot = Input.GetKeyDown(KeyCode.Q);
         isInteracting = Input.GetKeyDown(KeyCode.E);
 
-        isPressingInventoryKey = Input.GetKeyDown(KeyCode.I);
+        isPressingInventoryKey = Input.GetKeyDown(KeyCode.Tab);
         isPressingQuestLogKey = Input.GetKeyDown(KeyCode.O);
     }
 
