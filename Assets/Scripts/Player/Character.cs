@@ -276,6 +276,7 @@ public class Character : LivingEntity
         if (stamina < actualCost)
         {
             TextManager.Instance.PlayNotificationText("Not enough stamina!");
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ALERT, 0.2f);
             return false;
         }
         else

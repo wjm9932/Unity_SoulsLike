@@ -41,6 +41,7 @@ namespace UX
                     if(character.inventory.AddItem(this, numOfItem) == true)
                     {
                         TextManager.Instance.PlayNotificationText("You've got " + itemName + " x" + numOfItem);
+                        SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.PICKUP, 0.2f);
                         Destroy(this.gameObject);
                     }
                     else

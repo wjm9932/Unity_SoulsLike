@@ -27,6 +27,7 @@ public class DrinkPotionState : PlayerMovementState
         else
         {
             TextManager.Instance.PlayNotificationText(TextManager.DisplayText.HP_IS_FULL);
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ALERT, 0.2f);
             sm.ChangeState(sm.walkState);
         }
     }

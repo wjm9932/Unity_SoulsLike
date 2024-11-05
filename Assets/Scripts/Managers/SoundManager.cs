@@ -14,15 +14,15 @@ public class SoundManager : MonoBehaviour
 
     public enum SoundEffectType
     {
-        DODGE,
+        PICKUP,
+        DRINK,
+        ALERT,
         DODGE_LANDING,
         ATTACK_1,
         ATTACK_2,
         ATTACK_3,
-        WARRIOR_ENEMY_ATTACK,
-        DRINK,
-        PICKUP,
         PLAYER_HIT,
+        WARRIOR_ENEMY_ATTACK,
         ENEMY_HIT,
         ENEMY_DIE,
     }
@@ -37,7 +37,8 @@ public class SoundManager : MonoBehaviour
     private SoundEffectInfo[] effectInfos;
 
     private Dictionary<SoundEffectType, List<AudioClip>> audioClipsContainer = new Dictionary<SoundEffectType, List<AudioClip>>();
- 
+    private int maxPickUpSoundEffect = 3;
+    private int currentPlayingPickupEffect = 0;
 
     private void Awake()
     {
@@ -58,32 +59,39 @@ public class SoundManager : MonoBehaviour
             audioClipsContainer.Add(effectInfos[i].effectType, clips);
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
     }
 
     public void Play2DSoundEffect(SoundEffectType type, float volume = 0.2f)
     {
+        if (type == SoundEffectType.PICKUP && currentPlayingPickupEffect >= maxPickUpSoundEffect)
+        {
+            return;
+        }
+
         var audioSource = ObjectPoolManager.Instance.GetPoolableObject(ObjectType.SOUND);
-        audioSource.GetComponent<AudioSource>().volume = volume;
-        audioSource.GetComponent<AudioSource>().spatialBlend = 0f;
+        var soundObjectPool = audioSource.GetComponent<SoundObjectPool>();
+        var audioComponent = audioSource.GetComponent<AudioSource>();
+
+        if (type == SoundEffectType.PICKUP)
+        {
+            currentPlayingPickupEffect++;
+            soundObjectPool.removeFromIndex += () => { --currentPlayingPickupEffect; };
+        }
+        
+        audioComponent.volume = volume;
+        audioComponent.spatialBlend = 0f;
 
         if (audioClipsContainer[type].Count == 1)
         {
-            audioSource.GetComponent<AudioSource>().PlayOneShot(audioClipsContainer[type][0]);
+            audioComponent.PlayOneShot(audioClipsContainer[type][0]);
         }
         else
         {
             int index = Random.Range(0, audioClipsContainer[type].Count);
-            audioSource.GetComponent<AudioSource>().PlayOneShot(audioClipsContainer[type][index]);
+            audioComponent.PlayOneShot(audioClipsContainer[type][index]);
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class SoundObjectPool : MonoBehaviour, IPoolableObject
 {
     public IObjectPool<GameObject> pool { get; private set; }
     public AudioSource audioSource { get; private set; }
+    public Action removeFromIndex;
 
     void Awake()
     {
@@ -14,8 +16,14 @@ public class SoundObjectPool : MonoBehaviour, IPoolableObject
     }
     void Update()
     {
-        if(audioSource.isPlaying == false)
+        if (audioSource.isPlaying == false)
         {
+            if (removeFromIndex != null)
+            {
+                removeFromIndex();
+                removeFromIndex = null;
+            }
+
             transform.parent = null;
             pool.Release(this.gameObject);
         }
