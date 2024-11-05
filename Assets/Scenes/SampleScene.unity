@@ -27582,7 +27582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293926496069630896, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: info.Array.data[0].targetCount
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 293926496069630896, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: info.Array.data[0].targetEnemy
@@ -28286,6 +28286,10 @@ PrefabInstance:
       propertyPath: interactionIndicator
       value: 
       objectReference: {fileID: 750216688}
+    - target: {fileID: 1438546957634691687, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: m_Volume
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1438546957634691687, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 0
