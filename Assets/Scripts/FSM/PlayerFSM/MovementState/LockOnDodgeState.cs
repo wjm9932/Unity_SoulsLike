@@ -24,10 +24,12 @@ namespace PlayerFSM
             dodgeDir = sm.owner.input.dodgeInput;
             
             UpdateAnimation();
+            cameraPosition = sm.owner.originCameraTrasform;
         }
         public override void Update()
         {
             SpeedControl();
+            UpdateCameraDampingPosition();
             if (isDodgeFinished == true)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
