@@ -26,6 +26,7 @@ namespace PlayerFSM
         public override void Update()
         {
             SpeedControl();
+
             if (isDodgeFinished == true)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)

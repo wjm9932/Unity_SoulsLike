@@ -21,6 +21,7 @@ public class DrinkStaminaBuffPotionState : PlayerMovementState
     {
         SetMoveDirection();
         SpeedControl();
+        UpdateCameraDampingPosition();
 
         if (moveDirection == Vector3.zero)
         {

@@ -23,6 +23,7 @@ public class DrinkArmorBuffPotionState : PlayerMovementState
     {
         SetMoveDirection();
         SpeedControl();
+        UpdateCameraDampingPosition();
 
         if (moveDirection == Vector3.zero)
         {

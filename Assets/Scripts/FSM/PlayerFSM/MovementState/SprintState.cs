@@ -20,6 +20,8 @@ namespace PlayerFSM
         {
             sm.owner.playerEvents.Sprint(Time.deltaTime);
 
+            cameraPosition = sm.owner.originCameraTrasform + sm.owner.transform.forward * -1f;
+            
             if (sm.owner.input.isSprinting == false)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
@@ -35,8 +37,6 @@ namespace PlayerFSM
             {
                 base.Update();
             }
-
-            sm.owner.cameraTransform.localPosition = Vector3.Lerp(sm.owner.cameraTransform.localPosition, sm.owner.originCameraTrasform + sm.owner.transform.forward * -1f, 2f * Time.deltaTime);
         }
         public override void PhysicsUpdate()
         {

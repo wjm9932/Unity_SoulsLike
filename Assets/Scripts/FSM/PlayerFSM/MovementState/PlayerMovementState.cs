@@ -9,8 +9,10 @@ public abstract class PlayerMovementState : IState
 
     protected Vector3 moveDirection;
     protected Vector3 lookAtDirection;
+    protected Vector3 cameraPosition;
 
     protected float moveSpeed;
+
 
     private IEnumerator coroutineReference;
 
@@ -21,8 +23,8 @@ public abstract class PlayerMovementState : IState
 
     public virtual void Enter()
     {
+        cameraPosition = sm.owner.originCameraTrasform;
         SetMoveDirection();
-
         coroutineReference = PostSimulationUpdate();
         sm.owner.StartCoroutine(coroutineReference);
     }
@@ -30,7 +32,7 @@ public abstract class PlayerMovementState : IState
     {
         SetMoveDirection();
         SpeedControl();
-
+        UpdateCameraDampingPosition();
 
         if (sm.owner.input.moveInput == Vector2.zero)
         {
@@ -117,6 +119,12 @@ public abstract class PlayerMovementState : IState
             }
         }
     }
+
+    protected void UpdateCameraDampingPosition()
+    {
+        sm.owner.cameraTransform.localPosition = Vector3.Lerp(sm.owner.cameraTransform.localPosition, cameraPosition, 2f * Time.deltaTime);
+    }
+
     private void Rotate()
     {
         if (sm.owner.rb.velocity.magnitude > 0.2f)
@@ -127,6 +135,7 @@ public abstract class PlayerMovementState : IState
     }
     IEnumerator PostSimulationUpdate()
     {
+        yield return null;
         YieldInstruction waitForFixedUpdate = new WaitForFixedUpdate();
         while (true)
         {

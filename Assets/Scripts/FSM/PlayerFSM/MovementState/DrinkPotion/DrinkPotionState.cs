@@ -36,8 +36,9 @@ public class DrinkPotionState : PlayerMovementState
     {
         SetMoveDirection();
         SpeedControl();
+        UpdateCameraDampingPosition();
 
-        if(moveDirection == Vector3.zero)
+        if (moveDirection == Vector3.zero)
         {
             sm.owner.rb.velocity = Vector3.zero;
         }
