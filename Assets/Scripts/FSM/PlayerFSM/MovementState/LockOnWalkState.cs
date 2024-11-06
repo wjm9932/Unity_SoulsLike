@@ -20,6 +20,8 @@ namespace PlayerFSM
 
         public override void Update()
         {
+            sm.owner.cameraTransform.localPosition = Vector3.Lerp(sm.owner.cameraTransform.localPosition, sm.owner.originCameraTrasform, 2f * Time.deltaTime);
+
             if (sm.owner.input.isSprinting == true)
             {
                 sm.ChangeState(sm.sprintState);
