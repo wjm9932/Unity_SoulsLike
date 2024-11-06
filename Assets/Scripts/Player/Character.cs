@@ -35,7 +35,8 @@ public class Character : LivingEntity
     public CinemachineVirtualCamera followCamera;
     public Transform cameraTransform;
     public Transform camEyePos;
-
+    public Vector3 originCameraTrasform { get; private set; }
+   
     [Header("Layer Mask")]
     public LayerMask whatIsGround;
     public LayerMask enemyMask;
@@ -116,6 +117,7 @@ public class Character : LivingEntity
     protected override void Awake()
     {
         base.Awake();
+        originCameraTrasform = cameraTransform.transform.localPosition;
         staminaRecoverCoolTime = 0f;
         canBeDamaged = true;
         CameraStateMachine.Initialize(this);

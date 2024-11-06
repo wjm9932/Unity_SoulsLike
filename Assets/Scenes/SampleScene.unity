@@ -28443,6 +28443,10 @@ PrefabInstance:
       propertyPath: questDialogueUI
       value: 
       objectReference: {fileID: 836226269}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: _followCameraDistance
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3702315721447772409, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: eventSystem
       value: 

@@ -35,6 +35,8 @@ namespace PlayerFSM
             {
                 base.Update();
             }
+
+            sm.owner.cameraTransform.localPosition = Vector3.Lerp(sm.owner.cameraTransform.localPosition, sm.owner.originCameraTrasform + sm.owner.transform.forward * -1f, 2f * Time.deltaTime);
         }
         public override void PhysicsUpdate()
         {

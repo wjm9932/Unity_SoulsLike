@@ -17,6 +17,7 @@ namespace PlayerFSM
         }
         public void Update()
         {
+            sm.owner.cameraTransform.localPosition = Vector3.Lerp(sm.owner.cameraTransform.localPosition, sm.owner.originCameraTrasform , 2f * Time.deltaTime);
             //if(sm.owner.IsOnSlope() == true)
             //{
             //    sm.owner.rb.velocity = Vector3.zero;
