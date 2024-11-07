@@ -16,7 +16,7 @@ public abstract class OpenState : IStateUI
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         sm.owner.input.canGetMouseInput = false;
-        SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.5f);
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.3f);
     }
 
     // Update is called once per frame

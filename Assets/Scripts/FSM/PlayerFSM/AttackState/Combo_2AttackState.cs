@@ -66,7 +66,7 @@ namespace PlayerFSM
         public override void OnAnimationTransitionEvent()
         {
             base.OnAnimationTransitionEvent();
-            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ATTACK_2, 0.25f);
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ATTACK_2, 0.4f);
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KillArhcerSkeletonQuest
   m_EditorClassIdentifier: 
   id: KillArhcerSkeletonQuest
-  displayName: Kill Arhcer
+  displayName: Kill Arhcer!
   initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!

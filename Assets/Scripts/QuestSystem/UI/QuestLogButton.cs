@@ -36,6 +36,7 @@ public class QuestLogButton : MonoBehaviour
         {
             onSelectAction(quest);
         }
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.3f);
     }
 
     public void SetState(QuestState state)
