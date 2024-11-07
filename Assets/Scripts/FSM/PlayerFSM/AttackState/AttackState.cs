@@ -24,7 +24,6 @@ public class AttackState : IState
     }
     public virtual void Update()
     {
-        sm.owner.cameraTransform.localPosition = Vector3.Lerp(sm.owner.cameraTransform.localPosition, sm.owner.originCameraTrasform, 2f * Time.deltaTime);
 
         if (sm.owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f && sm.owner.animator.IsInTransition(0) == false)
         {

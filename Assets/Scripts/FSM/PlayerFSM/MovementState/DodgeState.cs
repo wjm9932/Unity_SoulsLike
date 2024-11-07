@@ -22,12 +22,10 @@ namespace PlayerFSM
             sm.owner.animator.SetBool("IsDodging", true);
             sm.owner.playerEvents.Dodge();
             SetMoveDirection();
-            cameraPosition = sm.owner.originCameraTrasform;
         }
         public override void Update()
         {
             SpeedControl();
-            UpdateCameraDampingPosition();
             if (isDodgeFinished == true)
             {
                 if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)

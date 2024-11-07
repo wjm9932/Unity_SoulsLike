@@ -14,7 +14,6 @@ namespace PlayerFSM
 
         public override void Enter()
         {
-            cameraPosition = sm.owner.originCameraTrasform;
             sm.owner.StartCoroutine(coroutineReference);
             moveSpeed = sm.owner.walkSpeed;
         }

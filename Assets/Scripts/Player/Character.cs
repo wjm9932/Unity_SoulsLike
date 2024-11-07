@@ -152,6 +152,11 @@ public class Character : LivingEntity
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
 
+        if(playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
+        {
+            cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
+        }
+
         CameraStateMachine.Instance.Update();
     }
     private void FixedUpdate()

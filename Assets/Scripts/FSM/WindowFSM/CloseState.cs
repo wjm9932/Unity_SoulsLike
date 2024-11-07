@@ -15,6 +15,7 @@ public class CloseState : IStateUI
         sm.owner.input.canGetMouseInput = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.5f);
     }
 
     public void Update()

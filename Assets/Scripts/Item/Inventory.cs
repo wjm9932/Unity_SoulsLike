@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -196,10 +197,18 @@ public class Inventory : MonoBehaviour
 
         if (results.Count > 0)
         {
-            UsableItem item = results[0].gameObject.GetComponent<UsableItem>();
-            if (item != null)
+            GameObject item = results[0].gameObject;
+            
+            UI_Item uiItem = item.GetComponent<UI_Item>();
+            if(uiItem != null)
             {
-                return item;
+                SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.5f);
+            }
+
+            UsableItem usableItem = item.GetComponent<UsableItem>();
+            if (usableItem != null)
+            {
+                return usableItem;
             }
         }
 

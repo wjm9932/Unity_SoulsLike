@@ -70,7 +70,9 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                 gameObject.GetComponent<UI_Item>().DropItem();
                 return;
             }
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.DROP, 0.8f);
         }
+
         transform.SetParent(_originParent);
         image.raycastTarget = true;
     }
