@@ -12511,10 +12511,10 @@ MonoBehaviour:
     audioClips:
     - {fileID: 8300000, guid: ed7e5d8f2f6306746a6929bab0d3975f, type: 3}
     - {fileID: 8300000, guid: 28ecac922c44d264383925bb733197ce, type: 3}
-  - effectType: 13
+  - effectType: 12
     audioClips:
     - {fileID: 8300000, guid: 06aa7953968b2fb46823f1334a2c32d4, type: 3}
-  - effectType: 12
+  - effectType: 13
     audioClips:
     - {fileID: 8300000, guid: fe4a85ab5a3ff5e4792ee4dfd5a406de, type: 3}
     - {fileID: 8300000, guid: 4133b64f780bfef418d19b5c30160453, type: 3}
@@ -27792,7 +27792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293926496069630896, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: info.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 293926496069630896, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: targetSpawnCount

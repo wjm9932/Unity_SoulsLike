@@ -20,7 +20,7 @@ namespace EnemyFSM
             sm.owner.navMesh.speed = 1f;
             sm.owner.navMesh.stoppingDistance = 1f;
             sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
-            sm.owner.navMesh.avoidancePriority = 50;
+            sm.owner.navMesh.avoidancePriority = 51;
 
             updatePathCoroutine = UpdatePath();
             sm.owner.StartCoroutine(updatePathCoroutine);
