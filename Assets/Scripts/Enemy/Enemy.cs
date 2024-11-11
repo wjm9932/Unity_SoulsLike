@@ -30,6 +30,8 @@ public class Enemy : LivingEntity
     [SerializeField] private AudioClip[] footStepClips;
     private AudioSource audioSource;
 
+    public GameObject attackSound { get; set; }
+
     protected override void Awake()
     {
         base.Awake();

@@ -24,8 +24,10 @@ public class SoundManager : MonoBehaviour
         ATTACK_3,
         PLAYER_HIT,
         WARRIOR_ENEMY_ATTACK,
+        ARCHER_ENEMY_ATTACK,
+        SHOT_ARROW,
         ENEMY_HIT,
-        ENEMY_DIE,
+        ENEMY_DIE, 
     }
 
     public enum UISoundEffectType
@@ -145,7 +147,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void Play3DSoundEffect(SoundEffectType type, float volume, Vector3 position, Quaternion rotation, Transform parent)
+    public GameObject Play3DSoundEffect(SoundEffectType type, float volume, Vector3 position, Quaternion rotation, Transform parent)
     {
         var audioSource = ObjectPoolManager.Instance.GetPoolableObject(ObjectType.SOUND);
         audioSource.GetComponent<AudioSource>().volume = volume;
@@ -162,5 +164,6 @@ public class SoundManager : MonoBehaviour
         }
 
         audioSource.GetComponent<IPoolableObject>().Initialize(position, rotation, parent);
+        return audioSource;
     }
 }

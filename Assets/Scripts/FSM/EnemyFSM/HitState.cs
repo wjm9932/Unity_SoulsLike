@@ -19,6 +19,10 @@ namespace EnemyFSM
             sm.owner.animator.SetBool("IsHit", true);
             sm.owner.canBeDamaged = false;
             sm.owner.navMesh.isStopped = true;
+            if(sm.owner.attackSound != null)
+            {
+                sm.owner.attackSound.GetComponent<AudioSource>().Stop();
+            }
             SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ENEMY_HIT, 0.12f);
         }
         public override void Update()

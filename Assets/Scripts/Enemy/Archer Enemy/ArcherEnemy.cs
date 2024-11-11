@@ -6,7 +6,6 @@ using UnityEngine;
 public class ArcherEnemy : Enemy
 {
     public Transform arrowPosition;
-
     private EnemyBehaviorStateMachine enemyBehaviorStateMachine;
     public override float health
     {

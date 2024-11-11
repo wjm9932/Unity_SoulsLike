@@ -70,6 +70,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.51735014
+        functionName: OnAnimationEnterEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 2afcd981ecf0ed74b9b1e55ace4dc87c, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

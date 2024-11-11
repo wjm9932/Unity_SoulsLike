@@ -59,7 +59,9 @@ namespace EnemyFSM
         }
         public override void OnAnimationTransitionEvent()
         {
-            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.WARRIOR_ENEMY_ATTACK, 0.25f, sm.owner.transform.position, Quaternion.identity, sm.owner.transform);
+            sm.owner.attackSound = SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.WARRIOR_ENEMY_ATTACK, 
+                0.25f, sm.owner.transform.position, Quaternion.identity, sm.owner.transform);
+            sm.owner.attackSound.GetComponent<SoundObjectPool>().removeAction += () => { sm.owner.attackSound = null; };
         }
         public override void OnAnimatorIK()
         {
