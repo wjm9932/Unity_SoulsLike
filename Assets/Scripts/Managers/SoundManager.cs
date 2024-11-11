@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
     {
         PICKUP,
         DRINK,
+        INCREASE_MAX_HP,
         BUFF,
         ALERT,
         DODGE_LANDING,

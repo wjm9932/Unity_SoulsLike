@@ -20,11 +20,7 @@ public class IncreaseMaxHpState : PlayerMovementState
             moveSpeed = sm.owner.walkSpeed;
             sm.owner.StartCoroutine(sm.owner.hpBar.ResizeStatusBarSize(sm.owner.toBeUsedItem.data.value));
             sm.owner.StartCoroutine(SetMaxHealth(sm.owner.toBeUsedItem.data.value));
-        }
-        else
-        {
-            TextManager.Instance.PlayNotificationText(TextManager.DisplayText.HP_IS_FULL);
-            sm.ChangeState(sm.walkState);
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.INCREASE_MAX_HP, 0.5f);
         }
     }
 

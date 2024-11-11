@@ -202,7 +202,7 @@ public class Inventory : MonoBehaviour
             UI_Item uiItem = item.GetComponent<UI_Item>();
             if(uiItem != null)
             {
-                SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.3f);
+                SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.15f);
             }
 
             UsableItem usableItem = item.GetComponent<UsableItem>();
