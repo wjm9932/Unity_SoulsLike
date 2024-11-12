@@ -74,12 +74,11 @@ public class CameraLockOffState : CameraState
     private IEnumerator ReduceDamping()
     {
         var cinemachineComponent = csm.owner.followCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-        float targetDamping = 0f;
         float dampingSpeed = 5f;
 
-        while (cinemachineComponent.Damping.x > 0.1f)
+        while (cinemachineComponent.Damping.x > 0.01f)
         {
-            cinemachineComponent.Damping.x = Mathf.Lerp(cinemachineComponent.Damping.x, targetDamping, dampingSpeed * Time.deltaTime);
+            cinemachineComponent.Damping.x = Mathf.Lerp(cinemachineComponent.Damping.x, 0f, dampingSpeed * Time.deltaTime);
             yield return null;
         }
 
