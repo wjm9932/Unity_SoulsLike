@@ -71,9 +71,11 @@ public class Enemy : LivingEntity
     {
         base.Die();
 
-        Destroy(this.gameObject, 3f);
+        navMesh.enabled = false;
+        hpBar.gameObject.SetActive(false);
         GetComponent<Collider>().enabled = false;
         DropItem();
+        Destroy(this.gameObject, 3f);
     }
     protected void DropItem()
     {
