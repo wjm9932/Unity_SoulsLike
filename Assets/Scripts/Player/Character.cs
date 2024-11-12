@@ -73,7 +73,7 @@ public class Character : LivingEntity
     public Inventory inventory { get; private set; }
     public PlayerQuestEvent playerEvents { get; private set; }
     public BuffManager playerBuff { get; private set; }
-
+    public bool isInDungeon { get; private set; }
     public float buffDamage { get; set; }
     public float buffStaminaPercent { get; set; }
 
@@ -326,12 +326,13 @@ public class Character : LivingEntity
         {
             case FootStepSoundType.TILE:
                 currentFootStepClips = tileFootStepClips;
+                isInDungeon = true;
                 break;
             case FootStepSoundType.GROUND:
                 currentFootStepClips = groundFootStepClips;
+                isInDungeon = false;
                 break;
         }
-
     }
 
     private void PlayFootStepSound(AnimationEvent ev)

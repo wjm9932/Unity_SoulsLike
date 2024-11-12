@@ -23,7 +23,7 @@ public class KillSkeletonQuestStep : QuestStep
     void Start()
     {
         questOwner.GetComponent<PlayerQuestEvent>().OnKill += KillSkeleton;
-        status = "Kill Skeleton: " + currentKillCount + "/" + targetKillCount;
+        status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
     }
 
     private void KillSkeleton(EntityType type)
