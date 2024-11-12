@@ -2666,6 +2666,7 @@ MonoBehaviour:
   dropItem: []
   hpBar: {fileID: 3106663348491083786}
   lockOnIndicator: {fileID: 4616444875287741867}
+  minimapIcon: {fileID: 176489057232991469}
   footStepClips:
   - {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
   - {fileID: 8300000, guid: 203ac8b6f07070e4f93f1c1a6fff06c3, type: 3}
@@ -4123,6 +4124,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44f66697794a61645b87a4d53ecf92aa, type: 3}
+--- !u!1 &176489057232991469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4315584565847298765, guid: 44f66697794a61645b87a4d53ecf92aa, type: 3}
+  m_PrefabInstance: {fileID: 4149797199504549408}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &176489057232991471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4315584565847298767, guid: 44f66697794a61645b87a4d53ecf92aa, type: 3}

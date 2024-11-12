@@ -19,6 +19,10 @@ public class Enemy : LivingEntity
     [Header("Lock On Indicator")]
     public Image lockOnIndicator;
 
+    [Header("Minimap Icon")]
+    [SerializeField] private GameObject minimapIcon;
+
+
     public float viewDistance { get; protected set; }
     public float fieldOfView { get; protected set; }
     public float trackingStopDistance { get; protected set; }
@@ -72,6 +76,7 @@ public class Enemy : LivingEntity
         base.Die();
 
         navMesh.enabled = false;
+        minimapIcon.SetActive(false);
         hpBar.gameObject.SetActive(false);
         GetComponent<Collider>().enabled = false;
         DropItem();
