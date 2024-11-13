@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
+  m_Name: KillKingSkeletonQuest
+  m_EditorClassIdentifier: 
+  id: KillKingSkeletonQuest
+  displayName: Kill King Skeleton!
+  initialState: 1
+  requirementsNotMetDialogue: 
+  doneDialogue: Thank you for your help!
+  onStartDialogue: Please kill the king skeleton and get back my temple!
+  onFinishDialogue: 
+  onFailFinishDialogue: Not enough space!
+  questPrerequisites: []
+  questStepPrefabs:
+  - stepPrefabs:
+    - {fileID: 7172216532091138447, guid: b476fa3d15621204093b43d156dde540, type: 3}
+  targetItem: []
+  rewards: []

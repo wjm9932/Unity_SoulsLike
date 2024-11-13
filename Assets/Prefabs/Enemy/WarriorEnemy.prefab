@@ -129,6 +129,7 @@ MonoBehaviour:
   - {fileID: 4355292216650409300, guid: 0b164067c57557247990105930882c9f, type: 3}
   hpBar: {fileID: 9163491590667176047}
   lockOnIndicator: {fileID: 1452057874665876942}
+  minimapIcon: {fileID: 981949153044169300}
   footStepClips:
   - {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
   - {fileID: 8300000, guid: 203ac8b6f07070e4f93f1c1a6fff06c3, type: 3}
@@ -3162,7 +3163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7069344119085881657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4214,6 +4215,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44f66697794a61645b87a4d53ecf92aa, type: 3}
+--- !u!1 &981949153044169300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4315584565847298765, guid: 44f66697794a61645b87a4d53ecf92aa, type: 3}
+  m_PrefabInstance: {fileID: 3910422730881437849}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &981949153044169302 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4315584565847298767, guid: 44f66697794a61645b87a4d53ecf92aa, type: 3}

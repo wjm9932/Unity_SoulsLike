@@ -22,8 +22,10 @@ public class Character : LivingEntity
 
     [SerializeField] private float maxStamina;
 
-    [Header("Quest")]
+    [Header("Inventory")]
     public GameObject inventoryUI;
+
+    [Header("Quest")]
     public GameObject questLogUI;
     public GameObject questDialogueUI;
 
@@ -51,7 +53,9 @@ public class Character : LivingEntity
 
 
     [Header("Player FootStep Sound")]
-    [SerializeField] private AudioClip[] footStepClips;
+    [SerializeField] private List<AudioClip> tileFootStepClips = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> groundFootStepClips = new List<AudioClip>();
+    private List<AudioClip> currentFootStepClips = new List<AudioClip>();
     private AudioSource playerFootStepSoundSource;
 
     [Space]
@@ -66,11 +70,10 @@ public class Character : LivingEntity
     public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
     public UIStateMachine uiStateMachine { get; private set; }
 
-
     public Inventory inventory { get; private set; }
     public PlayerQuestEvent playerEvents { get; private set; }
     public BuffManager playerBuff { get; private set; }
-
+    public bool isInDungeon { get; private set; }
     public float buffDamage { get; set; }
     public float buffStaminaPercent { get; set; }
 
@@ -117,6 +120,7 @@ public class Character : LivingEntity
     protected override void Awake()
     {
         base.Awake();
+        currentFootStepClips = groundFootStepClips;
         originCameraTrasform = cameraTransform.transform.localPosition;
         staminaRecoverCoolTime = 0f;
         canBeDamaged = true;
@@ -316,24 +320,27 @@ public class Character : LivingEntity
         }
     }
 
+    public void ChangeFootStepSound(FootStepSoundType type)
+    {
+        switch (type)
+        {
+            case FootStepSoundType.TILE:
+                currentFootStepClips = tileFootStepClips;
+                isInDungeon = true;
+                break;
+            case FootStepSoundType.GROUND:
+                currentFootStepClips = groundFootStepClips;
+                isInDungeon = false;
+                break;
+        }
+    }
+
     private void PlayFootStepSound(AnimationEvent ev)
     {
         if (ev.animatorClipInfo.weight >= 0.5f)
         {
-            int index = Random.Range(0, footStepClips.Length);
-            playerFootStepSoundSource.PlayOneShot(footStepClips[index]);
+            int index = Random.Range(0, currentFootStepClips.Count);
+            playerFootStepSoundSource.PlayOneShot(currentFootStepClips[index]);
         }
     }
-
-    /************************************Test********************************************************/
-    private void CloseQuestWindow()
-    {
-        Debug.Log("Close QuestWindow");
-    }
-
-    private void CloseInventoryWindow()
-    {
-        Debug.Log("Close InventoryWindow");
-    }
-    /************************************Test********************************************************/
 }
