@@ -16,7 +16,7 @@ public class KillSkeletonQuestStep : QuestStep
     }
     private void Awake()
     {
-        status = "Objective: Kill " + targetKillCount + " Skeletons\n";
+        status = "Objective: Kill " + targetKillCount + " " + targetType.ToString() + " Skeletons\n";
     }
 
     // Start is called before the first frame update

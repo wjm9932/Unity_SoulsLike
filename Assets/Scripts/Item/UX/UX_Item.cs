@@ -22,14 +22,13 @@ namespace UX
         public GameObject icon;
         [HideInInspector]
         public int triggerCount;
-        [HideInInspector]
-        public int numOfItem;
+
+        [SerializeField] public int numOfItem = 1;
 
 
         void Awake()
         {
             triggerCount = 0;
-            numOfItem = 1;
         }
         private void OnTriggerEnter(Collider other)
         {
