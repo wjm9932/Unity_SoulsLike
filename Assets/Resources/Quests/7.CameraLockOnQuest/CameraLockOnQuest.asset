@@ -31,5 +31,7 @@ MonoBehaviour:
   questStepPrefabs:
   - stepPrefabs:
     - {fileID: 8301076691625764753, guid: a9d2365cccc0daf42af9465410484610, type: 3}
+  - stepPrefabs:
+    - {fileID: 5681209154621276382, guid: 8b4875e562acd0d4ba562220b7f11c35, type: 3}
   targetItem: []
   rewards: []

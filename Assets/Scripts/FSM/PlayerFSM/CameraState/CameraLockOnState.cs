@@ -176,6 +176,8 @@ public class CameraLockOnState : CameraState
                 target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(false);
                 closestTarget.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(true);
                 target = closestTarget;
+                
+                csm.owner.playerEvents.ChangeTarget();
             }
         }
         else if(Mathf.Abs(mouseDir) <= 1f)

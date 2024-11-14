@@ -31,7 +31,7 @@ public class KillSkeletonQuestStep : QuestStep
         if(type == targetType)
         {
             ++currentKillCount;
-            status = "Kill Skeleton: " + currentKillCount + "/" + targetKillCount;
+            status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
 
             if (currentKillCount >= targetKillCount)
             {
