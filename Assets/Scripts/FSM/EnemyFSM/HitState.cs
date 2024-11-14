@@ -16,9 +16,9 @@ namespace EnemyFSM
         {
             isDone = false;
             sm.owner.canAttack = false;
-            sm.owner.animator.SetBool("IsHit", true);
             sm.owner.canBeDamaged = false;
             sm.owner.navMesh.isStopped = true;
+            sm.owner.animator.SetBool("IsHit", true);
             if(sm.owner.attackSound != null)
             {
                 sm.owner.attackSound.GetComponent<AudioSource>().Stop();

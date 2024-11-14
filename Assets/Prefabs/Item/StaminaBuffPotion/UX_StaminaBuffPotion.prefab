@@ -116,7 +116,7 @@ MonoBehaviour:
   _dropChace: 30
   icon: {fileID: 4078479804993434640, guid: a671d3140b8d41548a2bb17c07b26863, type: 3}
   triggerCount: 0
-  numOfItem: 0
+  numOfItem: 1
 --- !u!1001 &6479483730804932203
 PrefabInstance:
   m_ObjectHideFlags: 0
