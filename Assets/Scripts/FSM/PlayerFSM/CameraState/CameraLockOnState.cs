@@ -82,11 +82,6 @@ public class CameraLockOnState : CameraState
         targetRotation = targetRotation * downRotation;
 
         csm.owner.cameraTransform.rotation = Quaternion.Slerp(csm.owner.cameraTransform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-
-        if (Quaternion.Angle(csm.owner.cameraTransform.rotation, targetRotation) < 1f)
-        {
-            csm.owner.cameraTransform.rotation = targetRotation;
-        }
     }
 
     private GameObject SetTarget()
