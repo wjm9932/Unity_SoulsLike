@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healAmount: 10
   totalHealDuration: 1.5
-  healDuration: 0.5
+  healDuration: 0.2
 --- !u!82 &2150421196353053988
 AudioSource:
   m_ObjectHideFlags: 0
