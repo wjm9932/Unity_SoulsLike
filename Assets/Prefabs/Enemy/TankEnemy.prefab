@@ -2663,7 +2663,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   eyeTransform: {fileID: 3510701444229809461}
-  dropItem: []
+  dropItem:
+  - {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
+  - {fileID: 4359170919485928153, guid: 78f210f127df91b4a86d8176f2eaf054, type: 3}
+  - {fileID: 4355292216650409300, guid: 0b164067c57557247990105930882c9f, type: 3}
   hpBar: {fileID: 3106663348491083786}
   lockOnIndicator: {fileID: 4616444875287741867}
   minimapIcon: {fileID: 176489057232991469}

@@ -18,7 +18,7 @@ public class DestroyTextInTime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(FadeOutAndDestroy(duration - 1f));
+        StartCoroutine(FadeOutAndDestroy(duration - 1.3f));
     }
 
     // Update is called once per frame
