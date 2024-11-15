@@ -15,7 +15,7 @@ public class CollectHealthPotionQuestStep : QuestStep
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onCollect -= CollectHealthPotion;
+            questOwner.GetComponent<PlayerEvent>().onCollect -= CollectHealthPotion;
         }
     }
     private void Awake()
@@ -25,7 +25,7 @@ public class CollectHealthPotionQuestStep : QuestStep
     }
     private void Start()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectHealthPotion;
+        questOwner.GetComponent<PlayerEvent>().onCollect += CollectHealthPotion;
        
         currentHealthPotionCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>());
         status = "HealthPotion Collected: " + currentHealthPotionCount + "/" + targetHealthPotionCount;

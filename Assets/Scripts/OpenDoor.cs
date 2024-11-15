@@ -23,7 +23,7 @@ public class OpenDoor : MonoBehaviour
     {
         if (targetQuest.id == quest.info.id)
         {
-            this.gameObject.transform.rotation = Quaternion.identity;
+            this.transform.rotation *= Quaternion.Euler(0, 90, 0);
             minimapIcon.SetActive(false);
             Destroy(this);
         }

@@ -11,7 +11,7 @@ public class FindHealthPotionQuestStep : QuestStep
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onCollect -= FindHealthPotion;
+            questOwner.GetComponent<PlayerEvent>().onCollect -= FindHealthPotion;
         }
     }
     private void Awake()
@@ -21,7 +21,7 @@ public class FindHealthPotionQuestStep : QuestStep
 
     void Start()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onCollect += FindHealthPotion;
+        questOwner.GetComponent<PlayerEvent>().onCollect += FindHealthPotion;
         status = "Find a Health Potion";
 
         if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
@@ -36,7 +36,7 @@ public class FindHealthPotionQuestStep : QuestStep
             if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
             {
                 UpdateQuestStepState(QuestStepState.FINISHED);
-                questOwner.GetComponent<PlayerQuestEvent>().onCollect -= FindHealthPotion;
+                questOwner.GetComponent<PlayerEvent>().onCollect -= FindHealthPotion;
             }
         }
     }

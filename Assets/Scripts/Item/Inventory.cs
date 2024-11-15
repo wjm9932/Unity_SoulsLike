@@ -15,11 +15,11 @@ public class Inventory : MonoBehaviour
     private List<GameObject> inventorySlot = new List<GameObject>(36);
     private Dictionary<string, UI.UI_Item> itemContainer = new Dictionary<string, UI.UI_Item>(36);
     private PointerEventData pointerEventData;
-    private PlayerQuestEvent playerEvent;
+    private PlayerEvent playerEvent;
 
     private void Awake()
     {
-        playerEvent = GetComponent<PlayerQuestEvent>();
+        playerEvent = GetComponent<PlayerEvent>();
     }
 
     public UsableItem quickSlot

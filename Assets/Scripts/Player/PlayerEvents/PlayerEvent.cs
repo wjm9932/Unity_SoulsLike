@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerQuestEvent : MonoBehaviour
+public class PlayerEvent : MonoBehaviour
 {
     public event Action<string> onCollect;
     public event Action<string> onUse;
@@ -14,6 +14,8 @@ public class PlayerQuestEvent : MonoBehaviour
     public event Action onDodge;
     public event Action onCameraLockOn;
     public event Action onChangeTarget;
+
+    public event Action onUnlock;
 
     public void UpdateItemCount(string item)
     {
@@ -82,6 +84,14 @@ public class PlayerQuestEvent : MonoBehaviour
         if(onChangeTarget != null)
         {
             onChangeTarget();
+        }
+    }
+
+    public void Unlock()
+    {
+        if(onUnlock != null)
+        {
+            onUnlock();
         }
     }
 }

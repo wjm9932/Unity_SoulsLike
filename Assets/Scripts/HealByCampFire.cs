@@ -49,7 +49,7 @@ public class HealByCampFire : MonoBehaviour
         {
             yield return new WaitForSeconds(totalHealDuration - healDuration);
 
-            character.GetComponent<PlayerQuestEvent>().Visit(this.gameObject.tag);
+            character.GetComponent<PlayerEvent>().Visit(this.gameObject.tag);
 
             elapsedTime = 0f;
             while (elapsedTime < healDuration)

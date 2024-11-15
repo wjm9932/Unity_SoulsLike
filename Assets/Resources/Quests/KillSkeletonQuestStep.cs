@@ -11,7 +11,7 @@ public class KillSkeletonQuestStep : QuestStep
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().OnKill -= KillSkeleton;
+            questOwner.GetComponent<PlayerEvent>().OnKill -= KillSkeleton;
         }
     }
     private void Awake()
@@ -22,7 +22,7 @@ public class KillSkeletonQuestStep : QuestStep
     // Start is called before the first frame update
     void Start()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().OnKill += KillSkeleton;
+        questOwner.GetComponent<PlayerEvent>().OnKill += KillSkeleton;
         status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
     }
 

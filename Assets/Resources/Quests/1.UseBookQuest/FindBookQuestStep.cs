@@ -11,7 +11,7 @@ public class FindBookQuestStep : QuestStep
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onCollect -= FindBook;
+            questOwner.GetComponent<PlayerEvent>().onCollect -= FindBook;
         }
     }
     private void Awake()
@@ -21,7 +21,7 @@ public class FindBookQuestStep : QuestStep
 
     void Start()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onCollect += FindBook;
+        questOwner.GetComponent<PlayerEvent>().onCollect += FindBook;
         status = "Find a Book";
 
         if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)

@@ -7,7 +7,7 @@ using Cinemachine;
 using UnityEngine.TextCore.Text;
 using UnityEditorInternal;
 
-[RequireComponent(typeof(PlayerQuestEvent))]
+[RequireComponent(typeof(PlayerEvent))]
 [RequireComponent(typeof(Inventory))]
 public class Character : LivingEntity
 {
@@ -71,7 +71,7 @@ public class Character : LivingEntity
     public UIStateMachine uiStateMachine { get; private set; }
 
     public Inventory inventory { get; private set; }
-    public PlayerQuestEvent playerEvents { get; private set; }
+    public PlayerEvent playerEvents { get; private set; }
     public BuffManager playerBuff { get; private set; }
     public bool isInDungeon { get; private set; }
     public float buffDamage { get; set; }
@@ -138,7 +138,7 @@ public class Character : LivingEntity
         playerHeight = GetComponent<CapsuleCollider>().height;
         input = GetComponent<PlayerInput>();
         inventory = GetComponent<Inventory>();
-        playerEvents = GetComponent<PlayerQuestEvent>();
+        playerEvents = GetComponent<PlayerEvent>();
         playerBuff = GetComponent<BuffManager>();
         playerFootStepSoundSource = GetComponent<AudioSource>();
 
@@ -162,6 +162,11 @@ public class Character : LivingEntity
         }
 
         CameraStateMachine.Instance.Update();
+
+        if(input.isInteracting == true)
+        {
+            playerEvents.Unlock();
+        }
     }
     private void FixedUpdate()
     {

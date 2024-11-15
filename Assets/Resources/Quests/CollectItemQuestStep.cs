@@ -17,7 +17,7 @@ public class CollectItemQuestStep : QuestStep
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onCollect -= CollectItem;
+            questOwner.GetComponent<PlayerEvent>().onCollect -= CollectItem;
         }
     }
     private void Awake()
@@ -32,7 +32,7 @@ public class CollectItemQuestStep : QuestStep
     }
     private void Start()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onCollect += CollectItem;
+        questOwner.GetComponent<PlayerEvent>().onCollect += CollectItem;
 
         currentItemCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>());
         status = item.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;

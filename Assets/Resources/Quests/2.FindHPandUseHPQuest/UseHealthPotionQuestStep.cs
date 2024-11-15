@@ -14,7 +14,7 @@ public class UseHealthPotionQuestStep : QuestStep
     // Start is called before the first frame update
     void Start()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onUse += UseHealthPotion;
+        questOwner.GetComponent<PlayerEvent>().onUse += UseHealthPotion;
         status = "Use a Health Potion";
     }
 
@@ -31,7 +31,7 @@ public class UseHealthPotionQuestStep : QuestStep
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onUse -= UseHealthPotion;
+            questOwner.GetComponent<PlayerEvent>().onUse -= UseHealthPotion;
         }
     }
 }

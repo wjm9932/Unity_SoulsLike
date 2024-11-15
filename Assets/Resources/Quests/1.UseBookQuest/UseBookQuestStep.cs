@@ -14,7 +14,7 @@ public class UseBookQuestStep : QuestStep
     // Start is called before the first frame update
     void Start()
     {
-        questOwner.GetComponent<PlayerQuestEvent>().onUse += UseBook;
+        questOwner.GetComponent<PlayerEvent>().onUse += UseBook;
         status = "Use a Book";
     }
 
@@ -24,7 +24,7 @@ public class UseBookQuestStep : QuestStep
         if (itemName == targetItem.GetComponent<UX.UX_Item>().itemName)
         {
             UpdateQuestStepState(QuestStepState.FINISHED);
-            questOwner.GetComponent<PlayerQuestEvent>().onUse -= UseBook;
+            questOwner.GetComponent<PlayerEvent>().onUse -= UseBook;
         }
     }
 
@@ -32,7 +32,7 @@ public class UseBookQuestStep : QuestStep
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onUse -= UseBook;
+            questOwner.GetComponent<PlayerEvent>().onUse -= UseBook;
         }
     }
 }

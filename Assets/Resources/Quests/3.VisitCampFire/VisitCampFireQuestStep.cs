@@ -17,14 +17,14 @@ public class VisitCampFireQuestStep : QuestStep
         status = "Visit the campfire";
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onVisit += VisitCampFire;
+            questOwner.GetComponent<PlayerEvent>().onVisit += VisitCampFire;
         }
     }
     private void OnDisable()
     {
         if (questOwner != null)
         {
-            questOwner.GetComponent<PlayerQuestEvent>().onVisit -= VisitCampFire;
+            questOwner.GetComponent<PlayerEvent>().onVisit -= VisitCampFire;
         }
     }
     private void VisitCampFire(string place)
