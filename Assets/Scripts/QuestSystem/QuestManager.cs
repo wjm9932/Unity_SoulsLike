@@ -140,6 +140,7 @@ public class QuestManager : MonoBehaviour
         else
         {
             ChangeQuestState(quest, QuestState.CAN_FINISH);
+            TextManager.Instance.PlayNotificationText(quest.info.displayName + " can be completed!", 3f);
         }
 
     }

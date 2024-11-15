@@ -18,7 +18,7 @@ public class DestroyTextInTime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(FadeOutAndDestroy(duration));
+        StartCoroutine(FadeOutAndDestroy(duration - 1f));
     }
 
     // Update is called once per frame
@@ -29,6 +29,8 @@ public class DestroyTextInTime : MonoBehaviour
 
     IEnumerator FadeOutAndDestroy(float duration)
     {
+        yield return new WaitForSeconds(1f);
+
         float elapsedTime = 0f;
         float startAlpha = text.color.a;
 
@@ -43,5 +45,10 @@ public class DestroyTextInTime : MonoBehaviour
 
         OnDestroy?.Invoke();
         Destroy(gameObject);
+    }
+
+    public void SetDuration(float duration)
+    {
+        this.duration = duration;
     }
 }

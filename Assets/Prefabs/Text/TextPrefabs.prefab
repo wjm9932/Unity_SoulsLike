@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1063961605903607206}
   - component: {fileID: 1321648029690246880}
   m_Layer: 5
-  m_Name: GetOrDropItemText
+  m_Name: TextPrefabs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
