@@ -15180,6 +15180,9 @@ MonoBehaviour:
   - effectType: 1
     audioClips:
     - {fileID: 8300000, guid: 0bc7ccc67a7020048a7171b313ed75f5, type: 3}
+  - effectType: 3
+    audioClips:
+    - {fileID: 8300000, guid: c413e72a08791e840819201e642a6a93, type: 3}
 --- !u!1001 &900981971
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -35,7 +35,8 @@ public class SoundManager : MonoBehaviour
     {
         CLICK,
         DROP,
-        QUEST_DIALOGUE
+        QUEST_DIALOGUE,
+        QUEST_COMPLETED,
     }
 
 

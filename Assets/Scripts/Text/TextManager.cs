@@ -88,17 +88,7 @@ public class TextManager : MonoBehaviour
 
         notificationTextQueue.Enqueue(textObject.gameObject);
     }
-    public void PlayNotificationText(string text, float duration)
-    {
-        CheckNotificationTextQueueCount();
 
-        var textObject = Instantiate(textPrefabs, notificationPanel.transform);
-        textObject.GetComponent<DestroyTextInTime>().SetDuration(duration); 
-        textObject.text = text;
-        textObject.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += () => notificationTextQueue.Dequeue();
-
-        notificationTextQueue.Enqueue(textObject.gameObject);
-    }
 
     private void CheckNotificationTextQueueCount()
     {
