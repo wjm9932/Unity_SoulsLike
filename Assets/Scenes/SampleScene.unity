@@ -4030,6 +4030,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 423196543672732652, guid: 755770fee8c3cda4c9cf75c23dacccac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1050657780269650262, guid: 755770fee8c3cda4c9cf75c23dacccac, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -36455,6 +36459,10 @@ PrefabInstance:
       propertyPath: tileFootStepClips.Array.data[7]
       value: 
       objectReference: {fileID: 8300000, guid: d15f7338d693f0343843a6b9096d27f6, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: lockOnCameraObstacleLayer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: groundFootStepClips.Array.data[0]
       value: 
