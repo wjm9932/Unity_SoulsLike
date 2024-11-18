@@ -103,7 +103,7 @@ public class CameraLockOnState : CameraState
             {
                 Vector3 dir = nearByTargets[i].transform.position - csm.owner.camEyePos.position;
 
-                if (Physics.Raycast(csm.owner.camEyePos.position, dir, dir.magnitude, csm.owner.lockOnCameraTargetLayer) == true)
+                if (Physics.Raycast(csm.owner.camEyePos.position, dir, dir.magnitude, csm.owner.lockOnCameraObstacleLayer) == true)
                 {
                     continue;
                 }
@@ -146,9 +146,9 @@ public class CameraLockOnState : CameraState
                     continue;
                 }
 
-                Vector3 dir = (nearByTargets[i].transform.position - csm.owner.camEyePos.position).normalized;
+                Vector3 dir = (nearByTargets[i].transform.position - csm.owner.camEyePos.position);
 
-                if (Physics.Raycast(csm.owner.camEyePos.position, dir, dir.magnitude, csm.owner.lockOnCameraTargetLayer) == true)
+                if (Physics.Raycast(csm.owner.camEyePos.position, dir, dir.magnitude, csm.owner.lockOnCameraObstacleLayer) == true)
                 {
                     continue;
                 }
@@ -204,7 +204,7 @@ public class CameraLockOnState : CameraState
         Vector3 direction = (target.transform.position - cameraPosition).normalized;
         float distanceToTarget = Vector3.Distance(cameraPosition, target.transform.position);
 
-        if (Physics.Raycast(cameraPosition, direction, distanceToTarget, csm.owner.lockOnCameraTargetLayer) == true)
+        if (Physics.Raycast(cameraPosition, direction, distanceToTarget, csm.owner.lockOnCameraObstacleLayer) == true)
         {
             if (!isCollisionDetected)
             {

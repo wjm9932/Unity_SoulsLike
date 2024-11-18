@@ -42,7 +42,7 @@ public class Character : LivingEntity
     [Header("Layer Mask")]
     public LayerMask whatIsGround;
     public LayerMask enemyMask;
-    public LayerMask lockOnCameraTargetLayer;
+    public LayerMask lockOnCameraObstacleLayer;
 
     [Header("Movement")]
     public float walkSpeed;
