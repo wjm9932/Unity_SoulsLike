@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using static EffectManager;
-using static TextManager;
-using static UnityEditor.PlayerSettings;
 
 public class TextManager : MonoBehaviour
 {

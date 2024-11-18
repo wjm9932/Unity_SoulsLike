@@ -4,8 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
-using UnityEngine.TextCore.Text;
-using UnityEditorInternal;
 
 [RequireComponent(typeof(PlayerEvent))]
 [RequireComponent(typeof(Inventory))]
