@@ -32,6 +32,11 @@ public class Locker : MonoBehaviour
             minimapIcon.SetActive(false);
             Destroy(this);
         }
+        else
+        {
+            TextManager.Instance.PlayNotificationText("Key is not found");
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ALERT, 0.2f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
