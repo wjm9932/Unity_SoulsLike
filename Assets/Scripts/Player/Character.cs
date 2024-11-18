@@ -130,7 +130,7 @@ public class Character : LivingEntity
     }
     protected override void Start()
     {
-        health = 100f;
+        health = 30f;
         stamina = maxStamina;
 
         mainCamera = Camera.main;

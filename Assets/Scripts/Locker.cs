@@ -17,7 +17,7 @@ public class Locker : MonoBehaviour
             player.playerEvents.onUnlock -= unlockAction;
             player.GetComponent<InteractionIndicator>().Hide();
 
-            StartCoroutine(RotateOverTime(Quaternion.Euler(0, 90, 0), 2f));
+            StartCoroutine(RotateOverTime(Quaternion.Euler(0, 90, 0), 1.5f));
         }
         else
         {
