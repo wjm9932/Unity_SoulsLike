@@ -12,12 +12,13 @@ public class Locker : MonoBehaviour
 
     private void Unlock(Character player)
     {
-        if (player.inventory.GetTargetItemCountFromInventory(key.GetComponent<UX.UX_Item>()) >= 1)
+        if (player.inventory.RemoveTargetItemFromInventory(key.GetComponent<UX.UX_Item>(), 1) == true)
         {
             player.playerEvents.onUnlock -= unlockAction;
             player.GetComponent<InteractionIndicator>().Hide();
 
             StartCoroutine(RotateOverTime(Quaternion.Euler(0, 90, 0), 1.5f));
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.DOOR_OPEN, 0.5f);
         }
         else
         {

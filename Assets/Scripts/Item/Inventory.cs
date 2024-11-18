@@ -133,6 +133,11 @@ public class Inventory : MonoBehaviour
             Debug.LogError("targetItem has no UX.UX_Item Component");
             return false;
         }
+        
+        if (itemContainer.ContainsKey(targetItem.itemName) == false)
+        {
+            return false;
+        }
 
         UI.UI_Item item = itemContainer[targetItem.itemName].GetComponent<UI.UI_Item>();
         if (item.count < count)

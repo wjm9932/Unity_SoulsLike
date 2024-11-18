@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
         SHOT_ARROW,
         ENEMY_HIT,
         ENEMY_DIE, 
+        DOOR_OPEN,
     }
 
     public enum UISoundEffectType
