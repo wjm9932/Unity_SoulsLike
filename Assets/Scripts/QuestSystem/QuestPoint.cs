@@ -60,16 +60,16 @@ public class QuestPoint : MonoBehaviour
         {
             if (QuestManager.Instance.FinishQuest(quests[questIndex].quest.id) == true)
             {
-                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex - 1].quest.displayName, quests[questIndex - 1].quest.onFinishDialogue);
+                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].quest.displayName, quests[questIndex].quest.onFinishDialogue);
             }
             else
             {
-                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex - 1].quest.displayName, quests[questIndex - 1].quest.onFailFinishDialogue);
+                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].quest.displayName, quests[questIndex].quest.onFailFinishDialogue);
             }
         }
         else if (currentQuestState == QuestState.FINISHED)
         {
-            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex - 1].quest.displayName, quests[questIndex - 1].quest.doneDialogue);
+            QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].quest.displayName, quests[questIndex].quest.doneDialogue);
         }
         else if (currentQuestState == QuestState.IN_PROGRESS && quests[questIndex].isFinishPoint == true)
         {

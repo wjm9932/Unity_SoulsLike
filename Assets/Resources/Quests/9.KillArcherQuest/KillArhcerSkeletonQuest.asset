@@ -18,8 +18,8 @@ MonoBehaviour:
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
-  onStartDialogue: Kill the archer skeleton, collect their skull, and bring it to
-    the NPC in the next room
+  onStartDialogue: Kill the archer skeletons, collect their skulls, and deliver them
+    to the NPC in the next room
   onFinishDialogue: 'Thank you for killing skeletons and collecting skull!
 
     Here

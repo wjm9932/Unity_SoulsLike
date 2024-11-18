@@ -1210,7 +1210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1349711676762068918, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1349711676762068918, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1850,7 +1850,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &120663072
 PrefabInstance:
@@ -29509,7 +29509,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1774213747 stripped
 Transform:
@@ -31722,11 +31722,11 @@ PrefabInstance:
     - target: {fileID: 8842577014909471479, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: quests.Array.data[1].quest
       value: 
-      objectReference: {fileID: 11400000, guid: a38edb19f45da084490ec1e4fa9cd92b, type: 2}
+      objectReference: {fileID: 11400000, guid: 400ad2d5a6c243f4c8811381bcb97c64, type: 2}
     - target: {fileID: 8842577014909471479, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: quests.Array.data[2].quest
       value: 
-      objectReference: {fileID: 11400000, guid: 400ad2d5a6c243f4c8811381bcb97c64, type: 2}
+      objectReference: {fileID: 11400000, guid: a38edb19f45da084490ec1e4fa9cd92b, type: 2}
     - target: {fileID: 8842577014909471479, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: quests.Array.data[3].quest
       value: 
@@ -35601,7 +35601,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1349711676762068918, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1349711676762068918, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36410,7 +36410,8 @@ PrefabInstance:
       propertyPath: targetQuest
       value: 
       objectReference: {fileID: 11400000, guid: d4cb7c66b21dde54c80b69ad33276cbe, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7810530398286797360, guid: 18f4b77d5d4941445b9a25e71fbf6f00, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 18f4b77d5d4941445b9a25e71fbf6f00, type: 3}
 --- !u!1001 &3702315720383831814
 PrefabInstance:
