@@ -22,26 +22,8 @@ public class TextManager : MonoBehaviour
     private Queue<GameObject> notificationTextQueue = new Queue<GameObject>();
     private const int notificationTextMaxCount = 4;
 
-    [SerializeField]
-    private TextMeshPro damageText;
+    [SerializeField] private GameObject notificationPanel;
 
-    [SerializeField]
-    private TextMeshProUGUI hpIsFullText;
-
-    [SerializeField]
-    private TextMeshProUGUI inventoryIsFullText;
-
-    [SerializeField]
-    private TextMeshProUGUI textPrefabs;
-
-    [SerializeField]
-    private GameObject notificationPanel;
-
-    public enum DisplayText
-    {
-        HP_IS_FULL,
-        INVENTORY_IS_FUll,
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,33 +39,18 @@ public class TextManager : MonoBehaviour
 
     public void PlayDamageText(Vector3 pos, Transform parent, float damage)
     {
-        var text = Instantiate(damageText, pos, Quaternion.identity, parent);
-        text.text = damage.ToString();
-
+        var text = ObjectPoolManager.Instance.GetPoolableObject(ObjectPoolManager.ObjectType.DAMAGE_TEXT);
+        text.GetComponent<IPoolableObject>().Initialize(pos, Quaternion.identity, parent);
+        text.GetComponent<TextMeshPro>().text = damage.ToString();
     }
-    public void PlayNotificationText(DisplayText textType)
-    {
-        var displayText = GetDisplayText(textType);
 
-        if(displayText == null)
-        {
-            Debug.LogError("Notification text is null");
-            return;
-        }
-
-        CheckNotificationTextQueueCount();
-
-        var text = Instantiate(displayText, notificationPanel.transform).gameObject;
-        text.GetComponent<DestroyTextInTime>().OnDestroy += () => notificationTextQueue.Dequeue();
-
-        notificationTextQueue.Enqueue(text);
-    }
     public void PlayNotificationText(string text)
     {
         CheckNotificationTextQueueCount();
 
-        var textObject = Instantiate(textPrefabs, notificationPanel.transform);
-        textObject.text = text;
+        var textObject = ObjectPoolManager.Instance.GetPoolableObject(ObjectPoolManager.ObjectType.NOTIFICATION_TEXT);
+        textObject.GetComponent<IPoolableObject>().Initialize(Vector3.zero, Quaternion.identity, notificationPanel.transform);
+        textObject.GetComponent<TextMeshProUGUI>().text = text;
         textObject.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += () => notificationTextQueue.Dequeue();
 
         notificationTextQueue.Enqueue(textObject.gameObject);
@@ -95,21 +62,7 @@ public class TextManager : MonoBehaviour
         if (notificationTextQueue.Count >= notificationTextMaxCount)
         {
             var textToRemove = notificationTextQueue.Dequeue();
-            Destroy(textToRemove.gameObject);
-        }
-    }
-
-    TextMeshProUGUI GetDisplayText(DisplayText textType)
-    {
-
-        switch (textType)
-        {
-            case DisplayText.HP_IS_FULL:
-                return hpIsFullText;
-            case DisplayText.INVENTORY_IS_FUll:
-                return inventoryIsFullText;
-            default:
-                return null;
+            textToRemove.GetComponent<IPoolableObject>().Release();
         }
     }
 }

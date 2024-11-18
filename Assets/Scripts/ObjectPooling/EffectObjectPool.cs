@@ -18,8 +18,7 @@ public class EffectObjectPool : MonoBehaviour, IPoolableObject
     {
         if (!particle.isPlaying && !particle.IsAlive())
         {
-            transform.parent = null;
-            pool.Release(this.gameObject);
+            Release();
         }
     }
     public void Initialize(Vector3 position, Quaternion rotation, Transform parent = null)
@@ -37,5 +36,10 @@ public class EffectObjectPool : MonoBehaviour, IPoolableObject
     public void SetPool(IObjectPool<GameObject> pool)
     {
         this.pool = pool;
+    }
+    public void Release()
+    {
+        transform.parent = null;
+        pool.Release(this.gameObject);
     }
 }

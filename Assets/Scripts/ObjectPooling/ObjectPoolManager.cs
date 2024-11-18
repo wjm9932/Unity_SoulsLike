@@ -14,6 +14,8 @@ public class ObjectPoolManager : MonoBehaviour
         ARROW,
         EFFECT,
         SOUND,
+        NOTIFICATION_TEXT,
+        DAMAGE_TEXT,
     }
 
     [System.Serializable]

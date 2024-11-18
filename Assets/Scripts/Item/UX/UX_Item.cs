@@ -45,7 +45,7 @@ namespace UX
                     }
                     else
                     {
-                        TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
+                        TextManager.Instance.PlayNotificationText("Inventory is full");
                     }
                 }
                 else

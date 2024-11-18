@@ -23,9 +23,7 @@ public class SoundObjectPool : MonoBehaviour, IPoolableObject
                 removeAction();
                 removeAction = null;
             }
-
-            transform.parent = null;
-            pool.Release(this.gameObject);
+            Release();
         }
     }
     public void Initialize(Vector3 position, Quaternion rotation, Transform parent = null)
@@ -42,5 +40,12 @@ public class SoundObjectPool : MonoBehaviour, IPoolableObject
     public void SetPool(IObjectPool<GameObject> pool)
     {
         this.pool = pool;
+    }
+
+
+    public void Release()
+    {
+        pool.Release(this.gameObject);
+        transform.parent = null;
     }
 }

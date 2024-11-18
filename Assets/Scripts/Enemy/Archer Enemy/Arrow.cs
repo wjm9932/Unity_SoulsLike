@@ -76,6 +76,11 @@ public class Arrow : MonoBehaviour, IPoolableObject
     private IEnumerator Release(float delay)
     {
         yield return new WaitForSeconds(delay);
+        Release();
+    }
+
+    public void Release()
+    {
         transform.SetParent(null);
         pool.Release(this.gameObject);
     }
