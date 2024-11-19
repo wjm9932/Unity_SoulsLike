@@ -220,13 +220,6 @@ public class QuestManager : MonoBehaviour
 
     private Quest GetQuestById(string id)
     {
-        //Quest quest = questMap[id];
-        //if (quest == null)
-        //{
-        //    //Debug.LogError("ID not found in the Quest Map: " + id);
-        //}
-        //return quest;
-
         if (questMap.ContainsKey(id) == true)
         {
             return questMap[id];
@@ -239,26 +232,58 @@ public class QuestManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        //foreach (Quest quest in questMap.Values)
-        //{
-        //    SaveQuest(quest);
-        //}
+        foreach (Quest quest in questMap.Values)
+        {
+            SaveQuest(quest);
+        }
 
-        List<Quest> questList = new List<Quest>(questMap.Values);
+        //List<Quest> questList = new List<Quest>(questMap.Values);
 
-        Quest secondQuest = questList[1]; // ? ?? ??? ????
-        SaveQuest(secondQuest); // ? ?? ??? ??
+        //Quest secondQuest = questList[5];
+        //SaveQuest(secondQuest);
     }
     private void SaveQuest(Quest quest)
     {
-        QuestData questData = quest.GetQuestSaveData();
+        //QuestData questData = quest.GetQuestSaveData();
 
-        string json = JsonUtility.ToJson(questData, true);
+        //string json = JsonUtility.ToJson(questData, true);
 
-        // ?? ?? ??
-        string filePath = Path.Combine(Application.dataPath,"QuestData.json");
+        //string filePath = Path.Combine(Application.dataPath,"QuestData.json");
 
-        // JSON ??? ??? ??
-        File.WriteAllText(filePath, json);
+        //File.WriteAllText(filePath, json);
+
+        try
+        {
+            QuestData questData = quest.GetQuestSaveData();
+            string serializedData = JsonUtility.ToJson(questData);
+            PlayerPrefs.SetString(quest.info.id, serializedData);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Failed to save quest with id " + quest.info.id + ": " + e);
+        }
+    }
+    private Quest LoadQuest(QuestInfoSO questInfo)
+    {
+        Quest quest = null;
+        try
+        {
+            // load quest from saved data
+            if (PlayerPrefs.HasKey(questInfo.id) == true)
+            {
+                string serializedData = PlayerPrefs.GetString(questInfo.id);
+                QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
+                //quest = new Quest(questInfo, questData.state, questData.questStepIndex, questData.questStepStates);
+            }
+            else
+            {
+                //quest = new Quest(questInfo);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Failed to load quest with id " + quest.info.id + ": " + e);
+        }
+        return quest;
     }
 }

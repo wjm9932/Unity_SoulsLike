@@ -1,14 +1,18 @@
 {
-    "state": 2,
-    "currentQuestStepIndex": 0,
+    "state": 3,
+    "currentQuestStepIndex": 2,
     "questStepData": [
         {
-            "questStepState": 0,
-            "status": "Find a Book"
+            "questStepState": 1,
+            "status": "First Combo Attack"
         },
         {
-            "questStepState": 0,
-            "status": "Use a Book"
+            "questStepState": 1,
+            "status": "Second Combo Attack"
+        },
+        {
+            "questStepState": 1,
+            "status": "Third Combo Attack"
         }
     ]
 }
