@@ -1,0 +1,14 @@
+{
+    "state": 1,
+    "currentQuestStepIndex": 0,
+    "questStepData": [
+        {
+            "questStepState": 1,
+            "status": "test"
+        },
+        {
+            "questStepState": 0,
+            "status": "test1"
+        }
+    ]
+}

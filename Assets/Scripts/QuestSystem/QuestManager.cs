@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.IO;
 
 public class QuestManager : MonoBehaviour
 {
@@ -122,7 +123,7 @@ public class QuestManager : MonoBehaviour
 
     private void UpdateQuestState(Quest quest)
     {
-        if(quest.CanMoveNextQuestStep() == false)
+        if (quest.CanMoveNextQuestStep() == false)
         {
             ChangeQuestState(quest, QuestState.IN_PROGRESS);
             return;
@@ -136,7 +137,7 @@ public class QuestManager : MonoBehaviour
         else
         {
             ChangeQuestState(quest, QuestState.CAN_FINISH);
-            TextManager.Instance.PlayNotificationText("Quest : " + "\"" +quest.info.displayName + "\"" + " can be completed!");
+            TextManager.Instance.PlayNotificationText("Quest : " + "\"" + quest.info.displayName + "\"" + " can be completed!");
             SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.QUEST_COMPLETED, 0.25f);
         }
     }
@@ -236,6 +237,28 @@ public class QuestManager : MonoBehaviour
         }
 
     }
+    private void OnApplicationQuit()
+    {
+        //foreach (Quest quest in questMap.Values)
+        //{
+        //    SaveQuest(quest);
+        //}
 
+        List<Quest> questList = new List<Quest>(questMap.Values);
 
+        Quest secondQuest = questList[1]; // ? ?? ??? ????
+        SaveQuest(secondQuest); // ? ?? ??? ??
+    }
+    private void SaveQuest(Quest quest)
+    {
+        QuestData questData = quest.GetQuestSaveData();
+
+        string json = JsonUtility.ToJson(questData, true);
+
+        // ?? ?? ??
+        string filePath = Path.Combine(Application.dataPath,"QuestData.json");
+
+        // JSON ??? ??? ??
+        File.WriteAllText(filePath, json);
+    }
 }

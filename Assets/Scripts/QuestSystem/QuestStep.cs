@@ -11,9 +11,9 @@ public abstract class QuestStep : MonoBehaviour
 
     protected void UpdateQuestStepState(QuestStepState state)
     {
-        if (this.questStepData.state != state)
+        if (this.questStepData.questStepState != state)
         {
-            this.questStepData.state = state;
+            this.questStepData.questStepState = state;
             QuestManager.Instance.AdvanceQuest(questId);
         }
         else

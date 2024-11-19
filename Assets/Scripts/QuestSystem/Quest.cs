@@ -9,9 +9,9 @@ public class Quest
     public QuestState state { get; private set; }
     public List<GameObject> questSteps { get; private set; } = new List<GameObject>();
     public QuestStepData[][] questStepData;
-    private int currentQuestStepIndex;
 
     private Character questOwner;
+    private int currentQuestStepIndex;
     
     public Quest(QuestInfoSO info, Character owner)
     {
@@ -131,7 +131,7 @@ public class Quest
             {
                 for(int j = 0; j < questStepData[i].Length; j++)
                 {
-                    if (questStepData[i][j].state == QuestStepState.FINISHED)
+                    if (questStepData[i][j].questStepState == QuestStepState.FINISHED)
                     {
                         fullStatus += "<s>" + questStepData[i][j].status + "</s>\n";
                     }
@@ -170,7 +170,7 @@ public class Quest
         {
             for(int j = 0; j < questStepData[i].Length; j++)
             {
-                if (questStepData[i][j].state != QuestStepState.FINISHED)
+                if (questStepData[i][j].questStepState != QuestStepState.FINISHED)
                 {
                     return false;
                 }
@@ -178,5 +178,17 @@ public class Quest
         }
 
         return true;
+    }
+
+    public QuestData GetQuestSaveData()
+    {
+        QuestStepData[] data  = new QuestStepData[2];
+        data[0] = new QuestStepData();
+        data[0].status = "test";
+        data[0].questStepState = QuestStepState.FINISHED;
+        data[1] = new QuestStepData();
+        data[1].questStepState = QuestStepState.IN_PROGRESS;
+        data[1].status = "test1";
+        return new QuestData(state, currentQuestStepIndex, data);
     }
 }

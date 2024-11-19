@@ -5,12 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class QuestStepData
 {
+    public QuestStepState questStepState;
     public string status;
-    public QuestStepState state;
 
     public QuestStepData()
     {
+        questStepState = QuestStepState.IN_PROGRESS;
         this.status = "";
-        state = QuestStepState.IN_PROGRESS;
     }
 }
