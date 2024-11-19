@@ -5,14 +5,11 @@ using UnityEngine;
 public class AttackQuestStep : QuestStep
 {
     [SerializeField] private string attackNumber;
-    private void Awake()
-    {
-        status = "Objective: " + attackNumber +" Attack!";
-    }
+
     // Start is called before the first frame update
     void Start()
     {
-        status = attackNumber + " Combo Attack";
+        questStepData.status = attackNumber + " Combo Attack";
         questOwner.playerEvents.onAttack += Attack;
     }
 

@@ -14,15 +14,10 @@ public class FindHealthPotionQuestStep : QuestStep
             questOwner.GetComponent<PlayerEvent>().onCollect -= FindHealthPotion;
         }
     }
-    private void Awake()
-    {
-        status = "Objective: Find a Health Potion\n";
-    }
-
     void Start()
     {
         questOwner.GetComponent<PlayerEvent>().onCollect += FindHealthPotion;
-        status = "Find a Health Potion";
+        questStepData.status = "Find a Health Potion";
 
         if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
         {

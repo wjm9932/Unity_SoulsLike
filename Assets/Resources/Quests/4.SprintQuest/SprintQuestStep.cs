@@ -6,22 +6,17 @@ public class SprintQuestStep : QuestStep
 {
     [SerializeField] private float targetSprintTime;
     private float currentSprintTime;
-    private void Awake()
-    {
-        currentSprintTime = 0f;
-        status = "Objective: Sprint for " + targetSprintTime.ToString() + " seconds!";
-    }
-    // Start is called before the first frame update
+
     void Start()
     {
-        status = "Sprint time: " + currentSprintTime.ToString() + "s";
+        questStepData.status = "Sprint time: " + currentSprintTime.ToString() + "s";
         questOwner.playerEvents.onSprint += Sprint;
     }
 
     private void Sprint(float deltaTime)
     {
         currentSprintTime += deltaTime;
-        status = "Sprint time: " + currentSprintTime.ToString("F2") + "s";
+        questStepData.status = "Sprint time: " + currentSprintTime.ToString("F2") + "s";
 
         if (currentSprintTime > targetSprintTime)
         {

@@ -14,16 +14,11 @@ public class KillSkeletonQuestStep : QuestStep
             questOwner.GetComponent<PlayerEvent>().OnKill -= KillSkeleton;
         }
     }
-    private void Awake()
-    {
-        status = "Objective: Kill " + targetKillCount + " " + targetType.ToString() + " Skeletons\n";
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         questOwner.GetComponent<PlayerEvent>().OnKill += KillSkeleton;
-        status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
+        questStepData.status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
     }
 
     private void KillSkeleton(EntityType type)
@@ -31,7 +26,7 @@ public class KillSkeletonQuestStep : QuestStep
         if(type == targetType)
         {
             ++currentKillCount;
-            status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
+            questStepData.status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
 
             if (currentKillCount >= targetKillCount)
             {

@@ -27,15 +27,13 @@ public class CollectItemQuestStep : QuestStep
         {
             Debug.LogError("Invalid target item");
         }
-
-        status = "Objective: Get " + targetItemCount + item.itemName + "\n";
     }
     private void Start()
     {
         questOwner.GetComponent<PlayerEvent>().onCollect += CollectItem;
 
         currentItemCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>());
-        status = item.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;
+        questStepData.status = item.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;
 
         if (currentItemCount >= targetItemCount)
         {
@@ -49,7 +47,7 @@ public class CollectItemQuestStep : QuestStep
         {
             currentItemCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>());
 
-            status = item.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;
+            questStepData.status = item.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;
 
             if (currentItemCount >= targetItemCount)
             {

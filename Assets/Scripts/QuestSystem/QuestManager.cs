@@ -49,6 +49,7 @@ public class QuestManager : MonoBehaviour
             NotifyQuestStateToQuestPoints(quest);
         }
     }
+
     public void NotifyQuestFinished(Quest quest)
     {
         if (onFinishQuest != null)
@@ -121,18 +122,13 @@ public class QuestManager : MonoBehaviour
 
     private void UpdateQuestState(Quest quest)
     {
-        for (int i = 0; i < quest.questSteps.Count; i++)
+        if(quest.CanMoveNextQuestStep() == false)
         {
-            if (quest.questSteps[i].state != QuestStepState.FINISHED)
-            {
-                ChangeQuestState(quest, QuestState.IN_PROGRESS);
-                return;
-            }
+            ChangeQuestState(quest, QuestState.IN_PROGRESS);
+            return;
         }
 
-        quest.MoveToNextStep();
-
-        if (quest.CurrentStepExists() == true)
+        if (quest.IsNextQuestStepExists() == true)
         {
             quest.InstantiateCurrentQuestStep(this.transform);
             UpdateQuestProgress(quest);

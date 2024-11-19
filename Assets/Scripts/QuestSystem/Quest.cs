@@ -7,7 +7,8 @@ public class Quest
 {
     public QuestInfoSO info;
     public QuestState state { get; private set; }
-    public List<QuestStep> questSteps { get; private set; } = new List<QuestStep>();
+    public List<GameObject> questSteps { get; private set; } = new List<GameObject>();
+    public QuestStepData[][] questStepData;
     private int currentQuestStepIndex;
 
     private Character questOwner;
@@ -18,15 +19,35 @@ public class Quest
         this.state = info.initialState;
         this.currentQuestStepIndex = 0;
         this.questOwner = owner;
+
+        questStepData = new QuestStepData[info.questStepPrefabs.Length][];
+
+        for (int i = 0; i < info.questStepPrefabs.Length; i++)
+        {
+            questStepData[i] = new QuestStepData[info.questStepPrefabs[i].stepPrefabs.Length];
+
+            for (int j = 0; j < info.questStepPrefabs[i].stepPrefabs.Length; j++)
+            {
+                questStepData[i][j] = new QuestStepData();
+            }
+        }
     }
     public void MoveToNextStep()
     {
         currentQuestStepIndex++;
     }
 
-    public bool CurrentStepExists()
+    public bool IsNextQuestStepExists()
     {
-        return (currentQuestStepIndex < info.questStepPrefabs.Length);
+        if(currentQuestStepIndex + 1 < info.questStepPrefabs.Length)
+        {
+            ++currentQuestStepIndex;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public void InstantiateCurrentQuestStep(Transform parentTransform)
     {
@@ -35,8 +56,8 @@ public class Quest
         {
             for(int i = 0; i < questStepPrefab.stepPrefabs.Length; i++)
             {
-                QuestStep questStep = Object.Instantiate<GameObject>(questStepPrefab.stepPrefabs[i], parentTransform).GetComponent<QuestStep>();
-                questStep.Initialize(questOwner, info.id);
+                GameObject questStep = Object.Instantiate<GameObject>(questStepPrefab.stepPrefabs[i], parentTransform);
+                questStep.GetComponent<QuestStep>().Initialize(questOwner, info.id, questStepData[currentQuestStepIndex][i]);
                 questSteps.Add(questStep);
             }
         }
@@ -48,15 +69,13 @@ public class Quest
     private QuestStepPrefabs GetCurrentQuestStepPrefab()
     {
         QuestStepPrefabs questStepPrefab = null;
-        if (CurrentStepExists() == true)
+        questStepPrefab = info.questStepPrefabs[currentQuestStepIndex];
+
+        if(questStepPrefab == null)
         {
-            questStepPrefab = info.questStepPrefabs[currentQuestStepIndex];
+            Debug.LogError("questStepPrefab is null");
         }
-        else
-        {
-            Debug.LogWarning("Tried to get quest step prefab, but stepIndex was out of range indicating that "
-                + "there's no current step: QuestId=" + info.id + ", stepIndex=" + currentQuestStepIndex);
-        }
+       
         return questStepPrefab;
     }
 
@@ -108,15 +127,18 @@ public class Quest
         }
         else
         {
-            for (int i = 0; i < questSteps.Count; i++)
+            for(int i = 0; i <= currentQuestStepIndex; i++)
             {
-                if (questSteps[i].state == QuestStepState.FINISHED)
+                for(int j = 0; j < questStepData[i].Length; j++)
                 {
-                    fullStatus += "<s>" + questSteps[i].status + "</s>\n";
-                }
-                else
-                {
-                    fullStatus += questSteps[i].status + "</s>\n";
+                    if (questStepData[i][j].state == QuestStepState.FINISHED)
+                    {
+                        fullStatus += "<s>" + questStepData[i][j].status + "</s>\n";
+                    }
+                    else
+                    {
+                        fullStatus +=  questStepData[i][j].status + "\n";
+                    }
                 }
             }
 
@@ -139,5 +161,22 @@ public class Quest
         {
             Object.Destroy(questSteps[i].gameObject);
         }
+        questSteps.Clear();
+    }
+
+    public bool CanMoveNextQuestStep()
+    {
+        for(int i = 0; i <= currentQuestStepIndex; i++)
+        {
+            for(int j = 0; j < questStepData[i].Length; j++)
+            {
+                if (questStepData[i][j].state != QuestStepState.FINISHED)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

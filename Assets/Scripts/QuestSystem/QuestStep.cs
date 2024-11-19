@@ -6,14 +6,14 @@ public abstract class QuestStep : MonoBehaviour
 {
     protected string questId;
     protected Character questOwner;
-    public string status { get; protected set; }
-    public QuestStepState state { get; protected set; } = QuestStepState.IN_PROGRESS;
+
+    protected QuestStepData questStepData;
 
     protected void UpdateQuestStepState(QuestStepState state)
     {
-        if (this.state != state)
+        if (this.questStepData.state != state)
         {
-            this.state = state;
+            this.questStepData.state = state;
             QuestManager.Instance.AdvanceQuest(questId);
         }
         else
@@ -21,9 +21,10 @@ public abstract class QuestStep : MonoBehaviour
             QuestManager.Instance.UpdateQuestProgress(questId);
         }
     }
-    public void Initialize(Character owner, string id)
+    public void Initialize(Character owner, string id, QuestStepData questStepData)
     {
         questOwner = owner;
         questId = id;
+        this.questStepData = questStepData;
     }
 }

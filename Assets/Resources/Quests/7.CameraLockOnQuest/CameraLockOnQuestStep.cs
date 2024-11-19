@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class CameraLockOnQuestStep : QuestStep
 {
-    private void Awake()
-    {
-        status = "Objective: Lock on to enemy";
-    }
     // Start is called before the first frame update
     void Start()
     {
-        status = "Press F to Lock On";
+        questStepData.status = "Press F to Lock On";
         questOwner.playerEvents.onCameraLockOn += CameraLockOn;
     }
 

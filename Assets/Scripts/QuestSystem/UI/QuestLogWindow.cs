@@ -43,8 +43,18 @@ public class QuestLogWindow : MonoBehaviour
     {
         lastPressedButton = button;
     }
-
     private void UpdateQuestInfo(Quest quest)
+    {
+        StartCoroutine(UpdateQuestInfoCoroutine(quest));
+    }
+
+    private IEnumerator UpdateQuestInfoCoroutine(Quest quest)
+    {
+        yield return null; // ? ??? ??
+        ExecuteUpdateQuestInfo(quest);
+    }
+
+    private void ExecuteUpdateQuestInfo(Quest quest)
     {
         if (lastPressedButton == null || lastPressedButton.quest.info.id == quest.info.id)
         {
@@ -65,4 +75,25 @@ public class QuestLogWindow : MonoBehaviour
             }
         }
     }
+    //private void UpdateQuestInfo(Quest quest)
+    //{
+    //    if (lastPressedButton == null || lastPressedButton.quest.info.id == quest.info.id)
+    //    {
+    //        displayNameText.text = quest.info.displayName;
+    //        progressText.text = quest.GetFullStatusText();
+
+    //        rewardsText.text = "";
+    //        requirementsText.text = "";
+
+    //        for (int i = 0; i < quest.info.rewards.Length; i++)
+    //        {
+    //            rewardsText.text += quest.info.rewards[i].count + " " + quest.info.rewards[i].itemPrefab.itemName + "\n";
+    //        }
+
+    //        foreach (QuestInfoSO prerequisiteQuestInfo in quest.info.questPrerequisites)
+    //        {
+    //            requirementsText.text += prerequisiteQuestInfo.displayName + "\n";
+    //        }
+    //    }
+    //}
 }

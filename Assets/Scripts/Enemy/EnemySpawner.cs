@@ -100,8 +100,10 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int i = 0; i < enemies.Count; i++)
             {
+                enemies[i].Die();
                 Destroy(enemies[i].gameObject);
             }
         }
+        enemies.Clear();
     }
 }

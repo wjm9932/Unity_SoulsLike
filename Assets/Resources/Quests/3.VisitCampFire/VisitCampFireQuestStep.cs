@@ -6,15 +6,11 @@ public class VisitCampFireQuestStep : QuestStep
 {
     [SerializeField] GameObject targetPlace;
 
-    private void Awake()
-    {
-        status = "Objective: Visit the campfire";
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        status = "Visit the campfire";
+        questStepData.status = "Visit the campfire";
         if (questOwner != null)
         {
             questOwner.GetComponent<PlayerEvent>().onVisit += VisitCampFire;

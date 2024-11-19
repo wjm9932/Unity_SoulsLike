@@ -9,13 +9,13 @@ public class UseBookQuestStep : QuestStep
 
     private void Awake()
     {
-        status = "Objective: Use a Book\n";
+        //questStepData.status = "Objective: Use a Book\n";
     }
     // Start is called before the first frame update
     void Start()
     {
         questOwner.GetComponent<PlayerEvent>().onUse += UseBook;
-        status = "Use a Book";
+        questStepData.status = "Use a Book";
     }
 
 

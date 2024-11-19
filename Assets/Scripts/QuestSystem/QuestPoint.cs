@@ -17,7 +17,6 @@ public class QuestPoint : MonoBehaviour
     [SerializeField] private QuestInfo[] quests;
 
     [Header("Config")]
-
     private int questIndex;
     private QuestIcon questIcon;
     private QuestState currentQuestState;
@@ -39,7 +38,6 @@ public class QuestPoint : MonoBehaviour
         QuestManager.Instance.onChangeQuestState -= ChangeQuestState;
         QuestManager.Instance.onInteractWithQuest -= InteractWithQuest;
     }
-
 
     private bool InteractWithQuest()
     {

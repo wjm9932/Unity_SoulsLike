@@ -7,15 +7,11 @@ public class UseHealthPotionQuestStep : QuestStep
     [SerializeField]
     private GameObject targetItem;
 
-    private void Awake()
-    {
-        status = "Objective: Use a Health Potion\n";
-    }
     // Start is called before the first frame update
     void Start()
     {
         questOwner.GetComponent<PlayerEvent>().onUse += UseHealthPotion;
-        status = "Use a Health Potion";
+        questStepData.status = "Use a Health Potion";
     }
 
 
