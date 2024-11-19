@@ -7,9 +7,11 @@ public class Quest
 {
     public QuestInfoSO info;
     public QuestState state { get; private set; }
-    private int currentQuestStepIndex;
-    private Character questOwner;
     public List<QuestStep> questSteps { get; private set; } = new List<QuestStep>();
+    private int currentQuestStepIndex;
+
+    private Character questOwner;
+    
     public Quest(QuestInfoSO info, Character owner)
     {
         this.info = info;
@@ -39,7 +41,7 @@ public class Quest
             }
         }
     }
-    public void ChangeQuestState(QuestState state)
+    public void SetQuestState(QuestState state)
     {
         this.state = state;
     }
@@ -56,16 +58,6 @@ public class Quest
                 + "there's no current step: QuestId=" + info.id + ", stepIndex=" + currentQuestStepIndex);
         }
         return questStepPrefab;
-    }
-
-    private UX.UX_Item[] ConvertGameObjectInfoToItems(ItemInfo[] gameObjectInfos)
-    {
-        UX.UX_Item[] items = new UX.UX_Item[gameObjectInfos.Length];
-        for (int i = 0; i < gameObjectInfos.Length; i++)
-        {
-            items[i] = gameObjectInfos[i].itemPrefab;
-        }
-        return items;
     }
 
     public bool GetReward()

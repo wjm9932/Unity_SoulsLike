@@ -143,7 +143,6 @@ public class QuestManager : MonoBehaviour
             TextManager.Instance.PlayNotificationText("Quest : " + "\"" +quest.info.displayName + "\"" + " can be completed!");
             SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.QUEST_COMPLETED, 0.25f);
         }
-
     }
 
     public bool FinishQuest(string id)
@@ -198,7 +197,7 @@ public class QuestManager : MonoBehaviour
     }
     private void ChangeQuestState(Quest quest, QuestState state)
     {
-        quest.ChangeQuestState(state);
+        quest.SetQuestState(state);
         UpdateQuestProgress(quest);
         NotifyQuestStateToQuestPoints(quest);
     }
