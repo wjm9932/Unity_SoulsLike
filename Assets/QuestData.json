@@ -1,13 +1,13 @@
 {
-    "state": 3,
+    "state": 2,
     "currentQuestStepIndex": 0,
     "questStepData": [
         {
-            "questStepState": 1,
+            "questStepState": 0,
             "status": "Find a Book"
         },
         {
-            "questStepState": 1,
+            "questStepState": 0,
             "status": "Use a Book"
         }
     ]
