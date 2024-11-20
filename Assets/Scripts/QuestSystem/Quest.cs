@@ -139,7 +139,7 @@ public class Quest
         {
             var rewardItem = info.rewards[i];
             questOwner.inventory.AddItem(rewardItem.itemPrefab, rewardItem.count);
-            TextManager.Instance.PlayNotificationText("You've got reward: " + rewardItem.itemPrefab.itemName + " x" + rewardItem.count);
+            TextManager.Instance.PlayNotificationText("You've got reward: " + rewardItem.itemPrefab.data.itemName + " x" + rewardItem.count);
         }
 
         for (int i = 0; i < info.targetItem.Length; i++)

@@ -23,12 +23,12 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     private Image image;
     private Vector3 offset;
-    private UI.UI_Item item;
+    private UI_Item item;
 
     private void Awake()
     {
         image = GetComponent<Image>();
-        item = GetComponent<UI.UI_Item>();
+        item = GetComponent<UI_Item>();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {

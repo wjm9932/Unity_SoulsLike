@@ -17,7 +17,7 @@ public class UseHealthPotionQuestStep : QuestStep
 
     private void UseHealthPotion(string itemName)
     {
-        if(itemName == targetItem.GetComponent<UX.UX_Item>().itemName)
+        if(itemName == targetItem.GetComponent<UX_Item>().data.itemName)
         {
             UpdateQuestStepState(QuestStepState.FINISHED);
         }

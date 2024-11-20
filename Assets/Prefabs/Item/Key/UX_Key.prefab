@@ -182,11 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemName: Key
-  _dropChace: 10
-  icon: {fileID: 3828847424994390604, guid: ebde2fe0afd9c664cab37ca226b63aaa, type: 3}
-  triggerCount: 0
+  _data: {fileID: 11400000, guid: fcb819dd4da303d46986b05a3707e564, type: 2}
   numOfItem: 1
+  triggerCount: 0
 --- !u!65 &7036923253818994727
 BoxCollider:
   m_ObjectHideFlags: 0

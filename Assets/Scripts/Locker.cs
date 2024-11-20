@@ -12,7 +12,7 @@ public class Locker : MonoBehaviour
 
     private void Unlock(Character player)
     {
-        if (player.inventory.RemoveTargetItemFromInventory(key.GetComponent<UX.UX_Item>(), 1) == true)
+        if (player.inventory.RemoveTargetItemFromInventory(key.GetComponent<UX_Item>(), 1) == true)
         {
             player.playerEvents.onUnlock -= unlockAction;
             player.GetComponent<InteractionIndicator>().Hide();

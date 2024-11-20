@@ -45,18 +45,18 @@ public class QuestInfoSO : ScriptableObject
     {
         [SerializeField]
         private GameObject _itemPrefab;
-        public UX.UX_Item itemPrefab
+        public UX_Item itemPrefab
         {
             get
             {
-                if (_itemPrefab.GetComponent<UX.UX_Item>() == null)
+                if (_itemPrefab.GetComponent<UX_Item>() == null)
                 {
                     Debug.LogError(_itemPrefab.name + "does not have UX.UX_Item component!");
                     return null;
                 }
                 else
                 {
-                    return _itemPrefab.GetComponent<UX.UX_Item>();
+                    return _itemPrefab.GetComponent<UX_Item>();
                 }
 
             }

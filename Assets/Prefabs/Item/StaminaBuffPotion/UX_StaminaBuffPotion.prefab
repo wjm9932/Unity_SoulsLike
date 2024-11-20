@@ -112,11 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemName: Stamina Buff Potion
-  _dropChace: 30
-  icon: {fileID: 4078479804993434640, guid: a671d3140b8d41548a2bb17c07b26863, type: 3}
-  triggerCount: 0
+  _data: {fileID: 11400000, guid: 414ec1c6093ea8e48a154c7af50b8074, type: 2}
   numOfItem: 1
+  triggerCount: 0
 --- !u!1001 &6479483730804932203
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
-using UX;
 public abstract class PlayerMovementState : IState
 {
     protected PlayerMovementStateMachine sm;

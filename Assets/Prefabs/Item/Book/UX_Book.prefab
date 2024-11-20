@@ -47,11 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemName: Book
-  _dropChace: 15
-  icon: {fileID: 3895640531818722762, guid: 52018103bfd92b147bf6962e44ac6203, type: 3}
-  triggerCount: 0
+  _data: {fileID: 11400000, guid: c9d35f9d462e4434fa01656d957c0476, type: 2}
   numOfItem: 1
+  triggerCount: 0
 --- !u!54 &4006618410166112172
 Rigidbody:
   m_ObjectHideFlags: 0
