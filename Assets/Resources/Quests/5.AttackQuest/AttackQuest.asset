@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: AttackQuest
   displayName: Attack!
-  initialState: 0
+  initialState: 1
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Great job!

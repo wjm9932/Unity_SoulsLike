@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprintQuestStep : QuestStep
+public class SprintQuestStep : QuestStep, ICountBasedQuest
 {
     [SerializeField] private float targetSprintTime;
     private float currentSprintTime;
 
     void Start()
     {
-        questStepData.status = "Sprint time: " + currentSprintTime.ToString() + "s";
+        UpdateStatus();
         questOwner.playerEvents.onSprint += Sprint;
     }
 
     private void Sprint(float deltaTime)
     {
         currentSprintTime += deltaTime;
-        questStepData.status = "Sprint time: " + currentSprintTime.ToString("F2") + "s";
+        UpdateStatus();
 
         if (currentSprintTime > targetSprintTime)
         {
@@ -34,5 +34,14 @@ public class SprintQuestStep : QuestStep
         {
             questOwner.playerEvents.onSprint -= Sprint;
         }
+    }
+    private void UpdateStatus()
+    {
+        questStepData.count = currentSprintTime.ToString();
+        questStepData.status = "Sprint time: " + currentSprintTime.ToString("F2") + "s";
+    }
+    public void SetQuestStepCount(string count)
+    {
+        currentSprintTime = float.Parse(count);
     }
 }

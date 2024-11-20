@@ -11,8 +11,10 @@ public class Inventory : MonoBehaviour
     public GraphicRaycaster uiRaycaster;
     public EventSystem eventSystem;
 
-    [SerializeField]
-    private List<GameObject> inventorySlot = new List<GameObject>(36);
+    [Header("Save & Load")]
+    [SerializeField] private bool allowLoad;
+    
+    [SerializeField] private List<GameObject> inventorySlot = new List<GameObject>(36);
     private Dictionary<string, UI_Item> itemContainer = new Dictionary<string, UI_Item>(36);
     private PointerEventData pointerEventData;
     private PlayerEvent playerEvent;
@@ -20,6 +22,7 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         playerEvent = GetComponent<PlayerEvent>();
+        LoadItem();
     }
 
     public UsableItem quickSlot
@@ -58,35 +61,32 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
-        for (int i = 0; i < count; i++)
+        if (itemContainer.ContainsKey(item.data.itemName) == false)
         {
-            if (itemContainer.ContainsKey(item.data.itemName) == false)
+            int emptySlot = FindEmptySlot(item);
+
+            if (emptySlot == -1)
             {
-                int emptySlot = FindEmptySlot(item);
-
-                if (emptySlot == -1)
-                {
-                    return false;
-                }
-
-                UI_Item inventoryItem = Instantiate(item.data.icon, inventorySlot[emptySlot].transform).GetComponent<UI_Item>();
-                inventoryItem.AddItem();
-                inventoryItem.SetName(item.data.itemName);
-                inventoryItem.OnDestroy += RemoveItemFromItemContainer;
-                inventoryItem.OnDrop += DropItem;
-
-                if (inventoryItem.GetComponent<UsableItem>() != null)
-                {
-                    inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UpdateItemCount(item.data.itemName); };
-                    inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UseItem(item.data.itemName); };
-                }
-
-                itemContainer.Add(item.data.itemName, inventoryItem);
+                return false;
             }
-            else
+
+            UI_Item inventoryItem = Instantiate(item.data.icon, inventorySlot[emptySlot].transform).GetComponent<UI_Item>();
+            inventoryItem.SetName(item.data.itemName);
+            inventoryItem.count = count;
+            inventoryItem.OnDestroy += RemoveItemFromItemContainer;
+            inventoryItem.OnDrop += DropItem;
+
+            if (inventoryItem.GetComponent<UsableItem>() != null)
             {
-                itemContainer[item.data.itemName].AddItem();
+                inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UseItem(item.data.itemName); };
+                inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UpdateItemCount(item.data.itemName); };
             }
+
+            itemContainer.Add(item.data.itemName, inventoryItem);
+        }
+        else
+        {
+            itemContainer[item.data.itemName].count += count;
         }
 
         playerEvent.UpdateItemCount(item.data.itemName);
@@ -246,6 +246,52 @@ public class Inventory : MonoBehaviour
 
     private void LoadItem()
     {
+        if(allowLoad == false)
+        {
+            return;
+        }
 
+        string path = Path.Combine(Application.dataPath, "InvetoryData");
+
+        if (!File.Exists(path))
+        {
+            Debug.LogWarning("No inventory data found. Starting with an empty inventory.");
+            return;
+        }
+
+        string jsonData = File.ReadAllText(path);
+        InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(jsonData);
+
+        UX_ItemDataSO[] itemPrefabs = Resources.LoadAll<UX_ItemDataSO>("Item");
+        Dictionary<string, UX_ItemDataSO> map = new Dictionary<string, UX_ItemDataSO>();
+
+        for(int i = 0; i < itemPrefabs.Length; i++)
+        {
+            map.Add(itemPrefabs[i].itemName, itemPrefabs[i]);
+        }
+
+        for(int i = 0; i < inventoryData.itemData.Count; i++)
+        {
+            UX_ItemDataSO item = map[inventoryData.itemData[i].itemName];
+            LoadItemToInventory(item, inventoryData.itemData[i].itemCount, inventoryData.itemData[i].slotIndex);
+        }
+    }
+
+    private void LoadItemToInventory(UX_ItemDataSO item, int count, int slot)
+    {
+        UI_Item inventoryItem = Instantiate(item.icon, inventorySlot[slot].transform).GetComponent<UI_Item>();
+        inventoryItem.count = count;
+
+        inventoryItem.SetName(item.itemName);
+        inventoryItem.OnDestroy += RemoveItemFromItemContainer;
+        inventoryItem.OnDrop += DropItem;
+
+        if (inventoryItem.GetComponent<UsableItem>() != null)
+        {
+            inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UpdateItemCount(item.itemName); };
+            inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UseItem(item.itemName); };
+        }
+
+        itemContainer.Add(item.itemName, inventoryItem);
     }
 }

@@ -15,8 +15,10 @@ public class QuestManager : MonoBehaviour
     public event Action<string, string> onUpdateQuestDialogue;
     public event Func<bool> onInteractWithQuest;
 
-
+    [Header("Quest Owner")]
     [SerializeField] private Character questOwner;
+
+    [Header("Save & Load")]
     [SerializeField] bool allowLoadQuest;
     private Dictionary<string, Quest> questMap;
 

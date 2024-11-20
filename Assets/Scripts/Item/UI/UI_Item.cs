@@ -19,13 +19,13 @@ public class UI_Item : MonoBehaviour
     [TextArea(3, 10)]
     [SerializeField] public string toolTipText;
 
+    
+    public string itemName { get; private set; }
     public GameObject itemUX
     {
         get { return _itemUX; }
     }
     private int _count = 0;
-
-    public string itemName { get; private set; }
     public int count
     {
         set

@@ -94,7 +94,7 @@ public class Quest
             for (int j = 0; j < questStepPrefab.stepPrefabs.Length; j++)
             {
                 GameObject questStep = Object.Instantiate<GameObject>(questStepPrefab.stepPrefabs[j], parentTransform);
-                questStep.GetComponent<QuestStep>().Initialize(questOwner, info.id, questStepData[currentQuestStepIndex][j]);
+                questStep.GetComponent<QuestStep>().Initialize(questOwner, info.id, questStepData[i][j]);
                 questSteps.Add(questStep);
             }
         }
