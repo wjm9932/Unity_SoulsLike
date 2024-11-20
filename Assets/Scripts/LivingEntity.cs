@@ -30,7 +30,7 @@ public abstract class LivingEntity : MonoBehaviour
             _maxHealth = value;
         }
     }
-    
+
     private float _health;
     public virtual float health
     {
@@ -59,7 +59,7 @@ public abstract class LivingEntity : MonoBehaviour
 
     public bool RecoverHP(float amount)
     {
-        if(health >= maxHealth)
+        if (health >= maxHealth)
         {
             return false;
         }
@@ -87,7 +87,7 @@ public abstract class LivingEntity : MonoBehaviour
             if (health <= 0)
             {
                 Die();
-                if(damager.GetComponent<Character>() != null)
+                if (damager.GetComponent<Character>() != null)
                 {
                     damager.GetComponent<Character>().KillLivingEntity(this.entityType);
                 }
@@ -106,7 +106,14 @@ public abstract class LivingEntity : MonoBehaviour
     {
         if (animator.IsInTransition(0) == true)
         {
-            return;
+            if (gameObject.GetComponent<Enemy>() != null)
+            {
+                return;
+            }
+            else
+            {
+                return;
+            }
         }
 
         if (flag == 1)
@@ -125,7 +132,7 @@ public abstract class LivingEntity : MonoBehaviour
     }
     public virtual void Die()
     {
-        if(onDeath != null)
+        if (onDeath != null)
         {
             onDeath();
         }

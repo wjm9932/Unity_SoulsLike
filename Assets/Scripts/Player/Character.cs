@@ -9,6 +9,8 @@ using Cinemachine;
 [RequireComponent(typeof(Inventory))]
 public class Character : LivingEntity
 {
+    public WarriorEnemy test;
+    public Transform testpos;
     public UsableItem quickSlot
     {
         get
@@ -148,6 +150,10 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Instantiate(test, testpos);
+        }
         RecoverStamina();
 
         rb.useGravity = !IsOnSlope();

@@ -43,7 +43,7 @@ public class WarriorEnemy : Enemy
         trackingSpeed = 2f;
         trackingStopDistance = 1f;
 
-        health = 100f;
+        health = maxHealth;
         fieldOfView = 100f;
         viewDistance = 5f;
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
