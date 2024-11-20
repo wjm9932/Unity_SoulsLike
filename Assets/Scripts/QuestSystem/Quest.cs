@@ -32,6 +32,28 @@ public class Quest
             }
         }
     }
+
+    public Quest(QuestInfoSO info, QuestState state, int currentQuestStepIndex, QuestStepData[][] questStepData, Character owner)
+    {
+        this.info = info;
+        this.state = state;
+        this.currentQuestStepIndex = currentQuestStepIndex;
+        this.questStepData = questStepData;
+        this.questOwner = owner;
+
+        if (this.questStepData.GetLength(0) != info.questStepPrefabs.Length)
+        {
+            Debug.LogError("Load sync failed");
+        }
+        for(int i = 0; i < info.questStepPrefabs.Length; i++)
+        {
+            if (this.questStepData[i].Length != info.questStepPrefabs[i].stepPrefabs.Length)
+            {
+                Debug.LogError("Load sync failed");
+            }
+        }
+    }
+
     public void MoveToNextStep()
     {
         currentQuestStepIndex++;
@@ -207,7 +229,7 @@ public class Quest
         return questStepData1D;
     }
 
-    public QuestStepData[][] Convert2DArrayFrom1DArray(QuestStepData[] questStepData)
+    public static QuestStepData[][] Convert2DArrayFrom1DArray(QuestStepData[] questStepData, QuestInfoSO info)
     {
         QuestStepData[][] questStepData2D = new QuestStepData[info.questStepPrefabs.Length][];
 
