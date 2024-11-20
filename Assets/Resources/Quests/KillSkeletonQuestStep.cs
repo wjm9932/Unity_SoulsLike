@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillSkeletonQuestStep : QuestStep
+public class KillSkeletonQuestStep : QuestStep, ICountBasedQuest
 {
     private int currentKillCount = 0;
     [SerializeField] private int targetKillCount;
@@ -18,7 +18,7 @@ public class KillSkeletonQuestStep : QuestStep
     void Start()
     {
         questOwner.GetComponent<PlayerEvent>().OnKill += KillSkeleton;
-        questStepData.status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
+        UpdateStatus();
     }
 
     private void KillSkeleton(EntityType type)
@@ -26,7 +26,7 @@ public class KillSkeletonQuestStep : QuestStep
         if(type == targetType)
         {
             ++currentKillCount;
-            questStepData.status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
+            UpdateStatus();
 
             if (currentKillCount >= targetKillCount)
             {
@@ -39,4 +39,14 @@ public class KillSkeletonQuestStep : QuestStep
         }
     }
 
+    private void UpdateStatus()
+    {
+        questStepData.count = currentKillCount.ToString();
+        questStepData.status = "Kill " + targetType.ToString() + " Skeleton: " + currentKillCount + "/" + targetKillCount;
+    }
+
+    public void SetQuestStepCount(string count)
+    {
+        currentKillCount = System.Int32.Parse(count);
+    }
 }

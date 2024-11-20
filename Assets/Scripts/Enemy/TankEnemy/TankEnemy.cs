@@ -87,8 +87,8 @@ public class TankEnemy : Enemy
     }
     public override void Die()
     {
-        base.Die();
-
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.dieState);
+
+        base.Die();
     }
 }

@@ -26,5 +26,10 @@ public abstract class QuestStep : MonoBehaviour
         questOwner = owner;
         questId = id;
         this.questStepData = questStepData;
+
+        if(this.gameObject.GetComponent<ICountBasedQuest>() != null && this.questStepData.count != "")
+        {
+            this.gameObject.GetComponent<ICountBasedQuest>().SetQuestStepCount(this.questStepData.count);
+        }
     }
 }
