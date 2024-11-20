@@ -282,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageTextPosition: {fileID: 8692603334667775015}
   _entityType: 1
-  _maxHealth: 10
+  _maxHealth: 30
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256

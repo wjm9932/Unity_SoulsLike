@@ -9,7 +9,7 @@ using Cinemachine;
 [RequireComponent(typeof(Inventory))]
 public class Character : LivingEntity
 {
-    public WarriorEnemy test;
+    public GameObject test;
     public Transform testpos;
     public UsableItem quickSlot
     {
@@ -152,7 +152,7 @@ public class Character : LivingEntity
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            Instantiate(test, testpos);
+            Instantiate(test.gameObject, testpos.position, testpos.rotation);
         }
         RecoverStamina();
 

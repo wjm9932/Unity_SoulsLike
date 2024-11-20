@@ -18561,7 +18561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148737582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0981917, y: 0, z: 107.70486}
+  m_LocalPosition: {x: 0.558, y: 0, z: 107.399}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35829,7 +35829,7 @@ PrefabInstance:
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: test
       value: 
-      objectReference: {fileID: 589835942415050704, guid: 45193dde9293e474d892ea1bad3f20b7, type: 3}
+      objectReference: {fileID: 671828853054335102, guid: 45193dde9293e474d892ea1bad3f20b7, type: 3}
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: hpBar
       value: 
@@ -35837,7 +35837,7 @@ PrefabInstance:
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: testpos
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1148737583}
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: questLogUI
       value: 
