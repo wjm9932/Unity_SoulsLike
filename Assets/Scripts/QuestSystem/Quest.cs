@@ -84,6 +84,22 @@ public class Quest
             }
         }
     }
+
+    public void InstantiateLoadedQuestStep(Transform parentTransform)
+    {
+        for(int i = 0; i <= currentQuestStepIndex; i++)
+        {
+            QuestStepPrefabs questStepPrefab = info.questStepPrefabs[i];
+
+            for (int j = 0; j < questStepPrefab.stepPrefabs.Length; j++)
+            {
+                GameObject questStep = Object.Instantiate<GameObject>(questStepPrefab.stepPrefabs[j], parentTransform);
+                questStep.GetComponent<QuestStep>().Initialize(questOwner, info.id, questStepData[currentQuestStepIndex][j]);
+                questSteps.Add(questStep);
+            }
+        }
+    }
+
     public void SetQuestState(QuestState state)
     {
         this.state = state;

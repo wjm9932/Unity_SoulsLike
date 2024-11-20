@@ -49,7 +49,7 @@ public class QuestManager : MonoBehaviour
         {
             if(quest.state == QuestState.IN_PROGRESS || quest.state == QuestState.CAN_FINISH)
             {
-
+                quest.InstantiateLoadedQuestStep(this.transform);
             }
             NotifyQuestStateToQuestPoints(quest);
         }
@@ -240,22 +240,9 @@ public class QuestManager : MonoBehaviour
         {
             SaveQuest(quest);
         }
-
-        //List<Quest> questList = new List<Quest>(questMap.Values);
-
-        //Quest secondQuest = questList[5];
-        //SaveQuest(secondQuest);
     }
     private void SaveQuest(Quest quest)
     {
-        //QuestData questData = quest.GetQuestSaveData();
-
-        //string json = JsonUtility.ToJson(questData, true);
-
-        //string filePath = Path.Combine(Application.dataPath,"QuestData.json");
-
-        //File.WriteAllText(filePath, json);
-
         try
         {
             QuestData questData = quest.GetQuestSaveData();
@@ -272,7 +259,6 @@ public class QuestManager : MonoBehaviour
         Quest quest = null;
         try
         {
-            // load quest from saved data
             if (PlayerPrefs.HasKey(questInfo.id) == true && allowLoadQuest == true)
             {
                 string serializedData = PlayerPrefs.GetString(questInfo.id);
