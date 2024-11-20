@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -72,7 +72,7 @@ public class Inventory : MonoBehaviour
                 UI.UI_Item inventoryItem = Instantiate(item.icon, inventorySlot[emptySlot].transform).GetComponent<UI.UI_Item>();
                 inventoryItem.AddItem();
                 inventoryItem.SetName(item.itemName);
-                inventoryItem.OnDestroy += RemoveItemFromInventory;
+                inventoryItem.OnDestroy += RemoveItemFromItemContainer;
                 inventoryItem.OnDrop += DropItem;
 
                 if (inventoryItem.GetComponent<UsableItem>() != null)
@@ -150,14 +150,14 @@ public class Inventory : MonoBehaviour
 
             if (item.count <= 0)
             {
-                RemoveItemFromInventory(item);
+                RemoveItemFromItemContainer(item);
             }
         }
 
         return true;
     }
 
-    private void RemoveItemFromInventory(UI.UI_Item item)
+    private void RemoveItemFromItemContainer(UI.UI_Item item)
     {
         if (item == null)
         {
@@ -220,28 +220,27 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    UX.UX_Item item = other.gameObject.GetComponent<UX.UX_Item>();
+    private void OnApplicationQuit()
+    {
+        SaveInventory();
+    }
 
-    //    if (item != null)
-    //    {
-    //        if (item.triggerCount <= 0)
-    //        {
-    //            if (AddItem(item, item.numOfItem) == true)
-    //            {
-    //                TextManager.Instance.PlayNotificationText("You've got " + item.itemName + " x" + item.numOfItem);
-    //                Destroy(item.gameObject);
-    //            }
-    //            else
-    //            {
-    //                TextManager.Instance.PlayNotificationText(TextManager.DisplayText.INVENTORY_IS_FUll);
-    //            }
-    //        }
-    //        else
-    //        {
-    //            --item.triggerCount;
-    //        }
-    //    }
-    //}
+    private void SaveInventory()
+    {
+        List<ItemData> data = new List<ItemData>();
+
+        for (int i = 0; i < inventorySlot.Count; i++)
+        {
+            if (inventorySlot[i].transform.childCount != 0)
+            {
+                UI_Item item = inventorySlot[i].GetComponentInChildren<UI_Item>();
+                data.Add(new ItemData(i, item.itemName, item.count));
+            }
+        }
+        InventoryData inventoryData = new InventoryData(data);
+
+        string jsonData = JsonUtility.ToJson(inventoryData, true);
+        string path = Path.Combine(Application.dataPath, "InvetoryData");
+        File.WriteAllText(path, jsonData);
+    }
 }

@@ -6,9 +6,9 @@ using UnityEngine;
 public class UI_StaminaBuffPotion : UI_Item, UsableItem
 {
     [Header("Item Info")]
-    [SerializeField] private ItemData dataField;
+    [SerializeField] private ItemDataSO dataField;
 
-    public ItemData data
+    public ItemDataSO data
     {
         get { return dataField; }
     }

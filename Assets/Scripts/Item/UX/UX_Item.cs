@@ -6,22 +6,20 @@ namespace UX
 {
     public class UX_Item : MonoBehaviour
     {
-        [SerializeField]
-        private string _itemName;
-        [SerializeField]
-        private int _dropChace;
+
+        [SerializeField] private string _itemName;
+        [SerializeField] private int _dropChace;
         public int dropChance { get { return _dropChace; } private set { _dropChace = value; } }
         public string itemName
         {
             get { return _itemName; }
             private set { _itemName = value; }
         }
-        [SerializeField]
-        public GameObject icon;
-        [HideInInspector]
-        public int triggerCount;
+
+        [SerializeField] public GameObject icon;
 
         [SerializeField] public int numOfItem = 1;
+        [HideInInspector] public int triggerCount;
 
 
         void Awake()
