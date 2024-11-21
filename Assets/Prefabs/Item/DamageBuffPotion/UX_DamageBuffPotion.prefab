@@ -112,11 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemName: Damage Buff Potion
-  _dropChace: 30
-  icon: {fileID: 2447640876723100384, guid: 059306c8a5eb8854386fb6ade0298094, type: 3}
-  triggerCount: 0
+  _data: {fileID: 11400000, guid: ea1d7d9de08609c478e680f759766d8a, type: 2}
   numOfItem: 1
+  triggerCount: 0
 --- !u!1001 &3937330262006477475
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -100,6 +100,11 @@ namespace EnemyFSM
 
             foreach (var collider in colliders)
             {
+                if(collider.gameObject.GetComponent<LivingEntity>().isDead == true)
+                {
+                    return false;
+                }
+
                 if (IsPlayerOnNavMesh(collider.gameObject) == false)
                 {
                     return false;

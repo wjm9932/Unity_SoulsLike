@@ -98,11 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemName: Skull
-  _dropChace: 80
-  icon: {fileID: 3462686693902797349, guid: 9a43eefdddfa642449137150c6248e79, type: 3}
-  triggerCount: 0
+  _data: {fileID: 11400000, guid: 91d2104d20d211045b3a4eda357c574c, type: 2}
   numOfItem: 1
+  triggerCount: 0
 --- !u!65 &3236623389986173133
 BoxCollider:
   m_ObjectHideFlags: 0

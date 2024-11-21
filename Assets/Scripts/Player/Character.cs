@@ -36,7 +36,7 @@ public class Character : LivingEntity
     public Transform cameraTransform;
     public Transform camEyePos;
     public Vector3 originCameraTrasform { get; private set; }
-   
+
     [Header("Layer Mask")]
     public LayerMask whatIsGround;
     public LayerMask enemyMask;
@@ -148,23 +148,25 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        RecoverStamina();
-
-        rb.useGravity = !IsOnSlope();
-        playerMovementStateMachine.Update();
-        uiStateMachine.Update();
-
-        if(playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
+        if(isDead == false)
         {
-            cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
-        }
+            RecoverStamina();
 
+            rb.useGravity = !IsOnSlope();
+            playerMovementStateMachine.Update();
+            uiStateMachine.Update();
+
+            if (playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
+            {
+                cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
+            }
+
+            if (input.isInteracting == true)
+            {
+                playerEvents.Unlock();
+            }
+        }
         CameraStateMachine.Instance.Update();
-
-        if(input.isInteracting == true)
-        {
-            playerEvents.Unlock();
-        }
     }
     private void FixedUpdate()
     {
@@ -228,7 +230,10 @@ public class Character : LivingEntity
             {
                 if (ApplyDamage(enemy) == true)
                 {
-                    playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                    if (playerMovementStateMachine.currentState != playerMovementStateMachine.dieState)
+                    {
+                        playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                    }
 
                     var hitPoint = other.ClosestPoint(transform.position);
                     Vector3 hitNormal = (hitPoint - transform.position).normalized;
@@ -260,7 +265,10 @@ public class Character : LivingEntity
                     other.transform.SetParent(arrowHitPositionParent);
                     other.transform.position = arrowHitPositionParent.position;
 
-                    playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                    if (playerMovementStateMachine.currentState != playerMovementStateMachine.dieState)
+                    {
+                        playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                    }
 
                     var hitPoint = other.transform.position;
                     Vector3 hitNormal = (hitPoint - transform.position).normalized;
@@ -345,5 +353,33 @@ public class Character : LivingEntity
             int index = Random.Range(0, currentFootStepClips.Count);
             playerFootStepSoundSource.PlayOneShot(currentFootStepClips[index]);
         }
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        playerMovementStateMachine.ChangeState(playerMovementStateMachine.dieState);
+        StartCoroutine(Respawn());
+    }
+
+    IEnumerator Respawn()
+    {
+        GetComponent<Collider>().enabled = false;
+        rb.isKinematic = true;
+
+        yield return new WaitForSeconds(4f);
+
+        ResetPlayer();
+    }
+
+    private void ResetPlayer()
+    {
+        health = maxHealth;
+        stamina = maxStamina;
+        playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
+        transform.position = new Vector3(0f, 0f, 100f);
+        GetComponent<Collider>().enabled = true;
+        rb.isKinematic = false;
+        isDead = false;
     }
 }

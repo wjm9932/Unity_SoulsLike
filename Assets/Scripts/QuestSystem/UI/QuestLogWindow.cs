@@ -66,7 +66,7 @@ public class QuestLogWindow : MonoBehaviour
 
             for (int i = 0; i < quest.info.rewards.Length; i++)
             {
-                rewardsText.text += quest.info.rewards[i].count + " " + quest.info.rewards[i].itemPrefab.itemName + "\n";
+                rewardsText.text += quest.info.rewards[i].count + " " + quest.info.rewards[i].itemPrefab.data.itemName + "\n";
             }
 
             foreach (QuestInfoSO prerequisiteQuestInfo in quest.info.questPrerequisites)

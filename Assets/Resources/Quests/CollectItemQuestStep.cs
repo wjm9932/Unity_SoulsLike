@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UX;
 
 public class CollectItemQuestStep : QuestStep
 {
@@ -32,8 +31,8 @@ public class CollectItemQuestStep : QuestStep
     {
         questOwner.GetComponent<PlayerEvent>().onCollect += CollectItem;
 
-        currentItemCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>());
-        questStepData.status = item.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;
+        currentItemCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX_Item>());
+        questStepData.status = item.data.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;
 
         if (currentItemCount >= targetItemCount)
         {
@@ -43,11 +42,11 @@ public class CollectItemQuestStep : QuestStep
 
     private void CollectItem(string itemName)
     {
-        if (itemName == targetItem.GetComponent<UX.UX_Item>().itemName)
+        if (itemName == targetItem.GetComponent<UX_Item>().data.itemName)
         {
-            currentItemCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>());
+            currentItemCount = questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX_Item>());
 
-            questStepData.status = item.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;
+            questStepData.status = item.data.itemName + " Collected: " + currentItemCount + "/" + targetItemCount;
 
             if (currentItemCount >= targetItemCount)
             {

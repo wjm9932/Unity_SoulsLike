@@ -86,9 +86,9 @@ public class Enemy : LivingEntity
     {
         for (int i = 0; i < dropItem.Length; i++)
         {
-            UX.UX_Item item = dropItem[i].GetComponent<UX.UX_Item>();
+            UX_Item item = dropItem[i].GetComponent<UX_Item>();
 
-            if (IsDrop(item.dropChance) == true)
+            if (IsDrop(item.data.dropChance) == true)
             {
                 Vector2 randomOffset = Random.insideUnitCircle * 0.5f; 
                 Vector3 dropPosition = this.gameObject.transform.position + new Vector3(randomOffset.x, 0, randomOffset.y);
@@ -104,6 +104,6 @@ public class Enemy : LivingEntity
     }
     private bool IsDrop(float chances)
     {
-        return Random.Range(0f, 100f) <= chances;
+        return Random.Range(0f, 1f) <= chances;
     }
 }

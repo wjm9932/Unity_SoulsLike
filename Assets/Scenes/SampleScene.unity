@@ -6069,7 +6069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 210442451396089719, guid: 1696222c72e89ab4f9026119ef17826b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.93
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 210442451396089719, guid: 1696222c72e89ab4f9026119ef17826b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12805,6 +12805,10 @@ PrefabInstance:
       value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 8011076794458981704, guid: b78909d98814b3d42aa488a008c30001, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011076794458981704, guid: b78909d98814b3d42aa488a008c30001, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.494722
       objectReference: {fileID: 0}
@@ -15394,6 +15398,9 @@ MonoBehaviour:
   - effectType: 15
     audioClips:
     - {fileID: 8300000, guid: 4b7135b555d23d84797b5ecb9da86ace, type: 3}
+  - effectType: 16
+    audioClips:
+    - {fileID: 8300000, guid: 19cae764811dd5043ab9bcd891c90b64, type: 3}
   uiEffectInfos:
   - effectType: 0
     audioClips:
@@ -24016,6 +24023,10 @@ PrefabInstance:
       propertyPath: quests.Array.data[0].isStartPoint
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8842577014909471479, guid: a698a62cf39261f4887b479790a6a556, type: 3}
+      propertyPath: quests.Array.data[0].isFinishPoint
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a698a62cf39261f4887b479790a6a556, type: 3}
 --- !u!4 &1445493568 stripped
@@ -27028,7 +27039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2254754913457302998, guid: bd271741385672b478a33a0d372490ea, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2254754913457302998, guid: bd271741385672b478a33a0d372490ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28639,7 +28650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7573078095767149033, guid: 7d0884ce5d5b49d499cfa0d0d9049a24, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7573078095767149033, guid: 7d0884ce5d5b49d499cfa0d0d9049a24, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35753,15 +35764,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.51
+      value: -2.38
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62
+      value: 0.145
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 102.45
+      value: 82.4
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -35923,6 +35934,10 @@ PrefabInstance:
       propertyPath: groundFootStepClips.Array.data[12]
       value: 
       objectReference: {fileID: 8300000, guid: ed546d9af9b4e884cbe8d8047fa8c80a, type: 3}
+    - target: {fileID: 3702315721447772409, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: allowLoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3702315721447772409, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: eventSystem
       value: 

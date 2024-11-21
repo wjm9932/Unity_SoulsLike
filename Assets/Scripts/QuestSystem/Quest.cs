@@ -94,7 +94,7 @@ public class Quest
             for (int j = 0; j < questStepPrefab.stepPrefabs.Length; j++)
             {
                 GameObject questStep = Object.Instantiate<GameObject>(questStepPrefab.stepPrefabs[j], parentTransform);
-                questStep.GetComponent<QuestStep>().Initialize(questOwner, info.id, questStepData[currentQuestStepIndex][j]);
+                questStep.GetComponent<QuestStep>().Initialize(questOwner, info.id, questStepData[i][j]);
                 questSteps.Add(questStep);
             }
         }
@@ -139,7 +139,7 @@ public class Quest
         {
             var rewardItem = info.rewards[i];
             questOwner.inventory.AddItem(rewardItem.itemPrefab, rewardItem.count);
-            TextManager.Instance.PlayNotificationText("You've got reward: " + rewardItem.itemPrefab.itemName + " x" + rewardItem.count);
+            TextManager.Instance.PlayNotificationText("You've got reward: " + rewardItem.itemPrefab.data.itemName + " x" + rewardItem.count);
         }
 
         for (int i = 0; i < info.targetItem.Length; i++)

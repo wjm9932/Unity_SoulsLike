@@ -24,7 +24,14 @@ public class TrackingState : EnemyPatternState
     }
     public override void Update()
     {
-        base.Update();
+        if (sm.owner.target.GetComponent<LivingEntity>().isDead == true)
+        {
+            sm.ChangeState(sm.patrolState);
+        }
+        else
+        {
+            base.Update();
+        }
     }
     public override void PhysicsUpdate()
     {
@@ -62,7 +69,7 @@ public class TrackingState : EnemyPatternState
             sm.owner.navMesh.SetDestination(sm.owner.target.transform.position);
 
             yield return new WaitForSeconds(0.05f);
-            
+
             if (sm.owner.navMesh.remainingDistance >= sm.owner.viewDistance || IsPlayerOnNavMesh() == false)
             {
                 sm.ChangeState(sm.patrolState);

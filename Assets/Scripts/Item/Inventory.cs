@@ -11,15 +11,18 @@ public class Inventory : MonoBehaviour
     public GraphicRaycaster uiRaycaster;
     public EventSystem eventSystem;
 
-    [SerializeField]
-    private List<GameObject> inventorySlot = new List<GameObject>(36);
-    private Dictionary<string, UI.UI_Item> itemContainer = new Dictionary<string, UI.UI_Item>(36);
+    [Header("Save & Load")]
+    [SerializeField] private bool allowLoad;
+    
+    [SerializeField] private List<GameObject> inventorySlot = new List<GameObject>(36);
+    private Dictionary<string, UI_Item> itemContainer = new Dictionary<string, UI_Item>(36);
     private PointerEventData pointerEventData;
     private PlayerEvent playerEvent;
 
     private void Awake()
     {
         playerEvent = GetComponent<PlayerEvent>();
+        LoadItem();
     }
 
     public UsableItem quickSlot
@@ -37,9 +40,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool HasEnoughSpace(UX.UX_Item item)
+    public bool HasEnoughSpace(UX_Item item)
     {
-        if (itemContainer.ContainsKey(item.itemName) == false)
+        if (itemContainer.ContainsKey(item.data.itemName) == false)
         {
             if (FindEmptySlot(item) == -1)
             {
@@ -50,7 +53,7 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public bool AddItem(UX.UX_Item item, int count)
+    public bool AddItem(UX_Item item, int count)
     {
         if (item == null)
         {
@@ -58,65 +61,62 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
-        for (int i = 0; i < count; i++)
+        if (itemContainer.ContainsKey(item.data.itemName) == false)
         {
-            if (itemContainer.ContainsKey(item.itemName) == false)
+            int emptySlot = FindEmptySlot(item);
+
+            if (emptySlot == -1)
             {
-                int emptySlot = FindEmptySlot(item);
-
-                if (emptySlot == -1)
-                {
-                    return false;
-                }
-
-                UI.UI_Item inventoryItem = Instantiate(item.icon, inventorySlot[emptySlot].transform).GetComponent<UI.UI_Item>();
-                inventoryItem.AddItem();
-                inventoryItem.SetName(item.itemName);
-                inventoryItem.OnDestroy += RemoveItemFromItemContainer;
-                inventoryItem.OnDrop += DropItem;
-
-                if (inventoryItem.GetComponent<UsableItem>() != null)
-                {
-                    inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UpdateItemCount(item.itemName); };
-                    inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UseItem(item.itemName); };
-                }
-
-                itemContainer.Add(item.itemName, inventoryItem);
+                return false;
             }
-            else
+
+            UI_Item inventoryItem = Instantiate(item.data.icon, inventorySlot[emptySlot].transform).GetComponent<UI_Item>();
+            inventoryItem.SetName(item.data.itemName);
+            inventoryItem.count = count;
+            inventoryItem.OnDestroy += RemoveItemFromItemContainer;
+            inventoryItem.OnDrop += DropItem;
+
+            if (inventoryItem.GetComponent<UsableItem>() != null)
             {
-                itemContainer[item.itemName].AddItem();
+                inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UseItem(item.data.itemName); };
+                inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UpdateItemCount(item.data.itemName); };
             }
+
+            itemContainer.Add(item.data.itemName, inventoryItem);
+        }
+        else
+        {
+            itemContainer[item.data.itemName].count += count;
         }
 
-        playerEvent.UpdateItemCount(item.itemName);
+        playerEvent.UpdateItemCount(item.data.itemName);
         return true;
     }
 
-    public int GetTargetItemCountFromInventory(UX.UX_Item targetItem)
+    public int GetTargetItemCountFromInventory(UX_Item targetItem)
     {
         if(targetItem == null)
         {
             Debug.LogError("targetItem has no UX.UX_Item Component");
             return -1;
         }
-        if (itemContainer.ContainsKey(targetItem.itemName) == false)
+        if (itemContainer.ContainsKey(targetItem.data.itemName) == false)
         {
             return 0;
         }
         else
         {
-            return itemContainer[targetItem.itemName].count;
+            return itemContainer[targetItem.data.itemName].count;
         }
     }
 
-    private int FindEmptySlot(UX.UX_Item item)
+    private int FindEmptySlot(UX_Item item)
     {
         for (int i = 0; i < inventorySlot.Count; i++)
         {
             if (inventorySlot[i].transform.childCount == 0)
             {
-                if (i == 0 && item.icon.GetComponent<UsableItem>() == null)
+                if (i == 0 && item.data.icon.GetComponent<UsableItem>() == null)
                 {
                     continue;
                 }
@@ -126,7 +126,7 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
-    public bool RemoveTargetItemFromInventory(UX.UX_Item targetItem, int count)
+    public bool RemoveTargetItemFromInventory(UX_Item targetItem, int count)
     {
         if (targetItem == null)
         {
@@ -134,12 +134,12 @@ public class Inventory : MonoBehaviour
             return false;
         }
         
-        if (itemContainer.ContainsKey(targetItem.itemName) == false)
+        if (itemContainer.ContainsKey(targetItem.data.itemName) == false)
         {
             return false;
         }
 
-        UI.UI_Item item = itemContainer[targetItem.itemName].GetComponent<UI.UI_Item>();
+        UI_Item item = itemContainer[targetItem.data.itemName].GetComponent<UI_Item>();
         if (item.count < count)
         {
             return false;
@@ -157,7 +157,7 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    private void RemoveItemFromItemContainer(UI.UI_Item item)
+    private void RemoveItemFromItemContainer(UI_Item item)
     {
         if (item == null)
         {
@@ -172,7 +172,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void DropItem(UI.UI_Item item, int count)
+    private void DropItem(UI_Item item, int count)
     {
         if (item == null)
         {
@@ -180,14 +180,14 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        UX.UX_Item items = Instantiate(item.itemUX, gameObject.transform.position, Quaternion.identity).GetComponent<UX.UX_Item>();
+        UX_Item items = Instantiate(item.itemUX, gameObject.transform.position, Quaternion.identity).GetComponent<UX_Item>();
         items.triggerCount = 1;
         items.numOfItem = count;
 
         itemContainer[item.itemName].count = 0;
         playerEvent.UpdateItemCount(item.itemName);
 
-        TextManager.Instance.PlayNotificationText("You've dropped " + items.itemName + " x" + count);
+        TextManager.Instance.PlayNotificationText("You've dropped " + items.data.itemName + " x" + count);
     }
     public UsableItem GetItemUI()
     {
@@ -242,5 +242,56 @@ public class Inventory : MonoBehaviour
         string jsonData = JsonUtility.ToJson(inventoryData, true);
         string path = Path.Combine(Application.dataPath, "InvetoryData");
         File.WriteAllText(path, jsonData);
+    }
+
+    private void LoadItem()
+    {
+        if(allowLoad == false)
+        {
+            return;
+        }
+
+        string path = Path.Combine(Application.dataPath, "InvetoryData");
+
+        if (!File.Exists(path))
+        {
+            Debug.LogWarning("No inventory data found. Starting with an empty inventory.");
+            return;
+        }
+
+        string jsonData = File.ReadAllText(path);
+        InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(jsonData);
+
+        UX_ItemDataSO[] itemPrefabs = Resources.LoadAll<UX_ItemDataSO>("Item");
+        Dictionary<string, UX_ItemDataSO> map = new Dictionary<string, UX_ItemDataSO>();
+
+        for(int i = 0; i < itemPrefabs.Length; i++)
+        {
+            map.Add(itemPrefabs[i].itemName, itemPrefabs[i]);
+        }
+
+        for(int i = 0; i < inventoryData.itemData.Count; i++)
+        {
+            UX_ItemDataSO item = map[inventoryData.itemData[i].itemName];
+            LoadItemToInventory(item, inventoryData.itemData[i].itemCount, inventoryData.itemData[i].slotIndex);
+        }
+    }
+
+    private void LoadItemToInventory(UX_ItemDataSO item, int count, int slot)
+    {
+        UI_Item inventoryItem = Instantiate(item.icon, inventorySlot[slot].transform).GetComponent<UI_Item>();
+        inventoryItem.count = count;
+
+        inventoryItem.SetName(item.itemName);
+        inventoryItem.OnDestroy += RemoveItemFromItemContainer;
+        inventoryItem.OnDrop += DropItem;
+
+        if (inventoryItem.GetComponent<UsableItem>() != null)
+        {
+            inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UpdateItemCount(item.itemName); };
+            inventoryItem.GetComponent<UsableItem>().OnUseItem += () => { playerEvent.UseItem(item.itemName); };
+        }
+
+        itemContainer.Add(item.itemName, inventoryItem);
     }
 }

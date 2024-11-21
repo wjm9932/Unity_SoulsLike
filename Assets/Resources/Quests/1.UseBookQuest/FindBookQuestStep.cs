@@ -24,16 +24,16 @@ public class FindBookQuestStep : QuestStep
         questOwner.GetComponent<PlayerEvent>().onCollect += FindBook;
         questStepData.status = "Find a Book";
 
-        if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
+        if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX_Item>()) >= 1)
         {
             UpdateQuestStepState(QuestStepState.FINISHED);
         }
     }
     private void FindBook(string itemName)
     {
-        if (itemName == targetItem.GetComponent<UX.UX_Item>().itemName)
+        if (itemName == targetItem.GetComponent<UX_Item>().data.itemName)
         {
-            if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX.UX_Item>()) >= 1)
+            if (questOwner.inventory.GetTargetItemCountFromInventory(targetItem.GetComponent<UX_Item>()) >= 1)
             {
                 UpdateQuestStepState(QuestStepState.FINISHED);
             }

@@ -112,11 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abccea94c77a7549b20fad711b7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemName: Health Potion
-  _dropChace: 30
-  icon: {fileID: 9189238838166180093, guid: b5e894cc0abea1b42aea387af6e1f7cd, type: 3}
-  triggerCount: 0
+  _data: {fileID: 11400000, guid: de550649077cb1a4a8b9f1a89d29c9b9, type: 2}
   numOfItem: 1
+  triggerCount: 0
 --- !u!1001 &33317828196430552
 PrefabInstance:
   m_ObjectHideFlags: 0

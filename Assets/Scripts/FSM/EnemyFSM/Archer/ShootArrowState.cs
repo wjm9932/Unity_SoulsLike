@@ -32,7 +32,7 @@ public class ShootArrowState : EnemyPatternState
 
             Arrow arrow = ObjectPoolManager.Instance.GetPoolableObject(ObjectPoolManager.ObjectType.ARROW).GetComponent<Arrow>();
             arrow.Initialize(sm.owner.GetComponent<ArcherEnemy>().arrowPosition.position, targetRotation, sm.owner.transform);
-            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.SHOT_ARROW, 0.4f, sm.owner.transform.position, Quaternion.identity, sm.owner.transform);
+            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.SHOT_ARROW, 0.8f, sm.owner.transform.position, Quaternion.identity, sm.owner.transform);
             sm.ChangeState(sm.trackingState);
         }
         else
