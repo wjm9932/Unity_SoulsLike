@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.IO;
 
 public class QuestManager : MonoBehaviour
 {
@@ -14,9 +15,9 @@ public class QuestManager : MonoBehaviour
     public event Action<string, string> onUpdateQuestDialogue;
     public event Func<bool> onInteractWithQuest;
 
-    [SerializeField]
-    private Character questOwner;
 
+    [SerializeField] private Character questOwner;
+    [SerializeField] bool allowLoadQuest;
     private Dictionary<string, Quest> questMap;
 
 
@@ -46,6 +47,10 @@ public class QuestManager : MonoBehaviour
     {
         foreach (Quest quest in questMap.Values)
         {
+            if(quest.state == QuestState.IN_PROGRESS || quest.state == QuestState.CAN_FINISH)
+            {
+                quest.InstantiateLoadedQuestStep(this.transform);
+            }
             NotifyQuestStateToQuestPoints(quest);
         }
     }
@@ -122,7 +127,7 @@ public class QuestManager : MonoBehaviour
 
     private void UpdateQuestState(Quest quest)
     {
-        if(quest.CanMoveNextQuestStep() == false)
+        if (quest.CanMoveNextQuestStep() == false)
         {
             ChangeQuestState(quest, QuestState.IN_PROGRESS);
             return;
@@ -136,7 +141,7 @@ public class QuestManager : MonoBehaviour
         else
         {
             ChangeQuestState(quest, QuestState.CAN_FINISH);
-            TextManager.Instance.PlayNotificationText("Quest : " + "\"" +quest.info.displayName + "\"" + " can be completed!");
+            TextManager.Instance.PlayNotificationText("Quest : " + "\"" + quest.info.displayName + "\"" + " can be completed!");
             SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.QUEST_COMPLETED, 0.25f);
         }
     }
@@ -211,7 +216,7 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                idToQuestMap.Add(questInfo.id, new Quest(questInfo, questOwner));
+                idToQuestMap.Add(questInfo.id, LoadQuest(questInfo));
             }
         }
         return idToQuestMap;
@@ -219,13 +224,6 @@ public class QuestManager : MonoBehaviour
 
     private Quest GetQuestById(string id)
     {
-        //Quest quest = questMap[id];
-        //if (quest == null)
-        //{
-        //    //Debug.LogError("ID not found in the Quest Map: " + id);
-        //}
-        //return quest;
-
         if (questMap.ContainsKey(id) == true)
         {
             return questMap[id];
@@ -236,6 +234,47 @@ public class QuestManager : MonoBehaviour
         }
 
     }
-
-
+    private void OnApplicationQuit()
+    {
+        foreach (Quest quest in questMap.Values)
+        {
+            SaveQuest(quest);
+        }
+    }
+    private void SaveQuest(Quest quest)
+    {
+        try
+        {
+            QuestData questData = quest.GetQuestSaveData();
+            string serializedData = JsonUtility.ToJson(questData);
+            PlayerPrefs.SetString(quest.info.id, serializedData);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Failed to save quest with id " + quest.info.id + ": " + e);
+        }
+    }
+    private Quest LoadQuest(QuestInfoSO questInfo)
+    {
+        Quest quest = null;
+        try
+        {
+            if (PlayerPrefs.HasKey(questInfo.id) == true && allowLoadQuest == true)
+            {
+                string serializedData = PlayerPrefs.GetString(questInfo.id);
+                QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
+                QuestStepData[][] data = Quest.Convert2DArrayFrom1DArray(questData.questStepData, questInfo);
+                quest = new Quest(questInfo, questData.state, questData.currentQuestStepIndex, data, questOwner);
+            }
+            else
+            {
+                quest = new Quest(questInfo, questOwner);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Failed to load quest with id " + quest.info.id + ": " + e);
+        }
+        return quest;
+    }
 }

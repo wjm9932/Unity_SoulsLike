@@ -11,9 +11,9 @@ public abstract class QuestStep : MonoBehaviour
 
     protected void UpdateQuestStepState(QuestStepState state)
     {
-        if (this.questStepData.state != state)
+        if (this.questStepData.questStepState != state)
         {
-            this.questStepData.state = state;
+            this.questStepData.questStepState = state;
             QuestManager.Instance.AdvanceQuest(questId);
         }
         else
@@ -26,5 +26,10 @@ public abstract class QuestStep : MonoBehaviour
         questOwner = owner;
         questId = id;
         this.questStepData = questStepData;
+
+        if(this.gameObject.GetComponent<ICountBasedQuest>() != null && this.questStepData.count != "")
+        {
+            this.gameObject.GetComponent<ICountBasedQuest>().SetQuestStepCount(this.questStepData.count);
+        }
     }
 }

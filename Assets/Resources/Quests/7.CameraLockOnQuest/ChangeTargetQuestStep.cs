@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeTargetQuestStep : QuestStep
+public class ChangeTargetQuestStep : QuestStep, ICountBasedQuest
 {
     [SerializeField] private int targetCount;
     private int currnetCount = 0;
@@ -10,14 +10,14 @@ public class ChangeTargetQuestStep : QuestStep
     // Start is called before the first frame update
     void Start()
     {
-        questStepData.status = "Change lock on target: " + currnetCount.ToString() + "/" + targetCount.ToString();
         questOwner.playerEvents.onChangeTarget += ChangeTarget;
+        UpdateStatus();
     }
 
     private void ChangeTarget()
     {
         ++currnetCount;
-        questStepData.status = "Change lock on target: " + currnetCount.ToString() + "/" + targetCount.ToString();
+        UpdateStatus();
 
         if (currnetCount >= targetCount)
         {
@@ -36,5 +36,14 @@ public class ChangeTargetQuestStep : QuestStep
         {
             questOwner.playerEvents.onChangeTarget -= ChangeTarget;
         }
+    }
+    private void UpdateStatus()
+    {
+        questStepData.count = currnetCount.ToString();
+        questStepData.status = "Change lock on target: " + currnetCount.ToString() + "/" + targetCount.ToString();
+    }
+    public void SetQuestStepCount(string count)
+    {
+        currnetCount = System.Int32.Parse(count);
     }
 }

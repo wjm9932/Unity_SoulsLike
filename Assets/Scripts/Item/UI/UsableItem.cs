@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public interface UsableItem
 {
-    ItemData data { get;}
+    ItemDataSO data { get;}
     public bool UseItem(LivingEntity livingEntity);
     public IState GetTargetState(PlayerMovementStateMachine stateMachine);
 

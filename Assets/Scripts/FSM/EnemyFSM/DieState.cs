@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class DieState : IState
@@ -18,7 +19,12 @@ public class DieState : IState
     }
     public virtual void Update()
     {
-
+        if(sm.owner.canAttack == true)
+        {
+            StackTrace stackTrace = new StackTrace(true);
+            UnityEngine.Debug.Log(stackTrace.ToString());
+            UnityEngine.Debug.LogError(sm.owner.name + "is in Die state: " + sm.owner.canAttack);
+        }
     }
     public virtual void PhysicsUpdate()
     {

@@ -9,9 +9,9 @@ public class Quest
     public QuestState state { get; private set; }
     public List<GameObject> questSteps { get; private set; } = new List<GameObject>();
     public QuestStepData[][] questStepData;
-    private int currentQuestStepIndex;
 
     private Character questOwner;
+    private int currentQuestStepIndex;
     
     public Quest(QuestInfoSO info, Character owner)
     {
@@ -32,6 +32,28 @@ public class Quest
             }
         }
     }
+
+    public Quest(QuestInfoSO info, QuestState state, int currentQuestStepIndex, QuestStepData[][] questStepData, Character owner)
+    {
+        this.info = info;
+        this.state = state;
+        this.currentQuestStepIndex = currentQuestStepIndex;
+        this.questStepData = questStepData;
+        this.questOwner = owner;
+
+        if (this.questStepData.GetLength(0) != info.questStepPrefabs.Length)
+        {
+            Debug.LogError("Load sync failed");
+        }
+        for(int i = 0; i < info.questStepPrefabs.Length; i++)
+        {
+            if (this.questStepData[i].Length != info.questStepPrefabs[i].stepPrefabs.Length)
+            {
+                Debug.LogError("Load sync failed");
+            }
+        }
+    }
+
     public void MoveToNextStep()
     {
         currentQuestStepIndex++;
@@ -62,6 +84,22 @@ public class Quest
             }
         }
     }
+
+    public void InstantiateLoadedQuestStep(Transform parentTransform)
+    {
+        for(int i = 0; i <= currentQuestStepIndex; i++)
+        {
+            QuestStepPrefabs questStepPrefab = info.questStepPrefabs[i];
+
+            for (int j = 0; j < questStepPrefab.stepPrefabs.Length; j++)
+            {
+                GameObject questStep = Object.Instantiate<GameObject>(questStepPrefab.stepPrefabs[j], parentTransform);
+                questStep.GetComponent<QuestStep>().Initialize(questOwner, info.id, questStepData[currentQuestStepIndex][j]);
+                questSteps.Add(questStep);
+            }
+        }
+    }
+
     public void SetQuestState(QuestState state)
     {
         this.state = state;
@@ -131,7 +169,7 @@ public class Quest
             {
                 for(int j = 0; j < questStepData[i].Length; j++)
                 {
-                    if (questStepData[i][j].state == QuestStepState.FINISHED)
+                    if (questStepData[i][j].questStepState == QuestStepState.FINISHED)
                     {
                         fullStatus += "<s>" + questStepData[i][j].status + "</s>\n";
                     }
@@ -170,7 +208,7 @@ public class Quest
         {
             for(int j = 0; j < questStepData[i].Length; j++)
             {
-                if (questStepData[i][j].state != QuestStepState.FINISHED)
+                if (questStepData[i][j].questStepState != QuestStepState.FINISHED)
                 {
                     return false;
                 }
@@ -178,5 +216,49 @@ public class Quest
         }
 
         return true;
+    }
+
+    public QuestData GetQuestSaveData()
+    {
+        return new QuestData(state, currentQuestStepIndex, Convert1DArrayFrom2DArray(questStepData));
+    }
+
+    private QuestStepData[] Convert1DArrayFrom2DArray(QuestStepData[][] questStepData)
+    {
+        int totalLength = 0;
+        for (int i = 0; i < info.questStepPrefabs.Length; i++)
+        {
+            totalLength += info.questStepPrefabs[i].stepPrefabs.Length;
+        }
+
+        QuestStepData[] questStepData1D = new QuestStepData[totalLength];
+
+        int index = 0;
+        for (int i = 0; i < info.questStepPrefabs.Length; i++)
+        {
+            for (int j = 0; j < info.questStepPrefabs[i].stepPrefabs.Length; j++)
+            {
+                questStepData1D[index++] = questStepData[i][j];
+            }
+        }
+
+        return questStepData1D;
+    }
+
+    public static QuestStepData[][] Convert2DArrayFrom1DArray(QuestStepData[] questStepData, QuestInfoSO info)
+    {
+        QuestStepData[][] questStepData2D = new QuestStepData[info.questStepPrefabs.Length][];
+
+        int index = 0;
+        for (int i = 0; i < info.questStepPrefabs.Length; i++)
+        {
+            questStepData2D[i] = new QuestStepData[info.questStepPrefabs[i].stepPrefabs.Length];
+            for (int j = 0; j < info.questStepPrefabs[i].stepPrefabs.Length; j++)
+            {
+                questStepData2D[i][j] = questStepData[index++];
+            }
+        }
+
+        return questStepData2D;
     }
 }

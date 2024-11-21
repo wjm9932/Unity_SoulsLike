@@ -88,8 +88,8 @@ public class WarriorEnemy : Enemy
     }
     public override void Die()
     {
-        base.Die();
-
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.dieState);
+
+        base.Die();
     }
 }
