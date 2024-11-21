@@ -367,7 +367,7 @@ public class Character : LivingEntity
         GetComponent<Collider>().enabled = false;
         rb.isKinematic = true;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
 
         ResetPlayer();
     }

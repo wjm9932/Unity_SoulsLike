@@ -3,17 +3,32 @@
         {
             "slotIndex": 0,
             "itemName": "Health Potion",
-            "itemCount": 7
+            "itemCount": 4
         },
         {
-            "slotIndex": 1,
-            "itemName": "Book",
-            "itemCount": 3
+            "slotIndex": 4,
+            "itemName": "Damage Buff Potion",
+            "itemCount": 2
         },
         {
-            "slotIndex": 2,
+            "slotIndex": 5,
             "itemName": "Stamina Buff Potion",
             "itemCount": 3
+        },
+        {
+            "slotIndex": 6,
+            "itemName": "Book",
+            "itemCount": 2
+        },
+        {
+            "slotIndex": 7,
+            "itemName": "Key",
+            "itemCount": 1
+        },
+        {
+            "slotIndex": 8,
+            "itemName": "Armor Buff Potion",
+            "itemCount": 1
         }
     ]
 }

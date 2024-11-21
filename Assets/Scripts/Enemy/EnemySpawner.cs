@@ -15,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private float spawnRadius = 5f;
 
+    private bool isWaveEnd;
+
     [System.Serializable]
     private struct TargetEnemiesInfo
     {
@@ -32,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        if(quest != null)
+        if (quest != null)
         {
             QuestManager.Instance.onFinishQuest += EndWave;
         }
@@ -47,11 +49,14 @@ public class EnemySpawner : MonoBehaviour
     }
     void Start()
     {
-        for (int i = 0; i < info.Length; i++)
+        if(isWaveEnd == false)
         {
-            for (int j = 0; j < info[i].targetCount; j++)
+            for (int i = 0; i < info.Length; i++)
             {
-                SpawnEnemy(info[i].targetEnemy);
+                for (int j = 0; j < info[i].targetCount; j++)
+                {
+                    SpawnEnemy(info[i].targetEnemy);
+                }
             }
         }
     }
@@ -59,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void SpawnEnemy(GameObject enemyPrefab)
@@ -81,7 +86,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (NavMesh.SamplePosition(randomDirection, out hit, spawnRadius, 1 << areaMask) == true)
         {
-            return hit.position; 
+            return hit.position;
         }
         else
         {
@@ -92,17 +97,19 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemyAfterDelay(GameObject targetEnemy, float delay)
     {
         yield return new WaitForSeconds(delay);
-        SpawnEnemy(targetEnemy); 
+        SpawnEnemy(targetEnemy);
     }
     private void EndWave(Quest quest)
     {
-        if(quest.info.id == this.quest.id)
+        if (quest.info.id == this.quest.id)
         {
             for (int i = 0; i < enemies.Count; i++)
             {
                 Destroy(enemies[i].gameObject);
             }
+
+            enemies.Clear();
+            isWaveEnd = true;
         }
-        enemies.Clear();
     }
 }
