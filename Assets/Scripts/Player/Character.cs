@@ -148,23 +148,25 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        RecoverStamina();
-
-        rb.useGravity = !IsOnSlope();
-        playerMovementStateMachine.Update();
-        uiStateMachine.Update();
-
-        if (playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
+        if(isDead == false)
         {
-            cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
-        }
+            RecoverStamina();
 
+            rb.useGravity = !IsOnSlope();
+            playerMovementStateMachine.Update();
+            uiStateMachine.Update();
+
+            if (playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
+            {
+                cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
+            }
+
+            if (input.isInteracting == true)
+            {
+                playerEvents.Unlock();
+            }
+        }
         CameraStateMachine.Instance.Update();
-
-        if (input.isInteracting == true)
-        {
-            playerEvents.Unlock();
-        }
     }
     private void FixedUpdate()
     {
@@ -355,8 +357,22 @@ public class Character : LivingEntity
 
     public override void Die()
     {
-        playerMovementStateMachine.ChangeState(playerMovementStateMachine.dieState);
-
         base.Die();
+        playerMovementStateMachine.ChangeState(playerMovementStateMachine.dieState);
+        StartCoroutine(Respawn());
+    }
+
+    IEnumerator Respawn()
+    {
+        GetComponent<Collider>().enabled = false;
+        rb.isKinematic = true;
+
+        yield return new WaitForSeconds(5f);
+        
+        playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
+        transform.position = new Vector3(0f, 0f, 100f);
+        GetComponent<Collider>().enabled = true;
+        rb.isKinematic = false;
+        isDead = false;
     }
 }

@@ -138,6 +138,7 @@ public class SoundManager : MonoBehaviour
         }
         
         audioComponent.volume = volume;
+        audioComponent.spatialBlend = 0f;
 
         if (inGameAudioClips[type].Count == 1)
         {
