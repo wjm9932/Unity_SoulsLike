@@ -16,6 +16,7 @@ public class QuestIcon : MonoBehaviour
     [SerializeField] private GameObject canStartMinimapIcon;
     [SerializeField] private GameObject requirementsNotMetToFinishMinimapIcon;
     [SerializeField] private GameObject canFinishMinimapIcon;
+    [SerializeField] private GameObject npcIcon;
 
     public void SetState(QuestState newState, bool startPoint, bool finishPoint)
     {
@@ -32,6 +33,8 @@ public class QuestIcon : MonoBehaviour
         canFinishIcon.SetActive(false);
         canFinishMinimapIcon.SetActive(false);
 
+        npcIcon.SetActive(true);
+
         // set the appropriate one to active based on the new state
         switch (newState)
         {
@@ -39,24 +42,28 @@ public class QuestIcon : MonoBehaviour
                 if (startPoint) { 
                     requirementsNotMetToStartIcon.SetActive(true);
                     requirementsNotMetToStartMinimapIcon.SetActive(true);
+                    npcIcon.SetActive(false);
                 }
                 break;
             case QuestState.CAN_START:
                 if (startPoint) { 
                     canStartIcon.SetActive(true);
                     canStartMinimapIcon.SetActive (true);
+                    npcIcon.SetActive(false);
                 }
                 break;
             case QuestState.IN_PROGRESS:
                 if (finishPoint) { 
                     requirementsNotMetToFinishIcon.SetActive(true);
                     requirementsNotMetToFinishMinimapIcon.SetActive(true);
+                    npcIcon.SetActive(false);
                 }
                 break;
             case QuestState.CAN_FINISH:
                 if (finishPoint) { 
                     canFinishIcon.SetActive(true);
-                    canFinishMinimapIcon.SetActive (true); 
+                    canFinishMinimapIcon.SetActive (true);
+                    npcIcon.SetActive(false);
                 }
                 break;
             case QuestState.FINISHED:

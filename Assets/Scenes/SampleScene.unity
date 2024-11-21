@@ -4073,7 +4073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1050657780269650262, guid: 755770fee8c3cda4c9cf75c23dacccac, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.0653324
+      value: 1.5114515
       objectReference: {fileID: 0}
     - target: {fileID: 1050657780269650262, guid: 755770fee8c3cda4c9cf75c23dacccac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35812,7 +35812,7 @@ PrefabInstance:
       objectReference: {fileID: 442173697}
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: allowLoad
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: questLogUI

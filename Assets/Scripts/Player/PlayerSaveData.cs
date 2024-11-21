@@ -10,13 +10,15 @@ public struct PlayerSaveData
     public float currentHealth;
     public float maxHealth;
     public float currentStamina;
+    public bool isInDungeon;
 
-    public PlayerSaveData(Vector3 playerPosition, Quaternion playerRotation, float currentHealth, float maxHealth, float currentStamina)
+    public PlayerSaveData(Vector3 playerPosition, Quaternion playerRotation, float currentHealth, float maxHealth, float currentStamina, bool isInDungeon)
     {
         this.playerPosition = playerPosition;
         this.playerRotation = playerRotation;
         this.currentHealth = currentHealth;
         this.maxHealth = maxHealth;
         this.currentStamina = currentStamina;
+        this.isInDungeon = isInDungeon;
     }
 }

@@ -30,5 +30,6 @@ public abstract class OpenState : IStateUI
 
     public virtual void Exit()
     {
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.3f);
     }
 }

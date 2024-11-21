@@ -393,7 +393,7 @@ public class Character : LivingEntity
 
     private PlayerSaveData GetPlayerData()
     {
-        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina);
+        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, isInDungeon);
     }
     private void SaveData()
     {
@@ -421,11 +421,21 @@ public class Character : LivingEntity
 
                 transform.position = playerSaveData.playerPosition;
                 transform.rotation = playerSaveData.playerRotation;
-                
+
                 maxHealth = playerSaveData.maxHealth;
                 health = playerSaveData.currentHealth;
                 stamina = playerSaveData.currentStamina;
+                isInDungeon = playerSaveData.isInDungeon;
                 hpBar.SetStatusBarSize(maxHealth);
+
+                if (isInDungeon == true)
+                {
+                    ChangeFootStepSound(FootStepSoundType.TILE);
+                }
+                else
+                {
+                    ChangeFootStepSound(FootStepSoundType.GROUND);
+                }
             }
         }
         else
