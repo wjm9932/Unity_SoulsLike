@@ -368,7 +368,14 @@ public class Character : LivingEntity
         rb.isKinematic = true;
 
         yield return new WaitForSeconds(5f);
-        
+
+        ResetPlayer();
+    }
+
+    private void ResetPlayer()
+    {
+        health = maxHealth;
+        stamina = maxStamina;
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         transform.position = new Vector3(0f, 0f, 100f);
         GetComponent<Collider>().enabled = true;

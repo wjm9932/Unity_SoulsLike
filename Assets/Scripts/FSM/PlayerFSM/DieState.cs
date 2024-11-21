@@ -23,7 +23,7 @@ namespace PlayerFSM
             {
                 SoundManager.Instance.drinkAudioSource.Stop();
             }
-            //SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.PLAYER_DIE, 0.3f);
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.PLAYER_DIE, 0.3f);
         }
         public virtual void Update()
         {
