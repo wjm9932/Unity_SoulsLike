@@ -28,6 +28,10 @@ public class PlayerStatusBar : MonoBehaviour
             easeBar.value = statusBar.value;
         }
     }
+    private void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -70,5 +74,19 @@ public class PlayerStatusBar : MonoBehaviour
     public bool IsResizingDone()
     {
         return isResizingDone;
+    }
+
+    public void SetStatusBarSize(float maxHealth)
+    {
+        float percentage = maxHealth / originMaxHp;
+
+        RectTransform backgroundTransform = this.gameObject.GetComponent<RectTransform>();
+        RectTransform statusBarTransform = statusBar.GetComponent<RectTransform>();
+        RectTransform easeBarTransform = easeBar.GetComponent<RectTransform>();
+
+        backgroundTransform.sizeDelta = new Vector2(barBackGroundSize * percentage, backgroundTransform.sizeDelta.y);
+
+        statusBarTransform.sizeDelta = new Vector2(barSize * percentage, statusBarTransform.sizeDelta.y);
+        easeBarTransform.sizeDelta = new Vector2(statusBarTransform.sizeDelta.x, easeBarTransform.sizeDelta.y);
     }
 }

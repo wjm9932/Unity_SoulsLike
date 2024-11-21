@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using System.IO;
 
 [RequireComponent(typeof(PlayerEvent))]
 [RequireComponent(typeof(Inventory))]
@@ -19,6 +20,9 @@ public class Character : LivingEntity
     }
 
     [SerializeField] private float maxStamina;
+
+    [Header("Save & Load")]
+    [SerializeField] private bool allowLoad;
 
     [Header("Inventory")]
     public GameObject inventoryUI;
@@ -128,8 +132,7 @@ public class Character : LivingEntity
     }
     protected override void Start()
     {
-        health = 30f;
-        stamina = maxStamina;
+        LoadData();
 
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
@@ -148,7 +151,7 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        if(isDead == false)
+        if (isDead == false)
         {
             RecoverStamina();
 
@@ -381,5 +384,59 @@ public class Character : LivingEntity
         GetComponent<Collider>().enabled = true;
         rb.isKinematic = false;
         isDead = false;
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
+    private PlayerSaveData GetPlayerData()
+    {
+        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina);
+    }
+    private void SaveData()
+    {
+        PlayerSaveData playerSaveData = GetPlayerData();
+        string jsonData = JsonUtility.ToJson(playerSaveData, true);
+        string path = Path.Combine(Application.dataPath, "playerData");
+        File.WriteAllText(path, jsonData);
+    }
+
+    private void LoadData()
+    {
+        string path = Path.Combine(Application.dataPath, "playerData");
+
+        if (allowLoad)
+        {
+            if (!File.Exists(path))
+            {
+                Debug.LogWarning("No player data found. Initializing default values.");
+                InitializeDefaultPlayerData();
+            }
+            else
+            {
+                string jsonData = File.ReadAllText(path);
+                PlayerSaveData playerSaveData = JsonUtility.FromJson<PlayerSaveData>(jsonData);
+
+                transform.position = playerSaveData.playerPosition;
+                transform.rotation = playerSaveData.playerRotation;
+                
+                maxHealth = playerSaveData.maxHealth;
+                health = playerSaveData.currentHealth;
+                stamina = playerSaveData.currentStamina;
+                hpBar.SetStatusBarSize(maxHealth);
+            }
+        }
+        else
+        {
+            InitializeDefaultPlayerData();
+        }
+    }
+
+    private void InitializeDefaultPlayerData()
+    {
+        health = 30f;
+        stamina = maxStamina;
     }
 }
