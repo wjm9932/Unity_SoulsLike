@@ -9263,7 +9263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6019261130623370764, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6396068835311426742, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_RootOrder
@@ -9319,11 +9319,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7731697132335757175, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7731697132335757175, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8357322205833953460, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_Color.b
@@ -9351,11 +9351,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8682181209207948676, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.748
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8682181209207948676, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 611b0cf04398284489896ac54de8ccc8, type: 3}
@@ -15381,8 +15381,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: df788ab6bd4de1940acc3dab8ae1895a, type: 3}
   - effectType: 11
     audioClips:
-    - {fileID: 8300000, guid: ed7e5d8f2f6306746a6929bab0d3975f, type: 3}
-    - {fileID: 8300000, guid: 28ecac922c44d264383925bb733197ce, type: 3}
+    - {fileID: 8300000, guid: 699b912cc46ba4f4fad8fa38e997e232, type: 3}
+    - {fileID: 8300000, guid: eca8a0d2601435d48a00ed0d95545385, type: 3}
   - effectType: 12
     audioClips:
     - {fileID: 8300000, guid: 06aa7953968b2fb46823f1334a2c32d4, type: 3}

@@ -56,7 +56,7 @@ public class ShootArrowState : EnemyPatternState
     public override void OnAnimationEnterEvent()
     {
         sm.owner.attackSound = SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.ARCHER_ENEMY_ATTACK, 
-            1f, sm.owner.transform.position, Quaternion.identity, sm.owner.transform);
+            0.8f, sm.owner.transform.position, Quaternion.identity, sm.owner.transform);
         sm.owner.attackSound.GetComponent<SoundObjectPool>().removeAction += () => { sm.owner.attackSound = null; };
     }
     public override void OnAnimationExitEvent()
