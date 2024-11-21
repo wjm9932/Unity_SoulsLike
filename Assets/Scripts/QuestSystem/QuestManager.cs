@@ -64,9 +64,9 @@ public class QuestManager : MonoBehaviour
             onFinishQuest(quest);
         }
     }
-    public void UpdateQuestDialogue(string questName, string id)
+    public void UpdateQuestDialogue(string questName, string text)
     {
-        Quest quest = GetQuestById(id);
+        Quest quest = GetQuestById(text);
         if (quest != null)
         {
             if (onUpdateQuestDialogue != null)
@@ -76,7 +76,7 @@ public class QuestManager : MonoBehaviour
         }
         else
         {
-            onUpdateQuestDialogue(questName, id);
+            onUpdateQuestDialogue(questName, text);
         }
 
     }
@@ -253,7 +253,7 @@ public class QuestManager : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError("Failed to save quest with id " + quest.info.id + ": " + e);
+            Debug.LogError("Failed to save quest with text " + quest.info.id + ": " + e);
         }
     }
     private Quest LoadQuest(QuestInfoSO questInfo)
@@ -275,7 +275,7 @@ public class QuestManager : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError("Failed to load quest with id " + quest.info.id + ": " + e);
+            Debug.LogError("Failed to load quest with text " + quest.info.id + ": " + e);
         }
         return quest;
     }

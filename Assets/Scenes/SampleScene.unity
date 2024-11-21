@@ -24011,14 +24011,14 @@ PrefabInstance:
     - target: {fileID: 8842577014909471479, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: quests.Array.data[0].quest
       value: 
-      objectReference: {fileID: 11400000, guid: 400ad2d5a6c243f4c8811381bcb97c64, type: 2}
+      objectReference: {fileID: 11400000, guid: 014fb7e8093297d44be3d628fa59fd77, type: 2}
     - target: {fileID: 8842577014909471479, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: quests.Array.data[0].isStartPoint
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8842577014909471479, guid: a698a62cf39261f4887b479790a6a556, type: 3}
       propertyPath: quests.Array.data[0].isFinishPoint
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a698a62cf39261f4887b479790a6a556, type: 3}
@@ -35757,15 +35757,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.51
+      value: -2.38
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62
+      value: 0.145
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 102.45
+      value: 82.4
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalRotation.w
