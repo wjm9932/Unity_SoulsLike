@@ -17,6 +17,7 @@ public class PlayerMovementStateMachine : StateMachine
     public LockOnWalkState lockOnWalkState { get; }
     public LockOnDodgeState lockOnDodgeState { get; }
     public HitState hitState { get; }
+    public DieState dieState { get; }
     public DrinkPotionState drinkPotionState { get; }
     public DrinkDamageBuffPotionState drinkDamageBuffPotionState { get; }
     public DrinkArmorBuffPotionState drinkArmorBuffPotionState { get; }
@@ -46,6 +47,7 @@ public class PlayerMovementStateMachine : StateMachine
         lockOnWalkState = new LockOnWalkState(this);
         lockOnDodgeState = new LockOnDodgeState(this);
 
-        hitState = new HitState(this);  
+        hitState = new HitState(this);
+        dieState = new DieState(this);
     }
 }

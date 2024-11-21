@@ -30,6 +30,7 @@ public class SoundManager : MonoBehaviour
         ENEMY_HIT,
         ENEMY_DIE, 
         DOOR_OPEN,
+        PLAYER_DIE
     }
 
     public enum UISoundEffectType
@@ -137,7 +138,6 @@ public class SoundManager : MonoBehaviour
         }
         
         audioComponent.volume = volume;
-        audioComponent.spatialBlend = 0f;
 
         if (inGameAudioClips[type].Count == 1)
         {

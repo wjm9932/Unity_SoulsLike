@@ -36,7 +36,7 @@ public class Character : LivingEntity
     public Transform cameraTransform;
     public Transform camEyePos;
     public Vector3 originCameraTrasform { get; private set; }
-   
+
     [Header("Layer Mask")]
     public LayerMask whatIsGround;
     public LayerMask enemyMask;
@@ -154,14 +154,14 @@ public class Character : LivingEntity
         playerMovementStateMachine.Update();
         uiStateMachine.Update();
 
-        if(playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
+        if (playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
         {
             cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
         }
 
         CameraStateMachine.Instance.Update();
 
-        if(input.isInteracting == true)
+        if (input.isInteracting == true)
         {
             playerEvents.Unlock();
         }
@@ -228,7 +228,10 @@ public class Character : LivingEntity
             {
                 if (ApplyDamage(enemy) == true)
                 {
-                    playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                    if (playerMovementStateMachine.currentState != playerMovementStateMachine.dieState)
+                    {
+                        playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                    }
 
                     var hitPoint = other.ClosestPoint(transform.position);
                     Vector3 hitNormal = (hitPoint - transform.position).normalized;
@@ -260,7 +263,10 @@ public class Character : LivingEntity
                     other.transform.SetParent(arrowHitPositionParent);
                     other.transform.position = arrowHitPositionParent.position;
 
-                    playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                    if (playerMovementStateMachine.currentState != playerMovementStateMachine.dieState)
+                    {
+                        playerMovementStateMachine.ChangeState(playerMovementStateMachine.hitState);
+                    }
 
                     var hitPoint = other.transform.position;
                     Vector3 hitNormal = (hitPoint - transform.position).normalized;
@@ -345,5 +351,12 @@ public class Character : LivingEntity
             int index = Random.Range(0, currentFootStepClips.Count);
             playerFootStepSoundSource.PlayOneShot(currentFootStepClips[index]);
         }
+    }
+
+    public override void Die()
+    {
+        playerMovementStateMachine.ChangeState(playerMovementStateMachine.dieState);
+
+        base.Die();
     }
 }
