@@ -3,12 +3,12 @@
         {
             "slotIndex": 0,
             "itemName": "Health Potion",
-            "itemCount": 24
+            "itemCount": 23
         },
         {
             "slotIndex": 1,
             "itemName": "Stamina Buff Potion",
-            "itemCount": 24
+            "itemCount": 25
         },
         {
             "slotIndex": 2,
@@ -23,7 +23,7 @@
         {
             "slotIndex": 4,
             "itemName": "Bone",
-            "itemCount": 64
+            "itemCount": 65
         },
         {
             "slotIndex": 5,

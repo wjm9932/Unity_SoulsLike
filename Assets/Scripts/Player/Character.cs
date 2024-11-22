@@ -155,8 +155,6 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        
-
         if (isDead == false)
         {
             RecoverStamina();
