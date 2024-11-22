@@ -3,37 +3,37 @@
         {
             "slotIndex": 0,
             "itemName": "Health Potion",
-            "itemCount": 5
+            "itemCount": 3
         },
         {
             "slotIndex": 1,
-            "itemName": "Skull",
-            "itemCount": 1
+            "itemName": "Stamina Buff Potion",
+            "itemCount": 8
         },
         {
             "slotIndex": 2,
-            "itemName": "Bone",
-            "itemCount": 4
-        },
-        {
-            "slotIndex": 3,
             "itemName": "Damage Buff Potion",
             "itemCount": 5
         },
         {
+            "slotIndex": 3,
+            "itemName": "Armor Buff Potion",
+            "itemCount": 3
+        },
+        {
             "slotIndex": 4,
-            "itemName": "Book",
-            "itemCount": 1
+            "itemName": "Bone",
+            "itemCount": 6
         },
         {
             "slotIndex": 5,
-            "itemName": "Stamina Buff Potion",
-            "itemCount": 7
+            "itemName": "Skull",
+            "itemCount": 1
         },
         {
             "slotIndex": 6,
-            "itemName": "Armor Buff Potion",
-            "itemCount": 3
+            "itemName": "Book",
+            "itemCount": 1
         }
     ]
 }

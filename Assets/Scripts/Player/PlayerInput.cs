@@ -25,6 +25,8 @@ public class PlayerInput : MonoBehaviour
     public bool isPressingInventoryKey { get; private set; }
     public bool isPressingQuestLogKey { get; private set; }
     public bool canGetMouseInput { get; set; }
+    public bool isChargingStart { get; private set; }
+    public bool isChargingDone { get; private set; }
 
     private float inputX;
     private float inputY;
@@ -72,6 +74,9 @@ public class PlayerInput : MonoBehaviour
 
         isPressingInventoryKey = Input.GetKeyDown(KeyCode.Tab);
         isPressingQuestLogKey = Input.GetKeyDown(KeyCode.O);
+
+        isChargingStart = Input.GetButtonDown("Fire2");
+        isChargingDone = Input.GetButtonUp("Fire2");
     }
 
     public bool IsClickItemInInventory(ClickEvent clickEvent)

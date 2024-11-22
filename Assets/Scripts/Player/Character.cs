@@ -49,10 +49,11 @@ public class Character : LivingEntity
     [Header("Movement")]
     public float walkSpeed;
     public float sprintSpeed;
-    [SerializeField]
     private float maxSlopeAngle;
     public RaycastHit slopeHit;
 
+    [Header("Attack")]
+    public GameObject slash;
 
     [Header("Player FootStep Sound")]
     [SerializeField] private List<AudioClip> tileFootStepClips = new List<AudioClip>();
@@ -151,6 +152,11 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        if(input.isChargingDone)
+        {
+            Instantiate(slash, GetPlayerPosition(), transform.rotation);
+        }
+
         if (isDead == false)
         {
             RecoverStamina();

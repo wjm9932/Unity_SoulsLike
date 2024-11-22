@@ -35811,6 +35811,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 442173697}
     - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: slash
+      value: 
+      objectReference: {fileID: 6001824620308643967, guid: 6fc5e93588854bb43b65e212eba5c449, type: 3}
+    - target: {fileID: 3702315721447772400, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: allowLoad
       value: 1
       objectReference: {fileID: 0}
