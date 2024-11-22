@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,10 @@ public class ChargingState : IState
 
     private IEnumerator coroutineReference;
     private float accumulatedStamina;
+
+    private float sizeDuration = 1.5f;
+    private float sizeTimer;
+
     public ChargingState(PlayerMovementStateMachine sm)
     {
         this.sm = sm;
@@ -23,8 +27,13 @@ public class ChargingState : IState
             coroutineReference = PostSimulationUpdate();
             sm.owner.StartCoroutine(coroutineReference);
             sm.owner.rb.velocity = Vector3.zero;
-            sm.owner.animator.SetBool("IsCharging", true);
+            sm.owner.animator.SetBool("IsCharging", true); 
             accumulatedStamina = 0f;
+            sizeTimer = 0f;
+
+            var main = sm.owner.chargingEffect.main;
+            main.startSize = 0f;
+            sm.owner.chargingEffect.Play();
         }
     }
     public virtual void Update()
@@ -33,6 +42,8 @@ public class ChargingState : IState
         {
             sm.ChangeState(sm.idleState);
         }
+
+        UpdateStartSize();
         
         accumulatedStamina += Time.deltaTime * 10f;
 
@@ -52,9 +63,10 @@ public class ChargingState : IState
     public virtual void Exit()
     {
         sm.owner.SetDamage(Mathf.RoundToInt(accumulatedStamina * 1.5f));
-
         sm.owner.StopCoroutine(coroutineReference);
         sm.owner.animator.SetBool("IsCharging", false);
+        sm.owner.chargingEffect.Stop();
+
     }
     public virtual void OnAnimationEnterEvent()
     {
@@ -87,5 +99,25 @@ public class ChargingState : IState
             yield return waitForFixedUpdate;
             Rotate();
         }
+    }
+
+    private void UpdateStartSize()
+    {
+        if(sizeTimer >= sizeDuration)
+        {
+            return;
+        }
+        var main = sm.owner.chargingEffect.main;
+
+        // 타이머 갱신
+        sizeTimer += Time.deltaTime;
+
+
+        // 현재 크기에서 목표 크기로 선형 보간
+        float newSize = Mathf.Lerp(0f, 0.1f, sizeTimer / sizeDuration);
+
+        // 업데이트된 크기 반영
+        main.startSize = newSize;
+        
     }
 }

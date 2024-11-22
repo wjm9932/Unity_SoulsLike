@@ -54,6 +54,8 @@ public class Character : LivingEntity
 
     [Header("Attack")]
     public GameObject slash;
+    public ParticleSystem chargingEffect;
+
 
     [Header("Player FootStep Sound")]
     [SerializeField] private List<AudioClip> tileFootStepClips = new List<AudioClip>();
@@ -123,6 +125,7 @@ public class Character : LivingEntity
     protected override void Awake()
     {
         base.Awake();
+        chargingEffect.Stop();
         currentFootStepClips = groundFootStepClips;
         originCameraTrasform = cameraTransform.transform.localPosition;
         staminaRecoverCoolTime = 0f;
