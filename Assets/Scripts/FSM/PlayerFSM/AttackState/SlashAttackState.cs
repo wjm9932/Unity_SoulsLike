@@ -46,7 +46,8 @@ public class SlashAttackState : IState
     }
     public virtual void OnAnimationTransitionEvent()
     {
-        Object.Instantiate(sm.owner.slash, sm.owner.GetPlayerPosition(), sm.owner.transform.rotation);
+        var slash = Object.Instantiate(sm.owner.slash, sm.owner.GetPlayerPosition(), sm.owner.transform.rotation).GetComponent<Slash>();
+        slash.SetOwner(sm.owner.gameObject);
         sm.owner.canBeDamaged = true;
     }
     public virtual void OnAnimatorIK()

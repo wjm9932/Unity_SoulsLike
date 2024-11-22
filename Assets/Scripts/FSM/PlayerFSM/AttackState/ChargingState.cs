@@ -76,7 +76,7 @@ public class ChargingState : IState
         Vector3 cameraForward = sm.owner.mainCamera.transform.forward;
         Vector3 flatForward = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(flatForward);
-        sm.owner.rb.MoveRotation(Quaternion.Slerp(sm.owner.rb.rotation, targetRotation, 15f * Time.fixedDeltaTime));
+        sm.owner.rb.MoveRotation(Quaternion.Slerp(sm.owner.rb.rotation, targetRotation, 25f * Time.fixedDeltaTime));
     }
     IEnumerator PostSimulationUpdate()
     {

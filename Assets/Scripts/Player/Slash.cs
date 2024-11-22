@@ -7,9 +7,15 @@ public class Slash : MonoBehaviour
     private float speed;
     private float elapsedTime = 0f;
 
+    public GameObject owner { get; private set; }
     void Start()
     {
         speed = distance / duration;
+    }
+
+    public void SetOwner(GameObject owner)
+    {
+        this.owner = owner;
     }
 
     void Update()
@@ -25,4 +31,5 @@ public class Slash : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }

@@ -72,12 +72,12 @@ public class ArcherEnemy : Enemy
     {
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
-    protected override void OnEnemyTriggerStay(Collider collider)
+    protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
     {
-        base.OnEnemyTriggerStay(collider); 
+        base.OnEnemyTriggerStay(target, collider); 
         if (enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.dieState)
         {
-            target = collider.transform.root.gameObject;
+            this.target = target;
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.hitState);
         }
     }
