@@ -51,7 +51,7 @@ public class ChargingState : IState
     }
     public virtual void Exit()
     {
-        sm.owner.SetDamage(accumulatedStamina * 1.5f);
+        sm.owner.SetDamage(Mathf.RoundToInt(accumulatedStamina * 1.5f));
 
         sm.owner.StopCoroutine(coroutineReference);
         sm.owner.animator.SetBool("IsCharging", false);

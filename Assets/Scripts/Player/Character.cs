@@ -49,7 +49,7 @@ public class Character : LivingEntity
     [Header("Movement")]
     public float walkSpeed;
     public float sprintSpeed;
-    private float maxSlopeAngle;
+    [SerializeField] private float maxSlopeAngle;
     public RaycastHit slopeHit;
 
     [Header("Attack")]
