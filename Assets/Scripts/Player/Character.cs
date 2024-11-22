@@ -92,7 +92,7 @@ public class Character : LivingEntity
         {
             return _stamina;
         }
-        private set
+        set
         {
             _stamina = value;
             staminaBar.UpdateStatusBar(stamina, maxStamina);

@@ -71,6 +71,10 @@ namespace PlayerFSM
                 {
                     sm.ChangeState(sm.combo_1AttackState);
                 }
+                if(sm.owner.input.isChargingStart == true)
+                {
+                    sm.ChangeState(sm.chargingState);
+                }
             }
         }
         public void PhysicsUpdate()

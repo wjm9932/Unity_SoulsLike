@@ -68,6 +68,10 @@ public abstract class PlayerMovementState : IState
             {
                 sm.ChangeState(sm.combo_1AttackState);
             }
+            if(sm.owner.input.isChargingStart == true)
+            {
+                sm.ChangeState(sm.chargingState);
+            }
         }
     }
     public virtual void PhysicsUpdate()
