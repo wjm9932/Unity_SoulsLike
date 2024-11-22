@@ -152,10 +152,7 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        if(input.isChargingDone)
-        {
-            Instantiate(slash, GetPlayerPosition(), transform.rotation);
-        }
+        
 
         if (isDead == false)
         {
@@ -312,6 +309,7 @@ public class Character : LivingEntity
         }
         else
         {
+            staminaRecoverCoolTime = targetStaminaRecoverCoolTime;
             stamina -= actualCost;
             return true;
         }

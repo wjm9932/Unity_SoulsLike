@@ -36098,6 +36098,10 @@ PrefabInstance:
       propertyPath: inventorySlot.Array.data[35]
       value: 
       objectReference: {fileID: 191702686}
+    - target: {fileID: 5727759053618339512, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
 --- !u!1001 &3794804745772709650

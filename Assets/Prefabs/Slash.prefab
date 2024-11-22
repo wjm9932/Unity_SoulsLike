@@ -110,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a308af960f799a84b8059001d3c92134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 5
-  duration: 0.5
+  distance: 10
+  duration: 0.7
