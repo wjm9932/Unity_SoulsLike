@@ -18,7 +18,7 @@ public class ChargingState : IState
     }
     public virtual void Enter()
     {
-        if(sm.owner.stamina <= 10f)
+        if(sm.owner.stamina <= 10f || sm.owner.isSkillOn == false)
         {
             sm.ChangeState(sm.walkState);
         }
@@ -62,10 +62,14 @@ public class ChargingState : IState
     }
     public virtual void Exit()
     {
-        sm.owner.SetDamage(Mathf.RoundToInt(accumulatedStamina * 1.5f));
-        sm.owner.StopCoroutine(coroutineReference);
-        sm.owner.animator.SetBool("IsCharging", false);
-        sm.owner.chargingEffect.Stop();
+        if(coroutineReference != null)
+        {
+            sm.owner.SetDamage(Mathf.RoundToInt(accumulatedStamina * 1.5f));
+            sm.owner.StopCoroutine(coroutineReference);
+            sm.owner.animator.SetBool("IsCharging", false);
+            sm.owner.chargingEffect.Stop();
+        }
+        
 
     }
     public virtual void OnAnimationEnterEvent()

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae35aa04c3bde0b409744b267e718c92, type: 3}
+  m_Name: GetSlashQuest
+  m_EditorClassIdentifier: 
+  id: GetSlashQuest
+  displayName: Slash!
+  initialState: 1
+  requirementsNotMetDialogue: You have to complete other quest before start this
+    quest!
+  doneDialogue: Thank you for your help!
+  onStartDialogue: 'Hey you wanna get skill? bring me item in locked room.
+
+    You
+    can get the key for locked room from archer skeleton.
+
+    Good luck'
+  onFinishDialogue: Cool, you can use slash! Press right mouse button.
+  onFailFinishDialogue: Not enough space!
+  questPrerequisites:
+  - {fileID: 11400000, guid: d4cb7c66b21dde54c80b69ad33276cbe, type: 2}
+  questStepPrefabs:
+  - stepPrefabs:
+    - {fileID: 7020928468447112208, guid: 63ec8e5d3f049a54aa7cb717917db065, type: 3}
+  targetItem: []
+  rewards: []

@@ -30,6 +30,8 @@ public class Character : LivingEntity
     [Header("Quest")]
     public GameObject questLogUI;
     public GameObject questDialogueUI;
+    [SerializeField] private QuestInfoSO skillIsOnQuest;
+    public bool isSkillOn { get; private set; }
 
     [Header("Status Bar")]
     public PlayerStatusBar hpBar;
@@ -119,12 +121,21 @@ public class Character : LivingEntity
         }
     }
 
+    private void OnEnable()
+    {
+        QuestManager.Instance.onFinishQuest += EnableSkill;
+    }
 
+    private void OnDisable()
+    {
+        QuestManager.Instance.onFinishQuest -= EnableSkill;
+    }
 
     // Start is called before the first frame update
     protected override void Awake()
     {
         base.Awake();
+        isSkillOn = false;
         chargingEffect.Stop();
         currentFootStepClips = groundFootStepClips;
         originCameraTrasform = cameraTransform.transform.localPosition;
@@ -453,5 +464,14 @@ public class Character : LivingEntity
     {
         health = 30f;
         stamina = maxStamina;
+    }
+
+    private void EnableSkill(Quest quest)
+    {
+        if(quest.info.id == skillIsOnQuest.id)
+        {
+            isSkillOn = true;
+            QuestManager.Instance.onFinishQuest -= EnableSkill;
+        }
     }
 }

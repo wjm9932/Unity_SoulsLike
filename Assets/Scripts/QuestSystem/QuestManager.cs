@@ -53,11 +53,13 @@ public class QuestManager : MonoBehaviour
             {
                 quest.InstantiateLoadedQuestStep(this.transform);
             }
-            NotifyQuestStateToQuestPoints(quest);
+
             if(quest.state == QuestState.FINISHED)
             {
                 NotifyQuestFinished(quest);
             }
+
+            NotifyQuestStateToQuestPoints(quest);
         }
     }
 
