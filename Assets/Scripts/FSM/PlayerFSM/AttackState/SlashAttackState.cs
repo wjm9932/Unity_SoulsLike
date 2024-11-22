@@ -48,6 +48,7 @@ public class SlashAttackState : IState
     {
         var slash = Object.Instantiate(sm.owner.slash, sm.owner.GetPlayerPosition(), sm.owner.transform.rotation).GetComponent<Slash>();
         slash.SetOwner(sm.owner.gameObject);
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.SLASH, 0.5f);
         sm.owner.canBeDamaged = true;
     }
     public virtual void OnAnimatorIK()

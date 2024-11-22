@@ -30,7 +30,8 @@ public class SoundManager : MonoBehaviour
         ENEMY_HIT,
         ENEMY_DIE, 
         DOOR_OPEN,
-        PLAYER_DIE
+        PLAYER_DIE,
+        SLASH
     }
 
     public enum UISoundEffectType
