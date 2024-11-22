@@ -1310,40 +1310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
---- !u!1 &89274986 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1869261245327723788, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
-  m_PrefabInstance: {fileID: 89274985}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &89274988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1349711676762068918, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
   m_PrefabInstance: {fileID: 89274985}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &89274989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89274986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1302b2481c2374e8b853fb91848a56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageTextPosition: {fileID: 0}
-  _entityType: 1
-  _maxHealth: 100
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 0
-  eyeTransform: {fileID: 0}
-  dropItem: []
-  hpBar: {fileID: 0}
-  lockOnIndicator: {fileID: 0}
-  minimapIcon: {fileID: 0}
-  footStepClips: []
 --- !u!1 &89513775
 GameObject:
   m_ObjectHideFlags: 0
@@ -2286,40 +2257,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
---- !u!1 &136083833 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1869261245327723788, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
-  m_PrefabInstance: {fileID: 136083832}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &136083835 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1349711676762068918, guid: 19ad0cb0e13ad4a499ea3376692849de, type: 3}
   m_PrefabInstance: {fileID: 136083832}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &136083836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136083833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1302b2481c2374e8b853fb91848a56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageTextPosition: {fileID: 0}
-  _entityType: 1
-  _maxHealth: 100
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 0
-  eyeTransform: {fileID: 0}
-  dropItem: []
-  hpBar: {fileID: 0}
-  lockOnIndicator: {fileID: 0}
-  minimapIcon: {fileID: 0}
-  footStepClips: []
 --- !u!1 &139425113 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5306363323468762054, guid: a71e65c1e42bc6b4f88940c7bd9f21d7, type: 3}
