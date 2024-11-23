@@ -58,7 +58,7 @@ public class QuestPoint : MonoBehaviour
         {
             if (QuestManager.Instance.FinishQuest(quests[questIndex].quest.id) == true)
             {
-                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex].quest.displayName, quests[questIndex].quest.onFinishDialogue);
+                QuestManager.Instance.UpdateQuestDialogue(quests[questIndex - 1].quest.displayName, quests[questIndex - 1].quest.onFinishDialogue);
             }
             else
             {
