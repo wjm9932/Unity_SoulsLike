@@ -53,6 +53,7 @@ public class Locker : MonoBehaviour
         if (other.GetComponent<Character>() != null)
         {
             unlockAction = () => { Unlock(other.GetComponent<Character>()); };
+
             other.GetComponent<Character>().playerEvents.onUnlock += unlockAction;
             other.GetComponent<Character>().GetComponent<InteractionIndicator>().Show();
         }

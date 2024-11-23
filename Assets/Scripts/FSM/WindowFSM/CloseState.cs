@@ -36,6 +36,11 @@ public class CloseState : IStateUI
         {
             sm.ChangeState(sm.openInventoryState);
         }
+
+        if(sm.owner.input.isPressingEscape == true)
+        {
+            sm.ChangeState(sm.openPauseMenuState);
+        }
     }
 
     public void Exit()

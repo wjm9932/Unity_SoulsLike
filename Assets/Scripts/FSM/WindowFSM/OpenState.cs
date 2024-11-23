@@ -22,7 +22,7 @@ public abstract class OpenState : IStateUI
     // Update is called once per frame
     public virtual void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) == true)
+        if (sm.owner.input.isPressingEscape == true)
         {
             sm.ChangeState(sm.closeState);
         }

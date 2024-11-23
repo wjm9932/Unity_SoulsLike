@@ -24,6 +24,9 @@ public class Character : LivingEntity
     [Header("Save & Load")]
     [SerializeField] private bool allowLoad;
 
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+
     [Header("Inventory")]
     public GameObject inventoryUI;
 
@@ -168,22 +171,15 @@ public class Character : LivingEntity
     {
         if (isDead == false)
         {
-            RecoverStamina();
-
             rb.useGravity = !IsOnSlope();
             playerMovementStateMachine.Update();
             uiStateMachine.Update();
-
-            if (playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
-            {
-                cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
-            }
-
-            if (input.isInteracting == true)
-            {
-                playerEvents.Unlock();
-            }
+            
+            ResetCameraPosition();
+            Unlock();
+            RecoverStamina();
         }
+
         CameraStateMachine.Instance.Update();
     }
     private void FixedUpdate()
@@ -402,6 +398,21 @@ public class Character : LivingEntity
         isDead = false;
     }
 
+    private void ResetCameraPosition()
+    {
+        if (playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
+        {
+            cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
+        }
+    }
+    private void Unlock()
+    {
+        if (input.isInteracting == true && uiStateMachine.currentState is OpenState == false)
+        {
+            playerEvents.Unlock();
+        }
+    }
+
     private void OnApplicationQuit()
     {
         SaveData();
@@ -473,5 +484,14 @@ public class Character : LivingEntity
             isSkillOn = true;
             QuestManager.Instance.onFinishQuest -= EnableSkill;
         }
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    public void Resume()
+    {
+        uiStateMachine.ChangeState(uiStateMachine.closeState);
     }
 }

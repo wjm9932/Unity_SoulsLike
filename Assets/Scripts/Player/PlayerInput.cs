@@ -27,6 +27,7 @@ public class PlayerInput : MonoBehaviour
     public bool canGetMouseInput { get; set; }
     public bool isChargingStart { get; private set; }
     public bool isChargingDone { get; private set; }
+    public bool isPressingEscape { get; private set; }
 
     private float inputX;
     private float inputY;
@@ -72,6 +73,8 @@ public class PlayerInput : MonoBehaviour
         isUsingQuickSlot = Input.GetKeyDown(KeyCode.Q);
         isInteracting = Input.GetKeyDown(KeyCode.E);
 
+        isPressingEscape = Input.GetKeyDown(KeyCode.Escape);
+
         isPressingInventoryKey = Input.GetKeyDown(KeyCode.Tab);
         isPressingQuestLogKey = Input.GetKeyDown(KeyCode.O);
 
@@ -104,5 +107,4 @@ public class PlayerInput : MonoBehaviour
         }
         return false;
     }
-
 }
