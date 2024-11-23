@@ -81,7 +81,7 @@ public abstract class LivingEntity : MonoBehaviour
         {
             canBeDamaged = false;
 
-            float damageToApply = damager.damage * (1f - buffArmorPercent);
+            float damageToApply = Mathf.RoundToInt(damager.damage * (1f - buffArmorPercent));
             health -= damageToApply;
 
             if (health <= 0)

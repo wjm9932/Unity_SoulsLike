@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: GetSlashQuest
   displayName: Slash!
-  initialState: 1
+  initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
-  onStartDialogue: 'Hey you wanna get skill? bring me item in locked room.
+  onStartDialogue: 'Hey, you wanna get skill? bring me letter in locked room.
 
     You
     can get the key for locked room from archer skeleton.
