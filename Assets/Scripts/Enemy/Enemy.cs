@@ -14,7 +14,7 @@ public class Enemy : LivingEntity
     [SerializeField] protected GameObject[] dropItem;
 
     [Header("Health Bar")]
-    [SerializeField] protected EnemyHealthBar hpBar;
+    [SerializeField] public EnemyHealthBar hpBar;
 
     [Header("Lock On Indicator")]
     public Image lockOnIndicator;
@@ -49,9 +49,9 @@ public class Enemy : LivingEntity
     {
         navMesh.areaMask = 1 << mask;
     }
-    protected virtual void OnEnemyTriggerStay(Collider other)
+    protected virtual void OnEnemyTriggerStay(GameObject target, Collider collider)
     {
-        var hitPoint = other.ClosestPoint(transform.position);
+        var hitPoint = collider.ClosestPoint(transform.position);
         Vector3 hitNormal = (hitPoint - transform.position).normalized;
         EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, transform, EffectManager.EffectType.Flesh);
     }
@@ -66,7 +66,22 @@ public class Enemy : LivingEntity
             {
                 if (ApplyDamage(player) == true)
                 {
-                    OnEnemyTriggerStay(other);
+                    OnEnemyTriggerStay(player.gameObject, other);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Slash"))
+        {
+            LivingEntity player = other.GetComponent<Slash>().owner.GetComponent<LivingEntity>();
+            if (player != null)
+            {
+                if (ApplyDamage(player) == true)
+                {
+                    OnEnemyTriggerStay(player.gameObject, other);
                 }
             }
         }

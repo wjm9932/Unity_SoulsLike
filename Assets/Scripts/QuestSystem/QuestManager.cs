@@ -53,11 +53,13 @@ public class QuestManager : MonoBehaviour
             {
                 quest.InstantiateLoadedQuestStep(this.transform);
             }
-            NotifyQuestStateToQuestPoints(quest);
+
             if(quest.state == QuestState.FINISHED)
             {
                 NotifyQuestFinished(quest);
             }
+
+            NotifyQuestStateToQuestPoints(quest);
         }
     }
 
@@ -147,7 +149,7 @@ public class QuestManager : MonoBehaviour
         else
         {
             ChangeQuestState(quest, QuestState.CAN_FINISH);
-            TextManager.Instance.PlayNotificationText("Quest : " + "\"" + quest.info.displayName + "\"" + " can be completed!");
+            TextManager.Instance.PlayNotificationText("Quest : " + "\"" + quest.info.displayName + "\"" + " can be completed!", Color.green);
             SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.QUEST_COMPLETED, 0.25f);
         }
     }

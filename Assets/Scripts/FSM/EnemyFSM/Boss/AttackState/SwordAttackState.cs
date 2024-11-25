@@ -15,7 +15,7 @@ namespace BossEnemyFSM
         {
             dir = GetLookAtAngle();
             sm.owner.navMesh.isStopped = true;
-            sm.owner.animator.SetTrigger("Attack");
+            sm.owner.animator.SetBool("isAttack", true);
             sm.owner.SetDamage(10f);
         }
         public override void Update()
@@ -28,6 +28,8 @@ namespace BossEnemyFSM
                 //sm.ChangeState(sm.idleState);
                 //sm.ChangeState(sm.stabAttackState);
             }
+            base.Update();
+
         }
         public override void PhysicsUpdate()
         {
@@ -39,6 +41,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
+            sm.owner.animator.SetBool("isAttack", false);
             sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
@@ -63,7 +66,7 @@ namespace BossEnemyFSM
             switch (pattern)
             {
                 case 0:
-                    sm.ChangeState(sm.idleState);
+                    sm.ChangeState(sm.trackingState);
                     break;
                 case 1:
                     sm.ChangeState(sm.stabAttackState);

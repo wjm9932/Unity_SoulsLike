@@ -13,6 +13,7 @@ TagManager:
   - Obstacle
   - FxTemporaire
   - CampFire
+  - Slash
   layers:
   - Default
   - TransparentFX

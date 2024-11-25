@@ -5,15 +5,32 @@ using UnityEngine.AI;
 
 public class BossEnemy : Enemy
 {
-    [SerializeField]
-    private Character character;
-    private BossEnemyBehaviorStateMachine enemyBehaviorStateMachine;
+    public override float health
+    {
+        protected set
+        {
+            base.health = value;
+            hpBar.UpdateHealthBar(health, maxHealth);
+        }
+    }
 
+    public override bool canBeDamaged
+    {
+        get
+        {
+            return Time.time >= lastTimeDamaged + minTimeBetDamaged ? true : false;
+        }
+    }
+
+    private float lastTimeDamaged;
+    private const float minTimeBetDamaged = 0.5f;
+
+    private BossEnemyBehaviorStateMachine enemyBehaviorStateMachine;
     protected override void Awake()
     {
         base.Awake();
 
-        health = 10;
+        health = maxHealth;
 
         navMesh.updateRotation = false;
         canBeDamaged = true;
@@ -23,8 +40,9 @@ public class BossEnemy : Enemy
     protected override void Start()
     {
         base.Start();
-        enemyBehaviorStateMachine = new BossEnemyBehaviorStateMachine(this, character);
-        enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
+        buffArmorPercent = 0.3f;
+        enemyBehaviorStateMachine = new BossEnemyBehaviorStateMachine(this);
+        enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);
     }
 
     // Update is called once per frame
@@ -33,6 +51,10 @@ public class BossEnemy : Enemy
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stabAttackState);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
         }
 
         enemyBehaviorStateMachine.Update();
@@ -89,7 +111,12 @@ public class BossEnemy : Enemy
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
 
+    protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
+    {
+        base.OnEnemyTriggerStay(target, collider);
 
+        lastTimeDamaged = Time.time;
+    }
     public override void Die()
     {
         base.Die();

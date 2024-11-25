@@ -14,6 +14,10 @@ public class PlayerMovementStateMachine : StateMachine
     public Combo_1AttackState combo_1AttackState { get; }
     public Combo_2AttackState combo_2AttackState { get; }
     public Combo_3AttackState combo_3AttackState { get; }
+
+    public ChargingState chargingState { get; }
+    public SlashAttackState slashState { get; }
+
     public LockOnWalkState lockOnWalkState { get; }
     public LockOnDodgeState lockOnDodgeState { get; }
     public HitState hitState { get; }
@@ -44,6 +48,9 @@ public class PlayerMovementStateMachine : StateMachine
         combo_1AttackState = new Combo_1AttackState(this);
         combo_2AttackState = new Combo_2AttackState(this);
         combo_3AttackState = new Combo_3AttackState(this);
+        chargingState = new ChargingState(this);
+        slashState = new SlashAttackState(this);
+
         lockOnWalkState = new LockOnWalkState(this);
         lockOnDodgeState = new LockOnDodgeState(this);
 

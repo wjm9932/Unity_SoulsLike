@@ -38,8 +38,11 @@ public class QuestScrollList : MonoBehaviour
         QuestLogButton questLogButton = Instantiate(buttonPrefab, contentParent.transform).GetComponent<QuestLogButton>();
         questLogButton.Initialize(quest.info.displayName, quest, clickedQuest, clickedButton);
 
+        RectTransform buttonRectTransform = buttonPrefab.GetComponent<RectTransform>();
+        float buttonHeight = buttonRectTransform.rect.height;
+
         RectTransform contentRectTransform = contentParent.GetComponent<RectTransform>();
-        contentRectTransform.sizeDelta = new Vector2(contentParent.GetComponent<RectTransform>().sizeDelta.x, contentRectTransform.sizeDelta.y + 30f + layOut.spacing);
+        contentRectTransform.sizeDelta = new Vector2(contentParent.GetComponent<RectTransform>().sizeDelta.x, contentRectTransform.sizeDelta.y + buttonHeight + layOut.spacing);
 
         idToButtonMap.Add(quest.info.id, questLogButton);
         return questLogButton;

@@ -16,18 +16,18 @@ namespace BossEnemyFSM
             dir = GetLookAtAngle();
 
             sm.owner.navMesh.isStopped = true;
-            sm.owner.animator.SetTrigger("Stab");
+            sm.owner.animator.SetBool("isStab", true);
             sm.owner.SetDamage(5f);
         }
         public override void Update()
         {
             sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, dir, Time.deltaTime * 10);
-
             if (sm.owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.75f && sm.owner.animator.IsInTransition(0) == false)
             {
                 GetBossPattern();
-                //sm.ChangeState(sm.idleState);
             }
+            base.Update();
+
         }
         public override void PhysicsUpdate()
         {
@@ -39,6 +39,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
+            sm.owner.animator.SetBool("isStab", false);
             sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
@@ -63,7 +64,7 @@ namespace BossEnemyFSM
             switch (pattern)
             {
                 case 0:
-                    sm.ChangeState(sm.idleState);
+                    sm.ChangeState(sm.trackingState);
                     break;
                 case 1:
                     sm.ChangeState(sm.backFlipState);

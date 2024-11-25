@@ -18,11 +18,11 @@ namespace BossEnemyFSM
 
             isReadyToAttack = false;
             sm.owner.navMesh.isStopped = true;
-            sm.owner.animator.SetTrigger("StabReady");
+            sm.owner.animator.SetBool ("isStabReady", true);
         }
         public override void Update()
         {
-            if (isReadyToAttack == false && Vector3.Distance(sm.owner.transform.position, sm.character.transform.position) >= 3f)
+            if (isReadyToAttack == false && Vector3.Distance(sm.owner.transform.position, sm.owner.target.transform.position) >= 3f)
             {
                 sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, GetLookAtAngle(), Time.deltaTime * 10);
             }
@@ -30,6 +30,8 @@ namespace BossEnemyFSM
             {
                 sm.ChangeState(sm.dashAttackState);
             }
+            base.Update();
+
         }
         public override void PhysicsUpdate()
         {
@@ -41,6 +43,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
+            sm.owner.animator.SetBool("isStabReady", false);
             sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
@@ -70,7 +73,7 @@ namespace BossEnemyFSM
             switch (pattern)
             {
                 case 0:
-                    sm.ChangeState(sm.idleState);
+                    sm.ChangeState(sm.trackingState);
                     break;
                 case 1:
                     sm.ChangeState(sm.jumpAttackState);

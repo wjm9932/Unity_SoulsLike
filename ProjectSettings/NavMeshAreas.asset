@@ -15,11 +15,11 @@ NavMeshProjectSettings:
     cost: 1
   - name: SecondBattleField
     cost: 1
-  - name: 
+  - name: ThirdBattleField
     cost: 1
-  - name: 
+  - name: FourthBattelField
     cost: 1
-  - name: 
+  - name: Boss
     cost: 1
   - name: 
     cost: 1

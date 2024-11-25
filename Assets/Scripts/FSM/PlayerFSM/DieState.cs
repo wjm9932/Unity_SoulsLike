@@ -19,6 +19,11 @@ namespace PlayerFSM
             sm.owner.rb.velocity = Vector3.zero;
             sm.owner.animator.SetBool("IsDie", true);
 
+            if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            {
+                CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
+            }
+
             if (SoundManager.Instance.drinkAudioSource != null)
             {
                 SoundManager.Instance.drinkAudioSource.Stop();

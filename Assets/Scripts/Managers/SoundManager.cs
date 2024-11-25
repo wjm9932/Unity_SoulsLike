@@ -7,10 +7,14 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
-    private struct EnemySoundEffect
-    { 
-    }
+    [SerializeField] private AudioSource bgmAudioSource;
 
+    public enum BackGroundMusic
+    {
+        OUTSIDE,
+        DUNGEON,
+        BOSS
+    }
 
     public enum SoundEffectType
     {
@@ -30,7 +34,12 @@ public class SoundManager : MonoBehaviour
         ENEMY_HIT,
         ENEMY_DIE, 
         DOOR_OPEN,
-        PLAYER_DIE
+        PLAYER_DIE,
+        SLASH,
+        JUMP_ATTACK,
+        BOSS_JUMP,
+        BOSS_FLIP,
+        BOSS_DASH,
     }
 
     public enum UISoundEffectType
@@ -41,7 +50,12 @@ public class SoundManager : MonoBehaviour
         QUEST_COMPLETED,
     }
 
-
+    [System.Serializable]
+    private struct BGMInfo
+    {
+        public BackGroundMusic type;
+        public AudioClip audioClips;
+    }
 
     [System.Serializable]
     private struct SoundEffectInfo
@@ -57,11 +71,11 @@ public class SoundManager : MonoBehaviour
         public AudioClip[] audioClips;
     }
 
-
-
+    [SerializeField] private BGMInfo[] bgmList;
     [SerializeField] private SoundEffectInfo[] effectInfos;
     [SerializeField] private UISoundEffectInfo[] uiEffectInfos;
 
+    private Dictionary<BackGroundMusic, AudioClip> bgmAudioClips = new Dictionary<BackGroundMusic, AudioClip>();
     private Dictionary<SoundEffectType, List<AudioClip>> inGameAudioClips = new Dictionary<SoundEffectType, List<AudioClip>>();
     private Dictionary<UISoundEffectType, List<AudioClip>> uiGameAudioClips = new Dictionary<UISoundEffectType, List<AudioClip>>();
 
@@ -75,6 +89,11 @@ public class SoundManager : MonoBehaviour
             Instance = this;
         else
             Destroy(this.gameObject);
+
+        for(int i = 0; i < bgmList.Length; i++)
+        {
+            bgmAudioClips.Add(bgmList[i].type, bgmList[i].audioClips);
+        }
 
         for(int i = 0; i < effectInfos.Length; i++)
         {
@@ -169,5 +188,29 @@ public class SoundManager : MonoBehaviour
 
         audioSource.GetComponent<IPoolableObject>().Initialize(position, rotation, parent);
         return audioSource;
+    }
+
+    public void ChangeBackGroundMusic(BackGroundMusic type)
+    {
+        if(type  == BackGroundMusic.OUTSIDE)
+        {
+            bgmAudioSource.clip = bgmAudioClips[type];
+            bgmAudioSource.pitch = 2.5f;
+            bgmAudioSource.volume = 0.5f;
+            
+        }
+        else if (type == BackGroundMusic.DUNGEON)
+        {
+            bgmAudioSource.clip = bgmAudioClips[type];
+            bgmAudioSource.pitch = 1f;
+            bgmAudioSource.volume = 0.4f;
+        }
+        else
+        {
+            bgmAudioSource.clip = bgmAudioClips[type];
+            bgmAudioSource.pitch = 1f;
+            bgmAudioSource.volume = 0.35f;
+        }
+        bgmAudioSource.Play();
     }
 }

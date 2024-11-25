@@ -24,12 +24,17 @@ public class Character : LivingEntity
     [Header("Save & Load")]
     [SerializeField] private bool allowLoad;
 
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+
     [Header("Inventory")]
     public GameObject inventoryUI;
 
     [Header("Quest")]
     public GameObject questLogUI;
     public GameObject questDialogueUI;
+    [SerializeField] private QuestInfoSO skillIsOnQuest;
+    public bool isSkillOn { get; private set; }
 
     [Header("Status Bar")]
     public PlayerStatusBar hpBar;
@@ -49,9 +54,12 @@ public class Character : LivingEntity
     [Header("Movement")]
     public float walkSpeed;
     public float sprintSpeed;
-    [SerializeField]
-    private float maxSlopeAngle;
+    [SerializeField] private float maxSlopeAngle;
     public RaycastHit slopeHit;
+
+    [Header("Attack")]
+    public GameObject slash;
+    public ParticleSystem chargingEffect;
 
 
     [Header("Player FootStep Sound")]
@@ -59,6 +67,7 @@ public class Character : LivingEntity
     [SerializeField] private List<AudioClip> groundFootStepClips = new List<AudioClip>();
     private List<AudioClip> currentFootStepClips = new List<AudioClip>();
     private AudioSource playerFootStepSoundSource;
+    public SoundManager.BackGroundMusic musicType;
 
     [Space]
     public Transform leftHandPos;
@@ -75,7 +84,6 @@ public class Character : LivingEntity
     public Inventory inventory { get; private set; }
     public PlayerEvent playerEvents { get; private set; }
     public BuffManager playerBuff { get; private set; }
-    public bool isInDungeon { get; private set; }
     public float buffDamage { get; set; }
     public float buffStaminaPercent { get; set; }
 
@@ -91,7 +99,7 @@ public class Character : LivingEntity
         {
             return _stamina;
         }
-        private set
+        set
         {
             _stamina = value;
             staminaBar.UpdateStatusBar(stamina, maxStamina);
@@ -116,12 +124,22 @@ public class Character : LivingEntity
         }
     }
 
+    private void OnEnable()
+    {
+        QuestManager.Instance.onFinishQuest += EnableSkill;
+    }
 
+    private void OnDisable()
+    {
+        QuestManager.Instance.onFinishQuest -= EnableSkill;
+    }
 
     // Start is called before the first frame update
     protected override void Awake()
     {
         base.Awake();
+        isSkillOn = false;
+        chargingEffect.Stop();
         currentFootStepClips = groundFootStepClips;
         originCameraTrasform = cameraTransform.transform.localPosition;
         staminaRecoverCoolTime = 0f;
@@ -151,24 +169,22 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            var a = followCamera.GetComponent<CameraShake>();
+            a.ShakeCamera();
+        }
         if (isDead == false)
         {
-            RecoverStamina();
-
             rb.useGravity = !IsOnSlope();
             playerMovementStateMachine.Update();
             uiStateMachine.Update();
-
-            if (playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
-            {
-                cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
-            }
-
-            if (input.isInteracting == true)
-            {
-                playerEvents.Unlock();
-            }
+            
+            ResetCameraPosition();
+            Unlock();
+            RecoverStamina();
         }
+
         CameraStateMachine.Instance.Update();
     }
     private void FixedUpdate()
@@ -306,6 +322,7 @@ public class Character : LivingEntity
         }
         else
         {
+            staminaRecoverCoolTime = targetStaminaRecoverCoolTime;
             stamina -= actualCost;
             return true;
         }
@@ -334,17 +351,18 @@ public class Character : LivingEntity
         }
     }
 
-    public void ChangeFootStepSound(FootStepSoundType type)
+    public void ChangeSoundEffect(SoundManager.BackGroundMusic type)
     {
+        musicType = type;
+
         switch (type)
         {
-            case FootStepSoundType.TILE:
+            case SoundManager.BackGroundMusic.BOSS:
+            case SoundManager.BackGroundMusic.DUNGEON:
                 currentFootStepClips = tileFootStepClips;
-                isInDungeon = true;
                 break;
-            case FootStepSoundType.GROUND:
+            case SoundManager.BackGroundMusic.OUTSIDE:
                 currentFootStepClips = groundFootStepClips;
-                isInDungeon = false;
                 break;
         }
     }
@@ -380,10 +398,26 @@ public class Character : LivingEntity
         health = maxHealth;
         stamina = maxStamina;
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
-        transform.position = new Vector3(0f, 0f, 100f);
+        transform.position = GetComponent<PlayerCheckPoint>().checkPointPosition;
+        SoundManager.Instance.ChangeBackGroundMusic(SoundManager.BackGroundMusic.DUNGEON);
         GetComponent<Collider>().enabled = true;
         rb.isKinematic = false;
         isDead = false;
+    }
+
+    private void ResetCameraPosition()
+    {
+        if (playerMovementStateMachine.currentState != playerMovementStateMachine.sprintState)
+        {
+            cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, originCameraTrasform, 2f * Time.deltaTime);
+        }
+    }
+    private void Unlock()
+    {
+        if (input.isInteracting == true && uiStateMachine.currentState is OpenState == false)
+        {
+            playerEvents.Unlock();
+        }
     }
 
     private void OnApplicationQuit()
@@ -393,7 +427,7 @@ public class Character : LivingEntity
 
     private PlayerSaveData GetPlayerData()
     {
-        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, isInDungeon);
+        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, musicType, GetComponent<PlayerCheckPoint>().checkPointPosition);
     }
     private void SaveData()
     {
@@ -425,17 +459,11 @@ public class Character : LivingEntity
                 maxHealth = playerSaveData.maxHealth;
                 health = playerSaveData.currentHealth;
                 stamina = playerSaveData.currentStamina;
-                isInDungeon = playerSaveData.isInDungeon;
+                musicType = playerSaveData.musicType;
                 hpBar.SetStatusBarSize(maxHealth);
 
-                if (isInDungeon == true)
-                {
-                    ChangeFootStepSound(FootStepSoundType.TILE);
-                }
-                else
-                {
-                    ChangeFootStepSound(FootStepSoundType.GROUND);
-                }
+                ChangeSoundEffect(musicType);
+                SoundManager.Instance.ChangeBackGroundMusic(musicType);
             }
         }
         else
@@ -448,5 +476,23 @@ public class Character : LivingEntity
     {
         health = 30f;
         stamina = maxStamina;
+    }
+
+    private void EnableSkill(Quest quest)
+    {
+        if(quest.info.id == skillIsOnQuest.id)
+        {
+            isSkillOn = true;
+            QuestManager.Instance.onFinishQuest -= EnableSkill;
+        }
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    public void Resume()
+    {
+        uiStateMachine.ChangeState(uiStateMachine.closeState);
     }
 }

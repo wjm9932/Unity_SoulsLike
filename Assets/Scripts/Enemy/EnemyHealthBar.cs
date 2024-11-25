@@ -7,6 +7,7 @@ public class EnemyHealthBar : MonoBehaviour
 {
     [SerializeField] private Slider easeBar;
     [SerializeField] private Slider hpBar;
+    [SerializeField] private bool shouldLookPlayer = true;
 
     private float lerpSpeed = 3f;
     // Start is called before the first frame update
@@ -26,6 +27,9 @@ public class EnemyHealthBar : MonoBehaviour
             easeBar.value = Mathf.Lerp(easeBar.value, hpBar.value, lerpSpeed * Time.deltaTime);
         }
 
-        transform.LookAt(transform.position + Camera.main.transform.forward);
+        if(shouldLookPlayer == true)
+        {
+            transform.LookAt(transform.position + Camera.main.transform.forward);
+        }
     }
 }

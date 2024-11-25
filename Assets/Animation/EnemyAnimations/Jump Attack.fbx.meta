@@ -63,6 +63,20 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.075717166
+        functionName: OnAnimationTransitionEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 0654fac006e45fd41b69c95e9880ed98, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.3652304
+        functionName: OnAnimationEnterEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 0654fac006e45fd41b69c95e9880ed98, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.36953124
         functionName: SetCanAttack
         data: 
