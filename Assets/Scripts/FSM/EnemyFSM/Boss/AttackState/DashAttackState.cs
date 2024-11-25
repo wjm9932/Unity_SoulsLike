@@ -28,7 +28,7 @@ namespace BossEnemyFSM
             sm.owner.animator.SetBool("isDashStab", true);
             sm.owner.GetComponent<CapsuleCollider>().isTrigger = true;
             sm.owner.SetCanAttack(1);
-            sm.owner.SetDamage(15f);
+            sm.owner.SetDamage(20f);
         }
         public override void Update()
         {

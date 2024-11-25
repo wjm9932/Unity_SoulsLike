@@ -88,7 +88,7 @@ namespace BossEnemyFSM
             NavMeshHit hit;
             Vector3 randomDirection = Random.insideUnitSphere * 20f + sm.owner.transform.position;
 
-            if (NavMesh.SamplePosition(randomDirection, out hit, 10f, sm.owner.navMesh.areaMask) == true)
+            if (NavMesh.SamplePosition(randomDirection, out hit, 20f, sm.owner.navMesh.areaMask) == true)
             {
                 return hit.position;
             }

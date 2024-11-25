@@ -45,7 +45,7 @@ public abstract class LivingEntity : MonoBehaviour
     public float damage { get; protected set; }
     public float buffArmorPercent { get; set; }
     public bool isDead { get; protected set; }
-    public bool canBeDamaged { get; set; }
+    public virtual bool canBeDamaged { get; set; }
     public event Action onDeath;
 
     protected virtual void Awake()

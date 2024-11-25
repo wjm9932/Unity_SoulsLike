@@ -25,7 +25,7 @@ namespace BossEnemyFSM
             sm.owner.navMesh.stoppingDistance = stoppingDistance;
             sm.owner.navMesh.SetDestination(sm.owner.target.transform.position);
             sm.owner.animator.SetBool("isJumpAttack", true);
-            sm.owner.SetDamage(20f);
+            sm.owner.SetDamage(30f);
         }
         public override void Update()
         {
@@ -33,7 +33,7 @@ namespace BossEnemyFSM
 
             if (sm.owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && sm.owner.animator.IsInTransition(0) == false)
             {
-                GetBossPattern();
+                sm.ChangeState(sm.trackingState);
 
                 //sm.ChangeState(sm.idleState);
             }
@@ -76,9 +76,6 @@ namespace BossEnemyFSM
             {
                 case 0:
                     sm.ChangeState(sm.trackingState);
-                    break;
-                case 1:
-                    sm.ChangeState(sm.backFlipState);
                     break;
                 default:
                     break;

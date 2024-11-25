@@ -13,8 +13,19 @@ public class BossEnemy : Enemy
             hpBar.UpdateHealthBar(health, maxHealth);
         }
     }
-    private BossEnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
+    public override bool canBeDamaged
+    {
+        get
+        {
+            return Time.time >= lastTimeDamaged + minTimeBetDamaged ? true : false;
+        }
+    }
+
+    private float lastTimeDamaged;
+    private const float minTimeBetDamaged = 0.5f;
+
+    private BossEnemyBehaviorStateMachine enemyBehaviorStateMachine;
     protected override void Awake()
     {
         base.Awake();
@@ -29,6 +40,7 @@ public class BossEnemy : Enemy
     protected override void Start()
     {
         base.Start();
+        buffArmorPercent = 0.3f;
         enemyBehaviorStateMachine = new BossEnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);
     }
@@ -45,7 +57,7 @@ public class BossEnemy : Enemy
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
         }
 
-        enemyBehaviorStateMachine.Update();
+        //enemyBehaviorStateMachine.Update();
 
 
         //if (Input.GetKeyDown(KeyCode.C))
@@ -99,7 +111,12 @@ public class BossEnemy : Enemy
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
 
+    protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
+    {
+        base.OnEnemyTriggerStay(target, collider);
 
+        lastTimeDamaged = Time.time;
+    }
     public override void Die()
     {
         base.Die();

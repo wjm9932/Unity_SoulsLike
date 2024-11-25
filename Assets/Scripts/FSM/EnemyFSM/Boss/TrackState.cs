@@ -75,23 +75,18 @@ namespace BossEnemyFSM
         }
         private void GetBossPattern()
         {
-            int pattern = Random.Range(0, 4);
-            switch (pattern)
+            int pattern = Random.Range(0, 100);
+            if (pattern < 40)
             {
-                case 0:
-                    sm.ChangeState(sm.stabAttackState);
-                    break;
-                case 1:
-                    sm.ChangeState(sm.jumpAttackState);
-                    break;
-                case 2:
-                    sm.ChangeState(sm.swordAttackState);
-                    break;
-                case 3:
-                    sm.ChangeState(sm.backFlipState);
-                    break;
-                default:
-                    break;
+                sm.ChangeState(sm.stabAttackState);
+            }
+            else if (pattern < 80)
+            {
+                sm.ChangeState(sm.swordAttackState);
+            }
+            else
+            {
+                sm.ChangeState(sm.backFlipState);
             }
         }
     }
