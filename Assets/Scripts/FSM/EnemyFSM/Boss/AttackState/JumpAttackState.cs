@@ -56,6 +56,7 @@ namespace BossEnemyFSM
         {
             var camera = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera as CinemachineVirtualCamera;
             camera.GetComponent<CameraShake>().ShakeCamera();
+            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.JUMP_ATTACK, 1f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
         }
         public override void OnAnimationExitEvent()
         {

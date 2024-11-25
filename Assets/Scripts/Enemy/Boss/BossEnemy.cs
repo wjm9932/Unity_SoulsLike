@@ -57,7 +57,7 @@ public class BossEnemy : Enemy
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
         }
 
-        //enemyBehaviorStateMachine.Update();
+        enemyBehaviorStateMachine.Update();
 
 
         //if (Input.GetKeyDown(KeyCode.C))

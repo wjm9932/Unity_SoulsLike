@@ -210,6 +210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 257602996021742888, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 293926496069630896, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: quest
       value: 
@@ -20401,6 +20405,9 @@ MonoBehaviour:
   - effectType: 17
     audioClips:
     - {fileID: 8300000, guid: d93ea804a4529094b85152b65ab286e8, type: 3}
+  - effectType: 18
+    audioClips:
+    - {fileID: 8300000, guid: 5598c4ebcc2ec674396ed83c121eabe2, type: 3}
   uiEffectInfos:
   - effectType: 0
     audioClips:
@@ -32549,6 +32556,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: MaxDistance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].time
+      value: 0.79585195
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].value
+      value: 0.7112788
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].value
+      value: 0.463562
+      objectReference: {fileID: 0}
     - target: {fileID: 7894134720402693086, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: shouldLookPlayer
       value: 0
@@ -32689,6 +32720,10 @@ PrefabInstance:
     - target: {fileID: 257602996021742888, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 257602996021742888, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 293926496069630896, guid: 58e53ec2955b273439a64510b689d82c, type: 3}
       propertyPath: quest
@@ -48688,7 +48723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 135.13
+      value: 135.52
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -48696,7 +48731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 160.91
+      value: 160.53
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalRotation.w
