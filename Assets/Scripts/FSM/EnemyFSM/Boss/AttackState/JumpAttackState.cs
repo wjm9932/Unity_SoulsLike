@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace BossEnemyFSM
 {
     public class JumpAttackState : BossEnemyPatternState
     {
-        
+
         private float distance;
         public JumpAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
@@ -16,7 +17,7 @@ namespace BossEnemyFSM
         public override void Enter()
         {
             dir = GetLookAtAngle();
-            
+
             distance = Vector3.Distance(sm.owner.transform.position, sm.character.transform.position);
             agentSpeed = (distance - stoppingDistance) / 1f;
 
@@ -51,7 +52,8 @@ namespace BossEnemyFSM
         }
         public override void OnAnimationEnterEvent()
         {
-
+            var camera = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera as CinemachineVirtualCamera;
+            camera.GetComponent<CameraShake>().ShakeCamera();
         }
         public override void OnAnimationExitEvent()
         {

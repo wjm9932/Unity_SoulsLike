@@ -13,7 +13,7 @@ public class BossEnemy : Enemy
     {
         base.Awake();
 
-        health = 10;
+        health = maxHealth;
 
         navMesh.updateRotation = false;
         canBeDamaged = true;
