@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (quest != null)
         {
-            QuestManager.Instance.onFinishQuest += EndWave;
+            //QuestManager.Instance.onFinishQuest += EndWave;
         }
     }
 
@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (quest != null)
         {
-            QuestManager.Instance.onFinishQuest -= EndWave;
+            //QuestManager.Instance.onFinishQuest -= EndWave;
         }
     }
     void Start()

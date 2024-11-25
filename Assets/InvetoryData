@@ -1,9 +1,3 @@
 {
-    "itemData": [
-        {
-            "slotIndex": 0,
-            "itemName": "Book",
-            "itemCount": 1
-        }
-    ]
+    "itemData": []
 }
