@@ -19,7 +19,7 @@ namespace BossEnemyFSM
 
             dir = GetLookAtAngle();
             SetDashDestinationAndSpeed();
-            sm.owner.animator.SetTrigger("BackFlip");
+            sm.owner.animator.SetBool("isBackFlip", true);
         }
         public override void Update()
         {
@@ -41,6 +41,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
+            sm.owner.animator.SetBool("isBackFlip", false);
         }
         public override void OnAnimationEnterEvent()
         {

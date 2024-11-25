@@ -25,7 +25,7 @@ namespace BossEnemyFSM
             SetDashDestination();
 
             dir = GetLookAtAngle();
-            sm.owner.animator.SetTrigger("DashStab");
+            sm.owner.animator.SetBool("isDashStab", true);
             sm.owner.GetComponent<CapsuleCollider>().isTrigger = true;
             sm.owner.SetCanAttack(1);
             sm.owner.SetDamage(15f);
@@ -39,7 +39,6 @@ namespace BossEnemyFSM
             }
             if(timer <= 0)
             {
-                sm.owner.animator.SetTrigger("StabDone");
                 GetBossPattern();
             }
             base.Update();
@@ -54,6 +53,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
+            sm.owner.animator.SetBool("isDashStab", false);
             sm.owner.GetComponent<CapsuleCollider>().isTrigger = false;
             sm.owner.SetCanAttack(0);
         }

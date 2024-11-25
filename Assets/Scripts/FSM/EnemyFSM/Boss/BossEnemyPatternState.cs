@@ -21,6 +21,7 @@ public abstract class BossEnemyPatternState : IState
     {
        if(sm.owner.target.GetComponent<LivingEntity>().isDead == true)
         {
+            sm.owner.target = null;
             sm.ChangeState(sm.patrolState);
         }
     }

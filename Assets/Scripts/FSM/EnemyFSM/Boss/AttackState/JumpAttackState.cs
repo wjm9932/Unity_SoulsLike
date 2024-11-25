@@ -24,7 +24,7 @@ namespace BossEnemyFSM
             sm.owner.navMesh.speed = agentSpeed;
             sm.owner.navMesh.stoppingDistance = stoppingDistance;
             sm.owner.navMesh.SetDestination(sm.owner.target.transform.position);
-            sm.owner.animator.SetTrigger("Jump Attack");
+            sm.owner.animator.SetBool("isJumpAttack", true);
             sm.owner.SetDamage(20f);
         }
         public override void Update()
@@ -50,7 +50,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
-
+            sm.owner.animator.SetBool("isJumpAttack", false);
         }
         public override void OnAnimationEnterEvent()
         {

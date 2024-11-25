@@ -15,7 +15,7 @@ namespace BossEnemyFSM
         {
             dir = GetLookAtAngle();
             sm.owner.navMesh.isStopped = true;
-            sm.owner.animator.SetTrigger("Attack");
+            sm.owner.animator.SetBool("isAttack", true);
             sm.owner.SetDamage(10f);
         }
         public override void Update()
@@ -41,6 +41,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
+            sm.owner.animator.SetBool("isAttack", false);
             sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()

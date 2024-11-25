@@ -23,6 +23,7 @@ namespace BossEnemyFSM
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = agentSpeed;
             sm.owner.navMesh.stoppingDistance = stoppingDistance;
+            sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
         }
         public override void Update()
         {

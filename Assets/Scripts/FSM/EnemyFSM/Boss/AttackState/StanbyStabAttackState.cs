@@ -18,7 +18,7 @@ namespace BossEnemyFSM
 
             isReadyToAttack = false;
             sm.owner.navMesh.isStopped = true;
-            sm.owner.animator.SetTrigger("StabReady");
+            sm.owner.animator.SetBool ("isStabReady", true);
         }
         public override void Update()
         {
@@ -43,6 +43,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
+            sm.owner.animator.SetBool("isStabReady", false);
             sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()

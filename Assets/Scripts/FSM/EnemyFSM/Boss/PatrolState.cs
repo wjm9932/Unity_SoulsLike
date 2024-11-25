@@ -19,6 +19,7 @@ namespace BossEnemyFSM
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = agentSpeed;
             sm.owner.navMesh.stoppingDistance = stoppingDistance;
+            sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
 
             updatePathCoroutine = UpdatePath();
             sm.owner.StartCoroutine(updatePathCoroutine);
@@ -85,7 +86,7 @@ namespace BossEnemyFSM
         private Vector3 GetDestination()
         {
             NavMeshHit hit;
-            Vector3 randomDirection = Random.insideUnitSphere * 10f + sm.owner.transform.position;
+            Vector3 randomDirection = Random.insideUnitSphere * 20f + sm.owner.transform.position;
 
             if (NavMesh.SamplePosition(randomDirection, out hit, 10f, sm.owner.navMesh.areaMask) == true)
             {
