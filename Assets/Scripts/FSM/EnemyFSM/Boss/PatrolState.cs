@@ -16,6 +16,11 @@ namespace BossEnemyFSM
 
         public override void Enter()
         {
+            if (sm.owner.hpBar.gameObject.activeSelf == true)
+            {
+                sm.owner.hpBar.gameObject.SetActive(false);
+            }
+
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = agentSpeed;
             sm.owner.navMesh.stoppingDistance = stoppingDistance;

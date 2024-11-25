@@ -53,7 +53,7 @@ public class Enemy : LivingEntity
     {
         var hitPoint = collider.ClosestPoint(transform.position);
         Vector3 hitNormal = (hitPoint - transform.position).normalized;
-        EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, transform, EffectManager.EffectType.Flesh);
+        EffectManager.Instance.PlayEffect(hitPoint, hitNormal, transform, ObjectPoolManager.ObjectType.EFFECT);
     }
 
     private void OnTriggerStay(Collider other)

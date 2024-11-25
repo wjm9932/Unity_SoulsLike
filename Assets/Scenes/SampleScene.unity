@@ -10052,6 +10052,9 @@ MonoBehaviour:
   - objectType: 4
     prefab: {fileID: 4877062208703764033, guid: 41ec45cae8252c444ba95dc44dac2009, type: 3}
     count: 10
+  - objectType: 5
+    prefab: {fileID: 23745515630080405, guid: 0739247709caa2640986b3f748de40e2, type: 3}
+    count: 3
 --- !u!1 &442173692
 GameObject:
   m_ObjectHideFlags: 0
@@ -41976,7 +41979,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098ee51007032fe43a6c0222727daa55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fleshHitEffectPrefab: {fileID: 1124963464424970784, guid: 7fa07ad8afc788845a6ef5461d4f3d31, type: 3}
 --- !u!4 &1909101849
 Transform:
   m_ObjectHideFlags: 0

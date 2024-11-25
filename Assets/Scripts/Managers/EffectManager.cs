@@ -19,11 +19,9 @@ public class EffectManager : MonoBehaviour
         Wall
     }
 
-    public ParticleSystem fleshHitEffectPrefab;
-
-    public void PlayHitEffect(Vector3 pos, Vector3 normal, Transform parent, EffectType effectType)
+    public void PlayEffect(Vector3 pos, Vector3 normal, Transform parent, ObjectPoolManager.ObjectType effectType)
     {
-        var effect = ObjectPoolManager.Instance.GetPoolableObject(ObjectPoolManager.ObjectType.EFFECT).GetComponent<IPoolableObject>();
+        var effect = ObjectPoolManager.Instance.GetPoolableObject(effectType).GetComponent<IPoolableObject>();
         effect.Initialize(pos, Quaternion.LookRotation(normal), parent);
     }
 }

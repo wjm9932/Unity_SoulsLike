@@ -256,7 +256,7 @@ public class Character : LivingEntity
 
                     var hitPoint = other.ClosestPoint(transform.position);
                     Vector3 hitNormal = (hitPoint - transform.position).normalized;
-                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, transform, EffectManager.EffectType.Flesh);
+                    EffectManager.Instance.PlayEffect(hitPoint, hitNormal, transform, ObjectPoolManager.ObjectType.EFFECT);
                 }
             }
         }
@@ -291,7 +291,7 @@ public class Character : LivingEntity
 
                     var hitPoint = other.transform.position;
                     Vector3 hitNormal = (hitPoint - transform.position).normalized;
-                    EffectManager.Instance.PlayHitEffect(hitPoint, hitNormal, transform, EffectManager.EffectType.Flesh);
+                    EffectManager.Instance.PlayEffect(hitPoint, hitNormal, transform, ObjectPoolManager.ObjectType.EFFECT);
                 }
             }
         }

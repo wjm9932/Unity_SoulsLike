@@ -16,6 +16,7 @@ public class ObjectPoolManager : MonoBehaviour
         SOUND,
         NOTIFICATION_TEXT,
         DAMAGE_TEXT,
+        DUST,
     }
 
     [System.Serializable]
