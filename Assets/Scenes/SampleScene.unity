@@ -5005,7 +5005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 465418742315493875, guid: 18f4b77d5d4941445b9a25e71fbf6f00, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4108722506810427833, guid: 18f4b77d5d4941445b9a25e71fbf6f00, type: 3}
       propertyPath: targetQuest
@@ -8887,6 +8887,7 @@ GameObject:
   - component: {fileID: 384276040}
   - component: {fileID: 384276042}
   - component: {fileID: 384276041}
+  - component: {fileID: 384276043}
   m_Layer: 0
   m_Name: PlayerEnterCheck
   m_TagString: Untagged
@@ -8935,6 +8936,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &384276043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384276039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542910f3e224da84187f2fe271f3ae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1001 &385120219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12822,7 +12836,6 @@ GameObject:
   m_Component:
   - component: {fileID: 560342422}
   - component: {fileID: 560342421}
-  - component: {fileID: 560342423}
   m_Layer: 0
   m_Name: BackGroundMusic
   m_TagString: Untagged
@@ -12941,19 +12954,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &560342423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560342420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3d89cc597bcdf948be859a2a61af8b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 1089441782}
 --- !u!1001 &564035653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20328,6 +20328,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3655b870aedd99459d056e0b55fd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmAudioSource: {fileID: 560342421}
+  bgmList:
+  - type: 0
+    audioClips: {fileID: 8300000, guid: c7a1ef92b6039dc42ac9267879613b59, type: 3}
+  - type: 1
+    audioClips: {fileID: 8300000, guid: c7a1ef92b6039dc42ac9267879613b59, type: 3}
+  - type: 2
+    audioClips: {fileID: 8300000, guid: 554c08d46e3c927418c6b330ac17a4e7, type: 3}
   effectInfos:
   - effectType: 0
     audioClips:
@@ -20408,6 +20416,15 @@ MonoBehaviour:
   - effectType: 18
     audioClips:
     - {fileID: 8300000, guid: 5598c4ebcc2ec674396ed83c121eabe2, type: 3}
+  - effectType: 19
+    audioClips:
+    - {fileID: 8300000, guid: 98410a1c05420014aa38017a8b39e090, type: 3}
+  - effectType: 20
+    audioClips:
+    - {fileID: 8300000, guid: 7558c879fc30bd347a612ce23009572b, type: 3}
+  - effectType: 21
+    audioClips:
+    - {fileID: 8300000, guid: 1d27918e70b41224bbd4aa93626416af, type: 3}
   uiEffectInfos:
   - effectType: 0
     audioClips:
@@ -32548,6 +32565,42 @@ PrefabInstance:
       propertyPath: _maxHealth
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: bbe71963295bc7442bd50089344db64e, type: 3}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 510abe1fd528ebc438ac4b14730c8611, type: 3}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: e164a41479776de49929ff12306cc0db, type: 3}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: eb685f1cdae1b3f4db180b762e7656f8, type: 3}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: e93a82e8d3ac9e14991645c22c4b066b, type: 3}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 54fb9fb3aac28d14b95c593a1b4eea7b, type: 3}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d7f21571d8a9874cb563a1372696cf9, type: 3}
+    - target: {fileID: 4417306646773974596, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: footStepClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: aa57b8b4db7f5644da743908154823b9, type: 3}
     - target: {fileID: 4531836309446150035, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: m_Name
       value: BossEnemy
@@ -32558,7 +32611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: MaxDistance
@@ -32566,7 +32619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].time
-      value: 0.79585195
+      value: 0.8265526
       objectReference: {fileID: 0}
     - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].time
@@ -32574,11 +32627,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].value
-      value: 0.7112788
+      value: 0.69997966
       objectReference: {fileID: 0}
     - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].value
-      value: 0.463562
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7894134720402693086, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: shouldLookPlayer
@@ -48723,7 +48776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 135.52
+      value: 132.42
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -48731,7 +48784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 160.53
+      value: 160.79
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalRotation.w

@@ -29,6 +29,9 @@ namespace BossEnemyFSM
             sm.owner.GetComponent<CapsuleCollider>().isTrigger = true;
             sm.owner.SetCanAttack(1);
             sm.owner.SetDamage(20f);
+
+            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_DASH, 0.6f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
+
         }
         public override void Update()
         {

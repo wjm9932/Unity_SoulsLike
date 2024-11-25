@@ -67,6 +67,7 @@ public class Character : LivingEntity
     [SerializeField] private List<AudioClip> groundFootStepClips = new List<AudioClip>();
     private List<AudioClip> currentFootStepClips = new List<AudioClip>();
     private AudioSource playerFootStepSoundSource;
+    public SoundManager.BackGroundMusic musicType;
 
     [Space]
     public Transform leftHandPos;
@@ -83,7 +84,6 @@ public class Character : LivingEntity
     public Inventory inventory { get; private set; }
     public PlayerEvent playerEvents { get; private set; }
     public BuffManager playerBuff { get; private set; }
-    public bool isInDungeon { get; private set; }
     public float buffDamage { get; set; }
     public float buffStaminaPercent { get; set; }
 
@@ -351,17 +351,18 @@ public class Character : LivingEntity
         }
     }
 
-    public void ChangeFootStepSound(FootStepSoundType type)
+    public void ChangeSoundEffect(SoundManager.BackGroundMusic type)
     {
+        musicType = type;
+
         switch (type)
         {
-            case FootStepSoundType.TILE:
+            case SoundManager.BackGroundMusic.BOSS:
+            case SoundManager.BackGroundMusic.DUNGEON:
                 currentFootStepClips = tileFootStepClips;
-                isInDungeon = true;
                 break;
-            case FootStepSoundType.GROUND:
+            case SoundManager.BackGroundMusic.OUTSIDE:
                 currentFootStepClips = groundFootStepClips;
-                isInDungeon = false;
                 break;
         }
     }
@@ -398,6 +399,7 @@ public class Character : LivingEntity
         stamina = maxStamina;
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         transform.position = GetComponent<PlayerCheckPoint>().checkPointPosition;
+        SoundManager.Instance.ChangeBackGroundMusic(SoundManager.BackGroundMusic.DUNGEON);
         GetComponent<Collider>().enabled = true;
         rb.isKinematic = false;
         isDead = false;
@@ -425,7 +427,7 @@ public class Character : LivingEntity
 
     private PlayerSaveData GetPlayerData()
     {
-        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, isInDungeon, GetComponent<PlayerCheckPoint>().checkPointPosition);
+        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, musicType, GetComponent<PlayerCheckPoint>().checkPointPosition);
     }
     private void SaveData()
     {
@@ -457,17 +459,11 @@ public class Character : LivingEntity
                 maxHealth = playerSaveData.maxHealth;
                 health = playerSaveData.currentHealth;
                 stamina = playerSaveData.currentStamina;
-                isInDungeon = playerSaveData.isInDungeon;
+                musicType = playerSaveData.musicType;
                 hpBar.SetStatusBarSize(maxHealth);
 
-                if (isInDungeon == true)
-                {
-                    ChangeFootStepSound(FootStepSoundType.TILE);
-                }
-                else
-                {
-                    ChangeFootStepSound(FootStepSoundType.GROUND);
-                }
+                ChangeSoundEffect(musicType);
+                SoundManager.Instance.ChangeBackGroundMusic(musicType);
             }
         }
         else
