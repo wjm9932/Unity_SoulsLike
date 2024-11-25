@@ -14,7 +14,7 @@ public class Enemy : LivingEntity
     [SerializeField] protected GameObject[] dropItem;
 
     [Header("Health Bar")]
-    [SerializeField] protected EnemyHealthBar hpBar;
+    [SerializeField] public EnemyHealthBar hpBar;
 
     [Header("Lock On Indicator")]
     public Image lockOnIndicator;

@@ -29,7 +29,7 @@ namespace BossEnemyFSM
             {
                 GetBossPattern();
             }
-
+            base.Update();
         }
         public override void PhysicsUpdate()
         {

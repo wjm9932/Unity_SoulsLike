@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace BossEnemyFSM
 {
-    public class IdleState : BossEnemyPatternState
+    public class TrackState : BossEnemyPatternState
     {
-        public IdleState(BossEnemyBehaviorStateMachine sm) : base(sm)
+        public TrackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
             stoppingDistance = 2f;
             agentSpeed = 4f;
@@ -15,20 +15,25 @@ namespace BossEnemyFSM
 
         public override void Enter()
         {
+            if(sm.owner.hpBar.gameObject.activeSelf == false)
+            {
+                sm.owner.hpBar.gameObject.SetActive(true);
+            }
+
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = agentSpeed;
             sm.owner.navMesh.stoppingDistance = stoppingDistance;
         }
         public override void Update()
         {
-            if (Vector3.Distance(sm.character.transform.position, sm.owner.transform.position) >= stoppingDistance)
+            if (Vector3.Distance(sm.owner.target.transform.position, sm.owner.transform.position) >= stoppingDistance)
             {
                 sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
-                sm.owner.navMesh.SetDestination(sm.character.transform.position);
+                sm.owner.navMesh.SetDestination(sm.owner.target.transform.position);
             }
             else
             {
-                sm.ChangeState(sm.swordAttackState);
+                GetBossPattern();
             }
         }
         public override void PhysicsUpdate()
@@ -66,6 +71,27 @@ namespace BossEnemyFSM
             direction.y = 0; 
 
             return Quaternion.LookRotation(direction);
+        }
+        private void GetBossPattern()
+        {
+            int pattern = Random.Range(0, 4);
+            switch (pattern)
+            {
+                case 0:
+                    sm.ChangeState(sm.stabAttackState);
+                    break;
+                case 1:
+                    sm.ChangeState(sm.jumpAttackState);
+                    break;
+                case 2:
+                    sm.ChangeState(sm.swordAttackState);
+                    break;
+                case 3:
+                    sm.ChangeState(sm.backFlipState);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

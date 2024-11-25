@@ -18,12 +18,12 @@ namespace BossEnemyFSM
         {
             dir = GetLookAtAngle();
 
-            distance = Vector3.Distance(sm.owner.transform.position, sm.character.transform.position);
+            distance = Vector3.Distance(sm.owner.transform.position, sm.owner.target.transform.position);
             agentSpeed = (distance - stoppingDistance) / 1f;
 
             sm.owner.navMesh.speed = agentSpeed;
             sm.owner.navMesh.stoppingDistance = stoppingDistance;
-            sm.owner.navMesh.SetDestination(sm.character.transform.position);
+            sm.owner.navMesh.SetDestination(sm.owner.target.transform.position);
             sm.owner.animator.SetTrigger("Jump Attack");
             sm.owner.SetDamage(20f);
         }
@@ -37,6 +37,8 @@ namespace BossEnemyFSM
 
                 //sm.ChangeState(sm.idleState);
             }
+            base.Update();
+
         }
         public override void PhysicsUpdate()
         {
@@ -73,7 +75,7 @@ namespace BossEnemyFSM
             switch (pattern)
             {
                 case 0:
-                    sm.ChangeState(sm.idleState);
+                    sm.ChangeState(sm.trackingState);
                     break;
                 case 1:
                     sm.ChangeState(sm.backFlipState);

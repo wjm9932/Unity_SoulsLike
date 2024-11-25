@@ -19,7 +19,10 @@ public abstract class BossEnemyPatternState : IState
     }
     public virtual void Update()
     {
-       
+       if(sm.owner.target.GetComponent<LivingEntity>().isDead == true)
+        {
+            sm.ChangeState(sm.patrolState);
+        }
     }
     public virtual void PhysicsUpdate()
     {
@@ -51,7 +54,7 @@ public abstract class BossEnemyPatternState : IState
     }
     protected virtual Quaternion GetLookAtAngle()
     {
-        Vector3 dir = sm.character.transform.position - sm.owner.transform.position;
+        Vector3 dir = sm.owner.target.transform.position - sm.owner.transform.position;
         dir.y = 0;
 
         return Quaternion.LookRotation(dir);

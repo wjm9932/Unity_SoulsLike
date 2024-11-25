@@ -28,6 +28,8 @@ namespace BossEnemyFSM
                 //sm.ChangeState(sm.idleState);
                 //sm.ChangeState(sm.stabAttackState);
             }
+            base.Update();
+
         }
         public override void PhysicsUpdate()
         {
@@ -63,7 +65,7 @@ namespace BossEnemyFSM
             switch (pattern)
             {
                 case 0:
-                    sm.ChangeState(sm.idleState);
+                    sm.ChangeState(sm.trackingState);
                     break;
                 case 1:
                     sm.ChangeState(sm.stabAttackState);

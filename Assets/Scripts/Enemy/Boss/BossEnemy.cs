@@ -5,8 +5,14 @@ using UnityEngine.AI;
 
 public class BossEnemy : Enemy
 {
-    [SerializeField]
-    private Character character;
+    public override float health
+    {
+        protected set
+        {
+            base.health = value;
+            hpBar.UpdateHealthBar(health, maxHealth);
+        }
+    }
     private BossEnemyBehaviorStateMachine enemyBehaviorStateMachine;
 
     protected override void Awake()
@@ -23,8 +29,8 @@ public class BossEnemy : Enemy
     protected override void Start()
     {
         base.Start();
-        enemyBehaviorStateMachine = new BossEnemyBehaviorStateMachine(this, character);
-        enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
+        enemyBehaviorStateMachine = new BossEnemyBehaviorStateMachine(this);
+        enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);
     }
 
     // Update is called once per frame
@@ -33,6 +39,10 @@ public class BossEnemy : Enemy
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stabAttackState);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
         }
 
         enemyBehaviorStateMachine.Update();
