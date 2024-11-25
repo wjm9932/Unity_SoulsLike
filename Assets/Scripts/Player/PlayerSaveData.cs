@@ -2,16 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RespawnPosition
-{
-    ROOM_1,
-    ROOM_2,
-    ROOM_3,
-    ROOM_4,
-    ROOM_5,
-    ROOM_6,
-    ROOM_7,
-}
 
 [System.Serializable]
 public struct PlayerSaveData
@@ -22,8 +12,9 @@ public struct PlayerSaveData
     public float maxHealth;
     public float currentStamina;
     public bool isInDungeon;
+    public Vector3 checkPoint;
 
-    public PlayerSaveData(Vector3 playerPosition, Quaternion playerRotation, float currentHealth, float maxHealth, float currentStamina, bool isInDungeon)
+    public PlayerSaveData(Vector3 playerPosition, Quaternion playerRotation, float currentHealth, float maxHealth, float currentStamina, bool isInDungeon, Vector3 checkPoint)
     {
         this.playerPosition = playerPosition;
         this.playerRotation = playerRotation;
@@ -31,5 +22,6 @@ public struct PlayerSaveData
         this.maxHealth = maxHealth;
         this.currentStamina = currentStamina;
         this.isInDungeon = isInDungeon;
+        this.checkPoint = checkPoint;
     }
 }

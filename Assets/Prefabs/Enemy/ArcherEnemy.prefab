@@ -2602,7 +2602,7 @@ MonoBehaviour:
   dropItem:
   - {fileID: 3227801818095176289, guid: 82e2378669100bc4ca44e826ab37276f, type: 3}
   - {fileID: 5252429312154143949, guid: b7ddbe95f40837444a96912c018adb01, type: 3}
-  - {fileID: 6328879130854674886, guid: e589e18d6bcb65c41a71a1cb7eac1ac6, type: 3}
+  - {fileID: 7914230769067349282, guid: d26230d158a65ce4bacfdce3093ef556, type: 3}
   - {fileID: 8322360002472537457, guid: 980370f38a3a1404d814662a7b076514, type: 3}
   hpBar: {fileID: 6684347474770500124}
   lockOnIndicator: {fileID: 4021273976666996669}

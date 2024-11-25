@@ -40,13 +40,19 @@ public class TextManager : MonoBehaviour
         text.GetComponent<TextMeshPro>().text = damage.ToString();
     }
 
-    public void PlayNotificationText(string text)
+    public void PlayNotificationText(string text, Color color = default)
     {
+        if (color == default)
+        {
+            color = Color.black;
+        }
+
         CheckNotificationTextQueueCount();
 
         var textObject = ObjectPoolManager.Instance.GetPoolableObject(ObjectPoolManager.ObjectType.NOTIFICATION_TEXT);
         textObject.GetComponent<IPoolableObject>().Initialize(Vector3.zero, Quaternion.identity, notificationPanel.transform);
         textObject.GetComponent<TextMeshProUGUI>().text = text;
+        textObject.GetComponent<TextMeshProUGUI>().color = color;
         textObject.gameObject.GetComponent<DestroyTextInTime>().OnDestroy += () => notificationTextQueue.Dequeue();
 
         notificationTextQueue.Enqueue(textObject.gameObject);

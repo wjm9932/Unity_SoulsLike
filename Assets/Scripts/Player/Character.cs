@@ -397,7 +397,7 @@ public class Character : LivingEntity
         health = maxHealth;
         stamina = maxStamina;
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
-        transform.position = new Vector3(0f, 0f, 100f);
+        transform.position = GetComponent<PlayerCheckPoint>().checkPointPosition;
         GetComponent<Collider>().enabled = true;
         rb.isKinematic = false;
         isDead = false;
@@ -425,7 +425,7 @@ public class Character : LivingEntity
 
     private PlayerSaveData GetPlayerData()
     {
-        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, isInDungeon);
+        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, isInDungeon, GetComponent<PlayerCheckPoint>().checkPointPosition);
     }
     private void SaveData()
     {

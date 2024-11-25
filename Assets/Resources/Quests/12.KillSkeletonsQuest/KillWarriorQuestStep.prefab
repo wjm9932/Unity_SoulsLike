@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3158423860181390428
+--- !u!1 &7796495254989724592
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3158423860181390430}
-  - component: {fileID: 3158423860181390431}
+  - component: {fileID: 7796495254989724594}
+  - component: {fileID: 7796495254989724593}
   m_Layer: 0
-  m_Name: CollectSkullQuestStep
+  m_Name: KillWarriorQuestStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3158423860181390430
+--- !u!4 &7796495254989724594
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3158423860181390428}
+  m_GameObject: {fileID: 7796495254989724592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.2871, y: 6.360669, z: 103.73333}
+  m_LocalPosition: {x: 0.025931852, y: 0.0006222427, z: -0.2334508}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3158423860181390431
+--- !u!114 &7796495254989724593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3158423860181390428}
+  m_GameObject: {fileID: 7796495254989724592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87cf30521b8b0d24cb0a61dd74cb97c4, type: 3}
+  m_Script: {fileID: 11500000, guid: f683aa19d303d834489e0d7a34afb411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetItem: {fileID: 6328879130854674886, guid: e589e18d6bcb65c41a71a1cb7eac1ac6, type: 3}
-  targetItemCount: 3
+  targetKillCount: 5
+  targetType: 1
