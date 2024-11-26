@@ -55,14 +55,7 @@ public abstract class PlayerMovementState : IState
         {
             if (sm.owner.input.isDodging == true)
             {
-                if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
-                {
-                    sm.ChangeState(sm.lockOnDodgeState);
-                }
-                else
-                {
-                    sm.ChangeState(sm.dodgeState);
-                }
+                sm.ChangeState(sm.dodgeState);
             }
             if (sm.owner.input.isAttack == true)
             {
