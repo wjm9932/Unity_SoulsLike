@@ -40,6 +40,7 @@ public class SoundManager : MonoBehaviour
         BOSS_JUMP,
         BOSS_FLIP,
         BOSS_DASH,
+        BOSS_CHARGE_ATTACK,
     }
 
     public enum UISoundEffectType

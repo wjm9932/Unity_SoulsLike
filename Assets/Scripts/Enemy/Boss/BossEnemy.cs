@@ -112,14 +112,7 @@ public class BossEnemy : Enemy
     }
     private void OnAnimatorIK()
     {
-        if(enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.swordAttackState)
-        {
-            animator.SetFloat("HandWeight", 0);
-        }
-        else
-        {
-            enemyBehaviorStateMachine.OnAnimatorIK();
-        }
+        enemyBehaviorStateMachine.OnAnimatorIK();
     }
     protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
     {

@@ -14,6 +14,7 @@ public class BossEnemyBehaviorStateMachine : StateMachine
     public StanbyStabAttackState stanbyStabAttackState { get; }
     public BackFlipState backFlipState { get; }
     public StabAttackState stabAttackState { get; }
+    public ChargingSwordAttackState chargingSwordAttackState { get; }
     public BossEnemyBehaviorStateMachine(BossEnemy enemy)
     {   
         this.owner = enemy;
@@ -26,5 +27,6 @@ public class BossEnemyBehaviorStateMachine : StateMachine
         stanbyStabAttackState = new StanbyStabAttackState(this);
         backFlipState = new BackFlipState(this);
         stabAttackState = new StabAttackState(this);
+        chargingSwordAttackState = new ChargingSwordAttackState(this);
     }
 }

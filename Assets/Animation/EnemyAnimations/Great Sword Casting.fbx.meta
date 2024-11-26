@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
+    second: UpAttack
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -39,7 +39,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: UpAttack
       takeName: mixamo.com
       internalID: 0
       firstFrame: 12
@@ -62,7 +62,28 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.40065148
+        functionName: SetCanAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a786a064620d7ea41a54fe7fc852b60a, type: 3}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.42604774
+        functionName: OnAnimationTransitionEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 0654fac006e45fd41b69c95e9880ed98, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.45928338
+        functionName: SetCanAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a786a064620d7ea41a54fe7fc852b60a, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

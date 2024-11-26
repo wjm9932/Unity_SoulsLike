@@ -20428,6 +20428,9 @@ MonoBehaviour:
   - effectType: 21
     audioClips:
     - {fileID: 8300000, guid: 1d27918e70b41224bbd4aa93626416af, type: 3}
+  - effectType: 22
+    audioClips:
+    - {fileID: 8300000, guid: f946e08ff20017d4699f0d78feadf9cf, type: 3}
   uiEffectInfos:
   - effectType: 0
     audioClips:
@@ -27471,7 +27474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233101307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.049, y: -0.015, z: 0.149}
+  m_LocalPosition: {x: 0.049, y: -0.1091, z: 0.149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32670,6 +32673,26 @@ PrefabInstance:
     - target: {fileID: 5156210933115896598, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].value
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585461238923524027, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.21935995
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585461238923524027, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.82732713
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585461238923524027, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.07200325
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585461238923524027, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5120807
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585461238923524027, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -6.7359924
       objectReference: {fileID: 0}
     - target: {fileID: 7894134720402693086, guid: 69d7d1552b57f7a46af70f3ac5802313, type: 3}
       propertyPath: shouldLookPlayer

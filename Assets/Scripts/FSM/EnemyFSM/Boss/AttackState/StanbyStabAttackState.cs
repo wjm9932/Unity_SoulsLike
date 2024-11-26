@@ -30,7 +30,6 @@ namespace BossEnemyFSM
             {
                 sm.ChangeState(sm.dashAttackState);
             }
-            base.Update();
 
         }
         public override void PhysicsUpdate()
@@ -60,28 +59,12 @@ namespace BossEnemyFSM
         }
         public override void OnAnimatorIK()
         {
-
+            sm.owner.animator.SetFloat("HandWeight", 0f);
         }
         IEnumerator GetReady()
         {
             yield return new WaitForSeconds(1f);
             isReadyToAttack = true;
         }
-        private void GetBossPattern()
-        {
-            int pattern = Random.Range(0, 2);
-            switch (pattern)
-            {
-                case 0:
-                    sm.ChangeState(sm.trackingState);
-                    break;
-                case 1:
-                    sm.ChangeState(sm.jumpAttackState);
-                    break;
-                default:
-                    break;
-            }
-        }
-
     }
 }

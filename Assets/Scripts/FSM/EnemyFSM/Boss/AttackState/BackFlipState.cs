@@ -29,7 +29,6 @@ namespace BossEnemyFSM
             {
                 GetBossPattern();
             }
-            base.Update();
         }
         public override void PhysicsUpdate()
         {
@@ -59,7 +58,7 @@ namespace BossEnemyFSM
         }
         public override void OnAnimatorIK()
         {
-
+            sm.owner.animator.SetFloat("HandWeight", 0f);
         }
         private void GetBossPattern()
         {

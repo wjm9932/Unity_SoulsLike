@@ -28,7 +28,7 @@ namespace BossEnemyFSM
             sm.owner.animator.SetBool("isDashStab", true);
             sm.owner.GetComponent<CapsuleCollider>().isTrigger = true;
             sm.owner.SetCanAttack(1);
-            sm.owner.SetDamage(20f);
+            sm.owner.SetDamage(30f);
 
             SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_DASH, 0.6f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
 
@@ -36,15 +36,17 @@ namespace BossEnemyFSM
         public override void Update()
         {
             sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, dir, Time.deltaTime * 10);
-            if(sm.owner.navMesh.remainingDistance <= 0f)
+            if (sm.owner.navMesh.remainingDistance <= 0f)
             {
                 timer -= Time.deltaTime;
             }
-            if(timer <= 0)
+            if (timer <= 0)
             {
-                GetBossPattern();
+                if (IsTargetDead() == false)
+                {
+                    GetBossPattern();
+                }
             }
-            base.Update();
         }
         public override void PhysicsUpdate()
         {
@@ -74,7 +76,7 @@ namespace BossEnemyFSM
         }
         public override void OnAnimatorIK()
         {
-
+            sm.owner.animator.SetFloat("HandWeight", 0f);
         }
         private void GetBossPattern()
         {

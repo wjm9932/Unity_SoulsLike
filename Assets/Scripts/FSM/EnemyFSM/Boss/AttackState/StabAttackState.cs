@@ -24,9 +24,11 @@ namespace BossEnemyFSM
             sm.owner.transform.rotation = Quaternion.Slerp(sm.owner.transform.rotation, dir, Time.deltaTime * 10);
             if (sm.owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.75f && sm.owner.animator.IsInTransition(0) == false)
             {
-                GetBossPattern();
+                if (IsTargetDead() == false)
+                {
+                    GetBossPattern();
+                }
             }
-            base.Update();
 
         }
         public override void PhysicsUpdate()
@@ -56,7 +58,7 @@ namespace BossEnemyFSM
         }
         public override void OnAnimatorIK()
         {
-
+            sm.owner.animator.SetFloat("HandWeight", 0f);
         }
         private void GetBossPattern()
         {

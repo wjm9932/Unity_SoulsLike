@@ -1,12 +1,13 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BossEnemyFSM
 {
-    public class SwordAttackState : BossEnemyPatternState
+    public class ChargingSwordAttackState : BossEnemyPatternState
     {
-        public SwordAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
+        public ChargingSwordAttackState(BossEnemyBehaviorStateMachine sm) : base(sm)
         {
 
         }
@@ -15,8 +16,8 @@ namespace BossEnemyFSM
         {
             dir = GetLookAtAngle();
             sm.owner.navMesh.isStopped = true;
-            sm.owner.animator.SetBool("isAttack", true);
-            sm.owner.SetDamage(20f);
+            sm.owner.animator.SetBool("isUpAttack", true);
+            sm.owner.SetDamage(30f);
         }
         public override void Update()
         {
@@ -41,7 +42,7 @@ namespace BossEnemyFSM
         }
         public override void Exit()
         {
-            sm.owner.animator.SetBool("isAttack", false);
+            sm.owner.animator.SetBool("isUpAttack", false);
             sm.owner.navMesh.isStopped = false;
         }
         public override void OnAnimationEnterEvent()
@@ -54,6 +55,10 @@ namespace BossEnemyFSM
         }
         public override void OnAnimationTransitionEvent()
         {
+            var camera = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera as CinemachineVirtualCamera;
+            camera.GetComponent<CameraShake>().ShakeCamera();
+            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_CHARGE_ATTACK, 0.6f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
+            EffectManager.Instance.PlayEffect(sm.owner.transform.position + sm.owner.transform.forward * 2f, Vector3.up, sm.owner.gameObject.transform, ObjectPoolManager.ObjectType.DUST);
         }
         public override void OnAnimatorIK()
         {
@@ -63,23 +68,20 @@ namespace BossEnemyFSM
         }
         private void GetBossPattern()
         {
-            int pattern = Random.Range(0, 5);
+            int pattern = Random.Range(0, 4);
 
             switch (pattern)
             {
                 case 0:
-                    sm.ChangeState(sm.chargingSwordAttackState);
+                    sm.ChangeState(sm.trackingState);
                     break;
                 case 1:
                     sm.ChangeState(sm.stabAttackState);
                     break;
                 case 2:
-                    sm.ChangeState(sm.stabAttackState);
-                    break;
-                case 3:
                     sm.ChangeState(sm.jumpAttackState);
                     break;
-                case 4:
+                case 3:
                     sm.ChangeState(sm.backFlipState);
                     break;
                 default:

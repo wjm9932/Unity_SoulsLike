@@ -19,11 +19,7 @@ public abstract class BossEnemyPatternState : IState
     }
     public virtual void Update()
     {
-       if(sm.owner.target.GetComponent<LivingEntity>().isDead == true)
-        {
-            sm.owner.target = null;
-            sm.ChangeState(sm.patrolState);
-        }
+       
     }
     public virtual void PhysicsUpdate()
     {
@@ -52,6 +48,19 @@ public abstract class BossEnemyPatternState : IState
     public virtual void OnAnimatorIK()
     {
 
+    }
+    protected bool IsTargetDead()
+    {
+        if (sm.owner.target.GetComponent<LivingEntity>().isDead == true)
+        {
+            sm.owner.target = null;
+            sm.ChangeState(sm.patrolState);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     protected virtual Quaternion GetLookAtAngle()
     {

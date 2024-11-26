@@ -76,13 +76,17 @@ namespace BossEnemyFSM
         private void GetBossPattern()
         {
             int pattern = Random.Range(0, 100);
-            if (pattern < 40)
+            if (pattern < 20)
             {
                 sm.ChangeState(sm.stabAttackState);
             }
-            else if (pattern < 80)
+            else if (pattern < 40)
             {
                 sm.ChangeState(sm.swordAttackState);
+            }
+            else if(pattern < 80)
+            {
+                sm.ChangeState(sm.chargingSwordAttackState);
             }
             else
             {
