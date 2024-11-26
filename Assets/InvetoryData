@@ -1,3 +1,9 @@
 {
-    "itemData": []
+    "itemData": [
+        {
+            "slotIndex": 1,
+            "itemName": "Bone",
+            "itemCount": 1
+        }
+    ]
 }

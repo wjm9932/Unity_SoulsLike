@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: KillSkeletonsQuest
   displayName: Kill All Skeletons!
-  initialState: 4
+  initialState: 0
   requirementsNotMetDialogue: You have to complete other quest before start this
     quest!
   doneDialogue: Thank you for your help!
