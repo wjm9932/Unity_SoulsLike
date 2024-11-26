@@ -1,3 +1,44 @@
 {
-    "itemData": []
+    "itemData": [
+        {
+            "slotIndex": 0,
+            "itemName": "Health Potion",
+            "itemCount": 23
+        },
+        {
+            "slotIndex": 1,
+            "itemName": "Stamina Buff Potion",
+            "itemCount": 6
+        },
+        {
+            "slotIndex": 2,
+            "itemName": "Damage Buff Potion",
+            "itemCount": 4
+        },
+        {
+            "slotIndex": 3,
+            "itemName": "Skull",
+            "itemCount": 4
+        },
+        {
+            "slotIndex": 4,
+            "itemName": "Feather",
+            "itemCount": 10
+        },
+        {
+            "slotIndex": 5,
+            "itemName": "Bone",
+            "itemCount": 7
+        },
+        {
+            "slotIndex": 6,
+            "itemName": "Letter",
+            "itemCount": 1
+        },
+        {
+            "slotIndex": 7,
+            "itemName": "Armor Buff Potion",
+            "itemCount": 7
+        }
+    ]
 }

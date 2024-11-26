@@ -25,6 +25,7 @@ public class EnterBossRoom : MonoBehaviour
         {
             boss.GetComponent<Enemy>().target = other.gameObject;
             targetDoor.GetComponent<CloseDoor>().Close();
+            Destroy(this.gameObject);
         }
     }
 }

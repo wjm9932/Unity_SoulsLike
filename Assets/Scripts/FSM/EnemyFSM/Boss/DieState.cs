@@ -16,8 +16,10 @@ namespace BossEnemyFSM
         public virtual void Enter()
         {
             sm.owner.canAttack = false;
-            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ENEMY_DIE, 0.2f);
             sm.owner.animator.SetTrigger("Die");
+
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ENEMY_DIE, 0.2f);
+            SoundManager.Instance.ChangeBackGroundMusic(SoundManager.BackGroundMusic.DUNGEON);
         }
         public virtual void Update()
         {
