@@ -46,7 +46,6 @@ namespace BossEnemyFSM
         }
         public override void OnAnimationEnterEvent()
         {
-
         }
         public override void OnAnimationExitEvent()
         {
@@ -54,6 +53,7 @@ namespace BossEnemyFSM
         }
         public override void OnAnimationTransitionEvent()
         {
+            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_SWORD_ATTACK, 0.35f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
         }
         public override void OnAnimatorIK()
         {

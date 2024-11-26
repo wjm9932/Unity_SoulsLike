@@ -52,7 +52,7 @@ namespace BossEnemyFSM
         }
         public override void OnAnimationTransitionEvent()
         {
-            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_FLIP, 0.35f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
+            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_FLIP, 0.25f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
             EffectManager.Instance.PlayEffect(sm.owner.transform.position, Vector3.up, sm.owner.gameObject.transform, ObjectPoolManager.ObjectType.DUST);
 
         }

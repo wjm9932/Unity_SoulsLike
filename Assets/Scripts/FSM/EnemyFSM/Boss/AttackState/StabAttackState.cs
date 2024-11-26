@@ -13,11 +13,18 @@ namespace BossEnemyFSM
 
         public override void Enter()
         {
-            dir = GetLookAtAngle();
+            if(Vector3.Distance(sm.owner.target.transform.position, sm.owner.transform.position) >= 5f)
+            {
+                GetBossPattern();
+            }
+            else
+            {
+                dir = GetLookAtAngle();
 
-            sm.owner.navMesh.isStopped = true;
-            sm.owner.animator.SetBool("isStab", true);
-            sm.owner.SetDamage(5f);
+                sm.owner.navMesh.isStopped = true;
+                sm.owner.animator.SetBool("isStab", true);
+                sm.owner.SetDamage(5f);
+            }
         }
         public override void Update()
         {
@@ -54,7 +61,7 @@ namespace BossEnemyFSM
         }
         public override void OnAnimationTransitionEvent()
         {
-
+            SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_STAB_ATTACK, 0.3f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
         }
         public override void OnAnimatorIK()
         {

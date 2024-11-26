@@ -41,6 +41,8 @@ public class SoundManager : MonoBehaviour
         BOSS_FLIP,
         BOSS_DASH,
         BOSS_CHARGE_ATTACK,
+        BOSS_SWORD_ATTACK,
+        BOSS_STAB_ATTACK,
     }
 
     public enum UISoundEffectType
