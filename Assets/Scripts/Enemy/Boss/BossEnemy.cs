@@ -21,7 +21,7 @@ public class BossEnemy : Enemy
             return Time.time >= lastTimeDamaged + minTimeBetDamaged ? true : false;
         }
     }
-
+    public Transform leftHandPos;
     private float lastTimeDamaged;
     private const float minTimeBetDamaged = 0.5f;
 
@@ -110,7 +110,17 @@ public class BossEnemy : Enemy
     {
         enemyBehaviorStateMachine.OnAnimationTransitionEvent();
     }
-
+    private void OnAnimatorIK()
+    {
+        if(enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.swordAttackState)
+        {
+            animator.SetFloat("HandWeight", 0);
+        }
+        else
+        {
+            enemyBehaviorStateMachine.OnAnimatorIK();
+        }
+    }
     protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
     {
         base.OnEnemyTriggerStay(target, collider);
