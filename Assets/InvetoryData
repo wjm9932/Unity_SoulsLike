@@ -1,14 +1,3 @@
 {
-    "itemData": [
-        {
-            "slotIndex": 0,
-            "itemName": "Health Potion",
-            "itemCount": 1
-        },
-        {
-            "slotIndex": 1,
-            "itemName": "Bone",
-            "itemCount": 3
-        }
-    ]
+    "itemData": []
 }

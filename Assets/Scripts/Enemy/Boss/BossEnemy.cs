@@ -122,6 +122,7 @@ public class BossEnemy : Enemy
     }
     public override void Die()
     {
+        enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.dieState);
         base.Die();
     }
 }

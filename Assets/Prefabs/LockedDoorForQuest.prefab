@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 465418742318626291}
   - component: {fileID: 465418742317496115}
   - component: {fileID: 465418742315493884}
-  - component: {fileID: 7810530398286797360}
   - component: {fileID: 4108722506810427833}
   m_Layer: 9
   m_Name: LockedDoorForQuest
@@ -101,20 +100,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7663721523510738433, guid: 1a11b99e6435888469582d69e576670a, type: 3}
---- !u!136 &7810530398286797360
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465418742315493875}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.66930646
-  m_Height: 2.1229603
-  m_Direction: 1
-  m_Center: {x: 0.6666022, y: 1.1105713, z: 0.0791176}
 --- !u!114 &4108722506810427833
 MonoBehaviour:
   m_ObjectHideFlags: 0

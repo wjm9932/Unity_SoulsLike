@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-namespace EnemyFSM
+
+namespace BossEnemyFSM
 {
     public class DieState : IState
     {
-        protected EnemyBehaviorStateMachine sm;
-        public DieState(EnemyBehaviorStateMachine sm)
+        protected BossEnemyBehaviorStateMachine sm;
+        public DieState(BossEnemyBehaviorStateMachine sm)
         {
             this.sm = sm;
         }
-       
+
         public virtual void Enter()
         {
             sm.owner.canAttack = false;

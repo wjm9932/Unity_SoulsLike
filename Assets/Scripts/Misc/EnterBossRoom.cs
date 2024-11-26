@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnterBossRoom : MonoBehaviour
 {
     [SerializeField] private GameObject boss;
+    [SerializeField] private GameObject targetDoor;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class EnterBossRoom : MonoBehaviour
         if(other.CompareTag("Player") == true)
         {
             boss.GetComponent<Enemy>().target = other.gameObject;
+            targetDoor.GetComponent<CloseDoor>().Close();
         }
     }
 }

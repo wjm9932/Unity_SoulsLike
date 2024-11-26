@@ -5011,7 +5011,8 @@ PrefabInstance:
       propertyPath: targetQuest
       value: 
       objectReference: {fileID: 11400000, guid: 6447832b91a2f02449f9999ac12ded27, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 18f4b77d5d4941445b9a25e71fbf6f00, type: 3}
 --- !u!1001 &210164176
 PrefabInstance:
@@ -8923,6 +8924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 858963706}
+  targetDoor: {fileID: 1994465049}
 --- !u!65 &384276042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43811,6 +43813,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1696222c72e89ab4f9026119ef17826b, type: 3}
+--- !u!1 &1994465049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 465418742315493875, guid: 18f4b77d5d4941445b9a25e71fbf6f00, type: 3}
+  m_PrefabInstance: {fileID: 207148798}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1994465055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994465049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b820d706b6a0348961f2434729766c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1995124903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48803,7 +48822,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d4cb7c66b21dde54c80b69ad33276cbe, type: 2}
     m_RemovedComponents:
-    - {fileID: 7810530398286797360, guid: 18f4b77d5d4941445b9a25e71fbf6f00, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 18f4b77d5d4941445b9a25e71fbf6f00, type: 3}
 --- !u!1001 &3702315720383831814
 PrefabInstance:
@@ -48842,15 +48861,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2
+      value: 132.86
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 3.38
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 112
+      value: 160.649
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalRotation.w
