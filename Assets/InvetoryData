@@ -1,11 +1,6 @@
 {
     "itemData": [
         {
-            "slotIndex": 0,
-            "itemName": "Health Potion",
-            "itemCount": 1
-        },
-        {
             "slotIndex": 1,
             "itemName": "Stamina Buff Potion",
             "itemCount": 3

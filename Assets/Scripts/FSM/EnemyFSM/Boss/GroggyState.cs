@@ -19,6 +19,8 @@ namespace BossEnemyFSM
         public virtual void Enter()
         {
             isDone = false;
+            sm.owner.navMesh.isStopped = true;
+            sm.owner.navMesh.ResetPath();
             sm.owner.canAttack = false;
             sm.owner.animator.SetTrigger("isGroggy");
 
@@ -46,6 +48,8 @@ namespace BossEnemyFSM
         }
         public virtual void Exit()
         {
+            sm.owner.navMesh.isStopped = false;
+            sm.owner.groggyAmount = 0f;
             sm.owner.animator.SetTrigger("isGroggyFinished");
         }
         public virtual void OnAnimationEnterEvent()
