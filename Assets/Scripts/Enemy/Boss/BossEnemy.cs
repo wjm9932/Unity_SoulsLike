@@ -56,39 +56,43 @@ public class BossEnemy : Enemy
         {
             enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.groggyState);
+        }
 
         enemyBehaviorStateMachine.Update();
 
 
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    isTest = !isTest;
-        //}
+            //if (Input.GetKeyDown(KeyCode.C))
+            //{
+            //    isTest = !isTest;
+            //}
 
-        //if(Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
-        //}
-        //else if(Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stabAttackState);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha4))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.backFlipState);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha5))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.jumpAttackState);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha6))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stanbyStabAttackState);
-        //}
+            //if(Input.GetKeyDown(KeyCode.Alpha1))
+            //{
+            //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
+            //}
+            //else if(Input.GetKeyDown(KeyCode.Alpha2))
+            //{
+            //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha3))
+            //{
+            //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stabAttackState);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha4))
+            //{
+            //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.backFlipState);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha5))
+            //{
+            //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.jumpAttackState);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha6))
+            //{
+            //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stanbyStabAttackState);
+            //}
     }
     private void FixedUpdate()
     {
@@ -117,7 +121,7 @@ public class BossEnemy : Enemy
     protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
     {
         base.OnEnemyTriggerStay(target, collider);
-
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ENEMY_HIT, 0.12f);
         lastTimeDamaged = Time.time;
     }
     public override void Die()
