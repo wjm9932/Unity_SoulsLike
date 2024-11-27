@@ -14,11 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: KillKingSkeletonQuest
   displayName: Kill King Skeleton!
-  initialState: 1
+  initialState: 0
   requirementsNotMetDialogue: 
   doneDialogue: Thank you for your help!
   onStartDialogue: Please kill the king skeleton and get back my temple!
-  onFinishDialogue: 
+  onFinishDialogue: 'Thank you for saving our tempple!
+
+    Final I can use temple
+    freely.
+
+    Thank you very much.'
   onFailFinishDialogue: Not enough space!
   questPrerequisites: []
   questStepPrefabs:
