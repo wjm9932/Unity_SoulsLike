@@ -23,7 +23,7 @@ namespace BossEnemyFSM
             sm.owner.navMesh.ResetPath();
             sm.owner.canAttack = false;
             sm.owner.animator.SetTrigger("isGroggy");
-
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.BOSS_GROGGY, 0.8f);
         }
         public virtual void Update()
         {

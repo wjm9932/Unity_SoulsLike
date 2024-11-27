@@ -43,6 +43,7 @@ public class SoundManager : MonoBehaviour
         BOSS_CHARGE_ATTACK,
         BOSS_SWORD_ATTACK,
         BOSS_STAB_ATTACK,
+        BOSS_GROGGY
     }
 
     public enum UISoundEffectType

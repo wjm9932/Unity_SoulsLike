@@ -146,7 +146,7 @@ public class BossEnemy : Enemy
         {
             currentGroggyTime = recoverGroggyTime;
 
-            groggyAmount += target.GetComponent<LivingEntity>().damage * 0.5f;
+            groggyAmount += target.GetComponent<LivingEntity>().damage * 2f;
 
             if (groggyAmount >= maxGroggyAmount)
             {

@@ -22612,6 +22612,9 @@ MonoBehaviour:
   - effectType: 24
     audioClips:
     - {fileID: 8300000, guid: 949e8e796b5ec4e4fbae5d136e958743, type: 3}
+  - effectType: 25
+    audioClips:
+    - {fileID: 8300000, guid: 5d3fd461b0b399649b0b863629efccec, type: 3}
   uiEffectInfos:
   - effectType: 0
     audioClips:
