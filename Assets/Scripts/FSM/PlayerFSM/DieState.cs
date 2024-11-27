@@ -19,7 +19,10 @@ namespace PlayerFSM
             sm.owner.rb.velocity = Vector3.zero;
             sm.owner.animator.SetBool("IsDie", true);
 
-            if(CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
             {
                 CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
             }
@@ -46,6 +49,10 @@ namespace PlayerFSM
         {
             sm.owner.canBeDamaged = true;
             sm.owner.animator.SetBool("IsDie", false);
+
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         public virtual void OnAnimationEnterEvent()
         {

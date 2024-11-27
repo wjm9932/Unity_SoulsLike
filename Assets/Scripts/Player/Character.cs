@@ -24,8 +24,9 @@ public class Character : LivingEntity
     [Header("Save & Load")]
     [SerializeField] private bool allowLoad;
 
-    [Header("Pause Menu")]
+    [Header("Menu")]
     public GameObject pauseMenu;
+    public GameObject respawnMenu;
 
     [Header("Inventory")]
     public GameObject inventoryUI;
@@ -390,10 +391,10 @@ public class Character : LivingEntity
 
         yield return new WaitForSeconds(4f);
 
-        ResetPlayer();
+        respawnMenu.SetActive(true);
     }
 
-    private void ResetPlayer()
+    public void ResetPlayer()
     {
         health = maxHealth;
         stamina = maxStamina;
@@ -403,6 +404,7 @@ public class Character : LivingEntity
         GetComponent<Collider>().enabled = true;
         rb.isKinematic = false;
         isDead = false;
+        respawnMenu.SetActive(false);
     }
 
     private void ResetCameraPosition()
