@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: KillKingSkeletonQuest
   displayName: Kill King Skeleton!
-  initialState: 0
+  initialState: 1
   requirementsNotMetDialogue: 
   doneDialogue: Thank you for your help!
   onStartDialogue: Please kill the king skeleton and get back my temple!

@@ -65,52 +65,9 @@ public class BossEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.backFlipState);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.groggyState);
-        }
-
         enemyBehaviorStateMachine.Update();
 
         RecoverGroggy();
-
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    isTest = !isTest;
-        //}
-
-        //if(Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.idleState);
-        //}
-        //else if(Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.swordAttackState);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stabAttackState);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha4))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.backFlipState);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha5))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.jumpAttackState);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha6))
-        //{
-        //    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.stanbyStabAttackState);
-        //}
     }
     private void FixedUpdate()
     {
@@ -139,23 +96,25 @@ public class BossEnemy : Enemy
     protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
     {
         base.OnEnemyTriggerStay(target, collider);
+        SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ENEMY_HIT, 0.12f);
 
-        lastTimeDamaged = Time.time;
-
-        if (enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.groggyState)
+        if (enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.dieState)
         {
-            currentGroggyTime = recoverGroggyTime;
+            lastTimeDamaged = Time.time;
 
-            groggyAmount += target.GetComponent<LivingEntity>().damage * 2f;
-
-            if (groggyAmount >= maxGroggyAmount)
+            if (enemyBehaviorStateMachine.currentState != enemyBehaviorStateMachine.groggyState)
             {
-                groggyAmount = Mathf.Clamp(groggyAmount, 0, maxGroggyAmount);
-                enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.groggyState);
+                currentGroggyTime = recoverGroggyTime;
+
+                groggyAmount += target.GetComponent<LivingEntity>().damage * 0.5f;
+
+                if (groggyAmount >= maxGroggyAmount)
+                {
+                    groggyAmount = Mathf.Clamp(groggyAmount, 0, maxGroggyAmount);
+                    enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.groggyState);
+                }
             }
         }
-
-        SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ENEMY_HIT, 0.12f);
     }
     public override void Die()
     {

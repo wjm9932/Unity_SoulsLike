@@ -69,4 +69,16 @@ public abstract class BossEnemyPatternState : IState
 
         return Quaternion.LookRotation(dir);
     }
+    protected Quaternion GetMoveRotationAngle()
+    {
+        Vector3 direction = sm.owner.navMesh.velocity;
+        direction.y = 0;
+
+        if (direction == Vector3.zero)
+        {
+            return Quaternion.identity;
+        }
+
+        return Quaternion.LookRotation(direction);
+    }
 }

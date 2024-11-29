@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     public EventSystem eventSystem;
 
     [Header("Save & Load")]
-    [SerializeField] private bool allowLoad;
+    [SerializeField] public bool allowLoad;
     
     [SerializeField] private List<GameObject> inventorySlot = new List<GameObject>(36);
     private Dictionary<string, UI_Item> itemContainer = new Dictionary<string, UI_Item>(36);

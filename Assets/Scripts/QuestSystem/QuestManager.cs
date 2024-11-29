@@ -19,7 +19,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private Character questOwner;
 
     [Header("Save & Load")]
-    [SerializeField] bool allowLoadQuest;
+    [SerializeField] public bool allowLoadQuest;
     private Dictionary<string, Quest> questMap;
 
 

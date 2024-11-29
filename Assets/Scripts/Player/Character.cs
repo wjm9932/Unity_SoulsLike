@@ -170,11 +170,6 @@ public class Character : LivingEntity
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            var a = followCamera.GetComponent<CameraShake>();
-            a.ShakeCamera();
-        }
         if (isDead == false)
         {
             rb.useGravity = !IsOnSlope();

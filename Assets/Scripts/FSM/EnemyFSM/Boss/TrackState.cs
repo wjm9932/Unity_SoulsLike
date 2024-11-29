@@ -66,13 +66,6 @@ namespace BossEnemyFSM
         {
 
         }
-        private Quaternion GetMoveRotationAngle()
-        {
-            Vector3 direction = sm.owner.navMesh.velocity;
-            direction.y = 0; 
-
-            return Quaternion.LookRotation(direction);
-        }
         private void GetBossPattern()
         {
             int pattern = Random.Range(0, 100);

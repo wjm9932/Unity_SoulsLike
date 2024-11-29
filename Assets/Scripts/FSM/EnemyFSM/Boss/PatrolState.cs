@@ -62,13 +62,7 @@ namespace BossEnemyFSM
         {
 
         }
-        private Quaternion GetMoveRotationAngle()
-        {
-            Vector3 direction = sm.owner.navMesh.velocity;
-            direction.y = 0;
 
-            return Quaternion.LookRotation(direction);
-        }
         private IEnumerator UpdatePath()
         {
             while (sm.owner.isDead == false && sm.currentState == this)
