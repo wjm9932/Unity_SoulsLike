@@ -222,10 +222,10 @@ public class Inventory : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveInventory();
+
     }
 
-    private void SaveInventory()
+    public void SaveInventory()
     {
         List<ItemData> data = new List<ItemData>();
 
@@ -244,7 +244,7 @@ public class Inventory : MonoBehaviour
         File.WriteAllText(path, jsonData);
     }
 
-    private void LoadItem()
+    public void LoadItem()
     {
         if(allowLoad == false)
         {

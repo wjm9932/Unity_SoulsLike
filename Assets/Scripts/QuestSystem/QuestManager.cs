@@ -244,22 +244,22 @@ public class QuestManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
+      
+    }
+    public void SaveQuest()
+    {
         foreach (Quest quest in questMap.Values)
         {
-            SaveQuest(quest);
-        }
-    }
-    private void SaveQuest(Quest quest)
-    {
-        try
-        {
-            QuestData questData = quest.GetQuestSaveData();
-            string serializedData = JsonUtility.ToJson(questData);
-            PlayerPrefs.SetString(quest.info.id, serializedData);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to save quest with text " + quest.info.id + ": " + e);
+            try
+            {
+                QuestData questData = quest.GetQuestSaveData();
+                string serializedData = JsonUtility.ToJson(questData);
+                PlayerPrefs.SetString(quest.info.id, serializedData);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Failed to save quest with text " + quest.info.id + ": " + e);
+            }
         }
     }
     private Quest LoadQuest(QuestInfoSO questInfo)

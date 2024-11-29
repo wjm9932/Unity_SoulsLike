@@ -139,19 +139,17 @@ public class Character : LivingEntity
     protected override void Awake()
     {
         base.Awake();
+        
         isSkillOn = false;
         chargingEffect.Stop();
         currentFootStepClips = groundFootStepClips;
         originCameraTrasform = cameraTransform.transform.localPosition;
         staminaRecoverCoolTime = 0f;
         canBeDamaged = true;
+
         CameraStateMachine.Initialize(this);
         uiStateMachine = new UIStateMachine(this);
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
-    }
-    protected override void Start()
-    {
-        LoadData();
 
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
@@ -161,6 +159,10 @@ public class Character : LivingEntity
         playerEvents = GetComponent<PlayerEvent>();
         playerBuff = GetComponent<BuffManager>();
         playerFootStepSoundSource = GetComponent<AudioSource>();
+    }
+    protected override void Start()
+    {
+        LoadData();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         uiStateMachine.ChangeState(uiStateMachine.closeState);
@@ -419,14 +421,14 @@ public class Character : LivingEntity
 
     private void OnApplicationQuit()
     {
-        SaveData();
+
     }
 
     private PlayerSaveData GetPlayerData()
     {
         return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, musicType, GetComponent<PlayerCheckPoint>().checkPointPosition);
     }
-    private void SaveData()
+    public void SaveData()
     {
         PlayerSaveData playerSaveData = GetPlayerData();
         string jsonData = JsonUtility.ToJson(playerSaveData, true);
@@ -434,7 +436,7 @@ public class Character : LivingEntity
         File.WriteAllText(path, jsonData);
     }
 
-    private void LoadData()
+    public void LoadData()
     {
         string path = Path.Combine(Application.dataPath, "playerData");
 
@@ -483,13 +485,5 @@ public class Character : LivingEntity
             QuestManager.Instance.onFinishQuest -= EnableSkill;
         }
     }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-    public void Resume()
-    {
-        uiStateMachine.ChangeState(uiStateMachine.closeState);
-    }
+   
 }
