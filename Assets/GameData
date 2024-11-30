@@ -1,0 +1,251 @@
+{
+    "playerData": {
+        "playerPosition": {
+            "x": -0.4655125141143799,
+            "y": 0.00999981164932251,
+            "z": 105.61453247070313
+        },
+        "playerRotation": {
+            "x": -1.411861109193542e-31,
+            "y": 0.014500224962830544,
+            "z": 4.733631115168093e-31,
+            "w": 0.999894917011261
+        },
+        "currentHealth": 90.0,
+        "maxHealth": 100.0,
+        "currentStamina": 100.0,
+        "musicType": 1,
+        "checkPoint": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 105.21600341796875
+        }
+    },
+    "inventoryData": {
+        "itemData": [
+            {
+                "slotIndex": 0,
+                "itemName": "Health Potion",
+                "itemCount": 2
+            },
+            {
+                "slotIndex": 1,
+                "itemName": "Bone",
+                "itemCount": 5
+            },
+            {
+                "slotIndex": 2,
+                "itemName": "Stamina Buff Potion",
+                "itemCount": 3
+            }
+        ]
+    },
+    "questData": [
+        {
+            "questId": "KillKingSkeletonQuest",
+            "state": 1,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "FindandUseBookQuest",
+            "state": 2,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "Find a Book",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "Use a Book",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "FindHealthPotion",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "VisitCampFire",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "SprintQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "AttackQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "DodgeQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "CameraLockOnQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "KillWarriorSkeletonQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "GetSlashQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "KillArhcerSkeletonQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "KillTankSkeletonQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        },
+        {
+            "questId": "KillSkeletonsQuest",
+            "state": 0,
+            "currentQuestStepIndex": 0,
+            "questStepData": [
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                },
+                {
+                    "questStepState": 0,
+                    "status": "",
+                    "count": ""
+                }
+            ]
+        }
+    ]
+}

@@ -220,7 +220,7 @@ public class Quest
 
     public QuestData GetQuestSaveData()
     {
-        return new QuestData(state, currentQuestStepIndex, Convert1DArrayFrom2DArray(questStepData));
+        return new QuestData(info.id, state, currentQuestStepIndex, Convert1DArrayFrom2DArray(questStepData));
     }
 
     private QuestStepData[] Convert1DArrayFrom2DArray(QuestStepData[][] questStepData)

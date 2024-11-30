@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
         character.inventory.SaveInventory();
         QuestManager.Instance.SaveQuest();
 
+        SaveGameData();
+        
         SceneLoadManager.Instance.GoToMainMenu();
     }
 
@@ -46,5 +49,18 @@ public class GameManager : MonoBehaviour
         character.SaveData();
         character.inventory.SaveInventory();
         QuestManager.Instance.SaveQuest();
+    }
+
+    private void SaveGameData()
+    {
+        SaveData data = new SaveData();
+
+        data.playerData = character.GetData();
+        data.inventoryData = character.inventory.GetData();
+        data.questData = QuestManager.Instance.GetData();
+
+        string jsonData = JsonUtility.ToJson(data, true);
+        string path = Path.Combine(Application.dataPath, "GameData");
+        File.WriteAllText(path, jsonData);
     }
 }

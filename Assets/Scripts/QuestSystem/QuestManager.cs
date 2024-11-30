@@ -262,6 +262,21 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
+
+    public QuestData[] GetData()
+    {
+        QuestData[] data = new QuestData[questMap.Count];
+        int index = 0;
+        
+        foreach(Quest quest in questMap.Values)
+        {
+            QuestData questData = quest.GetQuestSaveData();
+            data[index++] = questData;
+        }
+
+        return data;
+    }
+
     private Quest LoadQuest(QuestInfoSO questInfo)
     {
         Quest quest = null;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -242,6 +243,23 @@ public class Inventory : MonoBehaviour
         string jsonData = JsonUtility.ToJson(inventoryData, true);
         string path = Path.Combine(Application.dataPath, "InvetoryData");
         File.WriteAllText(path, jsonData);
+    }
+
+    public InventoryData GetData()
+    {
+        List<ItemData> data = new List<ItemData>();
+
+        for (int i = 0; i < inventorySlot.Count; i++)
+        {
+            if (inventorySlot[i].transform.childCount != 0)
+            {
+                UI_Item item = inventorySlot[i].GetComponentInChildren<UI_Item>();
+                data.Add(new ItemData(i, item.itemName, item.count));
+            }
+        }
+        InventoryData inventoryData = new InventoryData(data);
+
+        return inventoryData;
     }
 
     public void LoadItem()
