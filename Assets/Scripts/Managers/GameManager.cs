@@ -23,25 +23,36 @@ public class GameManager : MonoBehaviour
 
     public void Load()
     {
-        character.LoadData();
-        character.inventory.LoadItem();
+        string path = Path.Combine(Application.dataPath, "GameData");
+        if (!File.Exists(path))
+        {
+            return;
+        }
 
+        string jsonData = File.ReadAllText(path);
+        SaveData saveData = JsonUtility.FromJson<SaveData>(jsonData);
+
+        character.LoadData(saveData.playerData);
+        character.inventory.LoadData(saveData.inventoryData);
+        QuestManager.Instance.LoadQuest(saveData.questData);
     }
 
+
+
+    public void Resume()
+    {
+        character.uiStateMachine.ChangeState(character.uiStateMachine.closeState);
+    }
     public void Quit()
     {
         character.SaveData();
         character.inventory.SaveInventory();
         QuestManager.Instance.SaveQuest();
+        /***********************************/
 
         SaveGameData();
-        
-        SceneLoadManager.Instance.GoToMainMenu();
-    }
 
-    public void Resume()
-    {
-        character.uiStateMachine.ChangeState(character.uiStateMachine.closeState);
+        SceneLoadManager.Instance.GoToMainMenu();
     }
 
     private void OnApplicationQuit()
@@ -49,6 +60,9 @@ public class GameManager : MonoBehaviour
         character.SaveData();
         character.inventory.SaveInventory();
         QuestManager.Instance.SaveQuest();
+        /***********************************/
+
+        SaveGameData();
     }
 
     private void SaveGameData()

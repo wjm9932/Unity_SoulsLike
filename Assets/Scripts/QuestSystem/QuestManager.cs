@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.IO;
+using static QuestPoint;
 
 public class QuestManager : MonoBehaviour
 {
@@ -84,7 +85,6 @@ public class QuestManager : MonoBehaviour
         {
             onUpdateQuestDialogue(questName, text);
         }
-
     }
 
     public void UpdateQuestProgress(string id)
@@ -299,5 +299,28 @@ public class QuestManager : MonoBehaviour
             Debug.LogError("Failed to load quest with text " + quest.info.id + ": " + e);
         }
         return quest;
+    }
+
+    public void LoadQuest(QuestData[] data)
+    {
+        for(int i = 0; i < data.Length; i++)
+        {
+            Quest quest = questMap[data[i].questId];
+            QuestStepData[][] stepData = quest.Convert2DArrayFrom1DArray(data[i].questStepData);
+            quest.LoadQuestData(data[i].state, data[i].currentQuestStepIndex, stepData);
+
+            if (quest.state == QuestState.IN_PROGRESS || quest.state == QuestState.CAN_FINISH)
+            {
+                quest.InstantiateLoadedQuestStep(this.transform);
+            }
+
+            if (quest.state == QuestState.FINISHED)
+            {
+                NotifyQuestFinished(quest);
+            }
+
+            NotifyQuestStateToQuestPoints(quest);
+        }
+
     }
 }

@@ -162,6 +162,8 @@ public class Character : LivingEntity
     }
     protected override void Start()
     {
+        InitializeDefaultPlayerData();
+
         LoadData();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
@@ -466,11 +468,23 @@ public class Character : LivingEntity
                 SoundManager.Instance.ChangeBackGroundMusic(musicType);
             }
         }
-        else
-        {
-            InitializeDefaultPlayerData();
-        }
     }
+
+    public void LoadData(PlayerSaveData data)
+    {
+        transform.position = data.playerPosition;
+        transform.rotation = data.playerRotation;
+
+        maxHealth = data.maxHealth;
+        health = data.currentHealth;
+        stamina = data.currentStamina;
+        musicType = data.musicType;
+        hpBar.SetStatusBarSize(maxHealth);
+
+        ChangeSoundEffect(musicType);
+        SoundManager.Instance.ChangeBackGroundMusic(musicType);
+    }
+
 
     private void InitializeDefaultPlayerData()
     {

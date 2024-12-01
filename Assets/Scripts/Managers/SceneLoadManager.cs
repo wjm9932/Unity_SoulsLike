@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static System.Net.WebRequestMethods;
 
 public class SceneLoadManager : MonoBehaviour
 {
     public static SceneLoadManager Instance;
+    private Action loadAction;
 
     private void Awake()
     {
@@ -15,7 +18,7 @@ public class SceneLoadManager : MonoBehaviour
             Destroy(this.gameObject);
 
         DontDestroyOnLoad(this.gameObject);
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void GoToMainMenu()
@@ -26,8 +29,19 @@ public class SceneLoadManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
-    public void ContinueGame()
+    public void ContinueGame(Action action)
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        loadAction = action;
+
         SceneManager.LoadScene("GameScene");
+    }
+
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if(arg0.name == "GameScene")
+        {
+
+        }
     }
 }

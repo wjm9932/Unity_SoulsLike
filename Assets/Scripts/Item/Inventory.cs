@@ -295,6 +295,23 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void LoadData(InventoryData data)
+    {
+        UX_ItemDataSO[] itemPrefabs = Resources.LoadAll<UX_ItemDataSO>("Item");
+        Dictionary<string, UX_ItemDataSO> map = new Dictionary<string, UX_ItemDataSO>();
+
+        for (int i = 0; i < itemPrefabs.Length; i++)
+        {
+            map.Add(itemPrefabs[i].itemName, itemPrefabs[i]);
+        }
+
+        for (int i = 0; i < data.itemData.Count; i++)
+        {
+            UX_ItemDataSO item = map[data.itemData[i].itemName];
+            LoadItemToInventory(item, data.itemData[i].itemCount, data.itemData[i].slotIndex);
+        }
+    }
+
     private void LoadItemToInventory(UX_ItemDataSO item, int count, int slot)
     {
         UI_Item inventoryItem = Instantiate(item.icon, inventorySlot[slot].transform).GetComponent<UI_Item>();

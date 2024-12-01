@@ -54,6 +54,19 @@ public class Quest
         }
     }
 
+    public void LoadQuestData(QuestState state, int currentQuestStepIndex, QuestStepData[][] questStepData)
+    {
+        if(this.questStepData.Length != questStepData.Length)
+        {
+            Debug.LogError("Load sync failed");
+            return;
+        }
+
+        this.state = state;
+        this.currentQuestStepIndex = currentQuestStepIndex;
+        this.questStepData = questStepData;
+    }
+
     public void MoveToNextStep()
     {
         currentQuestStepIndex++;
@@ -246,6 +259,23 @@ public class Quest
     }
 
     public static QuestStepData[][] Convert2DArrayFrom1DArray(QuestStepData[] questStepData, QuestInfoSO info)
+    {
+        QuestStepData[][] questStepData2D = new QuestStepData[info.questStepPrefabs.Length][];
+
+        int index = 0;
+        for (int i = 0; i < info.questStepPrefabs.Length; i++)
+        {
+            questStepData2D[i] = new QuestStepData[info.questStepPrefabs[i].stepPrefabs.Length];
+            for (int j = 0; j < info.questStepPrefabs[i].stepPrefabs.Length; j++)
+            {
+                questStepData2D[i][j] = questStepData[index++];
+            }
+        }
+
+        return questStepData2D;
+    }
+
+    public QuestStepData[][] Convert2DArrayFrom1DArray(QuestStepData[] questStepData)
     {
         QuestStepData[][] questStepData2D = new QuestStepData[info.questStepPrefabs.Length][];
 
