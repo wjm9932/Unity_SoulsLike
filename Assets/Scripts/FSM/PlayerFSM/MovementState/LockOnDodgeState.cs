@@ -30,7 +30,7 @@ namespace PlayerFSM
             SpeedControl();
             if (isDodgeFinished == true)
             {
-                if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+                if (sm.owner.playerCameraStateMachine.currentState == sm.owner.playerCameraStateMachine.cameraLockOnState)
                 {
                     sm.ChangeState(sm.lockOnWalkState);
                 }

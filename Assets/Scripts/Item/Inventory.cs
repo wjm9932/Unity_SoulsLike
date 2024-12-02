@@ -11,9 +11,6 @@ public class Inventory : MonoBehaviour
 {
     public GraphicRaycaster uiRaycaster;
     public EventSystem eventSystem;
-
-    [Header("Save & Load")]
-    [SerializeField] public bool allowLoad;
     
     [SerializeField] private List<GameObject> inventorySlot = new List<GameObject>(36);
     private Dictionary<string, UI_Item> itemContainer = new Dictionary<string, UI_Item>(36);
@@ -23,7 +20,6 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         playerEvent = GetComponent<PlayerEvent>();
-        LoadItem();
     }
 
     public UsableItem quickSlot
@@ -262,38 +258,6 @@ public class Inventory : MonoBehaviour
         return inventoryData;
     }
 
-    public void LoadItem()
-    {
-        if(allowLoad == false)
-        {
-            return;
-        }
-
-        string path = Path.Combine(Application.dataPath, "InvetoryData");
-
-        if (!File.Exists(path))
-        {
-            Debug.LogWarning("No inventory data found. Starting with an empty inventory.");
-            return;
-        }
-
-        string jsonData = File.ReadAllText(path);
-        InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(jsonData);
-
-        UX_ItemDataSO[] itemPrefabs = Resources.LoadAll<UX_ItemDataSO>("Item");
-        Dictionary<string, UX_ItemDataSO> map = new Dictionary<string, UX_ItemDataSO>();
-
-        for(int i = 0; i < itemPrefabs.Length; i++)
-        {
-            map.Add(itemPrefabs[i].itemName, itemPrefabs[i]);
-        }
-
-        for(int i = 0; i < inventoryData.itemData.Count; i++)
-        {
-            UX_ItemDataSO item = map[inventoryData.itemData[i].itemName];
-            LoadItemToInventory(item, inventoryData.itemData[i].itemCount, inventoryData.itemData[i].slotIndex);
-        }
-    }
 
     public void LoadData(InventoryData data)
     {

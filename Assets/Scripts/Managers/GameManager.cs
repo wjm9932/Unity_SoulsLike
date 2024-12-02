@@ -16,15 +16,11 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
     }
 
-    void Start()
-    {
-        
-    }
-
     public void Load()
     {
         string path = Path.Combine(Application.dataPath, "GameData");
         if (!File.Exists(path))
+
         {
             return;
         }
@@ -44,11 +40,6 @@ public class GameManager : MonoBehaviour
     }
     public void Quit()
     {
-        character.SaveData();
-        character.inventory.SaveInventory();
-        QuestManager.Instance.SaveQuest();
-        /***********************************/
-
         SaveGameData();
 
         SceneLoadManager.Instance.GoToMainMenu();
@@ -56,11 +47,6 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        character.SaveData();
-        character.inventory.SaveInventory();
-        QuestManager.Instance.SaveQuest();
-        /***********************************/
-
         SaveGameData();
     }
 

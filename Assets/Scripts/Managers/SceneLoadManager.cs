@@ -1,10 +1,11 @@
-#nullable enable
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using System.IO;
 
 public class SceneLoadManager : MonoBehaviour
 {
@@ -29,26 +30,31 @@ public class SceneLoadManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        gameObject.SetActive(true);
+        loadAtcion = null;
+        StartCoroutine(LoadSceneCoroutine("MainMenu"));
     }
     public void StartNewGame()
     {
-        SceneManager.LoadScene("LoadingScene");
+        gameObject.SetActive(true);
+        loadAtcion = null;
+        StartCoroutine(LoadSceneCoroutine("GameScene"));
     }
     public void ContinueGame(Action action)
     {
+        gameObject.SetActive(true);
         loadAtcion = action;
         SceneManager.sceneLoaded += OnSceneLoaded;
-        gameObject.SetActive(true);
 
-        StartCoroutine(LoadSceneCoroutine());
+        StartCoroutine(LoadSceneCoroutine("GameScene"));
     }
 
-    private IEnumerator LoadSceneCoroutine()
+    private IEnumerator LoadSceneCoroutine(string sceneName)
     {
+        loadingBar.fillAmount = 0f;
         yield return StartCoroutine(FadeInAndOut(true));
 
-        AsyncOperation op = SceneManager.LoadSceneAsync("GameScene");
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
 
         op.allowSceneActivation = false;
 
@@ -95,6 +101,11 @@ public class SceneLoadManager : MonoBehaviour
         loadingScene.SetActive(isStartLoading);
 
         yield return StartCoroutine(Fade(false));
+
+        if(isStartLoading == false)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator Fade(bool isFadeIn)
@@ -121,4 +132,5 @@ public class SceneLoadManager : MonoBehaviour
 
         loadAtcion?.Invoke();
     }
+
 }

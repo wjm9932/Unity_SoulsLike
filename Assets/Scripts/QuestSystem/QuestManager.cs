@@ -19,8 +19,6 @@ public class QuestManager : MonoBehaviour
     [Header("Quest Owner")]
     [SerializeField] private Character questOwner;
 
-    [Header("Save & Load")]
-    [SerializeField] public bool allowLoadQuest;
     private Dictionary<string, Quest> questMap;
 
 
@@ -50,16 +48,6 @@ public class QuestManager : MonoBehaviour
     {
         foreach (Quest quest in questMap.Values)
         {
-            if(quest.state == QuestState.IN_PROGRESS || quest.state == QuestState.CAN_FINISH)
-            {
-                quest.InstantiateLoadedQuestStep(this.transform);
-            }
-
-            if(quest.state == QuestState.FINISHED)
-            {
-                NotifyQuestFinished(quest);
-            }
-
             NotifyQuestStateToQuestPoints(quest);
         }
     }
@@ -224,7 +212,7 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                idToQuestMap.Add(questInfo.id, LoadQuest(questInfo));
+                idToQuestMap.Add(questInfo.id, new Quest(questInfo, questOwner));
             }
         }
         return idToQuestMap;
@@ -277,29 +265,6 @@ public class QuestManager : MonoBehaviour
         return data;
     }
 
-    private Quest LoadQuest(QuestInfoSO questInfo)
-    {
-        Quest quest = null;
-        try
-        {
-            if (PlayerPrefs.HasKey(questInfo.id) == true && allowLoadQuest == true)
-            {
-                string serializedData = PlayerPrefs.GetString(questInfo.id);
-                QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
-                QuestStepData[][] data = Quest.Convert2DArrayFrom1DArray(questData.questStepData, questInfo);
-                quest = new Quest(questInfo, questData.state, questData.currentQuestStepIndex, data, questOwner);
-            }
-            else
-            {
-                quest = new Quest(questInfo, questOwner);
-            }
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to load quest with text " + quest.info.id + ": " + e);
-        }
-        return quest;
-    }
 
     public void LoadQuest(QuestData[] data)
     {

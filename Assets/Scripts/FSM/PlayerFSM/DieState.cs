@@ -22,9 +22,9 @@ namespace PlayerFSM
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+            if (sm.owner.playerCameraStateMachine.currentState == sm.owner.playerCameraStateMachine.cameraLockOnState)
             {
-                CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
+                sm.owner.playerCameraStateMachine.ChangeState(sm.owner.playerCameraStateMachine.cameraLockOffState);
             }
 
             if (SoundManager.Instance.drinkAudioSource != null)
