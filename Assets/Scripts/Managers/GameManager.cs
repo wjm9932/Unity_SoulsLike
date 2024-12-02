@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     public void Resume()
     {
         character.uiStateMachine.ChangeState(character.uiStateMachine.closeState);

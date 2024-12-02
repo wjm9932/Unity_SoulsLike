@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MakeDontDestroyObjScene.unity
     guid: c710c065ef8184049a8ef0d4d49c8851
   - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 017a900680f9e0e4cb13dd59ad208c06
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 5abf817acab676e4c9e771c7ca4c956b
   - enabled: 1
