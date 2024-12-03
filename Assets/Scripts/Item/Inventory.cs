@@ -261,7 +261,7 @@ public class Inventory : MonoBehaviour
 
     public void LoadData(InventoryData data)
     {
-        UX_ItemDataSO[] itemPrefabs = Resources.LoadAll<UX_ItemDataSO>("Item");
+        UX_ItemDataSO[] itemPrefabs = Resources.LoadAll<UX_ItemDataSO>("ItemSO");
         Dictionary<string, UX_ItemDataSO> map = new Dictionary<string, UX_ItemDataSO>();
 
         for (int i = 0; i < itemPrefabs.Length; i++)

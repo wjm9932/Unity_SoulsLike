@@ -7,40 +7,46 @@ public class SceneGameDataManger : MonoBehaviour
     public void LoadSceneData(SceneSaveData data)
     {
         List<UX_Item> sceneItem = new List<UX_Item>();
-        Dictionary<string, GameObject> refItem = new Dictionary<string, GameObject>();
 
         foreach (UX_Item item in Object.FindObjectsOfType<UX_Item>(true))
         {
             sceneItem.Add(item);
-            refItem.TryAdd(item.data.itemName, item.gameObject);
         }
 
         for (int i = data.sceneData.Count - 1; i >= 0; i--)
         {
             for (int j = sceneItem.Count - 1; j >= 0; j--)
             {
-                if (sceneItem[j].data.itemName == data.sceneData[i].itemName)
-                {
-                    sceneItem[j].transform.position = data.sceneData[i].position;
-                    sceneItem[j].transform.rotation = data.sceneData[i].rotation;
-                    sceneItem[j].transform.localScale = data.sceneData[i].scale;
+                if (sceneItem[j].data.itemName != data.sceneData[i].itemName) continue;
+                if (sceneItem[j].numOfItem != data.sceneData[i].count) continue;
 
-                    data.sceneData.RemoveAt(i);
-                    sceneItem.RemoveAt(j);
-                    break; 
-                }
+                sceneItem[j].transform.position = data.sceneData[i].position;
+                sceneItem[j].transform.rotation = data.sceneData[i].rotation;
+                sceneItem[j].transform.localScale = data.sceneData[i].scale;
+                sceneItem[j].numOfItem = data.sceneData[i].count;
+
+                data.sceneData.RemoveAt(i);
+                sceneItem.RemoveAt(j);
+                break;
             }
         }
-        for (int i = data.sceneData.Count - 1; i >= 0; i--)
+
+
+        if (data.sceneData.Count > 0)
         {
-            if (refItem.ContainsKey(data.sceneData[i].itemName) == false)
+            UX_Item[] itemPrefabs = Resources.LoadAll<UX_Item>("ItemPrefabs");
+
+            Dictionary<string, GameObject> refItem = new Dictionary<string, GameObject>();
+
+            for (int i = 0; i < itemPrefabs.Length; i++)
             {
-                //GameObject item = 
+                refItem.Add(itemPrefabs[i].data.itemName, itemPrefabs[i].gameObject);
             }
-            else
+
+            for (int i = data.sceneData.Count - 1; i >= 0; i--)
             {
-                GameObject item = refItem[data.sceneData[i].itemName];
-                Instantiate(item, data.sceneData[i].position, data.sceneData[i].rotation);
+                var item = Instantiate(refItem[data.sceneData[i].itemName], data.sceneData[i].position, data.sceneData[i].rotation).GetComponent<UX_Item>();
+                item.numOfItem = data.sceneData[i].count;
             }
         }
 
@@ -48,6 +54,8 @@ public class SceneGameDataManger : MonoBehaviour
         {
             Destroy(sceneItem[i].gameObject);
         }
+
+
 
     }
 
@@ -62,6 +70,7 @@ public class SceneGameDataManger : MonoBehaviour
             sceneData.rotation = item.transform.rotation;
             sceneData.scale = item.transform.localScale;
             sceneData.itemName = item.data.itemName;
+            sceneData.count = item.numOfItem;
 
             data.Add(sceneData);
         }
