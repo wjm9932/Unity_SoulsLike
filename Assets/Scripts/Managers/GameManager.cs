@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [SerializeField] private Character character;
+    [SerializeField] private SceneGameDataManger sceneGameDataManger;
     private void Awake()
     {
         if (Instance == null)
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         string jsonData = File.ReadAllText(path);
         SaveData saveData = JsonUtility.FromJson<SaveData>(jsonData);
 
+        sceneGameDataManger.LoadSceneData(saveData.sceneSaveData);
         character.LoadData(saveData.playerData);
         character.inventory.LoadData(saveData.inventoryData);
         QuestManager.Instance.LoadQuest(saveData.questData);
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         SaveData data = new SaveData();
 
+        data.sceneSaveData = sceneGameDataManger.SaveSceneData();
         data.playerData = character.GetData();
         data.inventoryData = character.inventory.GetData();
         data.questData = QuestManager.Instance.GetData();

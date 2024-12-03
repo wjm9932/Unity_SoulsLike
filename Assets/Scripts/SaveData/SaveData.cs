@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct SaveData 
 {
+    public SceneSaveData sceneSaveData;
     public PlayerSaveData playerData;
     public InventoryData inventoryData;
     public QuestData[] questData;
