@@ -13,7 +13,7 @@ public class QuestInteractState : InteractStateUI
     public override void Enter()
     {
         base.Enter();
-        sm.owner.questDialogueUI.SetActive(true);
+        sm.owner.playerQuestManager.questDialogueUI.SetActive(true);
     }
     public override void Update()
     {
@@ -26,6 +26,6 @@ public class QuestInteractState : InteractStateUI
     public override void Exit()
     {
         base.Exit();
-        sm.owner.questDialogueUI.SetActive(false);
+        sm.owner.playerQuestManager.questDialogueUI.SetActive(false);
     }
 }

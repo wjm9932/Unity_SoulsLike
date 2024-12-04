@@ -2159,11 +2159,11 @@ GameObject:
   - component: {fileID: 892670058287141937}
   - component: {fileID: 3702315721447772414}
   - component: {fileID: 3702315721447772401}
+  - component: {fileID: 1438546957634691687}
   - component: {fileID: 3702315721447772400}
   - component: {fileID: 3702315721447772413}
   - component: {fileID: 3702315721447772409}
   - component: {fileID: 3702315721447771910}
-  - component: {fileID: 1438546957634691687}
   - component: {fileID: 1438546957634691673}
   - component: {fileID: 1438546957634691680}
   m_Layer: 8
@@ -2244,132 +2244,6 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &3702315721447772400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3160448260194838510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageTextPosition: {fileID: 3702315721113321823}
-  _entityType: 0
-  _maxHealth: 100
-  maxStamina: 100
-  inventoryUI: {fileID: 0}
-  questLogUI: {fileID: 0}
-  questDialogueUI: {fileID: 0}
-  hpBar: {fileID: 0}
-  staminaBar: {fileID: 0}
-  followCamera: {fileID: 0}
-  cameraTransform: {fileID: 0}
-  camEyePos: {fileID: 3702315720088745593}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 128
-  lockOnCameraTargetLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  walkSpeed: 2.5
-  sprintSpeed: 4
-  maxSlopeAngle: 45
-  footStepClips:
-  - {fileID: 8300000, guid: b993df4a93c1d304ab19d8b2eb88c9a5, type: 3}
-  - {fileID: 8300000, guid: 5c9bdbce37b06a24fa6ea793bcfd1907, type: 3}
-  - {fileID: 8300000, guid: 0909de896e9029541b92ae05fe15e4b6, type: 3}
-  - {fileID: 8300000, guid: 6ad0cf00f050bee41a2dee098475dc78, type: 3}
-  - {fileID: 8300000, guid: 7ca5a9710db4327439c9f8cb8204615e, type: 3}
-  - {fileID: 8300000, guid: 14ae706fef2303e4cb71112dbd5d250b, type: 3}
-  - {fileID: 8300000, guid: b995bc1775ea83b4b8f861763e9a1424, type: 3}
-  - {fileID: 8300000, guid: d15f7338d693f0343843a6b9096d27f6, type: 3}
-  leftHandPos: {fileID: 3702315721371053210}
-  swordEffect: {fileID: 3702315721475870886}
-  arrowHitPositionParent: {fileID: 1209147708}
-  cameraTargetYaw: 0
-  cameraTargetPitch: 0
-  staminaRecoverCoolTime: 0
---- !u!114 &3702315721447772413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3160448260194838510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6090a447a315d4cb9ee03db96c2e8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3702315721447772409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3160448260194838510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd289aeb36df604b8ad512070ddeb43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiRaycaster: {fileID: 0}
-  eventSystem: {fileID: 0}
-  inventorySlot:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &3702315721447771910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3160448260194838510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aa61dedc2a93ea439cbbf37e3617f81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1438546957634691687
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2466,6 +2340,131 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3702315721447772400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3160448260194838510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcff15ab2ec478341954dd39f31ac605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTextPosition: {fileID: 3702315721113321823}
+  _entityType: 0
+  _maxHealth: 100
+  maxStamina: 100
+  pauseMenu: {fileID: 0}
+  respawnMenu: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  questLogUI: {fileID: 0}
+  questDialogueUI: {fileID: 0}
+  skillIsOnQuest: {fileID: 0}
+  hpBar: {fileID: 0}
+  staminaBar: {fileID: 0}
+  followCamera: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  camEyePos: {fileID: 3702315720088745593}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 128
+  lockOnCameraObstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  walkSpeed: 2.5
+  sprintSpeed: 4
+  maxSlopeAngle: 45
+  slash: {fileID: 0}
+  chargingEffect: {fileID: 0}
+  tileFootStepClips: []
+  groundFootStepClips: []
+  musicType: 0
+  leftHandPos: {fileID: 3702315721371053210}
+  swordEffect: {fileID: 3702315721475870886}
+  arrowHitPositionParent: {fileID: 1209147708}
+  cameraTargetYaw: 0
+  cameraTargetPitch: 0
+  staminaRecoverCoolTime: 0
+--- !u!114 &3702315721447772413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3160448260194838510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6090a447a315d4cb9ee03db96c2e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3702315721447772409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3160448260194838510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd289aeb36df604b8ad512070ddeb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiRaycaster: {fileID: 0}
+  eventSystem: {fileID: 0}
+  inventorySlot:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &3702315721447771910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3160448260194838510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa61dedc2a93ea439cbbf37e3617f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1438546957634691673
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class ChargingState : IState
     }
     public virtual void Enter()
     {
-        if(sm.owner.stamina <= 10f || sm.owner.isSkillOn == false)
+        if(sm.owner.stamina <= 10f || sm.owner.playerQuestManager.isSkillOn == false)
         {
             sm.ChangeState(sm.walkState);
         }

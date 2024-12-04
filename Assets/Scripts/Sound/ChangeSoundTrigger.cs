@@ -12,7 +12,7 @@ public class ChangeSoundTrigger : MonoBehaviour
     {
         if(other.GetComponent<Character>() != null)
         {
-            other.GetComponent<Character>().ChangeSoundEffect(type);
+            other.GetComponent<PlayerSoundManager>().ChangeSoundEffect(type);
             SoundManager.Instance.ChangeBackGroundMusic(type);
         }
     }

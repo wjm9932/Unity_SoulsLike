@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Character character;
     [SerializeField] private SceneGameDataManger sceneGameDataManger;
+
     private void Awake()
     {
         if (Instance == null)
@@ -34,31 +36,7 @@ public class GameManager : MonoBehaviour
         character.inventory.LoadData(saveData.inventoryData);
         QuestManager.Instance.LoadQuest(saveData.questData);
     }
-
-
-    public void Resume()
-    {
-        character.uiStateMachine.ChangeState(character.uiStateMachine.closeState);
-    }
-
-    public void Setting()
-    {
-        character.uiStateMachine.ChangeState(character.uiStateMachine.openSettingMenu);
-    }
-
-    public void Quit()
-    {
-        SaveGameData();
-
-        SceneLoadManager.Instance.GoToMainMenu();
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveGameData();
-    }
-
-    private void SaveGameData()
+    public void SaveGameData()
     {
         SaveData data = new SaveData();
 
@@ -71,4 +49,10 @@ public class GameManager : MonoBehaviour
         string path = Path.Combine(Application.dataPath, "GameData");
         File.WriteAllText(path, jsonData);
     }
+
+    private void OnApplicationQuit()
+    {
+        SaveGameData();
+    }
+
 }

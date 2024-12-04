@@ -89,7 +89,7 @@ public abstract class LivingEntity : MonoBehaviour
                 Die();
                 if(damager.GetComponent<Character>() != null)
                 {
-                    damager.GetComponent<Character>().KillLivingEntity(this.entityType);
+                    damager.GetComponent<PlayerQuestManager>().KillLivingEntity(damager.GetComponent<Character>(), this.entityType);
                 }
             }
 

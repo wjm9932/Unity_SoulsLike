@@ -12,7 +12,7 @@ public class OpenQuestLogState : OpenState
     public override void Enter()
     {
         base.Enter();
-        sm.owner.questLogUI.SetActive(true);
+        sm.owner.playerQuestManager.questLogUI.SetActive(true);
     }
     public override void Update()
     {
@@ -25,6 +25,6 @@ public class OpenQuestLogState : OpenState
     public override void Exit()
     {
         base.Exit();
-        sm.owner.questLogUI.SetActive(false);
+        sm.owner.playerQuestManager.questLogUI.SetActive(false);
     }
 }

@@ -7,10 +7,10 @@ public class StaminaBuff : Buff
     public override void Initialize(float value)
     {
         elapsedTime = duration;
-        owner.buffStaminaPercent = value;
+        owner.playerBuffManager.buffStaminaPercent = value;
     }
     private void OnDisable()
     {
-        owner.buffStaminaPercent = 0f;
+        owner.playerBuffManager.buffStaminaPercent = 0f;
     }
 }

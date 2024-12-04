@@ -8,11 +8,11 @@ public class AttackBuff : Buff
     public override void Initialize(float value)
     {
         elapsedTime = duration;
-        owner.buffDamage = value;
+        owner.playerBuffManager.buffDamage = value;
     }
 
     private void OnDisable()
     {
-        owner.buffDamage = 0f;
+        owner.playerBuffManager.buffDamage = 0f;
     }
 }

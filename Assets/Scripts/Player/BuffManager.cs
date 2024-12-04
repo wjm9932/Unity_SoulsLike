@@ -18,6 +18,9 @@ public class BuffManager : MonoBehaviour
     private Dictionary<Buff.BuffType, GameObject> buffPrefabs = new Dictionary<Buff.BuffType, GameObject>();
     private Dictionary<Buff.BuffType, Buff> buffContainer = new Dictionary<Buff.BuffType, Buff>();
 
+    public float buffDamage { get; set; }
+    public float buffStaminaPercent { get; set; }
+
     private void Awake()
     {
         for(int i = 0; i < buffs.Length; i++)

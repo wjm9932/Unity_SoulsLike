@@ -30,7 +30,7 @@ public class DrinkStaminaBuffPotionState : PlayerMovementState
         if (isDrinkFinished == true)
         {
             sm.owner.toBeUsedItem.UseItem(sm.owner);
-            sm.owner.playerBuff.AddBuff(Buff.BuffType.STAMINA, sm.owner.toBeUsedItem.data.value);
+            sm.owner.playerBuffManager.AddBuff(Buff.BuffType.STAMINA, sm.owner.toBeUsedItem.data.value);
             sm.ChangeState(sm.walkState);
             SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.BUFF, 0.1f);
         }
