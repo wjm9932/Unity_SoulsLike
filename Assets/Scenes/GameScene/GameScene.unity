@@ -12995,7 +12995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -13026,7 +13026,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1543071902}
   m_HandleRect: {fileID: 1239781689}
   m_Direction: 0
-  m_MinValue: 0.001
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.5
@@ -23853,9 +23853,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmAudioSource: {fileID: 560342421}
   audioMixer: {fileID: 24100000, guid: 757bb6b1d008ff649a4d7f466f097501, type: 2}
-  masterVolume: {fileID: 0}
-  BGMVolume: {fileID: 0}
-  SFXVolume: {fileID: 0}
+  masterVolume: {fileID: 498936304}
+  bgmVolume: {fileID: 1534929367}
+  sfxVolume: {fileID: 1170515097}
   bgmList:
   - type: 0
     audioClips: {fileID: 8300000, guid: c7a1ef92b6039dc42ac9267879613b59, type: 3}
@@ -30472,7 +30472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -30503,7 +30503,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1301018936}
   m_HandleRect: {fileID: 1451680532}
   m_Direction: 0
-  m_MinValue: 0.001
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.5
@@ -40849,7 +40849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -40880,7 +40880,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1112458042}
   m_HandleRect: {fileID: 367716253}
   m_Direction: 0
-  m_MinValue: 0.001
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.5
@@ -58064,6 +58064,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 1438546957634691687, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 622795093735171591, guid: 757bb6b1d008ff649a4d7f466f097501, type: 2}
     - target: {fileID: 1438546957634691687, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 0

@@ -14,15 +14,9 @@ public class SoundManager : MonoBehaviour
 
     [Header("Slider")]
     [SerializeField] private Slider masterVolume;
-    [SerializeField] private Slider BGMVolume;
-    [SerializeField] private Slider SFXVolume;
+    [SerializeField] private Slider bgmVolume;
+    [SerializeField] private Slider sfxVolume;
 
-    public enum BackGroundMusic
-    {
-        OUTSIDE,
-        DUNGEON,
-        BOSS
-    }
 
     public enum SoundEffectType
     {
@@ -65,7 +59,7 @@ public class SoundManager : MonoBehaviour
     [System.Serializable]
     private struct BGMInfo
     {
-        public BackGroundMusic type;
+        public AreaType type;
         public AudioClip audioClips;
     }
 
@@ -87,13 +81,14 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private SoundEffectInfo[] effectInfos;
     [SerializeField] private UISoundEffectInfo[] uiEffectInfos;
 
-    private Dictionary<BackGroundMusic, AudioClip> bgmAudioClips = new Dictionary<BackGroundMusic, AudioClip>();
+    private Dictionary<AreaType, AudioClip> bgmAudioClips = new Dictionary<AreaType, AudioClip>();
     private Dictionary<SoundEffectType, List<AudioClip>> inGameAudioClips = new Dictionary<SoundEffectType, List<AudioClip>>();
     private Dictionary<UISoundEffectType, List<AudioClip>> uiGameAudioClips = new Dictionary<UISoundEffectType, List<AudioClip>>();
 
     private int maxPickUpSoundEffect = 3;
     private int currentPlayingPickupEffect = 0;
     public AudioSource drinkAudioSource { get; private set; }
+
 
     private void Awake()
     {
@@ -130,6 +125,10 @@ public class SoundManager : MonoBehaviour
 
             uiGameAudioClips.Add(uiEffectInfos[i].effectType, clips);
         }
+
+        SetMasterVolume(masterVolume.value);
+        SetBGMVolume(bgmVolume.value);
+        SetSFXVolume(sfxVolume.value);
     }
 
     public void Update()
@@ -202,16 +201,16 @@ public class SoundManager : MonoBehaviour
         return audioSource;
     }
 
-    public void ChangeBackGroundMusic(BackGroundMusic type)
+    public void ChangeBackGroundMusic(AreaType type)
     {
-        if(type  == BackGroundMusic.OUTSIDE)
+        if(type  == AreaType.OUTSIDE)
         {
             bgmAudioSource.clip = bgmAudioClips[type];
             bgmAudioSource.pitch = 2.5f;
             bgmAudioSource.volume = 0.5f;
             
         }
-        else if (type == BackGroundMusic.DUNGEON)
+        else if (type == AreaType.DUNGEON)
         {
             bgmAudioSource.clip = bgmAudioClips[type];
             bgmAudioSource.pitch = 1f;
@@ -239,5 +238,21 @@ public class SoundManager : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+    }
+
+    public void LoadSoundData(SoundSettingData data)
+    {
+        audioMixer.SetFloat("Master", Mathf.Log10(data.masterVolume) * 20);
+        audioMixer.SetFloat("BGM", Mathf.Log10(data.bgmVolume) * 20);
+        audioMixer.SetFloat("SFX", Mathf.Log10(data.sfxVolume) * 20);
+
+        masterVolume.value = data.masterVolume;
+        bgmVolume.value = data.bgmVolume;
+        sfxVolume.value = data.sfxVolume;
+    }
+
+    public SoundSettingData GetData()
+    {
+        return new SoundSettingData(masterVolume.value, bgmVolume.value, sfxVolume.value);
     }
 }

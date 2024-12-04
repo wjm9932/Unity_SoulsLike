@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class ChangeSoundTrigger : MonoBehaviour
 {
-    [SerializeField] private SoundManager.BackGroundMusic type;
+    [SerializeField] private AreaType type;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<Character>() != null)
         {
-            other.GetComponent<PlayerSoundManager>().ChangeSoundEffect(type);
+            other.GetComponent<PlayerSoundManager>().ChangeFootStepSound(type);
             SoundManager.Instance.ChangeBackGroundMusic(type);
         }
     }

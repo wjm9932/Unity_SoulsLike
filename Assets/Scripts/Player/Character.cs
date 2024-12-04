@@ -342,7 +342,7 @@ public class Character : LivingEntity
         stamina = maxStamina;
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         transform.position = GetComponent<PlayerCheckPoint>().checkPointPosition;
-        SoundManager.Instance.ChangeBackGroundMusic(SoundManager.BackGroundMusic.DUNGEON);
+        SoundManager.Instance.ChangeBackGroundMusic(AreaType.DUNGEON);
         GetComponent<Collider>().enabled = true;
         rb.isKinematic = false;
         isDead = false;
@@ -367,7 +367,7 @@ public class Character : LivingEntity
 
     public PlayerSaveData GetData()
     {
-        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, playerSoundManager.musicType, GetComponent<PlayerCheckPoint>().checkPointPosition);
+        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, playerSoundManager.areaType, GetComponent<PlayerCheckPoint>().checkPointPosition);
     }
 
     public void LoadData(PlayerSaveData data)

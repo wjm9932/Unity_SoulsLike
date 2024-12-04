@@ -258,8 +258,7 @@ public class QuestManager : MonoBehaviour
         
         foreach(Quest quest in questMap.Values)
         {
-            QuestData questData = quest.GetQuestSaveData();
-            data[index++] = questData;
+            data[index++] = quest.GetQuestSaveData();
         }
 
         return data;

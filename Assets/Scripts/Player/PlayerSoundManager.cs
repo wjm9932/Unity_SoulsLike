@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum AreaType
+{
+    OUTSIDE,
+    DUNGEON,
+    BOSS
+}
+
 public class PlayerSoundManager : MonoBehaviour
 {
     [Header("Player FootStep Sound")]
@@ -9,7 +17,7 @@ public class PlayerSoundManager : MonoBehaviour
     [SerializeField] private List<AudioClip> groundFootStepClips = new List<AudioClip>();
     private List<AudioClip> currentFootStepClips = new List<AudioClip>();
     private AudioSource playerFootStepSoundSource;
-    public SoundManager.BackGroundMusic musicType { get; private set; }
+    public AreaType areaType { get; private set; }
 
 
     private void Awake()
@@ -18,19 +26,17 @@ public class PlayerSoundManager : MonoBehaviour
         currentFootStepClips = groundFootStepClips;
     }
 
-
-    // Start is called before the first frame update
-    public void ChangeSoundEffect(SoundManager.BackGroundMusic type)
+    public void ChangeFootStepSound(AreaType type)
     {
-        musicType = type;
+        areaType = type;
 
         switch (type)
         {
-            case SoundManager.BackGroundMusic.BOSS:
-            case SoundManager.BackGroundMusic.DUNGEON:
+            case AreaType.BOSS:
+            case AreaType.DUNGEON:
                 currentFootStepClips = tileFootStepClips;
                 break;
-            case SoundManager.BackGroundMusic.OUTSIDE:
+            case AreaType.OUTSIDE:
                 currentFootStepClips = groundFootStepClips;
                 break;
         }
@@ -45,10 +51,10 @@ public class PlayerSoundManager : MonoBehaviour
         }
     }
 
-    public void Intialize(SoundManager.BackGroundMusic type)
+    public void Intialize(AreaType type)
     {
-        musicType = type;
-        ChangeSoundEffect(musicType);
-        SoundManager.Instance.ChangeBackGroundMusic(musicType);
+        areaType = type;
+        ChangeFootStepSound(areaType);
+        SoundManager.Instance.ChangeBackGroundMusic(areaType);
     }
 }

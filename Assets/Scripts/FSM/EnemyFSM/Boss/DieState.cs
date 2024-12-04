@@ -19,7 +19,7 @@ namespace BossEnemyFSM
             sm.owner.animator.SetTrigger("Die");
 
             SoundManager.Instance.Play2DSoundEffect(SoundManager.SoundEffectType.ENEMY_DIE, 0.2f);
-            SoundManager.Instance.ChangeBackGroundMusic(SoundManager.BackGroundMusic.DUNGEON);
+            SoundManager.Instance.ChangeBackGroundMusic(AreaType.DUNGEON);
         }
         public virtual void Update()
         {

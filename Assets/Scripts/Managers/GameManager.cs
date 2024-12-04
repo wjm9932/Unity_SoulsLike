@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         character.LoadData(saveData.playerData);
         character.inventory.LoadData(saveData.inventoryData);
         QuestManager.Instance.LoadQuest(saveData.questData);
+        SoundManager.Instance.LoadSoundData(saveData.soundSettingData);
     }
     public void SaveGameData()
     {
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         data.playerData = character.GetData();
         data.inventoryData = character.inventory.GetData();
         data.questData = QuestManager.Instance.GetData();
+        data.soundSettingData = SoundManager.Instance.GetData();
 
         string jsonData = JsonUtility.ToJson(data, true);
         string path = Path.Combine(Application.dataPath, "GameData");
