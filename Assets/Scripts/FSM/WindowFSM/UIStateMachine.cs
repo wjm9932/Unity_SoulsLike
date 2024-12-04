@@ -8,6 +8,7 @@ public class UIStateMachine
     public OpenQuestLogState openQuestLogState { get; }
     public QuestInteractState questInteractState { get; }
     public OpenPauseMenuState openPauseMenuState { get; }
+    public OpenSettingMenu openSettingMenu { get; }
     public CloseState closeState { get; }
 
     public IStateUI currentState { get; private set; }
@@ -21,6 +22,8 @@ public class UIStateMachine
         openQuestLogState = new OpenQuestLogState(this);
         questInteractState = new QuestInteractState(this);
         openPauseMenuState = new OpenPauseMenuState(this);
+        openSettingMenu = new OpenSettingMenu(this);
+
         closeState = new CloseState(this);
     }
 

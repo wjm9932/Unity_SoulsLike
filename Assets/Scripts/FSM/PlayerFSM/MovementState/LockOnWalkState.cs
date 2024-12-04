@@ -25,7 +25,7 @@ namespace PlayerFSM
             {
                 sm.ChangeState(sm.sprintState);
             }
-            else if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOffState)
+            else if (sm.owner.playerCameraStateMachine.currentState == sm.owner.playerCameraStateMachine.cameraLockOffState)
             {
                 sm.ChangeState(sm.walkState);
             }

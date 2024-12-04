@@ -71,9 +71,9 @@ public class AttackState : IState
 
         Vector3 forward;
         
-        if (CameraStateMachine.Instance.currentState == CameraStateMachine.Instance.cameraLockOnState)
+        if (sm.owner.playerCameraStateMachine.currentState == sm.owner.playerCameraStateMachine.cameraLockOnState)
         {
-            forward = CameraStateMachine.Instance.cameraLockOnState.target.transform.position - sm.owner.transform.position;
+            forward = sm.owner.playerCameraStateMachine.cameraLockOnState.target.transform.position - sm.owner.transform.position;
             forward.y = 0;
             forward.Normalize();
         }

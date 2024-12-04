@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.IO;
+using static QuestPoint;
 
 public class QuestManager : MonoBehaviour
 {
@@ -18,8 +19,6 @@ public class QuestManager : MonoBehaviour
     [Header("Quest Owner")]
     [SerializeField] private Character questOwner;
 
-    [Header("Save & Load")]
-    [SerializeField] public bool allowLoadQuest;
     private Dictionary<string, Quest> questMap;
 
 
@@ -49,16 +48,6 @@ public class QuestManager : MonoBehaviour
     {
         foreach (Quest quest in questMap.Values)
         {
-            if(quest.state == QuestState.IN_PROGRESS || quest.state == QuestState.CAN_FINISH)
-            {
-                quest.InstantiateLoadedQuestStep(this.transform);
-            }
-
-            if(quest.state == QuestState.FINISHED)
-            {
-                NotifyQuestFinished(quest);
-            }
-
             NotifyQuestStateToQuestPoints(quest);
         }
     }
@@ -84,7 +73,6 @@ public class QuestManager : MonoBehaviour
         {
             onUpdateQuestDialogue(questName, text);
         }
-
     }
 
     public void UpdateQuestProgress(string id)
@@ -224,7 +212,7 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                idToQuestMap.Add(questInfo.id, LoadQuest(questInfo));
+                idToQuestMap.Add(questInfo.id, new Quest(questInfo, questOwner));
             }
         }
         return idToQuestMap;
@@ -244,45 +232,60 @@ public class QuestManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
+      
+    }
+    public void SaveQuest()
+    {
         foreach (Quest quest in questMap.Values)
         {
-            SaveQuest(quest);
+            try
+            {
+                QuestData questData = quest.GetQuestSaveData();
+                string serializedData = JsonUtility.ToJson(questData);
+                PlayerPrefs.SetString(quest.info.id, serializedData);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Failed to save quest with text " + quest.info.id + ": " + e);
+            }
         }
     }
-    private void SaveQuest(Quest quest)
+
+    public QuestData[] GetData()
     {
-        try
+        QuestData[] data = new QuestData[questMap.Count];
+        int index = 0;
+        
+        foreach(Quest quest in questMap.Values)
         {
             QuestData questData = quest.GetQuestSaveData();
-            string serializedData = JsonUtility.ToJson(questData);
-            PlayerPrefs.SetString(quest.info.id, serializedData);
+            data[index++] = questData;
         }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to save quest with text " + quest.info.id + ": " + e);
-        }
+
+        return data;
     }
-    private Quest LoadQuest(QuestInfoSO questInfo)
+
+
+    public void LoadQuest(QuestData[] data)
     {
-        Quest quest = null;
-        try
+        for(int i = 0; i < data.Length; i++)
         {
-            if (PlayerPrefs.HasKey(questInfo.id) == true && allowLoadQuest == true)
+            Quest quest = questMap[data[i].questId];
+            QuestStepData[][] stepData = quest.Convert2DArrayFrom1DArray(data[i].questStepData);
+            quest.LoadQuestData(data[i].state, data[i].currentQuestStepIndex, stepData);
+
+            if (quest.state == QuestState.IN_PROGRESS || quest.state == QuestState.CAN_FINISH)
             {
-                string serializedData = PlayerPrefs.GetString(questInfo.id);
-                QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
-                QuestStepData[][] data = Quest.Convert2DArrayFrom1DArray(questData.questStepData, questInfo);
-                quest = new Quest(questInfo, questData.state, questData.currentQuestStepIndex, data, questOwner);
+                quest.InstantiateLoadedQuestStep(this.transform);
             }
-            else
+
+            if (quest.state == QuestState.FINISHED)
             {
-                quest = new Quest(questInfo, questOwner);
+                NotifyQuestFinished(quest);
             }
+
+            NotifyQuestStateToQuestPoints(quest);
         }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to load quest with text " + quest.info.id + ": " + e);
-        }
-        return quest;
+
     }
 }

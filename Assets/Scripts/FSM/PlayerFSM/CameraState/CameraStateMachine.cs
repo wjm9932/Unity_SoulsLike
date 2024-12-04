@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class CameraStateMachine : StateMachine
 {
-    private static CameraStateMachine instance;
-    public static CameraStateMachine Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
     public Character owner { get; }
 
     public CameraLockOnState cameraLockOnState { get; private set; }
@@ -24,13 +15,5 @@ public class CameraStateMachine : StateMachine
 
         cameraLockOnState = new CameraLockOnState(this);
         cameraLockOffState = new CameraLockOffState(this);
-    }
-
-    public static void Initialize(Character character)
-    {
-        if (instance == null)
-        {
-            instance = new CameraStateMachine(character);
-        }
     }
 }

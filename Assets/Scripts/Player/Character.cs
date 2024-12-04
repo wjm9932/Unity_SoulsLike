@@ -21,9 +21,6 @@ public class Character : LivingEntity
 
     [SerializeField] private float maxStamina;
 
-    [Header("Save & Load")]
-    [SerializeField] private bool allowLoad;
-
     [Header("Menu")]
     public GameObject pauseMenu;
     public GameObject respawnMenu;
@@ -74,13 +71,18 @@ public class Character : LivingEntity
     public Transform leftHandPos;
     public TrailRenderer swordEffect;
     public Transform arrowHitPositionParent;
+
+
+    public CameraStateMachine playerCameraStateMachine { get; private set; }
+    public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
+    public UIStateMachine uiStateMachine { get; private set; }
+
+
     public UsableItem toBeUsedItem { get; private set; }
     public Camera mainCamera { get; private set; }
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
     public PlayerInput input { get; private set; }
-    public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
-    public UIStateMachine uiStateMachine { get; private set; }
 
     public Inventory inventory { get; private set; }
     public PlayerEvent playerEvents { get; private set; }
@@ -139,19 +141,17 @@ public class Character : LivingEntity
     protected override void Awake()
     {
         base.Awake();
+        
         isSkillOn = false;
         chargingEffect.Stop();
         currentFootStepClips = groundFootStepClips;
         originCameraTrasform = cameraTransform.transform.localPosition;
         staminaRecoverCoolTime = 0f;
         canBeDamaged = true;
-        CameraStateMachine.Initialize(this);
+
+        playerCameraStateMachine = new CameraStateMachine(this);
         uiStateMachine = new UIStateMachine(this);
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
-    }
-    protected override void Start()
-    {
-        LoadData();
 
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
@@ -161,10 +161,14 @@ public class Character : LivingEntity
         playerEvents = GetComponent<PlayerEvent>();
         playerBuff = GetComponent<BuffManager>();
         playerFootStepSoundSource = GetComponent<AudioSource>();
+    }
+    protected override void Start()
+    {
+        InitializeDefaultPlayerData();
 
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.idleState);
         uiStateMachine.ChangeState(uiStateMachine.closeState);
-        CameraStateMachine.Instance.ChangeState(CameraStateMachine.Instance.cameraLockOffState);
+        playerCameraStateMachine.ChangeState(playerCameraStateMachine.cameraLockOffState);
     }
 
     // Update is called once per frame
@@ -181,17 +185,17 @@ public class Character : LivingEntity
             RecoverStamina();
         }
 
-        CameraStateMachine.Instance.Update();
+        playerCameraStateMachine.Update();
     }
     private void FixedUpdate()
     {
         playerMovementStateMachine.PhysicsUpdate();
-        CameraStateMachine.Instance.PhysicsUpdate();
+        playerCameraStateMachine.PhysicsUpdate();
     }
     private void LateUpdate()
     {
         playerMovementStateMachine.LateUpdate();
-        CameraStateMachine.Instance.LateUpdate();
+        playerCameraStateMachine.LateUpdate();
     }
     private void OnAnimationEnterEvent()
     {
@@ -417,57 +421,26 @@ public class Character : LivingEntity
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        SaveData();
-    }
-
-    private PlayerSaveData GetPlayerData()
+    public PlayerSaveData GetData()
     {
         return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, musicType, GetComponent<PlayerCheckPoint>().checkPointPosition);
     }
-    private void SaveData()
+
+    public void LoadData(PlayerSaveData data)
     {
-        PlayerSaveData playerSaveData = GetPlayerData();
-        string jsonData = JsonUtility.ToJson(playerSaveData, true);
-        string path = Path.Combine(Application.dataPath, "playerData");
-        File.WriteAllText(path, jsonData);
+        transform.position = data.playerPosition;
+        transform.rotation = data.playerRotation;
+
+        maxHealth = data.maxHealth;
+        health = data.currentHealth;
+        stamina = data.currentStamina;
+        musicType = data.musicType;
+        hpBar.SetStatusBarSize(maxHealth);
+
+        ChangeSoundEffect(musicType);
+        SoundManager.Instance.ChangeBackGroundMusic(musicType);
     }
 
-    private void LoadData()
-    {
-        string path = Path.Combine(Application.dataPath, "playerData");
-
-        if (allowLoad)
-        {
-            if (!File.Exists(path))
-            {
-                Debug.LogWarning("No player data found. Initializing default values.");
-                InitializeDefaultPlayerData();
-            }
-            else
-            {
-                string jsonData = File.ReadAllText(path);
-                PlayerSaveData playerSaveData = JsonUtility.FromJson<PlayerSaveData>(jsonData);
-
-                transform.position = playerSaveData.playerPosition;
-                transform.rotation = playerSaveData.playerRotation;
-
-                maxHealth = playerSaveData.maxHealth;
-                health = playerSaveData.currentHealth;
-                stamina = playerSaveData.currentStamina;
-                musicType = playerSaveData.musicType;
-                hpBar.SetStatusBarSize(maxHealth);
-
-                ChangeSoundEffect(musicType);
-                SoundManager.Instance.ChangeBackGroundMusic(musicType);
-            }
-        }
-        else
-        {
-            InitializeDefaultPlayerData();
-        }
-    }
 
     private void InitializeDefaultPlayerData()
     {
@@ -482,14 +455,5 @@ public class Character : LivingEntity
             isSkillOn = true;
             QuestManager.Instance.onFinishQuest -= EnableSkill;
         }
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-    public void Resume()
-    {
-        uiStateMachine.ChangeState(uiStateMachine.closeState);
     }
 }
