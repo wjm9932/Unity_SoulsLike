@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
 using static ObjectPoolManager;
 
 public class SoundManager : MonoBehaviour
@@ -8,6 +10,12 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
 
     [SerializeField] private AudioSource bgmAudioSource;
+    [SerializeField] private AudioMixer audioMixer;
+
+    [Header("Slider")]
+    [SerializeField] private Slider masterVolume;
+    [SerializeField] private Slider BGMVolume;
+    [SerializeField] private Slider SFXVolume;
 
     public enum BackGroundMusic
     {
@@ -216,5 +224,20 @@ public class SoundManager : MonoBehaviour
             bgmAudioSource.volume = 0.35f;
         }
         bgmAudioSource.Play();
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        audioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
     }
 }
