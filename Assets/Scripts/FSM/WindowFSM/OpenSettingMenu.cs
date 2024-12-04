@@ -12,6 +12,7 @@ public class OpenSettingMenu : OpenState
     public override void Enter()
     {
         base.Enter();
+        MenuManager.Instance.settingMenu.SetActive(true);
     }
     public override void Update()
     {
@@ -22,7 +23,7 @@ public class OpenSettingMenu : OpenState
     }
     public override void Exit()
     {
-        base.Exit();
+        MenuManager.Instance.settingMenu.SetActive(false);
     }
 }
 

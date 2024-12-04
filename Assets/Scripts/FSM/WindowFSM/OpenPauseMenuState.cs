@@ -12,15 +12,20 @@ public class OpenPauseMenuState : OpenState
     public override void Enter()
     {
         base.Enter();
-        sm.owner.pauseMenu.SetActive(true);
+        MenuManager.Instance.pauseMenu.SetActive(true);
+        MenuManager.Instance.menuList.SetActive(true);
     }
     public override void Update()
     {
-        base.Update();
+        if (sm.owner.input.isPressingEscape == true)
+        {
+            sm.ChangeState(sm.closeState);
+            MenuManager.Instance.pauseMenu.SetActive(false);
+            SoundManager.Instance.Play2DSoundEffect(SoundManager.UISoundEffectType.CLICK, 0.3f);
+        }
     }
     public override void Exit()
     {
-        base.Exit();
-        sm.owner.pauseMenu.SetActive(false);
+        MenuManager.Instance.menuList.SetActive(false);
     }
 }

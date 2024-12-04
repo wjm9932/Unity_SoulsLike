@@ -21,18 +21,8 @@ public class Character : LivingEntity
 
     [SerializeField] private float maxStamina;
 
-    [Header("Menu")]
-    public GameObject pauseMenu;
-    public GameObject respawnMenu;
-
     [Header("Inventory")]
     public GameObject inventoryUI;
-
-    [Header("Quest")]
-    public GameObject questLogUI;
-    public GameObject questDialogueUI;
-    [SerializeField] private QuestInfoSO skillIsOnQuest;
-    public bool isSkillOn { get; private set; }
 
     [Header("Status Bar")]
     public PlayerStatusBar hpBar;
@@ -59,19 +49,10 @@ public class Character : LivingEntity
     public GameObject slash;
     public ParticleSystem chargingEffect;
 
-
-    [Header("Player FootStep Sound")]
-    [SerializeField] private List<AudioClip> tileFootStepClips = new List<AudioClip>();
-    [SerializeField] private List<AudioClip> groundFootStepClips = new List<AudioClip>();
-    private List<AudioClip> currentFootStepClips = new List<AudioClip>();
-    private AudioSource playerFootStepSoundSource;
-    public SoundManager.BackGroundMusic musicType;
-
     [Space]
     public Transform leftHandPos;
     public TrailRenderer swordEffect;
     public Transform arrowHitPositionParent;
-
 
     public CameraStateMachine playerCameraStateMachine { get; private set; }
     public PlayerMovementStateMachine playerMovementStateMachine { get; private set; }
@@ -82,13 +63,14 @@ public class Character : LivingEntity
     public Camera mainCamera { get; private set; }
     public Rigidbody rb { get; private set; }
     public float playerHeight { get; private set; }
+    
     public PlayerInput input { get; private set; }
 
     public Inventory inventory { get; private set; }
     public PlayerEvent playerEvents { get; private set; }
-    public BuffManager playerBuff { get; private set; }
-    public float buffDamage { get; set; }
-    public float buffStaminaPercent { get; set; }
+    public BuffManager playerBuffManager { get; private set; }
+    public PlayerQuestManager playerQuestManager { get; private set; }
+    public PlayerSoundManager playerSoundManager { get; private set; }
 
     [HideInInspector] public float cameraTargetYaw;
     [HideInInspector] public float cameraTargetPitch;
@@ -127,24 +109,12 @@ public class Character : LivingEntity
         }
     }
 
-    private void OnEnable()
-    {
-        QuestManager.Instance.onFinishQuest += EnableSkill;
-    }
-
-    private void OnDisable()
-    {
-        QuestManager.Instance.onFinishQuest -= EnableSkill;
-    }
-
     // Start is called before the first frame update
     protected override void Awake()
     {
         base.Awake();
-        
-        isSkillOn = false;
+
         chargingEffect.Stop();
-        currentFootStepClips = groundFootStepClips;
         originCameraTrasform = cameraTransform.transform.localPosition;
         staminaRecoverCoolTime = 0f;
         canBeDamaged = true;
@@ -159,8 +129,9 @@ public class Character : LivingEntity
         input = GetComponent<PlayerInput>();
         inventory = GetComponent<Inventory>();
         playerEvents = GetComponent<PlayerEvent>();
-        playerBuff = GetComponent<BuffManager>();
-        playerFootStepSoundSource = GetComponent<AudioSource>();
+        playerBuffManager = GetComponent<BuffManager>();
+        playerQuestManager = GetComponent<PlayerQuestManager>();
+        playerSoundManager = GetComponent<PlayerSoundManager>();
     }
     protected override void Start()
     {
@@ -313,7 +284,7 @@ public class Character : LivingEntity
 
     public bool UseStamina(float cost)
     {
-        float actualCost = cost * (1 - buffStaminaPercent);
+        float actualCost = cost * (1 - playerBuffManager.buffStaminaPercent);
         if (stamina < actualCost)
         {
             TextManager.Instance.PlayNotificationText("Not enough stamina!");
@@ -329,12 +300,9 @@ public class Character : LivingEntity
     }
     public override void SetDamage(float damage)
     {
-        this.damage = damage + buffDamage;
+        this.damage = damage + playerBuffManager.buffDamage;
     }
-    public void KillLivingEntity(EntityType type)
-    {
-        playerEvents.KillEnemy(type);
-    }
+
     void RecoverStamina()
     {
         if (staminaRecoverCoolTime > 0)
@@ -348,31 +316,6 @@ public class Character : LivingEntity
                 stamina += 20f * Time.deltaTime;
                 stamina = Mathf.Clamp(stamina, 0, maxStamina);
             }
-        }
-    }
-
-    public void ChangeSoundEffect(SoundManager.BackGroundMusic type)
-    {
-        musicType = type;
-
-        switch (type)
-        {
-            case SoundManager.BackGroundMusic.BOSS:
-            case SoundManager.BackGroundMusic.DUNGEON:
-                currentFootStepClips = tileFootStepClips;
-                break;
-            case SoundManager.BackGroundMusic.OUTSIDE:
-                currentFootStepClips = groundFootStepClips;
-                break;
-        }
-    }
-
-    private void PlayFootStepSound(AnimationEvent ev)
-    {
-        if (ev.animatorClipInfo.weight >= 0.5f)
-        {
-            int index = Random.Range(0, currentFootStepClips.Count);
-            playerFootStepSoundSource.PlayOneShot(currentFootStepClips[index]);
         }
     }
 
@@ -390,7 +333,7 @@ public class Character : LivingEntity
 
         yield return new WaitForSeconds(4f);
 
-        respawnMenu.SetActive(true);
+        MenuManager.Instance.respawnMenu.SetActive(true);
     }
 
     public void ResetPlayer()
@@ -403,7 +346,8 @@ public class Character : LivingEntity
         GetComponent<Collider>().enabled = true;
         rb.isKinematic = false;
         isDead = false;
-        respawnMenu.SetActive(false);
+
+        MenuManager.Instance.respawnMenu.SetActive(false);
     }
 
     private void ResetCameraPosition()
@@ -423,7 +367,7 @@ public class Character : LivingEntity
 
     public PlayerSaveData GetData()
     {
-        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, musicType, GetComponent<PlayerCheckPoint>().checkPointPosition);
+        return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, playerSoundManager.musicType, GetComponent<PlayerCheckPoint>().checkPointPosition);
     }
 
     public void LoadData(PlayerSaveData data)
@@ -434,26 +378,13 @@ public class Character : LivingEntity
         maxHealth = data.maxHealth;
         health = data.currentHealth;
         stamina = data.currentStamina;
-        musicType = data.musicType;
+        playerSoundManager.Intialize(data.musicType);
         hpBar.SetStatusBarSize(maxHealth);
-
-        ChangeSoundEffect(musicType);
-        SoundManager.Instance.ChangeBackGroundMusic(musicType);
     }
-
 
     private void InitializeDefaultPlayerData()
     {
         health = 30f;
         stamina = maxStamina;
-    }
-
-    private void EnableSkill(Quest quest)
-    {
-        if(quest.info.id == skillIsOnQuest.id)
-        {
-            isSkillOn = true;
-            QuestManager.Instance.onFinishQuest -= EnableSkill;
-        }
     }
 }
