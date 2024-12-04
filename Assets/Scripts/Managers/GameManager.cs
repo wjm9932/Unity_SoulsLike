@@ -40,6 +40,12 @@ public class GameManager : MonoBehaviour
     {
         character.uiStateMachine.ChangeState(character.uiStateMachine.closeState);
     }
+
+    public void Setting()
+    {
+        character.uiStateMachine.ChangeState(character.uiStateMachine.openSettingMenu);
+    }
+
     public void Quit()
     {
         SaveGameData();

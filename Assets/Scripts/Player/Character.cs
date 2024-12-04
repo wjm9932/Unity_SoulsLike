@@ -425,14 +425,6 @@ public class Character : LivingEntity
     {
         return new PlayerSaveData(transform.position, transform.rotation, health, maxHealth, stamina, musicType, GetComponent<PlayerCheckPoint>().checkPointPosition);
     }
-    public void SaveData()
-    {
-        PlayerSaveData playerSaveData = GetData();
-        string jsonData = JsonUtility.ToJson(playerSaveData, true);
-        string path = Path.Combine(Application.dataPath, "playerData");
-        File.WriteAllText(path, jsonData);
-    }
-    
 
     public void LoadData(PlayerSaveData data)
     {
