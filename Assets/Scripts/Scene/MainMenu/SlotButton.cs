@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadDataButton : MonoBehaviour
+public class SlotButton : MonoBehaviour
 {
     private int slotID;
 
@@ -12,13 +12,13 @@ public class LoadDataButton : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(LoadData);
     }
 
-    public void SetSlotId(int slotID)
+    public void SetSlotID(int slotID)
     {
         this.slotID = slotID;
     }
 
     public void LoadData()
     {
-        //SceneLoadManager.Instance.LoadScene("GameScene", () => GameDataSaveLoadManager.Instance.Load(slotID));
+        SceneLoadManager.Instance.LoadScene("GameScene", () => GameDataSaveLoadManager.Instance.Load(slotID));
     }
 }

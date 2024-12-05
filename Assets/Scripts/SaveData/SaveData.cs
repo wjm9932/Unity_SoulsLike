@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct SaveData 
 {
+    public SlotData slotData;
     public SceneSaveData sceneSaveData;
     public PlayerSaveData playerData;
     public InventoryData inventoryData;
@@ -130,3 +131,17 @@ public struct SoundSettingData
         this.sfxVolume = sfxVolume;
     }
 }
+
+[System.Serializable]
+public struct SlotData
+{
+    public int slotID;
+    //public string playTime;
+    //public string lastPlayTime;
+
+    public SlotData(int slotID)
+    {
+        this.slotID = slotID;
+    }
+}
+

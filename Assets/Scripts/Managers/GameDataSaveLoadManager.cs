@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameDataSaveLoadManager : MonoBehaviour
 {
@@ -13,8 +13,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
 
     private int currentSlot;
     private string dataPath;
-    public int numOfData { get; private set; }
-
+    private string[] saveData;
 
     private void Awake()
     {
@@ -29,22 +28,27 @@ public class GameDataSaveLoadManager : MonoBehaviour
             Directory.CreateDirectory(dataPath);
         }
 
+        saveData = Directory.GetFiles(dataPath, "*.json").OrderByDescending(File.GetLastWriteTime).ToArray();
+
+
         DontDestroyOnLoad(this.gameObject);
     }
     public void Initialize()
     {
         sceneGameDataManger = FindObjectOfType<SceneGameDataManger>();
         character = FindObjectOfType<Character>();
+        currentSlot = saveData.Length;
     }
-    public void Load()
+    public void Load(int slotID)
     {
-        if (FileExist() == false)
+        if (FileExist(slotID) == false)
         {
             Debug.LogError("There is no continue file!");
             return;
         }
 
-        string path = Path.Combine(dataPath, "GameData");
+        currentSlot = slotID;
+        string path = Path.Combine(dataPath, "GameData" + slotID + ".json");
         string jsonData = File.ReadAllText(path);
         SaveData saveData = JsonUtility.FromJson<SaveData>(jsonData);
 
@@ -61,6 +65,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
     {
         SaveData data = new SaveData();
 
+        data.slotData = GetData();
         data.sceneSaveData = sceneGameDataManger.SaveSceneData();
         data.playerData = character.GetData();
         data.inventoryData = character.inventory.GetData();
@@ -68,27 +73,34 @@ public class GameDataSaveLoadManager : MonoBehaviour
         data.soundSettingData = SoundManager.Instance.GetData();
 
         string jsonData = JsonUtility.ToJson(data, true);
-        string path = Path.Combine(dataPath, "GameData");
+        string path = Path.Combine(dataPath, "GameData" + currentSlot + ".json");
         File.WriteAllText(path, jsonData);
     }
-    public bool FileExist()
+    public bool FileExist(int slotID)
     {
-        string path = Path.Combine(dataPath, "GameData");
+        string path = Path.Combine(dataPath, "GameData" + slotID + ".json");
         return File.Exists(path);
     }
 
-    public void SetCurrentSlot(int slotId)
+    public string[] GetAllSaveData()
     {
-        currentSlot = slotId;
+        return saveData;
     }
-    public int GetCurrentSlot()
+
+    private SlotData GetData()
     {
-        return currentSlot;
+        return new SlotData(currentSlot);
     }
-    
+
+    public SlotData GetSlotData(string dataPath)
+    {
+        string jsonData = File.ReadAllText(dataPath);
+        return JsonUtility.FromJson<SaveData>(jsonData).slotData;
+    }
+
     private void OnApplicationQuit()
     {
-        if(character != null && sceneGameDataManger != null)
+        if (character != null && sceneGameDataManger != null)
         {
             SaveGameData();
         }
