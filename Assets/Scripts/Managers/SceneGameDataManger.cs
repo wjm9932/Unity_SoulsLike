@@ -6,9 +6,11 @@ public class SceneGameDataManger : MonoBehaviour
 {
     public void LoadSceneData(SceneSaveData data)
     {
-        List<UX_Item> sceneItem = new List<UX_Item>();
 
-        foreach (UX_Item item in Object.FindObjectsOfType<UX_Item>(true))
+        UX_Item[] items = Object.FindObjectsOfType<UX_Item>();
+        List<UX_Item> sceneItem = new List<UX_Item>(items.Length);
+
+        foreach (UX_Item item in items)
         {
             sceneItem.Add(item);
         }
@@ -54,9 +56,6 @@ public class SceneGameDataManger : MonoBehaviour
         {
             Destroy(sceneItem[i].gameObject);
         }
-
-
-
     }
 
     public SceneSaveData SaveSceneData()

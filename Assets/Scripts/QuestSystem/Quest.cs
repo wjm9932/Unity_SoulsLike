@@ -33,27 +33,6 @@ public class Quest
         }
     }
 
-    public Quest(QuestInfoSO info, QuestState state, int currentQuestStepIndex, QuestStepData[][] questStepData, Character owner)
-    {
-        this.info = info;
-        this.state = state;
-        this.currentQuestStepIndex = currentQuestStepIndex;
-        this.questStepData = questStepData;
-        this.questOwner = owner;
-
-        if (this.questStepData.GetLength(0) != info.questStepPrefabs.Length)
-        {
-            Debug.LogError("Load sync failed");
-        }
-        for(int i = 0; i < info.questStepPrefabs.Length; i++)
-        {
-            if (this.questStepData[i].Length != info.questStepPrefabs[i].stepPrefabs.Length)
-            {
-                Debug.LogError("Load sync failed");
-            }
-        }
-    }
-
     public void LoadQuestData(QuestState state, int currentQuestStepIndex, QuestStepData[][] questStepData)
     {
         if(this.questStepData.Length != questStepData.Length)
