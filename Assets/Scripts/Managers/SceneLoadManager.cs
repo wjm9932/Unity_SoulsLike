@@ -34,20 +34,16 @@ public class SceneLoadManager : MonoBehaviour
         loadAtcion = null;
         StartCoroutine(LoadSceneCoroutine("MainMenu"));
     }
-    public void StartNewGame()
-    {
-        gameObject.SetActive(true);
-        loadAtcion = null;
-        StartCoroutine(LoadSceneCoroutine("GameScene"));
-    }
-    public void ContinueGame(Action action)
+
+    public void LoadScene(string scene, Action action)
     {
         gameObject.SetActive(true);
         loadAtcion = action;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        StartCoroutine(LoadSceneCoroutine("GameScene"));
+        StartCoroutine(LoadSceneCoroutine(scene));
     }
+
 
     private IEnumerator LoadSceneCoroutine(string sceneName)
     {

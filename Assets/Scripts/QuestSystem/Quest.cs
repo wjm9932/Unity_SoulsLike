@@ -32,7 +32,6 @@ public class Quest
             }
         }
     }
-
     public void LoadQuestData(QuestState state, int currentQuestStepIndex, QuestStepData[][] questStepData)
     {
         if(this.questStepData.Length != questStepData.Length)

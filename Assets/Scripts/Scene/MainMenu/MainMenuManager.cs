@@ -9,8 +9,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
-        string path = Path.Combine(Application.dataPath, "GameData");
-        if (!File.Exists(path))
+        if (GameDataSaveLoadManager.Instance.FileExist() == false)
         {
             continueButton.SetActive(false);
         }
@@ -21,12 +20,12 @@ public class MainMenuManager : MonoBehaviour
     }
     public void StartNewGame()
     {
-        SceneLoadManager.Instance.StartNewGame();
+        SceneLoadManager.Instance.LoadScene("GameScene", () => GameDataSaveLoadManager.Instance.Initialize());
     }
 
     public void ContinueGame()
     {
-        SceneLoadManager.Instance.ContinueGame(()=>GameManager.Instance.Load());
+        SceneLoadManager.Instance.LoadScene("GameScene", ()=>GameDataSaveLoadManager.Instance.Load());
     }
 
     public void Exit()
