@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class GameDataSaveLoadManager : MonoBehaviour
 {
@@ -11,9 +12,8 @@ public class GameDataSaveLoadManager : MonoBehaviour
     private SceneGameDataManger sceneGameDataManger;
     private Character character;
 
-    private int currentSlot;
+    private string currentSlot;
     private string dataPath;
-    private string[] saveData;
 
     private void Awake()
     {
@@ -28,18 +28,15 @@ public class GameDataSaveLoadManager : MonoBehaviour
             Directory.CreateDirectory(dataPath);
         }
 
-        saveData = Directory.GetFiles(dataPath, "*.json").OrderByDescending(File.GetLastWriteTime).ToArray();
-
-
         DontDestroyOnLoad(this.gameObject);
     }
     public void Initialize()
     {
         sceneGameDataManger = FindObjectOfType<SceneGameDataManger>();
         character = FindObjectOfType<Character>();
-        currentSlot = saveData.Length;
+        currentSlot = Guid.NewGuid().ToString();
     }
-    public void Load(int slotID)
+    public void Load(string slotID)
     {
         if (FileExist(slotID) == false)
         {
@@ -48,7 +45,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
         }
 
         currentSlot = slotID;
-        string path = Path.Combine(dataPath, "GameData" + slotID + ".json");
+        string path = Path.Combine(dataPath, slotID);
         string jsonData = File.ReadAllText(path);
         SaveData saveData = JsonUtility.FromJson<SaveData>(jsonData);
 
@@ -58,6 +55,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
         sceneGameDataManger.LoadSceneData(saveData.sceneSaveData);
         character.LoadData(saveData.playerData);
         character.inventory.LoadData(saveData.inventoryData);
+        PlayTimeTracker.LoadData(saveData.slotData);
         QuestManager.Instance.LoadQuest(saveData.questData);
         SoundManager.Instance.LoadSoundData(saveData.soundSettingData);
     }
@@ -72,30 +70,42 @@ public class GameDataSaveLoadManager : MonoBehaviour
         data.questData = QuestManager.Instance.GetData();
         data.soundSettingData = SoundManager.Instance.GetData();
 
+        string path = Path.Combine(dataPath, currentSlot);
         string jsonData = JsonUtility.ToJson(data, true);
-        string path = Path.Combine(dataPath, "GameData" + currentSlot + ".json");
         File.WriteAllText(path, jsonData);
     }
-    public bool FileExist(int slotID)
+    public bool FileExist(string slotID)
     {
-        string path = Path.Combine(dataPath, "GameData" + slotID + ".json");
+        string path = Path.Combine(dataPath, slotID);
         return File.Exists(path);
     }
 
     public string[] GetAllSaveData()
     {
-        return saveData;
+        return Directory.GetFiles(dataPath).OrderByDescending(File.GetLastWriteTime).ToArray();
     }
 
     private SlotData GetData()
     {
-        return new SlotData(currentSlot);
+        return new SlotData(DateTime.Now.ToString(("yyyy-MM-dd HH:mm")), PlayTimeTracker.GetTotalPlayTime());
     }
 
     public SlotData GetSlotData(string dataPath)
     {
         string jsonData = File.ReadAllText(dataPath);
         return JsonUtility.FromJson<SaveData>(jsonData).slotData;
+    }
+
+    public void DeleteSaveData(string slotID)
+    {
+        if(FileExist(slotID) == false)
+        {
+            Debug.LogError("There is no data to be deleted");
+            return;
+        }
+
+        string path = Path.Combine(dataPath, slotID);
+        File.Delete(path);
     }
 
     private void OnApplicationQuit()
