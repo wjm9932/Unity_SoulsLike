@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct SaveData 
+public struct SaveData
 {
     public SlotData slotData;
     public SceneSaveData sceneSaveData;
@@ -136,12 +136,14 @@ public struct SoundSettingData
 public struct SlotData
 {
     public int slotID;
-    //public string playTime;
-    //public string lastPlayTime;
+    public string lastPlayDate;
+    public float totalPlayTime;
 
-    public SlotData(int slotID)
+    public SlotData(int slotID, string lastPlayDate, float totalPlayTime)
     {
         this.slotID = slotID;
+        this.lastPlayDate = lastPlayDate;
+        this.totalPlayTime = totalPlayTime;
     }
 }
 

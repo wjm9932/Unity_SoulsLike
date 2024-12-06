@@ -1,15 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SlotButton : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI lastPlayedDateText;
+    [SerializeField] private TextMeshProUGUI totalplayTimeText;
+    [SerializeField] private Button loadButton;
+    [SerializeField] private Button deleteButton;
+
     private int slotID;
 
-    private void Awake()
+    public void Initialize(int slotID, string lastPlayedData, string totalPlayTime)
     {
-        GetComponent<Button>().onClick.AddListener(LoadData);
+        this.slotID = slotID;
+        lastPlayedDateText.text = lastPlayedData;
+        totalplayTimeText.text = totalPlayTime;
+        loadButton.onClick.AddListener(LoadData);
+        deleteButton.onClick.AddListener(DeleteData);
     }
 
     public void SetSlotID(int slotID)
@@ -20,5 +30,9 @@ public class SlotButton : MonoBehaviour
     public void LoadData()
     {
         SceneLoadManager.Instance.LoadScene("GameScene", () => GameDataSaveLoadManager.Instance.Load(slotID));
+    }
+    public void DeleteData()
+    {
+
     }
 }

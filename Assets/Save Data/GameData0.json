@@ -1,6 +1,8 @@
 {
-    "continueInfoData": {
-        "slotID": 0
+    "slotData": {
+        "slotID": 0,
+        "lastPlayDate": "2024-12-06 11:39",
+        "totalPlayTime": 7.754972457885742
     },
     "sceneSaveData": {
         "sceneData": [
@@ -268,15 +270,15 @@
     },
     "playerData": {
         "playerPosition": {
-            "x": -0.051232367753982547,
-            "y": 0.42278575897216799,
-            "z": 80.13905334472656
+            "x": 1.1353732347488404,
+            "y": 0.6526445150375366,
+            "z": 90.80635070800781
         },
         "playerRotation": {
             "x": 0.0,
-            "y": 0.0,
+            "y": 0.052765853703022,
             "z": 0.0,
-            "w": 1.0
+            "w": 0.9986069202423096
         },
         "currentHealth": 30.0,
         "maxHealth": 100.0,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class GameDataSaveLoadManager : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
         sceneGameDataManger.LoadSceneData(saveData.sceneSaveData);
         character.LoadData(saveData.playerData);
         character.inventory.LoadData(saveData.inventoryData);
+        PlayTimeTracker.LoadData(saveData.slotData);
         QuestManager.Instance.LoadQuest(saveData.questData);
         SoundManager.Instance.LoadSoundData(saveData.soundSettingData);
     }
@@ -89,7 +91,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
 
     private SlotData GetData()
     {
-        return new SlotData(currentSlot);
+        return new SlotData(currentSlot , DateTime.Now.ToString(("yyyy-MM-dd HH:mm")), PlayTimeTracker.GetTotalPlayTime());
     }
 
     public SlotData GetSlotData(string dataPath)

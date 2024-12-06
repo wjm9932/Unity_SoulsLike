@@ -4,6 +4,7 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject continueButton;
     [SerializeField] private GameObject slotButtonPrefabs;
+    [SerializeField] private GameObject slotButtonParent;
     [SerializeField] private GameObject slotListScrollView;
 
     private void Awake()
@@ -48,11 +49,20 @@ public class MainMenuManager : MonoBehaviour
     }
     private void CreateSlotButtons(string[] files)
     {
+        float buttonHeight = slotButtonPrefabs.GetComponent<RectTransform>().rect.height;
+        RectTransform slotButtonViewTransform = slotButtonParent.GetComponent<RectTransform>();
+        slotButtonViewTransform.sizeDelta = new Vector2(slotButtonViewTransform.sizeDelta.x, slotButtonViewTransform.sizeDelta.y + buttonHeight * files.Length);
+
         for (int i = 0; i < files.Length; i++)
         {
             SlotData data = GameDataSaveLoadManager.Instance.GetSlotData(files[i]);
-            //var button = Instantiate(slotButtonPrefabs, slotListScrollView.transform).GetComponent<SlotButton>();
-            //button.SetSlotID(data.slotID);
+            var button = Instantiate(slotButtonPrefabs, slotButtonParent.transform).GetComponent<SlotButton>();
+            //button.Initialize(data.slotID, data.lastPlayDate, data.totalPlayTime);
         }
     }
+
+    //private string ConvertPlayTimeToString(float playTime)
+    //{
+    //    return ;
+    //}
 }
