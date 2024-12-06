@@ -14,7 +14,6 @@ public class GameDataSaveLoadManager : MonoBehaviour
 
     private int currentSlot;
     private string dataPath;
-    private string[] saveData;
 
     private void Awake()
     {
@@ -29,8 +28,6 @@ public class GameDataSaveLoadManager : MonoBehaviour
             Directory.CreateDirectory(dataPath);
         }
 
-        saveData = Directory.GetFiles(dataPath, "*.json").OrderByDescending(File.GetLastWriteTime).ToArray();
-
 
         DontDestroyOnLoad(this.gameObject);
     }
@@ -38,7 +35,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
     {
         sceneGameDataManger = FindObjectOfType<SceneGameDataManger>();
         character = FindObjectOfType<Character>();
-        currentSlot = saveData.Length;
+        currentSlot = Directory.GetFiles(dataPath, "*.json").OrderByDescending(File.GetLastWriteTime).ToArray().Length;
     }
     public void Load(int slotID)
     {
@@ -86,7 +83,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
 
     public string[] GetAllSaveData()
     {
-        return saveData;
+        return Directory.GetFiles(dataPath, "*.json").OrderByDescending(File.GetLastWriteTime).ToArray();
     }
 
     private SlotData GetData()

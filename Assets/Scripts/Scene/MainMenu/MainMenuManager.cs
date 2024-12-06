@@ -57,12 +57,16 @@ public class MainMenuManager : MonoBehaviour
         {
             SlotData data = GameDataSaveLoadManager.Instance.GetSlotData(files[i]);
             var button = Instantiate(slotButtonPrefabs, slotButtonParent.transform).GetComponent<SlotButton>();
-            //button.Initialize(data.slotID, data.lastPlayDate, data.totalPlayTime);
+            button.Initialize(data.slotID, data.lastPlayDate, ConvertPlayTimeToString(data.totalPlayTime));
         }
     }
 
-    //private string ConvertPlayTimeToString(float playTime)
-    //{
-    //    return ;
-    //}
+    private string ConvertPlayTimeToString(float playTime)
+    {
+        int hours = Mathf.FloorToInt(playTime / 3600);
+        int minutes = Mathf.FloorToInt((playTime % 3600) / 60);
+        int seconds = Mathf.FloorToInt(playTime % 60);
+
+        return string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, seconds);
+    }
 }
