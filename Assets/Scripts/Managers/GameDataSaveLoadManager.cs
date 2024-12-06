@@ -12,7 +12,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
     private SceneGameDataManger sceneGameDataManger;
     private Character character;
 
-    private int currentSlot;
+    private string currentSlot;
     private string dataPath;
 
     private void Awake()
@@ -28,17 +28,15 @@ public class GameDataSaveLoadManager : MonoBehaviour
             Directory.CreateDirectory(dataPath);
         }
 
-
-
         DontDestroyOnLoad(this.gameObject);
     }
     public void Initialize()
     {
         sceneGameDataManger = FindObjectOfType<SceneGameDataManger>();
         character = FindObjectOfType<Character>();
-        currentSlot = Directory.GetFiles(dataPath, "*.json").OrderByDescending(File.GetLastWriteTime).ToArray().Length;
+        currentSlot = Guid.NewGuid().ToString();
     }
-    public void Load(int slotID)
+    public void Load(string slotID)
     {
         if (FileExist(slotID) == false)
         {
@@ -47,7 +45,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
         }
 
         currentSlot = slotID;
-        string path = Path.Combine(dataPath, "GameData" + slotID + ".json");
+        string path = Path.Combine(dataPath, slotID);
         string jsonData = File.ReadAllText(path);
         SaveData saveData = JsonUtility.FromJson<SaveData>(jsonData);
 
@@ -72,24 +70,24 @@ public class GameDataSaveLoadManager : MonoBehaviour
         data.questData = QuestManager.Instance.GetData();
         data.soundSettingData = SoundManager.Instance.GetData();
 
+        string path = Path.Combine(dataPath, currentSlot);
         string jsonData = JsonUtility.ToJson(data, true);
-        string path = Path.Combine(dataPath, "GameData" + currentSlot + ".json");
         File.WriteAllText(path, jsonData);
     }
-    public bool FileExist(int slotID)
+    public bool FileExist(string slotID)
     {
-        string path = Path.Combine(dataPath, "GameData" + slotID + ".json");
+        string path = Path.Combine(dataPath, slotID);
         return File.Exists(path);
     }
 
     public string[] GetAllSaveData()
     {
-        return Directory.GetFiles(dataPath, "*.json").OrderByDescending(File.GetLastWriteTime).ToArray();
+        return Directory.GetFiles(dataPath).OrderByDescending(File.GetLastWriteTime).ToArray();
     }
 
     private SlotData GetData()
     {
-        return new SlotData(currentSlot , DateTime.Now.ToString(("yyyy-MM-dd HH:mm")), PlayTimeTracker.GetTotalPlayTime());
+        return new SlotData(DateTime.Now.ToString(("yyyy-MM-dd HH:mm")), PlayTimeTracker.GetTotalPlayTime());
     }
 
     public SlotData GetSlotData(string dataPath)
@@ -98,7 +96,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
         return JsonUtility.FromJson<SaveData>(jsonData).slotData;
     }
 
-    public void DeleteSaveData(int slotID)
+    public void DeleteSaveData(string slotID)
     {
         if(FileExist(slotID) == false)
         {
@@ -106,7 +104,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
             return;
         }
 
-        string path = Path.Combine(dataPath, "GameData" + slotID + ".json");
+        string path = Path.Combine(dataPath, slotID);
         File.Delete(path);
     }
 

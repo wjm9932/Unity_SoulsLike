@@ -57,7 +57,7 @@ public class MainMenuManager : MonoBehaviour
         {
             SlotData data = GameDataSaveLoadManager.Instance.GetSlotData(files[i]);
             var button = Instantiate(slotButtonPrefabs, slotButtonParent.transform).GetComponent<SlotButton>();
-            button.Initialize(data.slotID, data.lastPlayDate, ConvertPlayTimeToString(data.totalPlayTime));
+            button.Initialize(files[i], data.lastPlayDate, ConvertPlayTimeToString(data.totalPlayTime));
         }
     }
 

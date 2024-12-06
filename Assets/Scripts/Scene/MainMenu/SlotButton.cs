@@ -11,20 +11,15 @@ public class SlotButton : MonoBehaviour
     [SerializeField] private Button loadButton;
     [SerializeField] private Button deleteButton;
 
-    private int slotID;
+    private string slotID;
 
-    public void Initialize(int slotID, string lastPlayedData, string totalPlayTime)
+    public void Initialize(string slotID, string lastPlayedData, string totalPlayTime)
     {
         this.slotID = slotID;
         lastPlayedDateText.text = lastPlayedData;
         totalplayTimeText.text = totalPlayTime;
         loadButton.onClick.AddListener(LoadData);
         deleteButton.onClick.AddListener(DeleteData);
-    }
-
-    public void SetSlotID(int slotID)
-    {
-        this.slotID = slotID;
     }
 
     public void LoadData()

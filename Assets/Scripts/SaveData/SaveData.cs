@@ -135,13 +135,11 @@ public struct SoundSettingData
 [System.Serializable]
 public struct SlotData
 {
-    public int slotID;
     public string lastPlayDate;
     public float totalPlayTime;
 
-    public SlotData(int slotID, string lastPlayDate, float totalPlayTime)
+    public SlotData(string lastPlayDate, float totalPlayTime)
     {
-        this.slotID = slotID;
         this.lastPlayDate = lastPlayDate;
         this.totalPlayTime = totalPlayTime;
     }
