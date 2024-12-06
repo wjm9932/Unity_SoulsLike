@@ -36,7 +36,7 @@ public class PlayerInput : MonoBehaviour
     private void Start()
     {
         canGetMouseInput = true;
-        Application.targetFrameRate = 144;
+        Application.targetFrameRate = 240;
     }
 
     private void Update()

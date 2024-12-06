@@ -87,7 +87,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
 
     private SlotData GetData()
     {
-        return new SlotData(DateTime.Now.ToString(("yyyy-MM-dd HH:mm")), PlayTimeTracker.GetTotalPlayTime());
+        return new SlotData(DateTime.Now.ToString(("yyyy-MM-dd hh:mm tt")), PlayTimeTracker.GetTotalPlayTime());
     }
 
     public SlotData GetSlotData(string dataPath)
