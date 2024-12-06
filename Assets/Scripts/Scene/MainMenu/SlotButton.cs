@@ -33,6 +33,7 @@ public class SlotButton : MonoBehaviour
     }
     public void DeleteData()
     {
-
+        GameDataSaveLoadManager.Instance.DeleteSaveData(slotID);
+        Destroy(gameObject);
     }
 }

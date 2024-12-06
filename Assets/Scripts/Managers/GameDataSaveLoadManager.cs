@@ -29,6 +29,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
         }
 
 
+
         DontDestroyOnLoad(this.gameObject);
     }
     public void Initialize()
@@ -95,6 +96,18 @@ public class GameDataSaveLoadManager : MonoBehaviour
     {
         string jsonData = File.ReadAllText(dataPath);
         return JsonUtility.FromJson<SaveData>(jsonData).slotData;
+    }
+
+    public void DeleteSaveData(int slotID)
+    {
+        if(FileExist(slotID) == false)
+        {
+            Debug.LogError("There is no data to be deleted");
+            return;
+        }
+
+        string path = Path.Combine(dataPath, "GameData" + slotID + ".json");
+        File.Delete(path);
     }
 
     private void OnApplicationQuit()
