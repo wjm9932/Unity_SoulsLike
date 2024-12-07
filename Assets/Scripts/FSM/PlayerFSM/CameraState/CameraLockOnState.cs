@@ -35,7 +35,7 @@ public class CameraLockOnState : CameraState
             csm.owner.playerEvents.CameraLockOn();
 
             target.transform.root.GetComponent<Enemy>().lockOnIndicator.gameObject.SetActive(true);
-            csm.owner.followCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 0.8f;
+            csm.owner.followCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping.x = 1f;
         }
     }
     public override void Update()
