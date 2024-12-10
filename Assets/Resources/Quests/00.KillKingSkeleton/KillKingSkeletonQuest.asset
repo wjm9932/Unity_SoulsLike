@@ -18,9 +18,9 @@ MonoBehaviour:
   requirementsNotMetDialogue: 
   doneDialogue: Thank you for your help!
   onStartDialogue: Please kill the king skeleton and get back my temple!
-  onFinishDialogue: 'Thank you for saving our tempple!
+  onFinishDialogue: 'Thank you for saving our temple!
 
-    Final I can use temple
+    Finally, I can use temple
     freely.
 
     Thank you very much.'
