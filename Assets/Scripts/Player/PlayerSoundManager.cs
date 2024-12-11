@@ -23,7 +23,8 @@ public class PlayerSoundManager : MonoBehaviour
     private void Awake()
     {
         playerFootStepSoundSource = GetComponent<AudioSource>();
-        currentFootStepClips = groundFootStepClips;
+        currentFootStepClips = tileFootStepClips;
+        SoundManager.Instance.ChangeBackGroundMusic(AreaType.DUNGEON);
     }
 
     public void ChangeFootStepSound(AreaType type)
