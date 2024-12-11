@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Key
   m_EditorClassIdentifier: 
   icon: {fileID: 3828847424994390604, guid: ebde2fe0afd9c664cab37ca226b63aaa, type: 3}
-  dropChance: 0.1
+  dropChance: 0
   itemName: Key

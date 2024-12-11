@@ -214,7 +214,7 @@ public class SoundManager : MonoBehaviour
         {
             bgmAudioSource.clip = bgmAudioClips[type];
             bgmAudioSource.pitch = 1f;
-            bgmAudioSource.volume = 0.4f;
+            bgmAudioSource.volume = 0.9f;
         }
         else
         {
