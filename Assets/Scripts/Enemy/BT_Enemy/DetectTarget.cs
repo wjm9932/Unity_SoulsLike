@@ -24,9 +24,16 @@ public class DetectTarget : MonoBehaviour
             if (blackboard.GetData<GameObject>("target") == null)
             {
                 var target = blackboard.GetData<GameObject>("target") ?? IsTargetOnSight();
-                if (target != null)
+                if (target != null && target.GetComponent<LivingEntity>().isDead == false)
                 {
                     blackboard.SetData<GameObject>("target", target);
+                }
+            }
+            else
+            {
+                if(blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true)
+                {
+                    blackboard.SetData<GameObject>("target", null);
                 }
             }
             yield return new WaitForSeconds(0.05f);

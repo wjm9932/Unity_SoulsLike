@@ -14,8 +14,13 @@ public class SwordAttack : IAction
 
     public void OnEnter()
     {
-        blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = true;
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().SetDamage(10f);
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsSwordAttack", true);
+        blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = true;
+
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete += FinishAttackAnim;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition += PlaySwordAttackSFX;
+
 
         dir = GetLookAtAngle();
     }
@@ -36,7 +41,22 @@ public class SwordAttack : IAction
 
     public void OnExit()
     {
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsSwordAttack", false);
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition -= PlaySwordAttackSFX;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete -= FinishAttackAnim;
         blackboard.SetData<bool>("isAttacking", false);
+    }
+
+    private void FinishAttackAnim()
+    {
+        blackboard.SetData<bool>("isAttacking", false);
+    }
+
+    private void PlaySwordAttackSFX()
+    {
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().attackSound = SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.WARRIOR_ENEMY_ATTACK,
+                0.15f, blackboard.GetData<GameObject>("Owner").transform.position, Quaternion.identity, blackboard.GetData<GameObject>("Owner").transform);
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().attackSound.GetComponent<SoundObjectPool>().removeAction += () => { blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().attackSound = null; };
     }
 
     private Quaternion GetLookAtAngle()

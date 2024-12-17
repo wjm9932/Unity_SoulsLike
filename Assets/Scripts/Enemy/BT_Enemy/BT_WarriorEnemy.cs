@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Bson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -10,8 +11,6 @@ using static UnityEditor.ObjectChangeEventStream;
 public class BT_WarriorEnemy : Enemy
 {
     private CompositeNode root;
-
-    public Event animationCompleteHandler;
     public override float health
     {
         protected set
@@ -66,15 +65,6 @@ public class BT_WarriorEnemy : Enemy
     private void LateUpdate()
     {
     }
-    private void OnAnimationEnterEvent()
-    {
-    }
-    private void OnAnimationExitEvent()
-    {
-    }
-    private void OnAnimationTransitionEvent()
-    {
-    }
 
     protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
     {
@@ -95,7 +85,7 @@ public class BT_WarriorEnemy : Enemy
         root = builder
         .AddSelector()
             .AddSequence()
-                .AddCondition(() => builder.blackboard.GetData<GameObject>("target") != null)
+                .AddCondition(() => builder.blackboard.GetData<GameObject>("target") != null || builder.blackboard.GetData<bool>("isAttacking"))
                 .AddSelector()
                     .AddAttackSelector()
                         .AddSequence()

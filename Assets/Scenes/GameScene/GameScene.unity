@@ -6135,6 +6135,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1696222c72e89ab4f9026119ef17826b, type: 3}
+--- !u!1 &224813174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 107334747140496812, guid: c66729e72cb821246b4d36b1e88b0d95, type: 3}
+  m_PrefabInstance: {fileID: 719456585}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &224813184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224813174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4df4370d5d958646a0ad47cdf0ecb80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &225912370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18639,6 +18656,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BT_WarriorEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 107334747140496812, guid: c66729e72cb821246b4d36b1e88b0d95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 735921613076023062, guid: c66729e72cb821246b4d36b1e88b0d95, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -27767,7 +27788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 107334747140496812, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 735921613076023062, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_RootOrder
@@ -27815,19 +27836,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5234396636511331588, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5234396636511331588, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6599352759163541495, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.748
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6599352759163541495, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
