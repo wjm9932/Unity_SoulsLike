@@ -18,11 +18,13 @@ public class Track : IAction
         trackCouroutine = TrackTarget();
 
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = false;
+        blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().avoidancePriority = 51;
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().speed = blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().trackingSpeed;
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance = blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().trackingStopDistance;
 
         blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetFloat("Speed", blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().speed);
         blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().StartCoroutine(trackCouroutine);
+
     }
 
     public NodeState Execute()

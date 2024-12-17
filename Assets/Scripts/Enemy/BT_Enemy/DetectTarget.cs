@@ -31,7 +31,7 @@ public class DetectTarget : MonoBehaviour
             }
             else
             {
-                if(blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true)
+                if(blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true || IsPlayerOnNavMesh(blackboard.GetData<GameObject>("target")) == false)
                 {
                     blackboard.SetData<GameObject>("target", null);
                 }

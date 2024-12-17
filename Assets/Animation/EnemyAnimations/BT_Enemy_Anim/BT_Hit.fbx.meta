@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 9171d8d306c13984882e30389096b162
+guid: d955b5724658ee34eb6e48576fdce8a3
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: SwordSwing
+    second: BT_Hit
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -39,11 +39,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: SwordSwing
+      name: BT_Hit
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 25
-      lastFrame: 135
+      firstFrame: 0
+      lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -52,10 +52,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -63,28 +63,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.4404332
-        functionName: SetCanAttack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: a786a064620d7ea41a54fe7fc852b60a, type: 3}
-        floatParameter: 0
-        intParameter: 1
-        messageOptions: 0
-      - time: 0.45881367
-        functionName: OnAnimationTransitionEvent
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: d4df4370d5d958646a0ad47cdf0ecb80, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5311851
-        functionName: SetCanAttack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: a786a064620d7ea41a54fe7fc852b60a, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5963303
+      - time: 0.74592954
         functionName: OnAnimationExitEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: d4df4370d5d958646a0ad47cdf0ecb80, type: 3}

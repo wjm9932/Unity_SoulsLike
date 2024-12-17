@@ -17,16 +17,15 @@ public class Patrol : IAction
         updatePathCoroutine = UpdatePath();
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().speed = 1f;
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance = 1f;
+        blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().avoidancePriority = 51;
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = false;
         blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetFloat("Speed", blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().speed);
 
         blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().StartCoroutine(updatePathCoroutine);
-        //Debug.Log("Entering Patrol state"); 
     }
     
     public NodeState Execute()
     {
-        //Debug.Log("Executing Patrol");
         blackBoard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackBoard.GetData<GameObject>("Owner").transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
         return NodeState.Success;
     }
@@ -34,7 +33,6 @@ public class Patrol : IAction
     public void OnExit() 
     {
         blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().StopCoroutine(updatePathCoroutine);
-        //Debug.Log("Exiting Patrol state"); 
     }
 
     private Vector3 GetDestination()

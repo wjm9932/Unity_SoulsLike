@@ -17,6 +17,7 @@ public class SwordAttack : IAction
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().SetDamage(10f);
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsSwordAttack", true);
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = true;
+        blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().avoidancePriority = 50;
 
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete += FinishAttackAnim;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition += PlaySwordAttackSFX;

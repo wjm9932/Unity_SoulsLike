@@ -69,6 +69,9 @@ public class BT_WarriorEnemy : Enemy
     protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
     {
         base.OnEnemyTriggerStay(target, collider);
+        GetComponent<BehaviorTreeBuilder>().blackboard.SetData<bool>("isHit", true);
+        GetComponent<BehaviorTreeBuilder>().blackboard.SetData<GameObject>("target", target);
+
     }
     public override void Die()
     {
@@ -81,9 +84,14 @@ public class BT_WarriorEnemy : Enemy
         builder.blackboard.InitializeBlackBoard(this.gameObject);
         builder.blackboard.SetData<GameObject>("target", null);
         builder.blackboard.SetData<bool>("isAttacking", false);
+        builder.blackboard.SetData<bool>("isHit", false);
 
         root = builder
         .AddSelector()
+            .AddSequence()
+                .AddCondition(() => builder.blackboard.GetData<bool>("isHit"))
+                .AddAction(new Hit(builder.blackboard), builder.actionManager)
+                .EndComposite()
             .AddSequence()
                 .AddCondition(() => builder.blackboard.GetData<GameObject>("target") != null || builder.blackboard.GetData<bool>("isAttacking"))
                 .AddSelector()
@@ -108,7 +116,7 @@ public class BT_WarriorEnemy : Enemy
         {
             if (GetComponent<BehaviorTreeBuilder>().blackboard.GetData<bool>("isAttacking") == false && GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target") != null)
             {
-                if(Vector3.Distance(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").transform.position, transform.position) <= 1f)
+                if (Vector3.Distance(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").transform.position, transform.position) <= 1f)
                 {
                     GetComponent<BehaviorTreeBuilder>().blackboard.SetData<bool>("isAttacking", true);
                 }
