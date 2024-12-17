@@ -9,10 +9,9 @@ using static UnityEditor.ObjectChangeEventStream;
 
 public class BT_WarriorEnemy : Enemy
 {
-    private Blackboard blackboard;
-    private Selector root;
-    private ActionManager actionManager;
+    private CompositeNode root;
 
+    public Event animationCompleteHandler;
     public override float health
     {
         protected set
@@ -37,12 +36,14 @@ public class BT_WarriorEnemy : Enemy
         base.Awake();
         navMesh.updateRotation = false;
     }
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
 
         BuildBT();
+        StartCoroutine(CheckIsInRange());
 
         buffArmorPercent = 0f;
 
@@ -86,31 +87,44 @@ public class BT_WarriorEnemy : Enemy
 
     private void BuildBT()
     {
-        blackboard = new Blackboard();
-        actionManager = new ActionManager();
+        var builder = GetComponent<BehaviorTreeBuilder>();
+        builder.blackboard.InitializeBlackBoard(this.gameObject);
+        builder.blackboard.SetData<GameObject>("target", null);
+        builder.blackboard.SetData<bool>("isAttacking", false);
 
-        blackboard.InitializeBlackBoard(this.gameObject);
-        blackboard.SetData<bool>("isTargetOnSight", false);
-        blackboard.SetData<bool>("isInAttakRange", false);
-        blackboard.SetData<GameObject>("target", null);
-
-        root = new Selector();
-
-        var attackSequence = new Sequence();
-        attackSequence.AddChild(new ConditionNode(() => blackboard.GetData<bool>("isInAttackRange")));
-        attackSequence.AddChild(new ActionNode(new Track(blackboard), actionManager));
-        root.AddChild(attackSequence);
-
-        var trackSequence = new Sequence();
-        trackSequence.AddChild(new ConditionNode(() => blackboard.GetData<bool>("isTargetOnSight")));
-        trackSequence.AddChild(new ActionNode(new Track(blackboard), actionManager));
-        root.AddChild(trackSequence);
-
-        root.AddChild(new ActionNode(new Patrol(blackboard), actionManager));
+        root = builder
+        .AddSelector()
+            .AddSequence()
+                .AddCondition(() => builder.blackboard.GetData<GameObject>("target") != null)
+                .AddSelector()
+                    .AddAttackSelector()
+                        .AddSequence()
+                            .AddCondition(() => builder.blackboard.GetData<bool>("isAttacking"))
+                            .AddAction(new SwordAttack(builder.blackboard), builder.actionManager)
+                        .EndComposite()
+                    .EndComposite()
+                    .AddAction(new Track(builder.blackboard), builder.actionManager)
+                .EndComposite()
+            .EndComposite()
+            .AddAction(new Patrol(builder.blackboard), builder.actionManager)
+        .EndComposite()
+        .Build();
     }
 
-    private bool IsInAttackRange()
+    private IEnumerator CheckIsInRange()
     {
-        return GetComponent<NavMeshAgent>().remainingDistance <= GetComponent<NavMeshAgent>().stoppingDistance;
+        yield return null;
+        while (true)
+        {
+            if (GetComponent<BehaviorTreeBuilder>().blackboard.GetData<bool>("isAttacking") == false && GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target") != null)
+            {
+                if(Vector3.Distance(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").transform.position, transform.position) <= 1f)
+                {
+                    GetComponent<BehaviorTreeBuilder>().blackboard.SetData<bool>("isAttacking", true);
+                }
+            }
+
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }

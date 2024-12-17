@@ -45,7 +45,7 @@ public class Character : LivingEntity
     [SerializeField] private float maxSlopeAngle;
     public RaycastHit slopeHit;
 
-    [Header("Attack")]
+    [Header("SwordAttack")]
     public GameObject slash;
     public ParticleSystem chargingEffect;
 

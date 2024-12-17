@@ -40,27 +40,15 @@ public class Track : IAction
     {
         while (blackBoard.GetData<GameObject>("Owner").GetComponent<LivingEntity>().isDead == false && blackBoard.GetData<GameObject>("target") != null)
         {
-            if (blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().remainingDistance >= blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().viewDistance || IsPlayerOnNavMesh() == false)
+            if (blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().remainingDistance >= blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().viewDistance)
             {
-                blackBoard.SetData<bool>("isTargetOnSight", false);
                 blackBoard.SetData<GameObject>("target", null);
-                //sm.ChangeState(sm.patrolState);
-            }
-            else if (blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().remainingDistance <= blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance)
-            {
-                //ChangeTargetState(sm.owner.entityType);
             }
 
             yield return new WaitForSeconds(0.05f);
 
             blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().SetDestination(blackBoard.GetData<GameObject>("target").transform.position);
         }
-    }
-
-    bool IsPlayerOnNavMesh()
-    {
-        NavMeshHit hit;
-        return NavMesh.SamplePosition(blackBoard.GetData<GameObject>("target").transform.position, out hit, 0.1f, blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().areaMask);
     }
 
     private Quaternion GetMoveRotationAngle()

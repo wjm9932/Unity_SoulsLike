@@ -18762,7 +18762,7 @@ MonoBehaviour:
     m_Bits: 512
   IgnoreTag: Player
   CameraRadius: 0.15
-  DampingIntoCollision: 0.1
+  DampingIntoCollision: 0.3
   DampingFromCollision: 0.1
 --- !u!114 &720346859
 MonoBehaviour:

@@ -57,70 +57,16 @@ public class Patrol : IAction
     {
         while (blackBoard.GetData<GameObject>("Owner").GetComponent<LivingEntity>().isDead == false)
         {
-            if (IsTargetOnSight() == true)
+            if (blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().remainingDistance <= blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance)
             {
-                blackBoard.SetData<bool>("isTargetOnSight", true);
-                //sm.ChangeState(sm.trackingState);
+                blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().SetDestination(GetDestination());
             }
-            else
-            {
-                if (blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().remainingDistance <= blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance)
-                {
-                    blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().SetDestination(GetDestination());
-                }
-            }
+
             yield return new WaitForSeconds(0.05f);
         }
     }
 
-    private bool IsTargetOnSight()
-    {
-        Transform eyeTransform = blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().eyeTransform;
-        float viewDistance = blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().viewDistance;
-        var colliders = Physics.OverlapSphere(eyeTransform.position, viewDistance, blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().whatIsTarget);
 
-        foreach (var collider in colliders)
-        {
-            if (collider.gameObject.GetComponent<LivingEntity>().isDead == true)
-            {
-                return false;
-            }
-
-            if (IsPlayerOnNavMesh(collider.gameObject) == false)
-            {
-                return false;
-            }
-
-            var direction = collider.transform.position - eyeTransform.position;
-            direction.y = eyeTransform.forward.y;
-
-            if (Vector3.Angle(direction, eyeTransform.forward) > blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().fieldOfView * 0.5f)
-            {
-                return false;
-            }
-
-            RaycastHit hit;
-
-            if (Physics.Raycast(eyeTransform.position, direction, out hit, viewDistance, blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().whatIsTarget) == true)
-            {
-                if (hit.transform == collider.transform)
-                {
-
-                    blackBoard.SetData<GameObject>("target", collider.gameObject);
-                    //sm.owner.target = collider.gameObject;
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    bool IsPlayerOnNavMesh(GameObject target)
-    {
-        NavMeshHit hit;
-        return NavMesh.SamplePosition(target.transform.position, out hit, 0.1f, blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().areaMask);
-    }
 
     private Quaternion GetMoveRotationAngle()
     {

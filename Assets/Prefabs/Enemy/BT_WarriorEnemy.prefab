@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4832994771560062093}
   - component: {fileID: 3676006084285233165}
   - component: {fileID: -688354563045898072}
+  - component: {fileID: 3151612446693247790}
+  - component: {fileID: 8140084873313794773}
   m_Layer: 0
   m_Name: BT_WarriorEnemy
   m_TagString: Enemy
@@ -262,6 +264,30 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f1547ad8fbfa4f24d83e5a445aee860d, type: 3}
   - {fileID: 8300000, guid: 47832b56ccba5bc408b1d5aac1871746, type: 3}
   - {fileID: 8300000, guid: 3d132da7af60f1145a3deb6a8bc42a08, type: 3}
+--- !u!114 &3151612446693247790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107334747140496812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a731a34659e4fe440b5e83c246ecd121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8140084873313794773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107334747140496812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c578ec1d87473474fb63deac864316ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &177101665409242902
 GameObject:
   m_ObjectHideFlags: 0

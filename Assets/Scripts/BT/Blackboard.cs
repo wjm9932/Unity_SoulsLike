@@ -35,7 +35,7 @@ public class Blackboard
     {
         if (!blackboardDictionary.ContainsKey(typeof(T)))
         {
-            Debug.LogError("There is no Key");
+            Debug.LogError("There is no Key " + keyName);
             return default(T);
         }
 
@@ -43,7 +43,7 @@ public class Blackboard
 
         if (!dic.Contains(keyName))
         {
-            Debug.LogError("There is no Key");
+            Debug.LogError("There is no Key: " + keyName);
             return default(T);
         }
 
