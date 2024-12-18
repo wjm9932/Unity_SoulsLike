@@ -40,7 +40,7 @@ public class BT_WarriorEnemy : Enemy
         base.Start();
 
         BuildBT();
-        StartCoroutine(CheckIsInRange());
+        //StartCoroutine(CheckIsInRange());
 
         buffArmorPercent = 0f;
 
@@ -95,7 +95,7 @@ public class BT_WarriorEnemy : Enemy
                 .AddSelector()
                     .AddAttackSelector()
                         .AddSequence()
-                            .AddCondition(() => builder.blackboard.GetData<bool>("isAttacking"))
+                            .AddCondition(() => builder.blackboard.GetData<bool>("isAttacking") || IsInRange())
                             .AddAction(new SwordAttack(builder.blackboard), builder.actionManager)
                         .EndComposite()
                     .EndComposite()
@@ -121,6 +121,17 @@ public class BT_WarriorEnemy : Enemy
             }
 
             yield return new WaitForSeconds(0.05f);
+        }
+    }
+    private bool IsInRange()
+    {
+        if (Vector3.Distance(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").transform.position, transform.position) <= 1f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

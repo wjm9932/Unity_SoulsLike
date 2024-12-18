@@ -27,7 +27,7 @@ public class Patrol : IAction
     public NodeState Execute()
     {
         blackBoard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackBoard.GetData<GameObject>("Owner").transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
-        return NodeState.Success;
+        return NodeState.Running;
     }
 
     public void OnExit() 

@@ -14,6 +14,8 @@ public class SwordAttack : IAction
 
     public void OnEnter()
     {
+        blackboard.SetData<bool>("isAttacking", true);
+
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().SetDamage(10f);
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsSwordAttack", true);
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = true;
@@ -29,28 +31,33 @@ public class SwordAttack : IAction
     public NodeState Execute()
     {
         blackboard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackboard.GetData<GameObject>("Owner").transform.rotation, dir, Time.deltaTime * 10);
-        
+
         if (blackboard.GetData<bool>("isAttacking") == true)
         {
             return NodeState.Running;
         }
         else
         {
+
             return NodeState.Success;
         }
+
     }
 
     public void OnExit()
     {
-        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsSwordAttack", false);
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition -= PlaySwordAttackSFX;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete -= FinishAttackAnim;
+
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsSwordAttack", false);
         blackboard.SetData<bool>("isAttacking", false);
     }
 
     private void FinishAttackAnim()
     {
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsSwordAttack", false);
         blackboard.SetData<bool>("isAttacking", false);
+
     }
 
     private void PlaySwordAttackSFX()

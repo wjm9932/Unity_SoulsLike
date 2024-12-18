@@ -8,11 +8,10 @@ public class Track : IAction
 {
     private Blackboard blackboard;
     private IEnumerator trackCouroutine;
-    private NodeState state;
+
     public Track(Blackboard blackBoard)
     {
         this.blackboard = blackBoard;
-        state = NodeState.Running;
     }
 
     public void OnEnter()
@@ -32,7 +31,7 @@ public class Track : IAction
     public NodeState Execute()
     {
         blackboard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackboard.GetData<GameObject>("Owner").transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
-        return state;
+        return NodeState.Running;
     }
 
     public void OnExit()
@@ -44,16 +43,14 @@ public class Track : IAction
     {
         while (blackboard.GetData<GameObject>("Owner").GetComponent<LivingEntity>().isDead == false && blackboard.GetData<GameObject>("target") != null)
         {
+            blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().SetDestination(blackboard.GetData<GameObject>("target").transform.position);
+           
+            yield return new WaitForSeconds(0.05f);
+
             if (Vector3.Distance(blackboard.GetData<GameObject>("target").transform.position, blackboard.GetData<GameObject>("Owner").transform.position) >= blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().viewDistance)
             {
                 blackboard.SetData<GameObject>("target", null);
-                state = NodeState.Success;
             }
-
-            yield return new WaitForSeconds(0.05f);
-
-            blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().SetDestination(blackboard.GetData<GameObject>("target").transform.position);
-            state = NodeState.Running;
         }
     }
 

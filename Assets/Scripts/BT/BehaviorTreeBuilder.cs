@@ -41,6 +41,14 @@ public class BehaviorTreeBuilder : MonoBehaviour
         currentNode = sequence;
         return this;
     }
+    public BehaviorTreeBuilder AddAttackSequence()
+    {
+        var selector = new AttackSequence();
+        if (currentNode != null) nodeStack.Push(currentNode);
+        currentNode = selector;
+        return this;
+    }
+
 
     public BehaviorTreeBuilder AddCondition(Func<bool> condition)
     {
