@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ActionNode : INode
@@ -17,5 +18,13 @@ public class ActionNode : INode
     {
         actionManager.ChangeAction(action);
         return actionManager.ExecuteCurrentAction();
+    }
+
+    public void SetResetAction(Action resetAction)
+    {
+        if(action is ICompositionNodeResettable dependentAction)
+        {
+            dependentAction.SetResetAction(resetAction); 
+        }
     }
 }

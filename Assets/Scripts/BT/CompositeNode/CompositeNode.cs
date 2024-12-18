@@ -9,5 +9,21 @@ public abstract class CompositeNode : INode
     }
 
     public abstract NodeState Evaluate();
+
+    public virtual void Reset()
+    {
+        foreach (var child in children)
+        {
+            if (child is CompositeNode compositeChild)
+            {
+                compositeChild.Reset();
+            }
+        }
+    }
+
+    public List<INode> GetChildren()
+    {
+        return children;
+    }
 }
 

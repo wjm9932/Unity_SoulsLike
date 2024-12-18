@@ -67,6 +67,25 @@ public class BehaviorTreeBuilder : MonoBehaviour
 
     public CompositeNode Build()
     {
+        var root = currentNode;
+
+        InjectResetActionDependencies(root.Reset, currentNode);
+
         return currentNode;
+    }
+
+    private void InjectResetActionDependencies(Action resetAction, CompositeNode node)
+    {
+        foreach (var child in node.GetChildren())
+        {
+            if (child is ActionNode actionNode)
+            {
+                actionNode.SetResetAction(resetAction);
+            }
+            else if (child is CompositeNode compositeChild)
+            {
+                InjectResetActionDependencies(resetAction, compositeChild);
+            }
+        }
     }
 }

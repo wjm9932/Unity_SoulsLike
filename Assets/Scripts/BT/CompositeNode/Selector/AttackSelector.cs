@@ -15,7 +15,9 @@ public class AttackSelector : CompositeNode
             {
                 return NodeState.Running;
             }
+
             runningNode = null;
+            
             if (runningState == NodeState.Success)
             {
                 return NodeState.Success;
@@ -39,5 +41,11 @@ public class AttackSelector : CompositeNode
         }
 
         return NodeState.Failure;
+    }
+
+    public override void Reset()
+    {
+        base.Reset();
+        runningNode = null;
     }
 }

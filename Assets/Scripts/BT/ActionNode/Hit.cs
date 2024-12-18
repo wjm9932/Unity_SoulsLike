@@ -1,11 +1,12 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Hit : IAction
+public class Hit : IAction, ICompositionNodeResettable
 {
     private Blackboard blackboard;
+    private Action onResetCompositionNode;
     public Hit(Blackboard blackBoard)
     {
         this.blackboard = blackBoard;
@@ -13,6 +14,8 @@ public class Hit : IAction
 
     public void OnEnter()
     {
+        onResetCompositionNode();
+
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete += FinishHitAnim;
 
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().canAttack = false;
@@ -53,5 +56,8 @@ public class Hit : IAction
         blackboard.SetData<bool>("isHit", false);
     }
 
-   
+   public void SetResetAction(Action resetAction)
+    {
+        this.onResetCompositionNode = resetAction;
+    }
 }

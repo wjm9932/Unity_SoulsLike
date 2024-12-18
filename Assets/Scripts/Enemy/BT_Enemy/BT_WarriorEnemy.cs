@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEditor.ObjectChangeEventStream;
 
 public class BT_WarriorEnemy : Enemy
 {
@@ -91,7 +89,7 @@ public class BT_WarriorEnemy : Enemy
             .AddSequence()
                 .AddCondition(() => builder.blackboard.GetData<bool>("isHit"))
                 .AddAction(new Hit(builder.blackboard), builder.actionManager)
-                .EndComposite()
+            .EndComposite()
             .AddSequence()
                 .AddCondition(() => builder.blackboard.GetData<GameObject>("target") != null || builder.blackboard.GetData<bool>("isAttacking"))
                 .AddSelector()
