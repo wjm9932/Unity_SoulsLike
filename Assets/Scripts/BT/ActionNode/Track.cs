@@ -30,7 +30,7 @@ public class Track : IAction
 
     public NodeState Execute()
     {
-        blackboard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackboard.GetData<GameObject>("Owner").transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 5);
+        blackboard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackboard.GetData<GameObject>("Owner").transform.rotation, GetMoveRotationAngle(), Time.deltaTime * 10);
         return state;
     }
 
@@ -72,9 +72,8 @@ public class Track : IAction
 
         if (direction == Vector3.zero)
         {
-            return Quaternion.identity;
+            return Quaternion.LookRotation(blackboard.GetData<GameObject>("target").transform.position - blackboard.GetData<GameObject>("Owner").transform.position);
         }
-
         return Quaternion.LookRotation(direction);
     }
 }

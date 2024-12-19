@@ -4,84 +4,52 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BackFlip : IAction, IAnimationEventHandler
+public class BackFlip : BossAttackAction
 {
-    private Blackboard blackboard;
     private Quaternion dir;
-    private bool isFirstFrame;
-    public BackFlip(Blackboard blackBoard)
+    public BackFlip(Blackboard blackBoard) : base(blackBoard)
     {
-        this.blackboard = blackBoard;
     }
 
-    public void OnEnter()
+    public override void OnEnter()
     {
-        isFirstFrame = true;
+        base.OnEnter();
+        blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = false;
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance = 0f;
 
         dir = GetLookAtAngle();
         SetDashDestinationAndSpeed();
         blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isBackFlip", true);
 
-
-        RegisterEvents();
     }
 
-    public NodeState Execute()
+    public override NodeState Execute()
     {
         blackboard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackboard.GetData<GameObject>("Owner").transform.rotation, dir, Time.deltaTime * 30);
-
-        if (!isFirstFrame)
-        {
-            if (blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().IsInTransition(0) == false)
-            {
-                return NodeState.Success;
-            }
-            else
-            {
-                return NodeState.Running;
-            }
-        }
-        else
-        {
-            isFirstFrame = false;
-            return NodeState.Running;
-        }
+        return base.Execute(); 
     }
 
-    public void OnExit()
+    public override void OnExit()
     {
+        base.OnExit();
         blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isBackFlip", false);
-        RemoveEvents();
     }
-    public void RegisterEvents()
-    {
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationEnter += OnAnimationEnter;
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition += OnAnimationTransition;
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().animationIK += OnAnimatorIK;
-    }
+   
 
-    public void RemoveEvents()
-    {
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationEnter -= OnAnimationEnter;
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition -= OnAnimationTransition;
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().animationIK -= OnAnimatorIK;
-    }
-
-    public void OnAnimationEnter()
+    public override void OnAnimationEnter()
     {
         SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_JUMP, 0.4f, blackboard.GetData<GameObject>("Owner").transform.position, Quaternion.identity, blackboard.GetData<GameObject>("Owner").transform);
     }
-    public void OnAnimationTransition()
+    public override void OnAnimationTransition()
     {
         SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_FLIP, 0.2f, blackboard.GetData<GameObject>("Owner").transform.position, Quaternion.identity, blackboard.GetData<GameObject>("Owner").transform);
         EffectManager.Instance.PlayEffect(blackboard.GetData<GameObject>("Owner").transform.position, Vector3.up, blackboard.GetData<GameObject>("Owner").transform, ObjectPoolManager.ObjectType.DUST);
     }
-    public void OnAnimationExit()
+    public override void OnAnimationExit()
     {
 
     }
-    public void OnAnimatorIK()
+    public override void OnAnimatorIK()
     {
         blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetFloat("HandWeight", 0f);
     }

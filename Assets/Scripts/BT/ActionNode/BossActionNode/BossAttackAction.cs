@@ -7,20 +7,20 @@ using UnityEngine.AI;
 
 public class BossAttackAction : IAction, IAnimationEventHandler
 {
-    private Blackboard blackboard;
+    protected Blackboard blackboard;
     private bool isFirstFrame;
     public BossAttackAction(Blackboard blackBoard)
     {
         this.blackboard = blackBoard;
     }
 
-    public void OnEnter()
+    public virtual void OnEnter()
     {
         isFirstFrame = true;
 
         RegisterEvents();
     }
-    public NodeState Execute()
+    public virtual NodeState Execute()
     {
         if (!isFirstFrame)
         {
@@ -40,7 +40,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
         }
     }
 
-    public void OnExit()
+    public virtual void OnExit()
     {
         RemoveEvents();
     }
@@ -49,6 +49,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
     {
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationEnter += OnAnimationEnter;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition += OnAnimationTransition;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationExit += OnAnimationExit;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().animationIK += OnAnimatorIK;
     }
 
@@ -56,6 +57,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
     {
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationEnter -= OnAnimationEnter;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition -= OnAnimationTransition;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationExit = OnAnimationExit;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().animationIK -= OnAnimatorIK;
     }
 

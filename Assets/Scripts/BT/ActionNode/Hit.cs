@@ -18,7 +18,7 @@ public class Hit : IAction, ICompositionNodeResettable
 
         blackboard.SetData<bool>("isHit", true);
 
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete += FinishHitAnim;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationExit += FinishHitAnim;
 
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().canAttack = false;
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().canBeDamaged = false;
@@ -49,7 +49,7 @@ public class Hit : IAction, ICompositionNodeResettable
     {
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().canBeDamaged = true;
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsHit", false);
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete -= FinishHitAnim;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationExit -= FinishHitAnim;
         blackboard.SetData<bool>("isHit", false);
     }
 

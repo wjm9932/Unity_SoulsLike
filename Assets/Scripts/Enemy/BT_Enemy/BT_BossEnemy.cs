@@ -82,10 +82,6 @@ public class BT_BossEnemy : Enemy
     {
     }
 
-    private void OnAnimatorIK()
-    {
-        GetComponent<AnimationEventHandler>().animationIK();
-    }
 
     private void OnAnimationEnterEvent()
     {

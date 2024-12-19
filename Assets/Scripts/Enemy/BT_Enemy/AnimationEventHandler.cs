@@ -6,7 +6,7 @@ public class AnimationEventHandler : MonoBehaviour
 {
     public Action onAnimationEnter;
     public Action onAnimationTransition;
-    public Action onAnimationComplete;
+    public Action onAnimationExit;
     
     public Action animationIK;
 
@@ -21,7 +21,7 @@ public class AnimationEventHandler : MonoBehaviour
     }
     public void OnAnimationExitEvent()
     {
-        onAnimationComplete?.Invoke();
+        onAnimationExit?.Invoke();
     }
 
     private void OnAnimatorIK()

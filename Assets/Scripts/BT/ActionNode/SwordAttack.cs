@@ -21,7 +21,7 @@ public class SwordAttack : IAction
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = true;
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().avoidancePriority = 50;
 
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete += FinishAttackAnim;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationExit += FinishAttackAnim;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition += PlaySwordAttackSFX;
 
 
@@ -47,7 +47,7 @@ public class SwordAttack : IAction
     public void OnExit()
     {
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition -= PlaySwordAttackSFX;
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete -= FinishAttackAnim;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationExit -= FinishAttackAnim;
 
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().animator.SetBool("IsSwordAttack", false);
         blackboard.SetData<bool>("isAttacking", false);
