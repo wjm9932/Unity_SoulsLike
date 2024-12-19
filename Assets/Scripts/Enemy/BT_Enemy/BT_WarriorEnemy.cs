@@ -125,7 +125,7 @@ public class BT_WarriorEnemy : Enemy
     }
     private bool IsInRange()
     {
-        if (Vector3.Distance(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").transform.position, transform.position) <= 1f)
+        if (Vector3.Distance(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").transform.position, transform.position) <= trackingStopDistance)
         {
             return true;
         }

@@ -35,12 +35,18 @@ public class AttackSequence : CompositeNode
             return NodeState.Running; 
         }
 
+        ResetNodeInfo();
         return NodeState.Failure;
     }
 
     public override void Reset()
     {
         base.Reset();
+        ResetNodeInfo();
+    }
+
+    private void ResetNodeInfo()
+    {
         currentNode = null;
         currentIndex = 0;
     }

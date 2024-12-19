@@ -40,12 +40,12 @@ public class AttackSelector : CompositeNode
             }
         }
 
+        runningNode = null;
         return NodeState.Failure;
     }
 
     public override void Reset()
     {
         base.Reset();
-        runningNode = null;
     }
 }

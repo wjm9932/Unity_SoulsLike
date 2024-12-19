@@ -27800,7 +27800,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 337433090, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 107334747140496812, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_Name
@@ -27808,7 +27808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 107334747140496812, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 735921613076023062, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_RootOrder
@@ -27856,19 +27856,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5234396636511331588, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5234396636511331588, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6599352759163541495, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.748
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6599352759163541495, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94f117bc182c4b04ea6102f5d052a2b4, type: 3}
@@ -58537,7 +58537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 99
+      value: 103.13
       objectReference: {fileID: 0}
     - target: {fileID: 2348621013360213332, guid: e0d29ceb276b04547a94950deed9efd9, type: 3}
       propertyPath: m_LocalRotation.w

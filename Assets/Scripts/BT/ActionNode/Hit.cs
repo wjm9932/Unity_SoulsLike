@@ -16,6 +16,8 @@ public class Hit : IAction, ICompositionNodeResettable
     {
         onResetCompositionNode();
 
+        blackboard.SetData<bool>("isHit", true);
+
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationComplete += FinishHitAnim;
 
         blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().canAttack = false;
