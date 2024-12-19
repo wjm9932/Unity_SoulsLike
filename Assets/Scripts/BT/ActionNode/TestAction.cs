@@ -6,18 +6,15 @@ using UnityEngine.AI;
 public class TestAction : IAction
 {
     private Blackboard blackboard;
-    GameObject player;
     private float testTime;
-    public TestAction(Blackboard blackBoard, GameObject player)
+    public TestAction(Blackboard blackBoard)
     {
         this.blackboard = blackBoard;
-        this.player = player;
     }
 
     public void OnEnter()
     {
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = true;
-        blackboard.SetData<GameObject>("target", player);
         testTime = 0f;
     }
 

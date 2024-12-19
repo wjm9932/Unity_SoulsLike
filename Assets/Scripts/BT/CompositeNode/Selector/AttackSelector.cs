@@ -33,10 +33,13 @@ public class AttackSelector : CompositeNode
                 runningNode = child;
                 return NodeState.Running;
             }
-
-            if (state == NodeState.Success)
+            else if (state == NodeState.Success)
             {
                 return NodeState.Success;
+            }
+            else
+            {
+                continue;
             }
         }
 
