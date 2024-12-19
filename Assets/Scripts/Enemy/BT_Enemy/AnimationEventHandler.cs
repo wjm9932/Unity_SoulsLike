@@ -4,18 +4,28 @@ using System;
 using UnityEngine;
 public class AnimationEventHandler : MonoBehaviour
 {
+    public Action onAnimationEnter;
     public Action onAnimationTransition;
     public Action onAnimationComplete;
+    
+    public Action animationIK;
+
     // Start is called before the first frame update
-    private void OnAnimationEnterEvent()
+    public void OnAnimationEnterEvent()
     {
+        onAnimationEnter?.Invoke();
     }
-    private void OnAnimationTransitionEvent()
+    public void OnAnimationTransitionEvent()
     {
         onAnimationTransition?.Invoke();
     }
-    private void OnAnimationExitEvent()
+    public void OnAnimationExitEvent()
     {
         onAnimationComplete?.Invoke();
+    }
+
+    private void OnAnimatorIK()
+    {
+        animationIK?.Invoke();
     }
 }

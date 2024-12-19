@@ -61,6 +61,7 @@ public class BT_BossEnemy : Enemy
 
         patrolSpeed = 2f;
         trackingSpeed = 4f;
+        trackingStopDistance = 2f;
 
         viewDistance = 30f;
         _groggyAmount = 0f;
@@ -70,8 +71,8 @@ public class BT_BossEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        //if(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target"))
         root.Evaluate();
+
         RecoverGroggy();
     }
     private void FixedUpdate()
@@ -79,6 +80,24 @@ public class BT_BossEnemy : Enemy
     }
     private void LateUpdate()
     {
+    }
+
+    private void OnAnimatorIK()
+    {
+        GetComponent<AnimationEventHandler>().animationIK();
+    }
+
+    private void OnAnimationEnterEvent()
+    {
+        GetComponent<AnimationEventHandler>().OnAnimationEnterEvent();
+    }
+    private void OnAnimationTransitionEvent()
+    {
+        GetComponent<AnimationEventHandler>().OnAnimationTransitionEvent();
+    }
+    private void OnAnimationExitEvent()
+    {
+        GetComponent<AnimationEventHandler>().OnAnimationExitEvent();
     }
 
     protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
@@ -143,16 +162,19 @@ public class BT_BossEnemy : Enemy
 
         root = builder
         .AddSelector()
-            .AddAttackSequence()
-                .AddRandomAttackSelector()
-                    .AddAttackSequence()
-                        
+            .AddSequence()
+                .AddCondition(() => builder.blackboard.GetData<GameObject>("target") != null)
+                .AddAttackSequence()
+                    .AddRandomAttackSelector()
+                        .AddAttackSequence()
+                            .AddAction(new BackFlip(builder.blackboard), builder.actionManager)
+                            .AddRandomAttackSelector()
+                                .AddAction(new JumpAttack(builder.blackboard), builder.actionManager)
+                            .EndComposite()
+                        .EndComposite()
                     .EndComposite()
-                    .AddAttackSequence()
-                        
-                    .EndComposite()
-                 .EndComposite()       
-                .AddAction(new Track(builder.blackboard), builder.actionManager)
+                    .AddAction(new Track(builder.blackboard), builder.actionManager)
+                .EndComposite()
             .EndComposite()
             .AddAction(new Patrol(builder.blackboard), builder.actionManager)
         .EndComposite()

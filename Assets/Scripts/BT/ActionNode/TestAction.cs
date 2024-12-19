@@ -7,9 +7,11 @@ public class TestAction : IAction
 {
     private Blackboard blackboard;
     private float testTime;
-    public TestAction(Blackboard blackBoard)
+    private int index;
+    public TestAction(Blackboard blackBoard, int index)
     {
         this.blackboard = blackBoard;
+        this.index = index;
     }
 
     public void OnEnter()
@@ -23,12 +25,12 @@ public class TestAction : IAction
         testTime += Time.deltaTime;
         if (testTime >= 2f)
         {
-            Debug.Log("Success");
+            Debug.Log("Success " + index);
             return NodeState.Success;
         }
         else
         {
-            Debug.Log("Running");
+            Debug.Log("Running " +  index);
             return NodeState.Running;
         }
     }

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomAttackSelector : CompositeNode
 {
-    int randomIndex;
     INode runningNode;
     public override NodeState Evaluate()
     {
@@ -16,14 +16,18 @@ public class RandomAttackSelector : CompositeNode
             {
                 return NodeState.Running;
             }
+
             runningNode = null;
+
             if (runningState == NodeState.Success)
             {
                 return NodeState.Success;
             }
         }
 
-        foreach (var child in children)
+        ShuffleChildren();
+
+        foreach(var child in children)
         {
             NodeState state = child.Evaluate();
 
@@ -32,13 +36,34 @@ public class RandomAttackSelector : CompositeNode
                 runningNode = child;
                 return NodeState.Running;
             }
-
-            if (state == NodeState.Success)
+            else if (state == NodeState.Success)
             {
                 return NodeState.Success;
             }
+            else
+            {
+                continue;
+            }
         }
 
+        runningNode = null;
         return NodeState.Failure;
+    }
+
+    private void ShuffleChildren()
+    {
+        for (int i = children.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            var temp = children[i];
+            children[i] = children[randomIndex];
+            children[randomIndex] = temp;
+        }
+    }
+
+    public override void Reset()
+    {
+        base.Reset();
+        runningNode = null;
     }
 }

@@ -6,6 +6,14 @@ public class AttackSequence : CompositeNode
 {
     private int currentIndex;
     private INode currentNode;
+    private bool requireAllSuccess;
+
+
+    public AttackSequence(bool requireAllSuccess)
+    {
+        this.requireAllSuccess = requireAllSuccess;
+    }
+
     public override NodeState Evaluate()
     {
         if (currentNode == null)
@@ -16,7 +24,7 @@ public class AttackSequence : CompositeNode
             }
             else
             {
-                currentIndex = 0;
+                ResetNodeInfo();
                 return NodeState.Success;
             }
         }
@@ -27,16 +35,33 @@ public class AttackSequence : CompositeNode
         {
             return NodeState.Running;
         }
-
-        if (state == NodeState.Success)
+        else if (state == NodeState.Success)
         {
             currentIndex++;
             currentNode = null;
             return NodeState.Running; 
         }
-
-        ResetNodeInfo();
-        return NodeState.Failure;
+        else
+        {
+            if(!requireAllSuccess)
+            {
+                if (currentIndex != 0)
+                {
+                    ResetNodeInfo();
+                    return NodeState.Success;
+                }
+                else
+                {
+                    ResetNodeInfo();
+                    return NodeState.Failure;
+                }
+            }
+            else
+            {
+                ResetNodeInfo();
+                return NodeState.Failure;
+            }
+        }
     }
 
     public override void Reset()
