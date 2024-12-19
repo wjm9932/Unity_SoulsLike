@@ -40,12 +40,14 @@ public class WarriorEnemy : Enemy
         base.Start();
         buffArmorPercent = 0f;
 
+        patrolSpeed = 1f;
         trackingSpeed = 2f;
         trackingStopDistance = 1f;
 
         health = maxHealth;
         fieldOfView = 100f;
         viewDistance = 5f;
+
         enemyBehaviorStateMachine = new EnemyBehaviorStateMachine(this);
         enemyBehaviorStateMachine.ChangeState(enemyBehaviorStateMachine.patrolState);
     }

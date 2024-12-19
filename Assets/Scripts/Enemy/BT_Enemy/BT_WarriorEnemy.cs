@@ -40,10 +40,10 @@ public class BT_WarriorEnemy : Enemy
         base.Start();
 
         BuildBT();
-        //StartCoroutine(CheckIsInRange());
 
         buffArmorPercent = 0f;
 
+        patrolSpeed = 1f;
         trackingSpeed = 2f;
         trackingStopDistance = 1f;
 
@@ -105,6 +105,7 @@ public class BT_WarriorEnemy : Enemy
             .AddAction(new Patrol(builder.blackboard), builder.actionManager)
         .EndComposite()
         .Build();
+
     }
 
     private IEnumerator CheckIsInRange()

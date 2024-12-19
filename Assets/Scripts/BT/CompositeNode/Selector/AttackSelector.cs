@@ -50,5 +50,6 @@ public class AttackSelector : CompositeNode
     public override void Reset()
     {
         base.Reset();
+        runningNode = null;
     }
 }

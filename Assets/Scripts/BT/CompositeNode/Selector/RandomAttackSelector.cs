@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomSelector : CompositeNode
+public class RandomAttackSelector : CompositeNode
 {
     int randomIndex;
     INode runningNode;

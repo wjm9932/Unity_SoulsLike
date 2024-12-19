@@ -15,7 +15,9 @@ public class Patrol : IAction
     public void OnEnter() 
     {
         updatePathCoroutine = UpdatePath();
-        blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().speed = 1f;
+
+        blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().speed = blackBoard.GetData<GameObject>("Owner").GetComponent<Enemy>().patrolSpeed;
+
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance = 1f;
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().avoidancePriority = 51;
         blackBoard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = false;

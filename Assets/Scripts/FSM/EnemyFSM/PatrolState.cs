@@ -17,7 +17,7 @@ namespace EnemyFSM
         {
             sm.owner.target = null;
             sm.owner.navMesh.isStopped = false;
-            sm.owner.navMesh.speed = 1f;
+            sm.owner.navMesh.speed = sm.owner.patrolSpeed;
             sm.owner.navMesh.stoppingDistance = 1f;
             sm.owner.animator.SetFloat("Speed", sm.owner.navMesh.speed);
             sm.owner.navMesh.avoidancePriority = 51;

@@ -34,6 +34,14 @@ public class BehaviorTreeBuilder : MonoBehaviour
         return this;
     }
 
+    public BehaviorTreeBuilder AddRandomAttackSelector()
+    {
+        var selector = new RandomAttackSelector();
+        if (currentNode != null) nodeStack.Push(currentNode);
+        currentNode = selector;
+        return this;
+    }
+
     public BehaviorTreeBuilder AddSequence()
     {
         var sequence = new Sequence();

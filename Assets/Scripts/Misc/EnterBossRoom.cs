@@ -24,6 +24,7 @@ public class EnterBossRoom : MonoBehaviour
         if(other.CompareTag("Player") == true)
         {
             boss.GetComponent<Enemy>().target = other.gameObject;
+            boss.GetComponent<Enemy>().hpBar.gameObject.SetActive(true);
             targetDoor.GetComponent<CloseDoor>().Close();
             Destroy(this.gameObject);
         }
