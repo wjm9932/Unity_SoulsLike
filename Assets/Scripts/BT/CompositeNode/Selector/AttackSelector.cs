@@ -32,6 +32,11 @@ public class AttackSelector : CompositeNode
 
         foreach (var child in children)
         {
+            if (runningNode != null && runningNode == child)
+            {
+                continue;
+            }
+
             NodeState state = child.Evaluate();
 
             if (state == NodeState.Running)
