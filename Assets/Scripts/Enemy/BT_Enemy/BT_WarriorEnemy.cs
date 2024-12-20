@@ -87,6 +87,10 @@ public class BT_WarriorEnemy : Enemy
         root = builder
         .AddSelector()
             .AddSequence()
+                .AddCondition(() => isDead == true)
+                .AddAction(new Die(builder.blackboard), builder.actionManager)
+            .EndComposite()
+            .AddSequence()
                 .AddCondition(() => builder.blackboard.GetData<bool>("isHit"))
                 .AddAction(new Hit(builder.blackboard), builder.actionManager)
             .EndComposite()

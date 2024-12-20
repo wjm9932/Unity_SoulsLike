@@ -58,7 +58,7 @@ public class Hit : IAction, ICompositionNodeResettable
         blackboard.SetData<bool>("isHit", false);
     }
 
-   public void SetResetAction(Action resetAction)
+    public void SetResetAction(Action resetAction)
     {
         this.onResetCompositionNode = resetAction;
     }

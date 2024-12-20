@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class StandBy : BossAttackAction
 {
-    private Quaternion dir;
     private bool isReadyToAttack;
     private IEnumerator timerCouroutine;
     public StandBy(Blackboard blackBoard) : base(blackBoard)
@@ -16,7 +15,6 @@ public class StandBy : BossAttackAction
     {
         base.OnEnter();
 
-        dir = GetLookAtAngle();
         isReadyToAttack = false;
         timerCouroutine = GetReady();
 
