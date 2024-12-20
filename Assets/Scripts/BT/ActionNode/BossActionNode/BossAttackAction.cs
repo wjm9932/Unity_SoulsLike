@@ -8,10 +8,12 @@ using UnityEngine.AI;
 public class BossAttackAction : IAction, IAnimationEventHandler
 {
     protected Blackboard blackboard;
+    protected float animationEndPercent;
     private bool isFirstFrame;
-    public BossAttackAction(Blackboard blackBoard)
+    public BossAttackAction(Blackboard blackBoard, float animationEndPercent = 0.85f)
     {
         this.blackboard = blackBoard;
+        this.animationEndPercent = animationEndPercent;
     }
 
     public virtual void OnEnter()
@@ -24,7 +26,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
     {
         if (!isFirstFrame)
         {
-            if (blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f && blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().IsInTransition(0) == false)
+            if (blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= animationEndPercent && blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().IsInTransition(0) == false)
             {
                 return NodeState.Success;
             }
@@ -63,7 +65,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
 
     public virtual void OnAnimationEnter()
     {
-        
+
     }
     public virtual void OnAnimationTransition()
     {
@@ -75,7 +77,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
     }
     public virtual void OnAnimatorIK()
     {
-      
+
     }
 
     protected Quaternion GetLookAtAngle()

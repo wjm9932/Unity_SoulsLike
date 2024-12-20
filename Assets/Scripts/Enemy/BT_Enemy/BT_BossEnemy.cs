@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using static UnityEditor.ObjectChangeEventStream;
 
 public class BT_BossEnemy : Enemy
 {
@@ -149,6 +150,11 @@ public class BT_BossEnemy : Enemy
         return Random.Range(0f, 1f) <= chances;
     }
 
+    private bool IsInRange(float range)
+    {
+        return Vector3.Distance(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").transform.position, transform.position) <= range;
+    }
+
     private void BuildBT()
     {
         var builder = GetComponent<BehaviorTreeBuilder>();
@@ -183,7 +189,9 @@ public class BT_BossEnemy : Enemy
                             .EndComposite()
                         .EndComposite()
                     .EndComposite()
-                    .AddAction(new Track(builder.blackboard), builder.actionManager)
+                    .AddCondition(()=> IsInRange(5f) == true)
+                    .AddCondition(() => RandomExecute(0.5f))
+                    .AddAction(new StabAttack(builder.blackboard), builder.actionManager)
                 .EndComposite()
             .EndComposite()
             .AddAction(new Patrol(builder.blackboard), builder.actionManager)
