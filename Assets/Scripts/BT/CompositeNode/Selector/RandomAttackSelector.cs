@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class RandomAttackSelector : CompositeNode
 {
-    INode runningNode;
+    private INode runningNode;
+    private int number;
+
+    public RandomAttackSelector(int number)
+    {
+        this.number = number;
+    }
+
     public override NodeState Evaluate()
     {
         if (runningNode != null)
@@ -23,6 +30,8 @@ public class RandomAttackSelector : CompositeNode
             {
                 return NodeState.Success;
             }
+
+            return NodeState.Failure;
         }
 
         ShuffleChildren();
@@ -46,7 +55,6 @@ public class RandomAttackSelector : CompositeNode
             }
         }
 
-        runningNode = null;
         return NodeState.Failure;
     }
 

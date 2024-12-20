@@ -5,6 +5,12 @@ using UnityEngine;
 public class AttackSelector : CompositeNode
 {
     INode runningNode;
+
+    private int number;
+    public AttackSelector(int number)
+    {
+        this.number = number;
+    }
     public override NodeState Evaluate()
     {
         if (runningNode != null)

@@ -4,6 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 public class Selector : CompositeNode
 {
+    private int number;
+
+    public Selector(int number)
+    {
+        this.number = number;
+    }
     public override NodeState Evaluate()
     {
         foreach (var child in children)

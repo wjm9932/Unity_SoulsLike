@@ -77,4 +77,12 @@ public class BossAttackAction : IAction, IAnimationEventHandler
     {
       
     }
+
+    protected Quaternion GetLookAtAngle()
+    {
+        Vector3 dir = blackboard.GetData<GameObject>("target").transform.position - blackboard.GetData<GameObject>("Owner").transform.position;
+        dir.y = 0;
+
+        return Quaternion.LookRotation(dir);
+    }
 }

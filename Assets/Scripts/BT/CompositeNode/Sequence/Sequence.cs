@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Sequence : CompositeNode
 {
+    private int number;
+
+    public Sequence(int number)
+    {
+        this.number = number;
+    }
+
     public override NodeState Evaluate()
     {
         foreach (var child in children)

@@ -31,7 +31,6 @@ namespace BossEnemyFSM
             sm.owner.SetDamage(30f);
 
             SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.BOSS_DASH, 0.6f, sm.owner.transform.position, Quaternion.identity, sm.owner.gameObject.transform);
-
         }
         public override void Update()
         {

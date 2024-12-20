@@ -67,11 +67,5 @@ public class JumpAttack : BossAttackAction
 
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().speed = Mathf.Max(0, (distance - blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance) / 1f);
     }
-    private Quaternion GetLookAtAngle()
-    {
-        Vector3 dir = blackboard.GetData<GameObject>("target").transform.position - blackboard.GetData<GameObject>("Owner").transform.position;
-        dir.y = 0;
 
-        return Quaternion.LookRotation(dir);
-    }
 }

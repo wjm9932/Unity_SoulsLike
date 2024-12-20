@@ -9,9 +9,11 @@ public class AttackSequence : CompositeNode
     private bool requireAllSuccess;
 
 
-    public AttackSequence(bool requireAllSuccess)
+    private int attackSequenceNumber;
+    public AttackSequence(bool requireAllSuccess, int attackSequenceNumber)
     {
         this.requireAllSuccess = requireAllSuccess;
+        this.attackSequenceNumber = attackSequenceNumber;
     }
 
     public override NodeState Evaluate()

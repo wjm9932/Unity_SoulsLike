@@ -65,11 +65,5 @@ public class BackFlip : BossAttackAction
         float distance = Vector3.Distance(blackboard.GetData<GameObject>("Owner").transform.position, dashDestination);
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().speed = distance / 0.75f;
     }
-    private Quaternion GetLookAtAngle()
-    {
-        Vector3 dir = blackboard.GetData<GameObject>("target").transform.position - blackboard.GetData<GameObject>("Owner").transform.position;
-        dir.y = 0;
 
-        return Quaternion.LookRotation(dir);
-    }
 }

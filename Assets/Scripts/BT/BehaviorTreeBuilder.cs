@@ -9,8 +9,9 @@ public class BehaviorTreeBuilder : MonoBehaviour
     public Blackboard blackboard { get; private set; }
     public ActionManager actionManager { get; private set; }
 
-    private CompositeNode currentNode;
     private Stack<CompositeNode> nodeStack = new Stack<CompositeNode>();
+    private CompositeNode currentNode;
+    private int CompositeNodeCount = 0;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class BehaviorTreeBuilder : MonoBehaviour
 
     public BehaviorTreeBuilder AddSelector()
     {
-        var selector = new Selector();
+        var selector = new Selector(CompositeNodeCount++);
         if (currentNode != null) nodeStack.Push(currentNode);
         currentNode = selector;
         return this;
@@ -28,7 +29,7 @@ public class BehaviorTreeBuilder : MonoBehaviour
 
     public BehaviorTreeBuilder AddAttackSelector()
     {
-        var selector = new AttackSelector();
+        var selector = new AttackSelector(CompositeNodeCount++);
         if (currentNode != null) nodeStack.Push(currentNode);
         currentNode = selector;
         return this;
@@ -36,7 +37,7 @@ public class BehaviorTreeBuilder : MonoBehaviour
 
     public BehaviorTreeBuilder AddRandomAttackSelector()
     {
-        var selector = new RandomAttackSelector();
+        var selector = new RandomAttackSelector(CompositeNodeCount++);
         if (currentNode != null) nodeStack.Push(currentNode);
         currentNode = selector;
         return this;
@@ -44,14 +45,14 @@ public class BehaviorTreeBuilder : MonoBehaviour
 
     public BehaviorTreeBuilder AddSequence()
     {
-        var sequence = new Sequence();
+        var sequence = new Sequence(CompositeNodeCount++);
         if (currentNode != null) nodeStack.Push(currentNode);
         currentNode = sequence;
         return this;
     }
     public BehaviorTreeBuilder AddAttackSequence(bool requireAllSuccess = false)
     {
-        var selector = new AttackSequence(requireAllSuccess);
+        var selector = new AttackSequence(requireAllSuccess, CompositeNodeCount++);
         if (currentNode != null) nodeStack.Push(currentNode);
         currentNode = selector;
         return this;
