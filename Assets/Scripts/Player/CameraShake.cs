@@ -7,7 +7,7 @@ public class CameraShake : MonoBehaviour
 {
     private CinemachineVirtualCamera cinemachineCamera;
     private CinemachineBasicMultiChannelPerlin noise;
-    private float shakeIntensity = 4f;
+    private float shakeIntensity = 2.5f;
     private float shakeTime = 0.5f;
 
     private void Awake()
