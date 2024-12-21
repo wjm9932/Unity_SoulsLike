@@ -66,14 +66,14 @@ ModelImporter:
       - time: 0.25867507
         functionName: PlayFootStepSound
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 7a1302b2481c2374e8b853fb91848a56, type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.66561514
         functionName: PlayFootStepSound
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 7a1302b2481c2374e8b853fb91848a56, type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

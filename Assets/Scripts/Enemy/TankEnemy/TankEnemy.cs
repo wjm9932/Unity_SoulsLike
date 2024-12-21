@@ -38,7 +38,7 @@ public class TankEnemy : Enemy
         base.Start();
 
         buffArmorPercent = 0.3f;
-
+        patrolSpeed = 0.75f;
         trackingSpeed = 1.5f;
         trackingStopDistance = 1f;
 

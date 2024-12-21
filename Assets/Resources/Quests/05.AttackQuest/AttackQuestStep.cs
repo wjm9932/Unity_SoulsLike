@@ -9,7 +9,7 @@ public class AttackQuestStep : QuestStep
     // Start is called before the first frame update
     void Start()
     {
-        questStepData.status = attackNumber + " Combo Attack";
+        questStepData.status = attackNumber + " Combo SwordAttack";
         questOwner.playerEvents.onAttack += Attack;
     }
 

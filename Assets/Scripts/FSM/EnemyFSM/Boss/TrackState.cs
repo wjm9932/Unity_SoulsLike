@@ -15,10 +15,10 @@ namespace BossEnemyFSM
 
         public override void Enter()
         {
-            if(sm.owner.hpBar.gameObject.activeSelf == false)
-            {
-                sm.owner.hpBar.gameObject.SetActive(true);
-            }
+            //if(sm.owner.hpBar.gameObject.activeSelf == false)
+            //{
+            //    sm.owner.hpBar.gameObject.SetActive(true);
+            //}
 
             sm.owner.navMesh.isStopped = false;
             sm.owner.navMesh.speed = agentSpeed;

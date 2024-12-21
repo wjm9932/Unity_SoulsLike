@@ -37,6 +37,7 @@ public class ArcherEnemy : Enemy
         base.Start();
         buffArmorPercent = -0.3f;
 
+        patrolSpeed = 1.5f;
         trackingSpeed = 2f;
         trackingStopDistance = 5f;
 

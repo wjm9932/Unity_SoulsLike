@@ -45,7 +45,8 @@ public class SoundManager : MonoBehaviour
         BOSS_CHARGE_ATTACK,
         BOSS_SWORD_ATTACK,
         BOSS_STAB_ATTACK,
-        BOSS_GROGGY
+        BOSS_GROGGY,
+        BOSS_START_CHARGING
     }
 
     public enum UISoundEffectType
@@ -84,6 +85,8 @@ public class SoundManager : MonoBehaviour
     private Dictionary<AreaType, AudioClip> bgmAudioClips = new Dictionary<AreaType, AudioClip>();
     private Dictionary<SoundEffectType, List<AudioClip>> inGameAudioClips = new Dictionary<SoundEffectType, List<AudioClip>>();
     private Dictionary<UISoundEffectType, List<AudioClip>> uiGameAudioClips = new Dictionary<UISoundEffectType, List<AudioClip>>();
+
+    private AreaType bgmType;
 
     private int maxPickUpSoundEffect = 3;
     private int currentPlayingPickupEffect = 0;
@@ -203,6 +206,11 @@ public class SoundManager : MonoBehaviour
 
     public void ChangeBackGroundMusic(AreaType type)
     {
+        if(bgmType == type)
+        {
+            return;
+        }
+
         if(type  == AreaType.OUTSIDE)
         {
             bgmAudioSource.clip = bgmAudioClips[type];
@@ -222,6 +230,7 @@ public class SoundManager : MonoBehaviour
             bgmAudioSource.pitch = 1f;
             bgmAudioSource.volume = 0.35f;
         }
+        bgmType = type;
         bgmAudioSource.Play();
     }
 
