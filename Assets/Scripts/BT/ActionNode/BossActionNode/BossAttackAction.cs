@@ -59,7 +59,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
     {
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationEnter -= OnAnimationEnter;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationTransition -= OnAnimationTransition;
-        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationExit = OnAnimationExit;
+        blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().onAnimationExit -= OnAnimationExit;
         blackboard.GetData<GameObject>("Owner").GetComponent<AnimationEventHandler>().animationIK -= OnAnimatorIK;
     }
 

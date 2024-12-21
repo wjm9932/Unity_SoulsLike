@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using static UnityEditor.ObjectChangeEventStream;
 
 public class BT_BossEnemy : Enemy
 {
@@ -198,6 +197,13 @@ public class BT_BossEnemy : Enemy
                                         .AddCondition(() => RandomExecute(0.6f))
                                         .AddAction(new JumpAttack(builder.blackboard), builder.actionManager)
                                     .EndComposite()
+                                .EndComposite()
+                            .EndComposite()
+                            .AddAttackSequence()
+                                .AddAction(new Track(builder.blackboard), builder.actionManager)
+                                .AddRandomAttackSelector()
+                                    .AddAction(new SwordSwingAttack(builder.blackboard), builder.actionManager)
+                                    .AddAction(new SwordChargeAttack(builder.blackboard), builder.actionManager)
                                 .EndComposite()
                             .EndComposite()
                         .EndComposite()
