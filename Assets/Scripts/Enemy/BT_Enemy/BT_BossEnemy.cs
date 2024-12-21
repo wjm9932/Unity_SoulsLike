@@ -81,21 +81,6 @@ public class BT_BossEnemy : Enemy
     private void LateUpdate()
     {
     }
-
-
-    private void OnAnimationEnterEvent()
-    {
-        GetComponent<AnimationEventHandler>().OnAnimationEnterEvent();
-    }
-    private void OnAnimationTransitionEvent()
-    {
-        GetComponent<AnimationEventHandler>().OnAnimationTransitionEvent();
-    }
-    private void OnAnimationExitEvent()
-    {
-        GetComponent<AnimationEventHandler>().OnAnimationExitEvent();
-    }
-
     protected override void OnEnemyTriggerStay(GameObject target, Collider collider)
     {
         base.OnEnemyTriggerStay(target, collider);

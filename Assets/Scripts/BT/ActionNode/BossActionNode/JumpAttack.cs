@@ -27,7 +27,8 @@ public class JumpAttack : BossAttackAction
     {
         blackboard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackboard.GetData<GameObject>("Owner").transform.rotation, dir, Time.deltaTime * 10);
 
-        return base.Execute();    }
+        return base.Execute();    
+    }
 
     public override void OnExit()
     {
