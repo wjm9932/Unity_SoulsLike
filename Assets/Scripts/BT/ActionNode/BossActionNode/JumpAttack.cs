@@ -14,13 +14,15 @@ public class JumpAttack : BossAttackAction
     public override void OnEnter()
     {
         base.OnEnter();
+
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().SetDamage(40f);
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = false;
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().stoppingDistance = 2f;
+        blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isJumpAttack", true);
 
         dir = GetLookAtAngle();
         SetDashDestinationAndSpeed();
 
-        blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isJumpAttack", true);
     }
 
     public override NodeState Execute()
@@ -54,10 +56,6 @@ public class JumpAttack : BossAttackAction
     }
     public override void OnAnimatorIK()
     {
-        //blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetFloat("HandWeight", 1, 0.1f, Time.deltaTime * 0.1f);
-        //blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetIKPositionWeight(AvatarIKGoal.LeftHand, blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().GetFloat("HandWeight"));
-        //blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetIKPosition(AvatarIKGoal.LeftHand, blackboard.GetData<GameObject>("Owner").GetComponent<BT_BossEnemy>().leftHandPos.position);
-
         blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetFloat("HandWeight", 0f);
     }
 

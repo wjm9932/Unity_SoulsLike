@@ -17,6 +17,7 @@ public class SwordChargeAttack : BossAttackAction
 
         dir = GetLookAtAngle();
 
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().SetDamage(40f);
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = true;
         blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isUpAttack", true);
     }

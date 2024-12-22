@@ -18,6 +18,7 @@ public class StabAttack : BossAttackAction
 
         dir = GetLookAtAngle();
 
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().SetDamage(10f);
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = true;
         blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isStab", true);
     }

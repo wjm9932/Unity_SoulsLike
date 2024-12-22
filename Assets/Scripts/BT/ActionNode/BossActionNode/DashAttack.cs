@@ -16,6 +16,7 @@ public class DashAttack : BossAttackAction
 
         timer = 0.1f;
 
+        blackboard.GetData<GameObject>("Owner").GetComponent<Enemy>().SetDamage(30f);
         blackboard.GetData<GameObject>("Owner").GetComponent<NavMeshAgent>().isStopped = false;
         blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isDashStab", true);
         blackboard.GetData<GameObject>("Owner").GetComponent<LivingEntity>().SetCanAttack(1);
