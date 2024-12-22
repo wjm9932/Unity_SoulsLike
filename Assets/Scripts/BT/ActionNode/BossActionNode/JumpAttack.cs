@@ -42,7 +42,7 @@ public class JumpAttack : BossAttackAction
     {
         var camera = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera as CinemachineVirtualCamera;
         camera.GetComponent<CameraShake>().ShakeCamera();
-        SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.JUMP_ATTACK, 0.6f, blackboard.GetData<GameObject>("Owner").transform.position, Quaternion.identity, blackboard.GetData<GameObject>("Owner").transform);
+        SoundManager.Instance.Play3DSoundEffect(SoundManager.SoundEffectType.JUMP_ATTACK, 0.7f, blackboard.GetData<GameObject>("Owner").transform.position, Quaternion.identity, blackboard.GetData<GameObject>("Owner").transform);
         EffectManager.Instance.PlayEffect(blackboard.GetData<GameObject>("Owner").transform.position + blackboard.GetData<GameObject>("Owner").transform.forward * 2f, Vector3.up, blackboard.GetData<GameObject>("Owner").transform, ObjectPoolManager.ObjectType.DUST);
     }
     public override void OnAnimationTransition()
