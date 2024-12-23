@@ -2,7 +2,6 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class BossAttackAction : IAction, IAnimationEventHandler
 {
@@ -18,6 +17,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
     public virtual void OnEnter()
     {
         isFirstFrame = true;
+        blackboard.SetData<bool>("isAttacking", true);
 
         RegisterEvents();
     }
@@ -36,6 +36,10 @@ public class BossAttackAction : IAction, IAnimationEventHandler
         }
         else
         {
+            if (blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true)
+            {
+                return NodeState.Failure;
+            }
             isFirstFrame = false;
             return NodeState.Running;
         }
@@ -43,6 +47,8 @@ public class BossAttackAction : IAction, IAnimationEventHandler
 
     public virtual void OnExit()
     {
+        blackboard.SetData<bool>("isAttacking", false); ;
+
         RemoveEvents();
     }
 

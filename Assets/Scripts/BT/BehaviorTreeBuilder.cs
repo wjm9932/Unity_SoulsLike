@@ -83,6 +83,13 @@ public class BehaviorTreeBuilder : MonoBehaviour
 
     public CompositeNode Build()
     {
+
+        if(nodeStack.Count > 0)
+        {
+            Debug.LogError("EndComposite Error");
+            return null;
+        }
+
         var root = currentNode;
 
         InjectResetActionDependencies(root.Reset, currentNode);

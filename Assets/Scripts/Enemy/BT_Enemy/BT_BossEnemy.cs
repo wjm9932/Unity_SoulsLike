@@ -6,7 +6,7 @@ using UnityEngine;
 public class BT_BossEnemy : Enemy
 {
     private CompositeNode root;
-
+    private bool needToBeResetTree;
 
     public override float health
     {
@@ -48,7 +48,6 @@ public class BT_BossEnemy : Enemy
         base.Awake();
 
         health = maxHealth;
-
         navMesh.updateRotation = false;
         canBeDamaged = true;
         isDead = false;
@@ -138,6 +137,25 @@ public class BT_BossEnemy : Enemy
     {
         return Vector3.Distance(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").transform.position, transform.position) <= range;
     }
+    private bool CheckTargetIsAvaliable()
+    {
+        if(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<bool>("isAttacking") == true)
+        {
+            return true;
+        }
+        else if(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target") == null)
+        {
+            return false;
+        }
+        else
+        {
+            if(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true)
+            {
+                GetComponent<BehaviorTreeBuilder>().blackboard.SetData<GameObject>("target", null);
+            }
+            return true;
+        }
+    }
 
     private void BuildBT()
     {
@@ -145,6 +163,9 @@ public class BT_BossEnemy : Enemy
         builder.blackboard.InitializeBlackBoard(this.gameObject);
         builder.blackboard.SetData<GameObject>("target", null);
         builder.blackboard.SetData<bool>("isGroggy", false);
+        builder.blackboard.SetData<bool>("isAttacking", false);
+
+        needToBeResetTree = false;
 
         root = builder
         .AddSelector()
@@ -157,7 +178,7 @@ public class BT_BossEnemy : Enemy
                 .AddAction(new Groggy(builder.blackboard), builder.actionManager)
             .EndComposite()
             .AddSequence()
-                .AddCondition(() => builder.blackboard.GetData<GameObject>("target") != null)
+                .AddCondition(CheckTargetIsAvaliable)
                 .AddAttackSelector()
                     .AddSequence()
                         .AddCondition(()=> !IsInRange(7f))
