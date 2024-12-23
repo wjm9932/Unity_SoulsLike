@@ -21,6 +21,7 @@ public class DashAttack : BossAttackAction
         blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isDashStab", true);
         blackboard.GetData<GameObject>("Owner").GetComponent<LivingEntity>().SetCanAttack(1);
         blackboard.GetData<GameObject>("Owner").GetComponent<CapsuleCollider>().isTrigger = true;
+        blackboard.SetData<bool>("isAttacking", true);
 
         SetDashDestination();
 
@@ -36,6 +37,7 @@ public class DashAttack : BossAttackAction
 
         if(timer <= 0f)
         {
+            blackboard.SetData<bool>("isAttacking", false);
             return NodeState.Success;
         }
 

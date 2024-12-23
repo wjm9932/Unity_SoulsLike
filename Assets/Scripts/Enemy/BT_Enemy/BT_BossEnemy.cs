@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEditor.Experimental.GraphView;
 
 public class BT_BossEnemy : Enemy
 {
@@ -139,21 +140,22 @@ public class BT_BossEnemy : Enemy
     }
     private bool CheckTargetIsAvaliable()
     {
-        if(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<bool>("isAttacking") == true)
-        {
-            return true;
-        }
-        else if(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target") == null)
+        if (GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target") == null)
         {
             return false;
         }
         else
         {
-            if(GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true)
+            if (GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true)
             {
                 GetComponent<BehaviorTreeBuilder>().blackboard.SetData<GameObject>("target", null);
+                needToBeResetTree = true;
+                return false;
             }
-            return true;
+            else
+            {
+                return true;
+            }
         }
     }
 
@@ -178,14 +180,14 @@ public class BT_BossEnemy : Enemy
                 .AddAction(new Groggy(builder.blackboard), builder.actionManager)
             .EndComposite()
             .AddSequence()
-                .AddCondition(CheckTargetIsAvaliable)
+                .AddCondition(() => CheckTargetIsAvaliable() || builder.blackboard.GetData<bool>("isAttacking") == true)
                 .AddAttackSelector()
                     .AddSequence()
-                        .AddCondition(()=> !IsInRange(7f))
+                        .AddCondition(() => !IsInRange(7f))
                         .AddAction(new Track(builder.blackboard), builder.actionManager)
                     .EndComposite()
                     .AddAttackSequence()
-                        .AddCondition(()=> !IsInRange(5f))
+                        .AddCondition(() => !IsInRange(5f))
                         .AddRandomAttackSelector()
                             .AddAction(new JumpAttack(builder.blackboard), builder.actionManager)
                             .AddAction(new Track(builder.blackboard), builder.actionManager)
@@ -200,6 +202,7 @@ public class BT_BossEnemy : Enemy
                                     .AddAttackSequence()
                                         .AddAction(new StandBy(builder.blackboard), builder.actionManager)
                                         .AddAction(new DashAttack(builder.blackboard), builder.actionManager)
+                                        .AddCondition(CheckTargetIsAvaliable)
                                         .AddCondition(() => RandomExecute(0.6f))
                                         .AddAction(new JumpAttack(builder.blackboard), builder.actionManager)
                                     .EndComposite()
@@ -213,13 +216,18 @@ public class BT_BossEnemy : Enemy
                                 .EndComposite()
                             .EndComposite()
                         .EndComposite()
+                        .AddCondition(CheckTargetIsAvaliable)
                         .AddCondition(() => IsInRange(5f) == true)
-                        .AddCondition(() => RandomExecute(0.5f))
+                        .AddCondition(() => RandomExecute(0.6f))
                         .AddAction(new StabAttack(builder.blackboard), builder.actionManager)
                     .EndComposite()
                 .EndComposite()
             .EndComposite()
             .AddAction(new Patrol(builder.blackboard), builder.actionManager)
+            .AddSequence()
+                .AddCondition(() => needToBeResetTree ? !(needToBeResetTree = false) : false)
+                .AddAction(new ResetNode(builder.blackboard), builder.actionManager)
+            .EndComposite()
         .EndComposite()
         .Build();
     }

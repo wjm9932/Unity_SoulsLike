@@ -27,6 +27,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
         {
             if (blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= animationEndPercent && blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().IsInTransition(0) == false)
             {
+                blackboard.SetData<bool>("isAttacking", false);
                 return NodeState.Success;
             }
             else
@@ -36,10 +37,7 @@ public class BossAttackAction : IAction, IAnimationEventHandler
         }
         else
         {
-            if (blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true)
-            {
-                return NodeState.Failure;
-            }
+
             isFirstFrame = false;
             return NodeState.Running;
         }
@@ -47,8 +45,6 @@ public class BossAttackAction : IAction, IAnimationEventHandler
 
     public virtual void OnExit()
     {
-        blackboard.SetData<bool>("isAttacking", false); ;
-
         RemoveEvents();
     }
 

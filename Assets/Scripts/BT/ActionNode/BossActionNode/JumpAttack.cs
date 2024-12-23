@@ -22,7 +22,6 @@ public class JumpAttack : BossAttackAction
 
         dir = GetLookAtAngle();
         SetDashDestinationAndSpeed();
-
     }
 
     public override NodeState Execute()
