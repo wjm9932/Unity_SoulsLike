@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using UnityEditor.Experimental.GraphView;
 
 public class BT_BossEnemy : Enemy
 {
@@ -187,7 +186,7 @@ public class BT_BossEnemy : Enemy
                         .AddAction(new Track(builder.blackboard), builder.actionManager)
                     .EndComposite()
                     .AddAttackSequence()
-                        .AddCondition(() => !IsInRange(5f))
+                        .AddCondition(() => !IsInRange(4f))
                         .AddRandomAttackSelector()
                             .AddAction(new JumpAttack(builder.blackboard), builder.actionManager)
                             .AddAction(new Track(builder.blackboard), builder.actionManager)

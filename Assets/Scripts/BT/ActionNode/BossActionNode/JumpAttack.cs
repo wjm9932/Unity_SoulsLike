@@ -28,13 +28,18 @@ public class JumpAttack : BossAttackAction
     {
         blackboard.GetData<GameObject>("Owner").transform.rotation = Quaternion.Slerp(blackboard.GetData<GameObject>("Owner").transform.rotation, dir, Time.deltaTime * 10);
 
-        return base.Execute();    
+        if(base.Execute() == NodeState.Success)
+        {
+            blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isJumpAttack", false);
+            return NodeState.Success;
+        }
+
+        return NodeState.Running;
     }
 
     public override void OnExit()
     {
         base.OnExit();
-        blackboard.GetData<GameObject>("Owner").GetComponent<Animator>().SetBool("isJumpAttack", false);
     }
    
     public override void OnAnimationEnter()

@@ -11,10 +11,10 @@ public class Inventory : MonoBehaviour
 {
     public GraphicRaycaster uiRaycaster;
     public EventSystem eventSystem;
+    private PointerEventData pointerEventData;
     
     [SerializeField] private List<GameObject> inventorySlot = new List<GameObject>(36);
     private Dictionary<string, UI_Item> itemContainer = new Dictionary<string, UI_Item>(36);
-    private PointerEventData pointerEventData;
     private PlayerEvent playerEvent;
 
     private void Awake()
