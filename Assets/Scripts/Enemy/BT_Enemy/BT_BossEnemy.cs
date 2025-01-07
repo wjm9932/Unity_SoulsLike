@@ -6,7 +6,7 @@ using UnityEngine;
 public class BT_BossEnemy : Enemy
 {
     private CompositeNode root;
-    private bool needToBeResetTree;
+    private bool needToResetTree;
 
     public override float health
     {
@@ -71,7 +71,6 @@ public class BT_BossEnemy : Enemy
     void Update()
     {
         root.Evaluate();
-
         RecoverGroggy();
     }
     private void FixedUpdate()
@@ -148,7 +147,7 @@ public class BT_BossEnemy : Enemy
             if (GetComponent<BehaviorTreeBuilder>().blackboard.GetData<GameObject>("target").GetComponent<LivingEntity>().isDead == true)
             {
                 GetComponent<BehaviorTreeBuilder>().blackboard.SetData<GameObject>("target", null);
-                needToBeResetTree = true;
+                needToResetTree = true;
                 return false;
             }
             else
@@ -166,18 +165,23 @@ public class BT_BossEnemy : Enemy
         builder.blackboard.SetData<bool>("isGroggy", false);
         builder.blackboard.SetData<bool>("isAttacking", false);
 
-        needToBeResetTree = false;
+        needToResetTree = false;
 
         root = builder
         .AddSelector()
+        #region Sequence 1
             .AddSequence()
                 .AddCondition(() => isDead == true)
                 .AddAction(new Die(builder.blackboard), builder.actionManager)
             .EndComposite()
+        #endregion
+        #region Sequence 2
             .AddSequence()
                 .AddCondition(() => builder.blackboard.GetData<bool>("isGroggy"))
                 .AddAction(new Groggy(builder.blackboard), builder.actionManager)
             .EndComposite()
+        #endregion
+        #region Sequence 3
             .AddSequence()
                 .AddCondition(() => CheckTargetIsAvaliable() || builder.blackboard.GetData<bool>("isAttacking") == true)
                 .AddAttackSelector()
@@ -222,11 +226,12 @@ public class BT_BossEnemy : Enemy
                     .EndComposite()
                 .EndComposite()
             .EndComposite()
-            .AddAction(new Patrol(builder.blackboard), builder.actionManager)
+            #endregion
             .AddSequence()
-                .AddCondition(() => needToBeResetTree ? !(needToBeResetTree = false) : false)
+                .AddCondition(() => needToResetTree ? !(needToResetTree = false) : false)
                 .AddAction(new ResetNode(builder.blackboard), builder.actionManager)
             .EndComposite()
+            .AddAction(new Patrol(builder.blackboard), builder.actionManager)
         .EndComposite()
         .Build();
     }
