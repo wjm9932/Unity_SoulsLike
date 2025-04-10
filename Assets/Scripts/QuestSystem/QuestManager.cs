@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.IO;
-using static QuestPoint;
 
 public class QuestManager : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class QuestManager : MonoBehaviour
     public event Action<Quest> onChangeQuestState;
     public event Action<Quest> onUpdateQuestProgress;
     public event Action<Quest> onFinishQuest;
+
     public event Action<string, string> onUpdateQuestDialogue;
     public event Func<bool> onInteractWithQuest;
 
@@ -75,14 +75,11 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void UpdateQuestProgress(string id)
+    public void UpdateQuestProgressWithID(string id)
     {
         Quest quest = GetQuestById(id);
 
-        if (onUpdateQuestProgress != null)
-        {
-            onUpdateQuestProgress(quest);
-        }
+        UpdateQuestProgress(quest);
     }
 
     private void UpdateQuestProgress(Quest quest)
@@ -192,6 +189,7 @@ public class QuestManager : MonoBehaviour
             onChangeQuestState(quest);
         }
     }
+
     private void ChangeQuestState(Quest quest, QuestState state)
     {
         quest.SetQuestState(state);
@@ -229,26 +227,6 @@ public class QuestManager : MonoBehaviour
             return null;
         }
 
-    }
-    private void OnApplicationQuit()
-    {
-      
-    }
-    public void SaveQuest()
-    {
-        foreach (Quest quest in questMap.Values)
-        {
-            try
-            {
-                QuestData questData = quest.GetQuestSaveData();
-                string serializedData = JsonUtility.ToJson(questData);
-                PlayerPrefs.SetString(quest.info.id, serializedData);
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError("Failed to save quest with text " + quest.info.id + ": " + e);
-            }
-        }
     }
 
     public QuestData[] GetData()

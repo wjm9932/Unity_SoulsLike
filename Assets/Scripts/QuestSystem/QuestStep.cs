@@ -18,7 +18,7 @@ public abstract class QuestStep : MonoBehaviour
         }
         else
         {
-            QuestManager.Instance.UpdateQuestProgress(questId);
+            QuestManager.Instance.UpdateQuestProgressWithID(questId);
         }
     }
     public void Initialize(Character owner, string id, QuestStepData questStepData)

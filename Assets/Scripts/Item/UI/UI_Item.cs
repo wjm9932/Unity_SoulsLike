@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UI_Item : MonoBehaviour
+public abstract class UI_Item : MonoBehaviour
 {
     public delegate void OnDestroyEventHandler(UI_Item item);
     public event OnDestroyEventHandler OnDestroy;
