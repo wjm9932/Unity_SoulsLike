@@ -9,7 +9,7 @@ using System.IO;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    public static SceneLoadManager Instance;
+    public static SceneLoadManager Instance { get; private set; }
 
     [SerializeField] private Image background;
     [SerializeField] private Image loadingBar;
