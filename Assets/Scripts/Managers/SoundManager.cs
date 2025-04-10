@@ -7,7 +7,7 @@ using static ObjectPoolManager;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance;
+    public static SoundManager Instance { get; private set; }
 
     [SerializeField] private AudioSource bgmAudioSource;
     [SerializeField] private AudioMixer audioMixer;

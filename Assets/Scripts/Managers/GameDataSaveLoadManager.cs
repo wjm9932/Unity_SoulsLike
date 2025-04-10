@@ -7,7 +7,7 @@ using System;
 
 public class GameDataSaveLoadManager : MonoBehaviour
 {
-    public static GameDataSaveLoadManager Instance;
+    public static GameDataSaveLoadManager Instance { get; private set; }
 
     private SceneGameDataManger sceneGameDataManger;
     private Character character;
@@ -30,7 +30,7 @@ public class GameDataSaveLoadManager : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
     }
-    public void Initialize()
+    public void MakeNewSaveSlot()
     {
         sceneGameDataManger = FindObjectOfType<SceneGameDataManger>();
         character = FindObjectOfType<Character>();

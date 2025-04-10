@@ -14,7 +14,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        SceneLoadManager.Instance.LoadScene("GameScene", () => GameDataSaveLoadManager.Instance.Initialize());
+        SceneLoadManager.Instance.LoadScene("GameScene", () => GameDataSaveLoadManager.Instance.MakeNewSaveSlot());
     }
 
     public void ContinueGame()
