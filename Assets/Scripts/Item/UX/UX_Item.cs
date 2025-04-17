@@ -10,11 +10,11 @@ public class UX_Item : MonoBehaviour
     [SerializeField] public int numOfItem = 1;
     [HideInInspector] public int triggerCount;
 
-
     void Awake()
     {
         triggerCount = 0;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         Character character = other.GetComponent<Character>();

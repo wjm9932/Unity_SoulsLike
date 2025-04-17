@@ -167,7 +167,7 @@ public class QuestManager : MonoBehaviour
 
     private bool IsRequirementMet(Quest quest)
     {
-        if (quest.info.questPrerequisites.Length == 0)
+        if (quest.info.questPrerequisites.Length == 0) // dont need to check if there is no prerequisite so return false
         {
             return false;
         }
